@@ -1,0 +1,20 @@
+@import '../../styles/variables.scss';
+
+.logo {
+  width: fit-content;
+  height: fit-content;
+
+  &__link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover > .logo__img path:nth-child(3) {
+      fill: $turquoise;
+    }
+
+    &:active > .logo__img path:nth-child(3) {
+      fill: $fc-primary;
+    }
+  }
+}
