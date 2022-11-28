@@ -530,7 +530,13 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
 // ===== / ===== //
 // ===== TABS ===== //
 .nav-tabs {                       // bootstrap default class
+  position: sticky;
+  top: $header-height;
   border: none;
+  padding-top: $base * 8;     // 40 px
+  padding-bottom: $base * 2;  // 10 px
+  background-color: white;
+  z-index: 10;
 
   & > .nav-item {                 // bootstrap default class
     position: relative;
@@ -589,10 +595,27 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
       margin-left: $base * 6;    // 30 px
     }
   }
+
+  @media screen and (max-width: 767px) {
+    column-gap: $base * 4;       // 20 px
+    row-gap: $base * 2;          // 10 px
+
+    & > .nav-item {
+      position: relative;
+
+      & > .nav-link {
+        padding-top: $base * 2;     // 10 px
+      }
+    }
+
+    .nav-item + .nav-item {
+      margin-left: 0;
+    }
+  }
 }
 
 .tab-content {
-  padding-top: $base * 10;      // 50 px
+  padding-top: $base * 8;       // 40 px
   margin-bottom: $base * 4;     // 20 px
 
   @media screen and (max-width: 767px) {
