@@ -155,7 +155,7 @@ function ClientForm() {
 
   return (
     <Form
-      className={ stl.brief__form }
+      className={ stl.form }
       method="POST"
       noValidate    // remove default HTML validation
     >

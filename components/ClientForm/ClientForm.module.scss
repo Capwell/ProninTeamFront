@@ -1,13 +1,7 @@
 @import '../../styles/variables.scss';
 
-.brief {
-
-  &__form {
-    position: relative;
-  }
-}
-
 .form {
+  position: relative;
 
   &__input_name,
   &__input_communicate {
@@ -33,7 +27,7 @@
       .item__text {
         color: $fc-gray;
         font-size: .9375rem;
-        line-height: 145.4%;
+        line-height: 1.454;
         letter-spacing: .07em;
       }
     }
@@ -48,13 +42,13 @@
     letter-spacing: .07em;
   }
 
-  &__radios {
-    position: absolute;
-    // display: flex;
-    display: none;
-    right: $base * 3;
-    bottom: $base * 10;
-  }
+  // &__radios {
+  //   position: absolute;
+  //   // display: flex;
+  //   display: none;
+  //   right: $base * 3;
+  //   bottom: $base * 10;
+  // }
 
   &__checkbox {
     display: flex;
@@ -90,4 +84,43 @@
       }
     }
   }
+}
+
+@media screen and (max-width: 767px) {
+
+  .form {
+
+    &__questions {
+      margin-bottom: $base * 6;  // 30 px
+      padding-left: 0;
+
+      .questions__item {
+        & + & {
+          margin-top: $base * 4;   // 20 px
+        }
+      }
+    }
+
+    &__text {
+      text-align: center;
+    }
+
+    &__checkbox {
+      padding-left: 0;
+    }
+  }
+}
+
+@media screen and (max-width: 575px) {
+
+  .form {
+
+    &__questions {
+
+      .questions__item + .questions__item {
+        margin-top: $base * 6;               // 30 px
+      }
+    }
+  }
+
 }

@@ -148,7 +148,7 @@ function Team() {
       eventKey: 'managers',
       tabTitle: 'Менеджеры',
       contentTitle: 'Менеджеры',
-      contentText: 'Наша цель - долгосрочные отношения.'
+      contentText: 'Наша цель - забота о клиенте.'
     },
     {
       eventKey: 'developers',
@@ -196,7 +196,7 @@ function Team() {
         <h1 className={ stl.team__title }>
           Наша команда
         </h1>
-        
+
         <Tabs
           defaultActiveKey={ tabs[0].eventKey }  // first tab is active by default
           id="team-tabs"
