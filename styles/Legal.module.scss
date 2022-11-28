@@ -92,3 +92,12 @@
     }
   }
 }
+
+@media screen and (max-width: 575px) {
+  .legal {
+
+    &__title {
+      font-size: 2rem;
+    }
+  }
+}

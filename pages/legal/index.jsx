@@ -7,18 +7,7 @@ import Link from 'next/link'
 
 function Legal() {
   const router = useRouter()
-
-  // useEffect(() => {
-
-  //   const toggleVisible = () => {
-  //     const scrolled = document.documentElement.scrollTop;
-  //     if (scrolled > 300) setToTopVisible(true)
-  //     else if (scrolled <= 300) setToTopVisible(false)
-  //   };
-
-  //   window.addEventListener("scroll", toggleVisible);
-  // }, []); // empty dependencies array means "run this once on first mount"
-
+  // scroll to top on button click
   const scrollToTop = () =>{
     window.scrollTo({
       top: 0,
@@ -36,7 +25,6 @@ function Legal() {
 {/* Back button */}
       <Button
         className="btn btn--back my-40"
-        // href='/#brief'
         onClick={() => router.back()}
       >
         <svg className='btn__icon' width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
