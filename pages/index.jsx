@@ -5,10 +5,14 @@ import {
   Button
 } from "react-bootstrap";
 import PTHead from "../components/PTHead/PTHead"
+import VideoModal from "../components/VideoModal/VideoModal"
 import ClientForm from '../components/ClientForm/ClientForm'
 import stl from "../styles/Home.module.scss"
 
 function Home() {
+  const [showVideo, setShowVideo] = useState(false);
+  // open modal window with video
+  const openVideo = () => setShowVideo(true)
 
   return (
     <>
@@ -66,16 +70,25 @@ function Home() {
           className='
             d-flex
             justify-content-center
-            mt-6 mt-lg-0
+            mt-30 mt-lg-0
           '
         >
+          <VideoModal
+            show={ showVideo }
+            setShow={ setShowVideo }
+          />
           <div className={ stl.about__video }>
-{/* TODO: add bootstrap ratio component */}
-            <div className={ stl.video__thumbnail } />
+            <a
+              className={ stl.video__thumbnail }
+              onClick={ openVideo }
+            />
             <span className={ stl.video__title }>За минуту просто и ясно о том, как пойдёт работа</span>
             <span className={ stl.video__author }>Андрей Пронин СЕО</span>
 
-            <Button className='btn btn--secondary' href="#">
+            <Button
+              className='btn btn--secondary'
+              onClick={ openVideo }
+            >
               Смотреть видео
             </Button>
           </div>
