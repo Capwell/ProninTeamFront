@@ -19,120 +19,120 @@ function Team() {
         title: 'Seo'
       },
       other_roles: {
-        title: 'остальные роли'
+        title: 'Backend-разработчик'
       },
-      photo: '/images/user-1.jpeg',
+      photo: '/images/user-1.webp',
       first_name: 'Андрей',
       last_name: 'Пронин',
       middle_name: 'Александрович'
     },
     {
       main_role: {
-        title: 'Seo'
+        title: 'QA'
       },
       other_roles: {
-        title: 'остальные роли'
+        title: ''
       },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
+      photo: '/images/user-2.webp',
+      first_name: 'Александр',
+      last_name: 'Грабовский',
+      middle_name: ''
     },
     {
       main_role: {
-        title: 'Seo'
+        title: 'PM'
       },
       other_roles: {
-        title: 'остальные роли'
+        title: ''
       },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
+      photo: '/images/user-3.webp',
+      first_name: 'Каролина',
+      last_name: 'Павлычева',
+      middle_name: ''
     },
     {
       main_role: {
-        title: 'Seo'
+        title: 'Frontend-разработчик'
       },
       other_roles: {
-        title: 'остальные роли'
+        title: ''
       },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
+      photo: '/images/user-4.webp',
+      first_name: 'Егор',
+      last_name: 'Романов',
+      middle_name: 'Иванович'
     },
     {
       main_role: {
-        title: 'Seo'
+        title: 'Backend-разработчик'
       },
       other_roles: {
-        title: 'остальные роли'
+        title: ''
       },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
+      photo: '/images/user-5.webp',
+      first_name: 'Алексей',
+      last_name: 'Шевич',
+      middle_name: ''
     },
     {
       main_role: {
-        title: 'Seo'
+        title: 'Backend-разработчик'
       },
       other_roles: {
-        title: 'остальные роли'
+        title: ''
       },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
+      photo: '/images/user-6.webp',
+      first_name: 'Николай',
+      last_name: 'Павлов',
+      middle_name: ''
     },
     {
       main_role: {
-        title: 'Seo'
+        title: 'Frontend-разработчик'
       },
       other_roles: {
-        title: 'остальные роли'
+        title: ''
       },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
+      photo: '/images/user-7.webp',
+      first_name: 'Сергей',
+      last_name: 'Бородулин',
+      middle_name: ''
     },
     {
       main_role: {
-        title: 'Seo'
+        title: 'PM'
       },
       other_roles: {
-        title: 'остальные роли'
+        title: ''
       },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
+      photo: '/images/user-8.webp',
+      first_name: 'Елена',
+      last_name: 'Береза',
+      middle_name: ''
     },
     {
       main_role: {
-        title: 'Seo'
+        title: 'PM'
       },
       other_roles: {
-        title: 'остальные роли'
+        title: ''
       },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
+      photo: '/images/user-9.webp',
+      first_name: 'Нина',
+      last_name: 'Попова',
+      middle_name: ''
     },
     {
       main_role: {
-        title: 'Seo'
+        title: 'Дизайнер'
       },
       other_roles: {
-        title: 'остальные роли'
+        title: ''
       },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
+      photo: '/images/user-10.webp',
+      first_name: 'Олег',
+      last_name: 'Кипарисов',
+      middle_name: ''
     },
   ]
   // data for every tabs on this page
@@ -148,25 +148,51 @@ function Team() {
       eventKey: 'managers',
       tabTitle: 'Менеджеры',
       contentTitle: 'Менеджеры',
-      contentText: 'Наша цель - забота о клиенте.'
+      contentText: 'Наша цель - забота о клиенте.',
+      members: membersData.filter(member =>  {
+        return (
+          member.main_role.title === 'PM' ||
+          member.other_roles.title === 'PM'
+        )
+      })
     },
     {
       eventKey: 'developers',
       tabTitle: 'Разработчики',
       contentTitle: 'Команда разработки',
-      contentText: 'Делаем быстро, не забывая о качестве.'
+      contentText: 'Делаем быстро, не забывая о качестве.',
+      members: membersData.filter(member => {
+        return (
+          member.main_role.title === 'Frontend-разработчик' ||
+          member.other_roles.title === 'Frontend-разработчик' ||
+          member.main_role.title === 'Backend-разработчик' ||
+          member.other_roles.title === 'Backend-разработчик'
+        )
+      })
     },
     {
       eventKey: 'designers',
       tabTitle: 'Дизайнеры',
       contentTitle: 'Команда UX/UI дизайна',
-      contentText: 'Сделать не только красиво, но и — удобно.'
+      contentText: 'Сделать не только красиво, но и — удобно.',
+      members: membersData.filter(member =>  {
+        return (
+          member.main_role.title === 'Дизайнер' ||
+          member.other_roles.title === 'Дизайнер'
+        )
+      })
     },
     {
       eventKey: 'testers',
       tabTitle: 'Тестировщики',
       contentTitle: 'Команда QA',
-      contentText: 'Найти и обезвредить ошибки.'
+      contentText: 'Найти и обезвредить ошибки.',
+      members: membersData.filter(member =>  {
+        return (
+          member.main_role.title === 'QA' ||
+          member.other_roles.title === 'QA'
+        )
+      })
     },
   ]
 
@@ -217,7 +243,7 @@ function Team() {
                     { tab.contentText }
                   </p>
 
-                  <Row as='ul' className={ stl.tab__members } sm='1' md='3' lg='4'>
+                  <Row as='ul' className={ stl.tab__members } xs='1' sm='2' md='3' lg='4'>
                     {
                       tab.members?.map((member, index) => {
                         const photo = member.photo

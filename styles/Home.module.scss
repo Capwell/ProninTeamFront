@@ -75,6 +75,7 @@
     height: $base * 27;           // 135 px
     margin-bottom: $base * 4;     // 20 px
     background-color: #d9d9d9;
+    cursor: pointer;
 
     &:before {
       content: url('../public/images/play-button.svg');

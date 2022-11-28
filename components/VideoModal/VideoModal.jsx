@@ -21,7 +21,7 @@ function VideoModal({ show, setShow }) {
       <Modal.Body>
         <iframe
           className='modal-video'
-          src="https://www.youtube.com/embed/Vfh7uomDd_I?autoplay=1"
+          src="https://www.youtube.com/embed/AbK2SViu6KQ?autoplay=1"
           title="YouTube video player"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -32,6 +32,5 @@ function VideoModal({ show, setShow }) {
 
   )
 }
-
 
 export default VideoModal
