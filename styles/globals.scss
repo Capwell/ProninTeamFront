@@ -1,0 +1,631 @@
+@import './variables.scss';
+
+$grid-gutter-width: 30px !default;   // bootstrap columns' gap size
+
+// size postfixes for margin and padding's classes of bootstrap
+$spacer: $base;       // 1 unit of size (5px, based on '$base' var)
+$spacers: (
+  0: 0,               // 0 px
+  5: $spacer,         // 5 px
+  15: $spacer * 3,    // 15 px
+  20: $spacer * 4,    // 20 px
+  25: $spacer * 5,    // 25 px
+  30: $spacer * 6,    // 30 px
+  35: $spacer * 7,    // 35 px
+  40: $spacer * 8,    // 40 px
+  45: $spacer * 9,    // 45 px
+  50: $spacer * 10,   // 50 px
+  70: $spacer * 14,   // 70 px
+  80: $spacer * 16,   // 80 px
+  100: $spacer * 20,  // 100 px
+  140: $spacer * 28,  // 140 px
+  150: $spacer * 30   // 150 px
+);
+// values of media queries
+$grid-breakpoints: (
+  xs: 0,
+  sm: 320px,
+  md: 576px,
+  lg: 768px,
+  xl: 992px,
+  xxl: 1150px
+);
+// widths of container for every screen size
+$container-max-widths: (
+  sm: 540px,
+  md: 720px,
+  lg: 960px,
+  xl: 1000px,
+  xxl: 1150px
+);
+$container-padding-x: 2.5rem; // padding-left & padding-right of container
+// settings for ratio components
+$aspect-ratios: (
+  "1x1": 100%,
+  "4x3": calc(3 / 4 * 100%),
+  "16x9": calc(9 / 16 * 100%),
+  "21x9": calc(9 / 21 * 100%)
+);
+
+$body-color: $fc-primary;
+$font-family-base: 'Montserrat', sans-serif;
+
+// ===== HEADINGS ===== //
+$headings-font-weight: 600;
+// ===== / ===== //
+
+// ===== FLOATING INPUTS & LABELS ===== //
+// label
+$form-floating-label-opacity: 1;
+$form-floating-label-transform: scale(.695) translateY(-.5rem) translateX(.9rem);
+
+@media screen and (max-width: 575px) {
+  $form-floating-label-transform: scale(1.3) translateY(-.5rem) translateX(.9rem);
+}
+// input
+$form-floating-line-height: 120%;
+$form-floating-input-padding-b: 0;
+// ===== / ===== //
+
+// ===== CHECKBOXES ===== //
+// default
+$form-check-input-width: 1.25em;
+$form-check-input-border: 1px solid $light-gray;
+$form-check-input-border-radius: 0;
+// focus
+$form-check-input-focus-border: $fc-primary;
+$form-check-input-focus-box-shadow: none;
+// checked
+$form-check-input-checked-border-color: $fc-primary;
+$form-check-input-checked-bg-color: white;
+$form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.77794 15.4444L3.3335 11L4.88905 9.44444L7.77794 12.3333L15.1113 5L16.6668 6.55556L7.77794 15.4444Z' fill='black'/%3E%3C/svg%3E%0A");
+// ===== / ===== //
+
+// Option A: Include all of Bootstrap
+// Include any default variable overrides here (though functions won't be available)
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// Then add additional custom code here
+// ===== GOOGLE RECAPTCHA ===== //
+.grecaptcha-badge {
+  visibility: hidden;
+  opacity: .5;
+
+  &:hover {
+    opacity: 1;
+  }
+}
+// ===== / ===== //
+// ===== ANCHORS ===== //
+.anchor {
+  display: block;
+  position: relative;
+  top: calc(($header-height + ($base * 6)) * -1);
+  visibility: hidden;
+}
+// ===== / ===== //
+// ===== BUTTONS ===== //
+.btn {
+  @include button-size(
+    0,                        // padding-y
+    0,                        // padding-x
+    1rem,                     // font-size
+    0                         // border-radius
+  );
+
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 1.454;
+  letter-spacing: .07em;
+
+  &--primary,
+  &--secondary {
+    width: $base * 57;          // 285 px
+    height: $base * 16;         // 80 px
+    font-weight: 500;
+  }
+
+  &--primary {
+    @include button-variant(
+      white,                // backgorund
+      $fc-primary,            // border-color
+      $fc-primary,            // color
+      $turquoise,             // hover - background
+      $turquoise,             // hover - border-color
+      white,                // hover - color
+      white,                // active - background
+      $turquoise,             // active - border-color
+      $turquoise,             // active - color
+      white,                // disable - backgorund
+      rgba($fc-primary, .3),  // disable - border-color
+      rgba($fc-primary, .3)   // disable - color
+    );
+  }
+
+  &--secondary {
+    @include button-variant(
+      white,                // backgorund
+      $fc-primary,            // border-color
+      $fc-primary,            // color
+      white,                // hover - background
+      $turquoise,             // hover - border-color
+      $turquoise,             // hover - color
+      $turquoise,             // active - background
+      $turquoise,             // active - border-color
+      white,                // active - color
+      white,                // disable - backgorund
+      rgba($fc-primary, .3),  // disable - border-color
+      rgba($fc-primary, .3)   // disable - color
+    );
+  }
+
+  &--small {
+    @include button-variant(
+      transparent,            // backgorund
+      transparent,            // border-color
+      $fc-primary,            // color
+      transparent,            // hover - background
+      transparent,            // hover - border-color
+      $fc-primary,             // hover - color
+      transparent,            // active - background
+      transparent,            // active - border-color
+      #b0b0b0,              // active - color
+      transparent,            // disable - backgorund
+      rgba($fc-primary, .3),  // disable - border-color
+      rgba($fc-primary, .3)   // disable - color
+    );
+
+    width: fit-content;
+    height: $base * 8 ;       // 40 px
+    border: none;
+    font-weight: 400;
+    line-height: 1;
+
+    .btn__icon > path {
+      transition: all .15s ease-in-out;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+
+    &:active > .btn__icon > path {
+      stroke: #b0b0b0;
+      text-decoration: none;
+    }
+  }
+
+  &--up,
+  &--back {
+    @extend .btn--small;
+  }
+
+  &--burger {
+    @include button-size(
+      4px,                    // padding-y
+      0,                      // padding-x
+      1rem,                   // font-size
+      0                       // border-radius
+    );
+
+    @include button-variant(
+      transparent,            // backgorund
+      transparent,            // border-color
+      $fc-primary,            // color
+      transparent,            // hover - background
+      transparent,            // hover - border-color
+      $fc-primary,            // hover - color
+      transparent,            // active - background
+      transparent,            // active - border-color
+      #b0b0b0,              // active - color
+      transparent,            // disable - backgorund
+      transparent,            // disable - border-color
+      rgba($fc-primary, .3)   // disable - color
+    );
+
+    width: $base * 6;         // 30 px
+    height: $base * 6;        // 30 px
+    border: none;
+    flex-direction: column;
+    justify-content: space-between !important;
+
+    & > span {
+      width: 100%;
+      height: 4px;
+      background-color: $fc-primary;
+      transition: all .15s ease-in-out;
+    }
+
+    &:hover > span {
+      background-color: $turquoise;
+    }
+
+    &:active > span {
+      background-color: #b0b0b0;
+    }
+  }
+}
+// ===== / ===== //
+// ===== INPUTS ===== //
+.control--text {
+  position: relative;
+  width: 100%;
+
+  .control__input {
+    width: 100%;
+    height: $base * 14;              // 70 px
+    border: none;
+    border-bottom: 1px solid $fc-primary;
+    border-radius: 0;
+    padding-top: $base * 6;          // 30 px
+    padding-right: $base * 7;        // 35 px
+    padding-bottom: 0;
+    padding-left: 0;
+    background-color: white;
+    color: $fc-primary;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.2;
+    letter-spacing: .045em;
+
+    &:focus {
+      box-shadow: none;
+    }
+  }
+
+  .control__label {
+    width: auto;
+    height: auto;
+    border: none;
+    padding: 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: .045em;
+  }
+
+  .control__error {
+    position: absolute;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 4px;
+    color: #d53030;
+    font-size: .875rem;
+    line-height: 1.143;
+    text-align: right;
+  }
+
+  &.valid,
+  &.invalid {
+
+    &:after {
+      position: absolute;
+      right: 0;
+      top: calc(50% - 10px);
+    }
+  }
+
+  &.valid:after {
+    content: url('../public/images/input-valid.svg');
+  }
+
+  &.invalid:after {
+    content: url('../public/images/input-invalid.svg');
+  }
+
+  @media screen and (max-width: 575px) {
+
+    .control__input {
+      height: $base * 10;              // 50 px
+      padding-top: $base * 5;          // 20 px
+      font-size: 1.2rem;
+    }
+
+    .control__label {
+      font-size: 1rem;
+    }
+
+    .control__input:focus + .control__label,
+    :not(.control__input:placeholder-shown) + .control__label {
+      transform: scale(.8) translateY(0) translateX(.4rem) !important;
+    }
+
+    &.valid,
+    &.invalid {
+
+    &:after {
+      top: calc(65% - 10px);
+    }
+  }
+
+    // :not(.control__input:placeholder-shown) + .control__label {
+    //   transform: scale(.8) translateY(0) translateX(.4rem) !important;
+    // }
+  }
+}
+
+.control--textarea {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: $base * 50;        // 250 px
+
+  .control__input {
+    width: 100%;
+    border-color: $fc-primary;
+    border-radius: 0;
+    padding: $base * 5;           // 25 px
+    line-height: 1.454;
+    letter-spacing: .07em;
+    resize: none;
+
+    &:focus {
+      border-color: $fc-primary;
+      box-shadow: none;
+    }
+
+    &::placeholder {
+      color: $fc-secondary;
+      line-height: 1.454;
+      letter-spacing: .07em;
+    }
+  }
+
+  .control__error {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 4px;
+    color: #d53030;
+    font-size: .875rem;
+    line-height: 1.143;
+  }
+
+  &.valid,
+  &.invalid {
+
+    &:after {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+  }
+
+  &.valid:after {
+    content: url('../public/images/input-valid.svg');
+  }
+
+  &.invalid:after {
+    content: url('../public/images/input-invalid.svg');
+  }
+
+  @media screen and (max-width: 575px) {
+
+    .control__input {
+      padding: $base * 5 $base * 3;           // 25 px - 15 px
+    }
+  }
+}
+
+.control--file {
+  position: relative;
+  width: fit-content;
+  max-width: $base * 82;            // 410 px
+
+  .control__label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: fit-content;
+    margin-bottom: 0;
+    padding-left: $base * 13;       // 65 px
+    font-weight: 500;
+    cursor: pointer;
+
+    &:before {
+      content: url('../public/images/paper-clip.svg');
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .label__top {
+      display: flex;
+      flex-wrap: wrap;
+
+      span {
+        height: 1rem;
+        margin-bottom: $base * 2;     // 10 px
+        line-height: 1;
+        letter-spacing: .07em;
+        white-space: nowrap;
+      }
+
+      span:first-child {
+        margin-right: .4rem;
+        border-bottom: 1px solid $fc-primary;
+        max-width: $base * 42;         // 210 px
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+      }
+    }
+
+    & > span {
+      color: $fc-light-gray;
+      font-size: .875rem;
+      line-height: 1;
+      letter-spacing: .07em;
+    }
+
+    &:hover .label__top > span:first-child {
+      font-weight: 700;
+    }
+
+    &:active .label__top > span:first-child {
+      font-weight: 500;
+      color: #b0b0b0;
+      border-color: #b0b0b0;
+    }
+  }
+
+  .control__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    visibility: hidden;
+    opacity: 0;
+    z-index: -1;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  @media screen and (max-width: 575px) {
+
+    .control--file {
+      max-width: $base * 56;       // 280 px
+    }
+
+    .control__label {
+      padding-left: $base * 10;    // 50 px
+    }
+  }
+}
+// checkbox is styling by bootstrap variables above
+// ===== / ===== //
+// ===== MODALS ===== //
+.submit-modal {
+  border: 2px solid transparent;
+  border-radius: 0;
+  padding: $base * 5;           // 25 px
+
+  &.success {
+    border-color: $turquoise;
+  }
+
+  &.error {
+    border-color: $danger;
+  }
+
+  &__text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    & > * {
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+// ===== / ===== //
+// ===== TABS ===== //
+.nav-tabs {                       // bootstrap default class
+  border: none;
+
+  & > .nav-item {                 // bootstrap default class
+    position: relative;
+
+    & > .nav-link {               // bootstrap default class
+      position: relative;
+      width: 100%;
+      min-width: $base * 23;      // 115 px
+      margin-bottom: 0;
+      padding-top: $base * 4;     // 20 px
+      padding-bottom: $base * 2;  // 10 px
+      padding-left: 0;
+      padding-right: 0;
+      border: none;
+      color: $fc-primary;
+      line-height: 1.454;
+      letter-spacing: .07em;
+      text-align: left;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: 0;
+        width: 100%;
+        max-width: $base * 23;      // 115 px
+        height: 3px;
+        background-color: $fc-primary;
+        transition: all .15s ease-in-out;
+      }
+
+      &.active {
+        color: $turquoise;
+
+        &:before {
+          background-color: $turquoise;
+        }
+      }
+    }
+  }
+
+  .nav-item + .nav-item {
+    margin-left: $base * 10;    // 50 px
+  }
+
+  @media screen and (max-width: 991px) {
+
+    & > .nav-item {
+
+      & > .nav-link {
+        min-width: $base * 16;   // 80 px
+      }
+    }
+
+    .nav-item + .nav-item {
+      margin-left: $base * 6;    // 30 px
+    }
+  }
+}
+
+.tab-content {
+  padding-top: $base * 10;      // 50 px
+  margin-bottom: $base * 4;     // 20 px
+
+  @media screen and (max-width: 767px) {
+    padding-top: $base * 8;     // 40 px
+  }
+}
+// ===== / ===== //
+
+body {
+  height: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+// rules that allows to make bottom-fixed footer for every height of content
+#__next {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main {
+  padding-top: $header-height;
+}
+
+// @media (prefers-color-scheme: dark) {
+//   html {
+//     color-scheme: dark;
+//   }
+//   body {
+//     color: white;
+//     background: black;
+//   }
+// }

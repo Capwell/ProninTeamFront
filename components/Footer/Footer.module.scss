@@ -1,0 +1,152 @@
+@import '../../styles/variables.scss';
+
+.footer {
+  margin-top: auto;
+  background-color: white;
+  box-shadow: 0px -4px 4px rgba(51, 51, 51, .07);
+
+  &__logo {
+
+    .logo {
+
+      &__link {
+        display: flex;
+      }
+
+      &__img {
+        width: 150px;
+        height: 30px;
+      }
+    }
+  }
+
+  &__nav {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    .nav__link {
+      color: $fc-primary;
+      font-weight: 600;
+      line-height: 1.25;
+
+      &:hover {
+        color: $turquoise;
+      }
+
+      &:active {
+        color: #b0b0b0;
+      }
+    }
+
+    .nav__link + .nav__link {
+      margin-left: $base * 10;          // 50 px
+    }
+  }
+
+  &__legal {
+    font-weight: 400;
+    font-size: .875rem;
+    line-height: 120%;
+    text-decoration-line: underline;
+  }
+
+  &__copyright {
+    white-space: nowrap;
+  }
+
+  &__bottom {
+    display: flex;
+    align-items: flex-end;
+
+    & > * {
+      border: 1px solid green;
+    }
+  }
+
+  &__group {
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    text-align: right;
+
+    & + & {
+      margin-left: $base * 8;     // 40 px
+    }
+
+    .group {
+
+      &__title {
+        font-size: .875rem;
+        line-height: 1.215;
+        letter-spacing: .045em;
+        margin-bottom: $base * 2;    // 10 px
+      }
+
+      &__link {
+        color: $fc-primary;
+        font-weight: 500;
+        line-height: 1.25;
+        white-space: nowrap;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 992px) {
+  .footer {
+
+    &__nav {
+
+      .nav__link + .nav__link {
+        margin-left: $base * 6;    // 30 px
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .footer {
+
+    &__nav {
+      justify-content: center;
+    }
+
+    &__group {
+      text-align: center;
+    }
+  }
+}
+
+@media screen and (max-width: 575px) {
+  .footer {
+
+    &__nav {
+      flex-direction: column;
+      align-items: flex-start;
+
+      .nav__link + .nav__link {
+        margin-left: 0;
+        margin-top: $base * 2; // 10 px
+      }
+    }
+
+    &__group {
+      width: 100%;
+      text-align: right;
+
+      & + & {
+        margin-top: $base * 2;      // 10 px
+        margin-left: 0;     // 40 px
+      }
+
+      .group {
+
+        &__link {
+          font-size: .875rem;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+@import './variables.scss';
+
+.team {
+
+  &__title {
+    margin-bottom: $base * 13;    // 65 px
+    letter-spacing: .04em;
+  }
+}
+
+.tab {
+
+  &__title {
+    margin-bottom: $base * 2;     // 10 px
+    color: $fc-primary;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: .045em;
+  }
+
+  &__description {
+    margin-bottom: $base * 14;    // 70 px
+    max-width: $base * 150;       // 750 px
+    line-height: 1.25;
+    letter-spacing: .07em;
+    white-space: pre-wrap
+  }
+
+  &__members {
+    list-style: none;
+    margin-bottom: 0;
+    padding-left: 0;
+  }
+}
