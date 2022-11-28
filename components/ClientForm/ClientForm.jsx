@@ -85,24 +85,15 @@ function ClientForm() {
       fData.append('is_agreed', values.is_agreed)
       fData.append('token', token)
 
-      console.log(fData.get('name'))
-      console.log(fData.get('communicate'))
-      console.log(fData.get('message'))
-      console.log(fData.get('file'))
-      console.log(fData.get('is_agreed'))
-      console.log(fData.get('token'))
-
       await fetch(`${process.env.API_URL}/api/requests`, {               // send data to API
         method: 'POST',
         body: fData,
-        // body: JSON.stringify(data),
       })
       .then(res => {
         if (res.ok) {  //show success modal
           setModalType('success')
           setModalShow(true)
           setTimeout(() => setModalShow(false), 3000)
-          console.log(JSON.stringify(fData, null, 2));
           return res.json();
         } else { // if error - reject promise and show error modal
           setModalType('error')
