@@ -414,7 +414,8 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
 .control--file {
   position: relative;
   width: fit-content;
-  max-width: $base * 82;            // 410 px
+  max-width: $base * 85;            // 425 px
+  padding-right: 1.5rem;
 
   .control__label {
     position: relative;
@@ -486,6 +487,30 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     z-index: -1;
     overflow: hidden;
     clip: rect(0 0 0 0);
+  }
+
+  .control__btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    // display: flex;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;
+    height: 1rem;
+    border: none;
+    padding: 0;
+    background: transparent;
+    transition: all .15s ease-in-out;
+
+    &.show {
+      display: flex;
+    }
+
+    &:hover > svg {
+      transform: scale(1.25)
+    }
   }
 
   @media screen and (max-width: 575px) {
