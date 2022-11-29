@@ -9,6 +9,7 @@ import {
 import stl from '../../styles/Team.module.scss'
 import PTHead from '../../components/PTHead/PTHead'
 import TeamMember from '../../components/TeamMember/TeamMember'
+import PTButton from '../../components/PTButton/PTButton'
 
 function Team() {
   const router = useRouter()
@@ -207,15 +208,11 @@ function Team() {
       />
 
 {/* Back button */}
-      <Button
-        className="btn btn--back my-30"
-        onClick={() => router.back()}
-      >
-        <svg className='btn__icon' width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M25.2002 29.6L15.2002 19.6L25.2002 9.6" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-        Назад
-      </Button>
+      <PTButton
+        className="my-30"
+        variant="small-back"
+        onClick={ () => router.back() }
+      />
 
       <section className={ stl.team }>
         <h1 className={ stl.team__title }>

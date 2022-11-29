@@ -1,9 +1,8 @@
 import PTHead from '../../components/PTHead/PTHead'
-import { Button } from "react-bootstrap";
 import { useRouter } from 'next/router'
-import stl from "../../styles/Legal.module.scss";
-import { useState, useEffect } from 'react';
+import stl from '../../styles/Legal.module.scss'
 import Link from 'next/link'
+import PTButton from '../../components/PTButton/PTButton'
 
 function Legal() {
   const router = useRouter()
@@ -23,15 +22,11 @@ function Legal() {
       />
 
 {/* Back button */}
-      <Button
-        className="btn btn--back my-40"
-        onClick={() => router.back()}
-      >
-        <svg className='btn__icon' width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M25.2002 29.6L15.2002 19.6L25.2002 9.6" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-        Назад
-      </Button>
+      <PTButton
+        className="my-40"
+        variant='small-back'
+        onClick={ () => router.back() }
+      />
 
       <h1 className={ stl.legal__title }>
         Правовая информация
@@ -89,22 +84,17 @@ function Legal() {
         </div>
 
 {/* Button to top */}
-        <Button
-          className={ stl.btn_top + ' btn btn--up'}
+        <PTButton
+          variant="small-up"
           onClick={ scrollToTop }
-        >
-          <svg className="btn__icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10.3999 25.2L20.3999 15.2L30.3999 25.2" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Наверх
-        </Button>
+        />
 {/* Button back */}
-        <Button
-          className={ stl.btn_back + ' btn btn--secondary' }
-          onClick={() => router.back()}
-        >
-          Назад
-        </Button>
+        <PTButton
+          className="mb-100"
+          variant="secondary"
+          text="Назад"
+          onClick={ () => router.back() }
+        />
       </article>
 
 {/* Privacy Policy */}
@@ -348,22 +338,17 @@ function Legal() {
         </div>
 
 {/* Button to top */}
-        <Button
-          className={ stl.btn_top + ' btn btn--up'}
+        <PTButton
+          variant="small-up"
           onClick={ scrollToTop }
-        >
-          <svg className="btn__icon" width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M10.3999 25.2L20.3999 15.2L30.3999 25.2" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-          </svg>
-          Наверх
-        </Button>
+        />
 {/* Button back */}
-        <Button
-          className={ stl.btn_back + ' btn btn--secondary' }
-          onClick={() => router.back()}
-        >
-          Назад
-        </Button>
+        <PTButton
+          className="mb-100"
+          variant="secondary"
+          text="Назад"
+          onClick={ () => router.back() }
+        />
       </article>
     </>
   )

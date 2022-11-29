@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Row,
   Col,
   Button
-} from "react-bootstrap";
-import PTHead from "../components/PTHead/PTHead"
-import VideoModal from "../components/VideoModal/VideoModal"
+} from 'react-bootstrap';
+import PTHead from '../components/PTHead/PTHead'
+import VideoModal from '../components/VideoModal/VideoModal'
 import ClientForm from '../components/ClientForm/ClientForm'
-import stl from "../styles/Home.module.scss"
+import stl from '../styles/Home.module.scss'
+import PTButton from '../components/PTButton/PTButton'
 
 function Home() {
   const [showVideo, setShowVideo] = useState(false);
@@ -85,12 +86,11 @@ function Home() {
             <span className={ stl.video__title }>За минуту просто и ясно о том, как пойдёт работа</span>
             <span className={ stl.video__author }>Андрей Пронин СЕО</span>
 
-            <Button
-              className='btn btn--secondary'
+            <PTButton
+              variant="secondary"
+              text="Смотреть видео"
               onClick={ openVideo }
-            >
-              Смотреть видео
-            </Button>
+            />
           </div>
         </Col>
       </Row>

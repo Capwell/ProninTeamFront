@@ -11,6 +11,7 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import SubmitModal from '../SubmitModal/SubmitModal'
 import PTFileInput from '../PTFileInput/PTFileInput'
 import stl from './ClientForm.module.scss'
+import PTButton from '../PTButton/PTButton'
 
 function ClientForm() {
   // submit button availablity
@@ -352,14 +353,13 @@ function ClientForm() {
           lg={{ span: 'auto', order: 'first' }}
           className='d-flex justify-content-center'
         >
-          <Button
-            className='btn btn--primary'
-            type="submit"
-            disabled={ !isSubmitAvailable }
+          <PTButton
+            variant="primary"
+            text="Отправить ответы"
             onClick={ presubmitCheck }
-          >
-            Отправить ответы
-          </Button>
+            disabled={ !isSubmitAvailable }
+            type="submit"
+          />
         </Col>
       </Row>
     </Form>

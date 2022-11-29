@@ -120,14 +120,14 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   line-height: 1.454;
   letter-spacing: .07em;
 
-  &--primary,
-  &--secondary {
+  &-primary,
+  &-secondary {
     width: $base * 57;          // 285 px
     height: $base * 16;         // 80 px
     font-weight: 500;
   }
 
-  &--primary {
+  &-primary {
     @include button-variant(
       white,                // backgorund
       $fc-primary,            // border-color
@@ -144,7 +144,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     );
   }
 
-  &--secondary {
+  &-secondary {
     @include button-variant(
       white,                // backgorund
       $fc-primary,            // border-color
@@ -197,8 +197,8 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     }
   }
 
-  &--up,
-  &--back {
+  &-small-back,
+  &-small-up {
     @extend .btn--small;
   }
 
