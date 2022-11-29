@@ -37,17 +37,17 @@ function Header() {
             ref={ nav }
             onClick={ burgerMenuClickHandler }
           >
-            {/* <NavLink className={ stl.nav__link } href="#services">
+            <NavLink className={ stl.nav__link } href="/#services">
               Услуги
-            </NavLink> */}
-            <NavLink className={ stl.nav__link } href="/#cases">
+            </NavLink>
+            <NavLink className={ stl.nav__link } href="/cases">
               Кейсы
             </NavLink>
-            <NavLink className={ stl.nav__link } href="/#about">
+            {/* <NavLink className={ stl.nav__link } href="/#about">
               О нас
-            </NavLink>
+            </NavLink> */}
             <Link className={ stl.nav__link } href="/team">
-              Команда
+              Наша команда
             </Link>
             <NavLink className={ stl.nav__link } href="/#brief">
               Стать клиентом

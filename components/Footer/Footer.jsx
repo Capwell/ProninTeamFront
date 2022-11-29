@@ -33,17 +33,17 @@ function Footer() {
                 <NavLink className={ stl.nav__link } href="/#brief">
                   Стать клиентом
                 </NavLink>
-                {/* <NavLink className={ stl.nav__link } href="#section-services">
+                <NavLink className={ stl.nav__link } href="/#services">
                   Услуги
-                </NavLink> */}
-                <NavLink className={ stl.nav__link } href="/#cases">
+                </NavLink>
+                <NavLink className={ stl.nav__link } href="/cases">
                   Кейсы
                 </NavLink>
-                <NavLink className={ stl.nav__link } href="/#about">
+                {/* <NavLink className={ stl.nav__link } href="/#about">
                   О нас
-                </NavLink>
+                </NavLink> */}
                 <Link className={ stl.nav__link } href="/team">
-                  Команда
+                  Наша команда
                 </Link>
               </nav>
             </Col>
