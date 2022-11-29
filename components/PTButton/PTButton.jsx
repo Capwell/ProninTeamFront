@@ -1,6 +1,21 @@
-import { Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap'
+import styled from 'styled-components'
 
-function PTButton({ className, variant, text, onClick, ...rest }) {
+const ColoredBtn = styled(Button)`
+  color: ${(props) => props.color};
+  border-color: ${(props) => props.color};
+
+  &:hover {
+    color: white;
+    background-color: ${(props) => props.color};
+    border-color: ${(props) => props.color};
+  }
+  // TODO: добавить стили для нажатия
+`
+
+function PTButton({ className, variant, text, onClick, color, ...rest }) {
+// TODO: написать описание styled-components
+  const classes = `${className} ${color ? 'btn btn-primary' : ''}`
 
   // set svg icon for some button's variants
   const setIcon = () => {
@@ -31,15 +46,16 @@ function PTButton({ className, variant, text, onClick, ...rest }) {
   }
 
   return (
-    <Button
-      className={ className }
+    <ColoredBtn
+      className={ classes }
       variant={ variant }
       onClick={ onClick }
+      color={ color }
       { ...rest }
     >
       { setIcon() }
       { text || setText() }
-    </Button>
+    </ColoredBtn>
   )
 }
 

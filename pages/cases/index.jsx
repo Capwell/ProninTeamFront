@@ -17,7 +17,7 @@ function Cases() {
     {
       logo: '/images/proninteam-logo.svg',
       description: 'Безусловно, высококачественный прототип будущего проекта способствует подготовке и реализации модели развития.',
-      color: '##30D5C8'
+      color: '#30D5C8'
     }
   ]
 
@@ -64,7 +64,7 @@ function Cases() {
                   text="Подробнее"
                   as='a'
                   href='/cases/case'
-                  btnColor={ caseItem.color }
+                  color={ caseItem.color }
                 />
               </li>
             )
