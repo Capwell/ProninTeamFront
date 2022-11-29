@@ -1,0 +1,55 @@
+@import '../styles/variables.scss';
+
+.cases {
+
+  &__title {
+    margin: 0;
+    font-weight: 600;
+    font-size: 3rem;
+    line-height: 1.25;
+    letter-spacing: .04em;
+  }
+
+  &__list {
+    list-style: none;
+    padding: 0;
+  }
+}
+
+.list__item {
+  display: flex;
+  flex-direction: column;
+  height: $base * 120;  // 600 px
+
+  .item {
+
+    &__logo {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      max-width: $base * 127; // 635 px
+      min-height: $base * 27; // 135 px
+      margin-bottom: $base * 19; // 95 px
+
+      .logo__img {
+        object-fit: contain;
+        width: 100% !important;
+        position: relative !important;
+        height: unset !important;
+      }
+    }
+
+    &__description {
+      font-size: 1.5rem;
+      font-weight: 500;
+      line-height: 1.25;
+      letter-spacing: .045em;
+    }
+
+    &__btn {
+      margin-top: auto;
+      margin-left: auto;
+    }
+  }
+}

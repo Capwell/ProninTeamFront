@@ -18,6 +18,7 @@ $spacers: (
   70: $spacer * 14,   // 70 px
   80: $spacer * 16,   // 80 px
   100: $spacer * 20,  // 100 px
+  115: $spacer * 23,  // 115 px
   140: $spacer * 28,  // 140 px
   150: $spacer * 30   // 150 px
 );
@@ -121,7 +122,8 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   letter-spacing: .07em;
 
   &-primary,
-  &-secondary {
+  &-secondary,
+  &-primary-colored {
     width: $base * 57;          // 285 px
     height: $base * 16;         // 80 px
     font-weight: 500;
@@ -159,6 +161,10 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
       rgba($fc-primary, .3),  // disable - border-color
       rgba($fc-primary, .3)   // disable - color
     );
+  }
+
+  &-primary-colored {
+    @extend .btn-primary;
   }
 
   &--small {
