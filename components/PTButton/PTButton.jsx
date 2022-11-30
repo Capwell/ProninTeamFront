@@ -1,21 +1,27 @@
 import { Button } from 'react-bootstrap'
 import styled from 'styled-components'
 
+// use styled-components for set color settings
+// (if we get it from dynamicly)
 const ColoredBtn = styled(Button)`
-  color: ${(props) => props.color};
-  border-color: ${(props) => props.color};
+  color: ${ props => props.btnColor };
+  border-color: ${ props => props.btnColor };
 
   &:hover {
     color: white;
-    background-color: ${(props) => props.color};
-    border-color: ${(props) => props.color};
+    background-color: ${ props => props.btnColor };
+    border-color: ${ props => props.btnColor };
   }
-  // TODO: добавить стили для нажатия
+
+  &:active {
+    color: #333333 !important;
+    border-color: #333333 !important;
+  }
 `
 
-function PTButton({ className, variant, text, onClick, color, ...rest }) {
-// TODO: написать описание styled-components
-  const classes = `${className} ${color ? 'btn btn-primary' : ''}`
+function PTButton({ className, variant, text, onClick, btnColor, ...rest }) {
+  // if btnColor is define - we have to add bootstrap classes of element manualy
+  const classes = `${className} ${btnColor ? 'btn btn-colored' : ''}`
 
   // set svg icon for some button's variants
   const setIcon = () => {
@@ -46,16 +52,29 @@ function PTButton({ className, variant, text, onClick, color, ...rest }) {
   }
 
   return (
-    <ColoredBtn
-      className={ classes }
-      variant={ variant }
-      onClick={ onClick }
-      color={ color }
-      { ...rest }
-    >
-      { setIcon() }
-      { text || setText() }
-    </ColoredBtn>
+    // if variant prop is "colored" - return styled component
+    variant === 'colored'
+      ? <ColoredBtn
+          className={ classes }
+          variant={ variant }
+          onClick={ onClick }
+          btnColor={ btnColor }
+          { ...rest }
+        >
+          { setIcon() }
+          { text || setText() }
+        </ColoredBtn>
+      // else - return bootstrap Button component
+      : <Button
+          className={ classes }
+          variant={ variant }
+          onClick={ onClick }
+          btnColor={ btnColor }
+          { ...rest }
+        >
+          { setIcon() }
+          { text || setText() }
+        </Button>
   )
 }
 

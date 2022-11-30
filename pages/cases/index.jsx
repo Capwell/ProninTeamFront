@@ -59,12 +59,12 @@ function Cases() {
                 <p className={ stl.item__description }>{ caseItem.description }</p>
 
                 <PTButton
-                  variant="primary"
-                  className={ stl.item__btn }
+                  variant="colored"
+                  className="mt-auto ms-auto"
                   text="Подробнее"
                   as='a'
                   href='/cases/case'
-                  color={ caseItem.color }
+                  btnColor={ caseItem.color }
                 />
               </li>
             )
