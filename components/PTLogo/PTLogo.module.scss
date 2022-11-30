@@ -10,11 +10,11 @@
     justify-content: center;
 
     &:hover > .logo__img path:nth-child(3) {
-      fill: $turquoise;
+      fill: $c-success;
     }
 
     &:active > .logo__img path:nth-child(3) {
-      fill: $fc-primary;
+      fill: $c-primary;
     }
   }
 }

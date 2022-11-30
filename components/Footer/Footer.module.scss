@@ -3,7 +3,7 @@
 .footer {
   margin-top: auto;
   background-color: white;
-  box-shadow: 0px -4px 4px rgba(51, 51, 51, .07);
+  box-shadow: $box-shadow;
 
   &__logo {
 
@@ -14,8 +14,8 @@
       }
 
       &__img {
-        width: 150px;
-        height: 30px;
+        width: $logo-width;   // 150 px
+        height: $logo-height; // 30 px
       }
     }
   }
@@ -32,11 +32,11 @@
       line-height: 1.25;
 
       &:hover {
-        color: $turquoise;
+        color: $c-success;
       }
 
       &:active {
-        color: #b0b0b0;
+        color: $c-secondary;
       }
     }
 
@@ -46,23 +46,14 @@
   }
 
   &__legal {
-    font-weight: 400;
     font-size: .875rem;
-    line-height: 120%;
+    font-weight: 400;
+    line-height: 1.2;
     text-decoration-line: underline;
   }
 
   &__copyright {
     white-space: nowrap;
-  }
-
-  &__bottom {
-    display: flex;
-    align-items: flex-end;
-
-    & > * {
-      border: 1px solid green;
-    }
   }
 
   &__group {
@@ -72,7 +63,7 @@
     text-align: right;
 
     & + & {
-      margin-left: $base * 8;     // 40 px
+      margin-left: $base * 8;      // 40 px
     }
 
     .group {
@@ -81,7 +72,7 @@
         font-size: .875rem;
         line-height: 1.215;
         letter-spacing: .045em;
-        margin-bottom: $base * 2;    // 10 px
+        margin-bottom: $base * 2;  // 10 px
       }
 
       &__link {
@@ -128,7 +119,7 @@
 
       .nav__link + .nav__link {
         margin-left: 0;
-        margin-top: $base * 2; // 10 px
+        margin-top: $base * 2;    // 10 px
       }
     }
 
@@ -137,8 +128,8 @@
       text-align: right;
 
       & + & {
-        margin-top: $base * 2;      // 10 px
-        margin-left: 0;     // 40 px
+        margin-top: $base * 2;    // 10 px
+        margin-left: 0;           // 40 px
       }
 
       .group {

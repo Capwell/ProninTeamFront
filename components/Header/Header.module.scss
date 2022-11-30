@@ -7,7 +7,7 @@
   right: 0;
   display: flex;
   background-color: white;
-  box-shadow: 0px 4px 4px rgba(black, .07);
+  box-shadow: $box-shadow;
   z-index: 1000;
 
   &__inner {
@@ -34,7 +34,7 @@
       line-height: 1.25;
 
       &:first-child {
-        margin-left: -$logo-width;
+        margin-left: -$logo-width;  // -150 px
       }
 
       &:last-child {
@@ -43,11 +43,11 @@
       }
 
       &:hover {
-        color: $turquoise;
+        color: $c-success;
       }
 
       &:active {
-        color: #b0b0b0;
+        color: $c-secondary;
       }
     }
 
@@ -64,7 +64,7 @@
     &__nav {
 
       .nav__link + .nav__link {
-        margin-left: $base * 6     // 30 px
+        margin-left: $base * 6      // 30 px
       }
     }
   }
