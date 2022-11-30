@@ -2,7 +2,7 @@ import { Button } from 'react-bootstrap'
 import styled from 'styled-components'
 
 // use styled-components for set color settings
-// (if we get it from dynamicly)
+// (if we get it dynamicly)
 const ColoredBtn = styled(Button)`
   color: ${ props => props.btnColor };
   border-color: ${ props => props.btnColor };
@@ -50,7 +50,6 @@ function PTButton({ className, variant, text, onClick, btnColor, ...rest }) {
 
     return
   }
-
   return (
     // if variant prop is "colored" - return styled component
     variant === 'colored'
@@ -69,7 +68,6 @@ function PTButton({ className, variant, text, onClick, btnColor, ...rest }) {
           className={ classes }
           variant={ variant }
           onClick={ onClick }
-          btnColor={ btnColor }
           { ...rest }
         >
           { setIcon() }

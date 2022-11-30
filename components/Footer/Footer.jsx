@@ -36,9 +36,9 @@ function Footer() {
                 <NavLink className={ stl.nav__link } href="/#services">
                   Услуги
                 </NavLink>
-                <NavLink className={ stl.nav__link } href="/cases">
+                <Link className={ stl.nav__link } href="/cases">
                   Кейсы
-                </NavLink>
+                </Link>
                 {/* <NavLink className={ stl.nav__link } href="/#about">
                   О нас
                 </NavLink> */}

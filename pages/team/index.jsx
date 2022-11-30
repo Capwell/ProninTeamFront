@@ -4,7 +4,8 @@ import {
   Tabs,
   Tab,
   Row,
-  Col
+  Col,
+  Container
 } from 'react-bootstrap'
 import stl from '../../styles/Team.module.scss'
 import PTHead from '../../components/PTHead/PTHead'
@@ -207,18 +208,22 @@ function Team() {
         ogSiteName='ProninTeam'
       />
 
+      <Container
+        as="section"
+        fluid="xxl"
+        className="mt-30 mb-20"
+      >
 {/* Back button */}
-      <PTButton
-        className="my-30"
-        variant="small-back"
-        onClick={ () => router.back() }
-      />
+        <PTButton
+          className="mb-30"
+          variant="small-back"
+          onClick={ () => router.back() }
+        />
 
-      <section className={ stl.team }>
         <h1 className={ stl.team__title }>
           Наша команда
         </h1>
-
+{/* Tabs */}
         <Tabs
           defaultActiveKey={ tabs[0].eventKey }  // first tab is active by default
           id="team-tabs"
@@ -268,7 +273,7 @@ function Team() {
             })
           }
         </Tabs>
-      </section>
+      </Container>
     </>
   )
 }
