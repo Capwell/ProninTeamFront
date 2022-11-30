@@ -3,8 +3,7 @@ import { useState, useRef } from "react";
 import {
   Row,
   Col,
-  Form,
-  Button
+  Form
 } from "react-bootstrap";
 import { useFormik } from 'formik'
 import ReCAPTCHA from 'react-google-recaptcha'
@@ -21,6 +20,7 @@ function ClientForm() {
   // modal content type
   const [modalType, setModalType] = useState('')
   // recaptcha component
+  const [isLoading, setIsLoading] = useState(false)
   const recaptcha = useRef()
   const fileInput = useRef()
 
@@ -74,18 +74,20 @@ function ClientForm() {
     },
     // set function for success validation and submitting
     onSubmit: async values => {
-      // Execute the reCAPTCHA when the form is submitted
-      const token = await recaptcha.current.executeAsync();
-
-      const fData = new FormData()
-      fData.append('name', values.name)
-      fData.append('communicate', values.communicate)
-      fData.append('message', values.message)
-      fData.append('file', values.file)
-      fData.append('is_agreed', values.is_agreed)
-      fData.append('token', token)
 
       try {
+        setIsLoading(true)
+        // Execute the reCAPTCHA when the form is submitted
+        const token = await recaptcha.current.executeAsync();
+
+        const fData = new FormData()
+        fData.append('name', values.name)
+        fData.append('communicate', values.communicate)
+        fData.append('message', values.message)
+        fData.append('file', values.file)
+        fData.append('is_agreed', values.is_agreed)
+        fData.append('token', token)
+
         await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/requests`, {               // send data to API
           method: 'POST',
           body: fData,
@@ -102,11 +104,13 @@ function ClientForm() {
             setTimeout(() => setModalShow(false), 3000)
             return Promise.reject(`Ошибка: ${res.status}`);
           }
+          setIsLoading(false)
         })
       } catch (err) {
         setModalType('error')
         setModalShow(true)
         setTimeout(() => setModalShow(false), 3000)
+        setIsLoading(false)
       }
     },
   })
@@ -358,6 +362,8 @@ function ClientForm() {
             variant="primary"
             text="Отправить ответы"
             onClick={ presubmitCheck }
+            loader={ true }
+            isLoad={ isLoading }
             disabled={ !isSubmitAvailable }
             type="submit"
           />

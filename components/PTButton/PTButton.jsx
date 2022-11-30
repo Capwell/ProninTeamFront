@@ -1,6 +1,8 @@
 import Link from 'next/link'
-import { Button } from 'react-bootstrap'
+import { useState } from 'react'
+import { Button, Spinner } from 'react-bootstrap'
 import styled from 'styled-components'
+import stl from './PTButton.module.scss'
 
 // use styled-components for set color settings
 // (if we get it dynamicly)
@@ -36,7 +38,19 @@ const ColoredLink = styled(Link)`
   }
 `
 
-function PTButton({ className, variant, text, onClick, btnColor, href, ...rest }) {
+function PTButton({
+  className,
+  variant,         // react-bootstrap "variant" prop
+  text,            // text on button
+  onClick,         // onClick handler
+  btnColor,        // value for colored styled-component
+  href,            // link for <Link> as button
+  loader = false,  // boolean: is spinner element must be include
+  isLoad = false,  // boolean: state for showing loader
+  ...rest          // other params
+}) {
+  // state for showing spinner when something is loading
+  // const [isLoading, setIsLoading] = useState(isLoad)
   // if btnColor is define - we have to add bootstrap classes of element manualy
   const classes = `${className || ''} ${btnColor ? 'btn btn-colored' : ''}`
 
@@ -67,9 +81,12 @@ function PTButton({ className, variant, text, onClick, btnColor, href, ...rest }
 
     return
   }
-
+  // return component depending on the values of the passed parameters
   const renderElem = () => {
+    // if there is href value
     if (href) {
+      // and if there is a color parameter -
+      // return next.js <Link> wrapped on styled-component
       if (variant === 'colored') return (
         <ColoredLink
           className={ classes }
@@ -81,6 +98,8 @@ function PTButton({ className, variant, text, onClick, btnColor, href, ...rest }
           { text || setText() }
         </ColoredLink>
       )
+      // there is NOT a color parameter -
+      // return next.js Link component
       else return (
         <Link
           className={ `${classes} btn btn-${variant}` }
@@ -91,7 +110,10 @@ function PTButton({ className, variant, text, onClick, btnColor, href, ...rest }
           { text || setText() }
         </Link>
       )
+    // if there is NOT href value
     } else {
+      // and if there is a color parameter -
+      // return react-bootstrap <Button> wrapped on styled-component
       if (variant === 'colored') return (
         <ColoredBtn
           className={ classes }
@@ -104,7 +126,8 @@ function PTButton({ className, variant, text, onClick, btnColor, href, ...rest }
           { text || setText() }
         </ColoredBtn>
       )
-      // else - return bootstrap Button component
+      // there is NOT a color parameter -
+      // else - return react-bootstrap <Button>
       else return (
         <Button
           className={ classes }
@@ -112,8 +135,22 @@ function PTButton({ className, variant, text, onClick, btnColor, href, ...rest }
           onClick={ onClick }
           { ...rest }
         >
-          { setIcon() }
-          { text || setText() }
+          { !isLoad && setIcon() }
+          { !isLoad && text || setText() }
+          { loader &&
+            <Spinner
+              className={ `${stl.loader} ${
+                isLoad ? 'd-block' : 'd-none'
+              }` }
+              as="span"
+              animation="border"
+              role="status"
+              size="md"
+              aria-hidden="true"
+            >
+              <span className="visually-hidden">Подождите...</span>
+            </Spinner>
+          }
         </Button>
       )
     }
