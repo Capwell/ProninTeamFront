@@ -11,6 +11,7 @@ import ClientForm from '../components/ClientForm/ClientForm'
 import stl from '../styles/Home.module.scss'
 import PTButton from '../components/PTButton/PTButton'
 import CaseBanner from '../components/CaseBanner/CaseBanner'
+import Loader from '../components/Loader/Loader';
 
 function Home() {
   const [showVideo, setShowVideo] = useState(false)

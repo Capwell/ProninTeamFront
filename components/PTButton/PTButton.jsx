@@ -1,7 +1,7 @@
 import Link from 'next/link'
-import { Button, Spinner } from 'react-bootstrap'
+import { Button } from 'react-bootstrap'
 import styled from 'styled-components'
-import stl from './PTButton.module.scss'
+import Loader from '../Loader/Loader'
 
 // use styled-components for set color settings
 // (if we get it dynamicly)
@@ -135,18 +135,10 @@ function PTButton({
           { !isLoad && setIcon() }
           { !isLoad && text || setText() }
           { loader &&
-            <Spinner
-              className={ `${stl.loader} ${
-                isLoad ? 'd-block' : 'd-none'
-              }` }
-              as="span"
-              animation="border"
-              role="status"
+            <Loader
+              className={ `${isLoad ? 'd-block' : 'd-none'}` }
               size="md"
-              aria-hidden="true"
-            >
-              <span className="visually-hidden">Подождите...</span>
-            </Spinner>
+            />
           }
         </Button>
       )
