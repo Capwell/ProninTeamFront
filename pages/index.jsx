@@ -146,22 +146,29 @@ function Home() {
 {/* Cases section */}
       <a id="cases" className="anchor" />
 
-      <Container
-        as='section'
-        fluid="xxl"
-        className={`${stl.cases}`}
-      >
-        <h2 className={ stl.cases__title }>
-          Пример наших работ
-        </h2>
-      </Container>
+      <section className={ stl.cases }>
+        <Container fluid="xxl">
+          <h2 className={ stl.cases__title }>
+            Пример наших работ
+          </h2>
+        </Container>
 
-      <CaseBanner
-        as='div'
-        caseColor={ mainCase.color }
-        logo={ mainCase.logo }
-        description={ mainCase.description }
-      />
+        <CaseBanner
+          as='div'
+          caseColor={ mainCase.color }
+          logo={ mainCase.logo }
+          description={ mainCase.description }
+        />
+
+        <Container fluid="xxl" className="d-flex justify-content-center">
+          <PTButton
+            variant="primary"
+            className="mt-20"
+            text="Посмотреть все кейсы"
+            href="/cases"
+          />
+        </Container>
+      </section>
 
         {/* <div className={ stl.cases__timeline }>
           <ul className={ stl.timeline__list }>

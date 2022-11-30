@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import { Button } from 'react-bootstrap'
 import styled from 'styled-components'
 
@@ -19,9 +20,25 @@ const ColoredBtn = styled(Button)`
   }
 `
 
-function PTButton({ className, variant, text, onClick, btnColor, ...rest }) {
+const ColoredLink = styled(Link)`
+  color: ${ props => props.btnColor };
+  border-color: ${ props => props.btnColor };
+
+  &:hover {
+    color: white;
+    background-color: ${ props => props.btnColor };
+    border-color: ${ props => props.btnColor };
+  }
+
+  &:active {
+    color: #333333 !important;
+    border-color: #333333 !important;
+  }
+`
+
+function PTButton({ className, variant, text, onClick, btnColor, href, ...rest }) {
   // if btnColor is define - we have to add bootstrap classes of element manualy
-  const classes = `${className} ${btnColor ? 'btn btn-colored' : ''}`
+  const classes = `${className || ''} ${btnColor ? 'btn btn-colored' : ''}`
 
   // set svg icon for some button's variants
   const setIcon = () => {
@@ -50,10 +67,33 @@ function PTButton({ className, variant, text, onClick, btnColor, ...rest }) {
 
     return
   }
-  return (
-    // if variant prop is "colored" - return styled component
-    variant === 'colored'
-      ? <ColoredBtn
+
+  const renderElem = () => {
+    if (href) {
+      if (variant === 'colored') return (
+        <ColoredLink
+          className={ classes }
+          btnColor={ btnColor }
+          href={ href }
+          { ...rest }
+        >
+          { setIcon() }
+          { text || setText() }
+        </ColoredLink>
+      )
+      else return (
+        <Link
+          className={ `${classes} btn btn-${variant}` }
+          href={ href }
+          { ...rest }
+        >
+          { setIcon() }
+          { text || setText() }
+        </Link>
+      )
+    } else {
+      if (variant === 'colored') return (
+        <ColoredBtn
           className={ classes }
           variant={ variant }
           onClick={ onClick }
@@ -63,8 +103,10 @@ function PTButton({ className, variant, text, onClick, btnColor, ...rest }) {
           { setIcon() }
           { text || setText() }
         </ColoredBtn>
+      )
       // else - return bootstrap Button component
-      : <Button
+      else return (
+        <Button
           className={ classes }
           variant={ variant }
           onClick={ onClick }
@@ -73,6 +115,12 @@ function PTButton({ className, variant, text, onClick, btnColor, ...rest }) {
           { setIcon() }
           { text || setText() }
         </Button>
+      )
+    }
+  }
+
+  return (
+    renderElem()
   )
 }
 
