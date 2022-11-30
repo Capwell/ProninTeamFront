@@ -10,11 +10,18 @@ import VideoModal from '../components/VideoModal/VideoModal'
 import ClientForm from '../components/ClientForm/ClientForm'
 import stl from '../styles/Home.module.scss'
 import PTButton from '../components/PTButton/PTButton'
+import CaseBanner from '../components/CaseBanner/CaseBanner'
 
 function Home() {
-  const [showVideo, setShowVideo] = useState(false);
+  const [showVideo, setShowVideo] = useState(false)
   // open modal window with video
   const openVideo = () => setShowVideo(true)
+
+  const mainCase = {
+    logo: '/images/donorsearch-logo.svg',
+    description: 'Безусловно, высококачественный прототип будущего проекта способствует подготовке и реализации модели развития.',
+    color: '#ff2a23'
+  }
 
   return (
     <>
@@ -142,13 +149,21 @@ function Home() {
       <Container
         as='section'
         fluid="xxl"
-        className={`${stl.cases} mb-100 mb-lg-150`}
+        className={`${stl.cases}`}
       >
         <h2 className={ stl.cases__title }>
-          Кейсы
+          Пример наших работ
         </h2>
+      </Container>
 
-        <div className={ stl.cases__timeline }>
+      <CaseBanner
+        as='div'
+        caseColor={ mainCase.color }
+        logo={ mainCase.logo }
+        description={ mainCase.description }
+      />
+
+        {/* <div className={ stl.cases__timeline }>
           <ul className={ stl.timeline__list }>
 
             <li className={ stl.timeline__item }>
@@ -222,8 +237,8 @@ function Home() {
             </li>
 
           </ul>
-        </div>
-      </Container>
+        </div> */}
+
     </>
   );
 }

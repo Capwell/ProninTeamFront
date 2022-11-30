@@ -14,46 +14,7 @@
     list-style: none;
     padding: 0;
 
-    .list__item {
-      position: relative;
-      height: $base * 120;  // 600 px
-
-      .item {
-
-        &__inner {
-          display: flex;
-          flex-direction: column;
-          justify-content: flex-start;
-          height: 100%;
-        }
-
-        &__logo {
-          display: flex;
-          align-items: center;
-          position: relative;
-          width: 100%;
-          max-width: $base * 127;    // 635 px
-          min-height: $base * 27;    // 135 px
-          margin-bottom: $base * 19; // 95 px
-
-          .logo__img {
-            object-fit: contain;
-            width: 100% !important;
-            position: relative !important;
-            height: unset !important;
-          }
-        }
-
-        &__description {
-          font-size: 1.5rem;
-          font-weight: 500;
-          line-height: 1.25;
-          letter-spacing: .045em;
-        }
-      }
-    }
-
-    .list__item + .list__item {
+    & > * + * {
       margin-top: $base * 6;  // 30 px
     }
   }

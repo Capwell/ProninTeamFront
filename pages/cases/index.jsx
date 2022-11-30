@@ -5,11 +5,7 @@ import styled from 'styled-components'
 import PTHead from '../../components/PTHead/PTHead'
 import PTButton from '../../components/PTButton/PTButton'
 import stl from '../../styles/Cases.module.scss'
-
-// use styled-components for set color settings for case item
-const ColoredItem = styled.li`
-  background: linear-gradient(90deg, ${props => props.itemColor}1a 0%, #ffffff 48.91%);
-`
+import CaseBanner from '../../components/CaseBanner/CaseBanner'
 
 function Cases() {
   const router = useRouter()
@@ -55,36 +51,13 @@ function Cases() {
         {
           casesData.map((caseItem, index) => {
             return (
-              <ColoredItem
+              <CaseBanner
+                as="li"
                 key={ `case-${index}` }
-                className={ stl.list__item }
-                itemColor={ caseItem.color }
-              >
-                <Container
-                  fluid="xxl"
-                  className={`${stl.item__inner} pt-115 pb-45`}
-                >
-                  <div className={ stl.item__logo }>
-                    <Image
-                      className={ stl.logo__img }
-                      src={ caseItem.logo }
-                      alt="Case image"
-                      fill
-                    />
-                  </div>
-
-                  <p className={ stl.item__description }>{ caseItem.description }</p>
-{/* TODO: Реализовать ссылку через Next.js Link компонент */}
-                  <PTButton
-                    as='a'
-                    className="mt-auto ms-auto"
-                    variant="colored"
-                    href="/cases/case"
-                    btnColor={ caseItem.color }
-                    text="Подробнее"
-                  />
-                </Container>
-              </ColoredItem>
+                caseColor={ caseItem.color }
+                logo={ caseItem.logo }
+                description={ caseItem.description }
+              />
             )
           })
         }

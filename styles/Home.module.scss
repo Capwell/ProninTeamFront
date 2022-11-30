@@ -178,9 +178,10 @@
 
 // ===== CASES ===== //
 .cases {
-
+  margin-bottom: $base * 20;
+  
   &__title {
-    margin-bottom: $base * 6;       // 30 px
+    margin-bottom: $base * 10;       // 50 px
     font-weight: 600;
     font-size: 2.5rem;
     line-height: 1.2;
