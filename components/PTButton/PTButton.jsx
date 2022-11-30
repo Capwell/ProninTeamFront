@@ -1,5 +1,4 @@
 import Link from 'next/link'
-import { useState } from 'react'
 import { Button, Spinner } from 'react-bootstrap'
 import styled from 'styled-components'
 import stl from './PTButton.module.scss'
@@ -49,8 +48,6 @@ function PTButton({
   isLoad = false,  // boolean: state for showing loader
   ...rest          // other params
 }) {
-  // state for showing spinner when something is loading
-  // const [isLoading, setIsLoading] = useState(isLoad)
   // if btnColor is define - we have to add bootstrap classes of element manualy
   const classes = `${className || ''} ${btnColor ? 'btn btn-colored' : ''}`
 
