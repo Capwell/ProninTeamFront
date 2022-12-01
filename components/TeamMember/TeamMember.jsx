@@ -8,8 +8,8 @@ function TeamMember({ photo, name, mainRole, roles }) {
         <Image
           className={ stl.photo__img }
           src={ photo }
-          width='255'
-          height='260'
+          width="255"
+          height="260"
           alt={ 'Фото ' + name }
         />
       </div>

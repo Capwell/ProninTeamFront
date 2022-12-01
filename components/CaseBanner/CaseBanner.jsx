@@ -9,7 +9,7 @@ const ColoredBanner = styled.div`
   background: linear-gradient(90deg, ${props => props.bgColor}1a 0%, #ffffff 48.91%);
 `
 
-function CaseBanner({ as, className, caseColor, logo, description }) {
+function CaseBanner({ as, className, caseColor, logo, description, linkURL }) {
 
   return(
     <ColoredBanner
@@ -33,12 +33,11 @@ function CaseBanner({ as, className, caseColor, logo, description }) {
         <p className={ stl.banner__description }>
           { description }
         </p>
-{/* TODO: Реализовать ссылку через Next.js Link компонент */}
+
         <PTButton
-          as="a"
           className="mt-auto ms-auto"
           variant="colored"
-          href="/cases/case"
+          href={ `/cases/${linkURL}` }
           btnColor={ caseColor }
           text="Подробнее"
         />

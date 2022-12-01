@@ -15,12 +15,17 @@ $spacers: (
   40: $spacer * 8,    // 40 px
   45: $spacer * 9,    // 45 px
   50: $spacer * 10,   // 50 px
+  60: $spacer * 12,   // 60 px
   70: $spacer * 14,   // 70 px
+  75: $spacer * 15,   // 75 px
   80: $spacer * 16,   // 80 px
+  90: $spacer * 18,   // 90 px
   100: $spacer * 20,  // 100 px
+  110: $spacer * 22,  // 110 px
   115: $spacer * 23,  // 115 px
   140: $spacer * 28,  // 140 px
-  150: $spacer * 30   // 150 px
+  150: $spacer * 30,  // 150 px
+  170: $spacer * 34,  // 170 px
 );
 // values of media queries
 $grid-breakpoints: (

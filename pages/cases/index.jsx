@@ -1,7 +1,5 @@
 import { useRouter } from 'next/router'
-import Image from 'next/image'
 import { Container } from 'react-bootstrap'
-import styled from 'styled-components'
 import PTHead from '../../components/PTHead/PTHead'
 import PTButton from '../../components/PTButton/PTButton'
 import stl from '../../styles/Cases.module.scss'
@@ -12,14 +10,16 @@ function Cases() {
 
   const casesData = [
     {
+      title: 'donor-search',
       logo: '/images/donorsearch-logo.svg',
       description: 'Безусловно, высококачественный прототип будущего проекта способствует подготовке и реализации модели развития.',
-      color: '#FF2A23'
+      hex_color: '#FF2A23'
     },
     {
+      title: 'pronin-team',
       logo: '/images/proninteam-logo.svg',
       description: 'Безусловно, высококачественный прототип будущего проекта способствует подготовке и реализации модели развития.',
-      color: '#30D5C8'
+      hex_color: '#30D5C8'
     }
   ]
 
@@ -54,9 +54,10 @@ function Cases() {
               <CaseBanner
                 as="li"
                 key={ `case-${index}` }
-                caseColor={ caseItem.color }
+                caseColor={ caseItem.hex_color }
                 logo={ caseItem.logo }
                 description={ caseItem.description }
+                linkURL={ caseItem.title }
               />
             )
           })
