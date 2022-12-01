@@ -9,7 +9,7 @@ function TeamMember({ photo, name, mainRole, roles }) {
           className={ stl.photo__img }
           src={ photo }
           width='255'
-          height='255'
+          height='260'
           alt={ 'Фото ' + name }
         />
       </div>
