@@ -20,30 +20,8 @@ export async function getStaticProps() {
   return { props: { casesData } }
 }
 
-// function Cases({ casesData }) {
-function Cases() {
+function Cases({ casesData }) {
   const router = useRouter()
-
-  const casesData = [
-    {
-      title: 'DonorSearch',
-      hex_color: '#FF2A23',
-      logo: '/images/donorsearch-logo.svg',
-      is_on_main_page: false,
-      is_visible: true,
-      slug: 'donor-search',
-      text: 'Безусловно, высококачественный прототип будущего проекта способствует подготовке и реализации модели развития.'
-    },
-    {
-      title: 'ProninTeam',
-      hex_color: '#30D5C8',
-      logo: '/images/proninteam-logo.svg',
-      is_on_main_page: true,
-      is_visible: true,
-      slug: 'pronin-team',
-      text: 'Безусловно, высококачественный прототип будущего проекта способствует подготовке и реализации модели развития.',
-    }
-  ]
 
   return (
     <>
