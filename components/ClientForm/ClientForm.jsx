@@ -11,6 +11,7 @@ import SubmitModal from '../SubmitModal/SubmitModal'
 import PTFileInput from '../PTFileInput/PTFileInput'
 import stl from './ClientForm.module.scss'
 import PTButton from '../PTButton/PTButton'
+import api from '../../utils/api'
 
 function ClientForm() {
   // submit button availablity
@@ -74,9 +75,9 @@ function ClientForm() {
     },
     // set function for success validation and submitting
     onSubmit: async values => {
+      setIsLoading(true)
 
       try {
-        setIsLoading(true)
         // Execute the reCAPTCHA when the form is submitted
         const token = await recaptcha.current.executeAsync();
 
@@ -88,28 +89,16 @@ function ClientForm() {
         fData.append('is_agreed', values.is_agreed)
         fData.append('token', token)
 
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/requests`, {               // send data to API
-          method: 'POST',
-          body: fData,
-        })
-        .then(res => {
-          if (res.ok) {  //show success modal
-            setModalType('success')
-            setModalShow(true)
-            setTimeout(() => setModalShow(false), 3000)
-            return res.json();
-          } else { // if error - reject promise and show error modal
-            setModalType('error')
-            setModalShow(true)
-            setTimeout(() => setModalShow(false), 3000)
-            return Promise.reject(`Ошибка: ${res.status}`);
-          }
-          setIsLoading(false)
-        })
+        await api.sendOffer(fData)
+
+        setModalType('success')
+        setModalShow(true)
+        setTimeout(() => setModalShow(false), 3000)
       } catch (err) {
         setModalType('error')
         setModalShow(true)
         setTimeout(() => setModalShow(false), 3000)
+      } finally {
         setIsLoading(false)
       }
     },
