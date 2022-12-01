@@ -15,7 +15,9 @@ function TeamMember({ photo, name, mainRole, roles }) {
       </div>
       <span className={ stl.member__name }>{ name }</span>
       <span className={ stl.member__mainRole }>{ mainRole }</span>
-      <span className={ stl.member__roles }>{ roles }</span>
+      {
+        roles && <span className={ stl.member__roles }>{ roles }</span>
+      }
     </div>
   )
 }

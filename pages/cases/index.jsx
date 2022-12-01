@@ -4,22 +4,44 @@ import PTHead from '../../components/PTHead/PTHead'
 import PTButton from '../../components/PTButton/PTButton'
 import stl from '../../styles/Cases.module.scss'
 import CaseBanner from '../../components/CaseBanner/CaseBanner'
+import api from '../../utils/api'
 
+export async function getStaticProps() {
+  let casesData = null
+
+  try {
+    const allData = await api.getCases()
+    // filter only visible cases
+    casesData = allData.filter(caseData => caseData.is_visible === true)
+  } catch (err) {
+    console.log(err.message)
+  }
+
+  return { props: { casesData } }
+}
+
+// function Cases({ casesData }) {
 function Cases() {
   const router = useRouter()
 
   const casesData = [
     {
-      title: 'donor-search',
+      title: 'DonorSearch',
+      hex_color: '#FF2A23',
       logo: '/images/donorsearch-logo.svg',
-      description: 'Безусловно, высококачественный прототип будущего проекта способствует подготовке и реализации модели развития.',
-      hex_color: '#FF2A23'
+      is_on_main_page: false,
+      is_visible: true,
+      slug: 'donor-search',
+      text: 'Безусловно, высококачественный прототип будущего проекта способствует подготовке и реализации модели развития.'
     },
     {
-      title: 'pronin-team',
+      title: 'ProninTeam',
+      hex_color: '#30D5C8',
       logo: '/images/proninteam-logo.svg',
-      description: 'Безусловно, высококачественный прототип будущего проекта способствует подготовке и реализации модели развития.',
-      hex_color: '#30D5C8'
+      is_on_main_page: true,
+      is_visible: true,
+      slug: 'pronin-team',
+      text: 'Безусловно, высококачественный прототип будущего проекта способствует подготовке и реализации модели развития.',
     }
   ]
 
@@ -56,8 +78,8 @@ function Cases() {
                 key={ `case-${index}` }
                 caseColor={ caseItem.hex_color }
                 logo={ caseItem.logo }
-                description={ caseItem.description }
-                linkURL={ caseItem.title }
+                description={ caseItem.text }
+                linkURL={ caseItem.slug }
               />
             )
           })

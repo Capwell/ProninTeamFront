@@ -6,13 +6,13 @@ import Loader from '../Loader/Loader'
 // use styled-components for set color settings
 // (if we get it dynamicly)
 const ColoredBtn = styled(Button)`
-  color: ${ props => props.btnColor };
-  border-color: ${ props => props.btnColor };
+  color: ${ props => props.color };
+  border-color: ${ props => props.color };
 
   &:hover {
     color: white;
-    background-color: ${ props => props.btnColor };
-    border-color: ${ props => props.btnColor };
+    background-color: ${ props => props.color };
+    border-color: ${ props => props.color };
   }
 
   &:active {
@@ -22,13 +22,13 @@ const ColoredBtn = styled(Button)`
 `
 
 const ColoredLink = styled(Link)`
-  color: ${ props => props.btnColor };
-  border-color: ${ props => props.btnColor };
+  color: ${ props => props.color };
+  border-color: ${ props => props.color };
 
   &:hover {
     color: white;
-    background-color: ${ props => props.btnColor };
-    border-color: ${ props => props.btnColor };
+    background-color: ${ props => props.color };
+    border-color: ${ props => props.color };
   }
 
   &:active {
@@ -87,7 +87,7 @@ function PTButton({
       if (variant === 'colored') return (
         <ColoredLink
           className={ classes }
-          btnColor={ btnColor }
+          color={ btnColor }
           href={ href }
           { ...rest }
         >
@@ -116,7 +116,7 @@ function PTButton({
           className={ classes }
           variant={ variant }
           onClick={ onClick }
-          btnColor={ btnColor }
+          color={ btnColor }
           { ...rest }
         >
           { setIcon() }

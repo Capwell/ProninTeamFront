@@ -1,6 +1,5 @@
 import { useRouter } from 'next/router'
 import {
-  Button,
   Tabs,
   Tab,
   Row,
@@ -11,18 +10,31 @@ import stl from '../../styles/Team.module.scss'
 import PTHead from '../../components/PTHead/PTHead'
 import TeamMember from '../../components/TeamMember/TeamMember'
 import PTButton from '../../components/PTButton/PTButton'
+import api from '../../utils/api'
 
+export async function getStaticProps() {
+  let usersData = null
+  try {
+    usersData = await api.getTeam()
+    // return { props: { usersData } }
+  } catch (err) {
+    console.log(err.message)
+  }
+  return { props: { usersData } }
+}
+
+// function Team({ usersData }) {
 function Team() {
   const router = useRouter()
   // information about all team's members
-  const membersData = [
+  const usersData = [
     {
       main_role: {
         title: 'Seo'
       },
-      other_roles: {
-        title: 'Backend-разработчик'
-      },
+      other_roles: [
+        { title: 'Backend-разработчик' }
+      ],
       photo: '/images/user-1.webp',
       first_name: 'Андрей',
       last_name: 'Пронин',
@@ -32,9 +44,7 @@ function Team() {
       main_role: {
         title: 'QA'
       },
-      other_roles: {
-        title: ''
-      },
+      other_roles: [],
       photo: '/images/user-2.webp',
       first_name: 'Александр',
       last_name: 'Грабовский',
@@ -44,9 +54,7 @@ function Team() {
       main_role: {
         title: 'PM'
       },
-      other_roles: {
-        title: ''
-      },
+      other_roles: [],
       photo: '/images/user-3.webp',
       first_name: 'Каролина',
       last_name: 'Павлычева',
@@ -56,9 +64,7 @@ function Team() {
       main_role: {
         title: 'Frontend-разработчик'
       },
-      other_roles: {
-        title: ''
-      },
+      other_roles: [],
       photo: '/images/user-4.webp',
       first_name: 'Егор',
       last_name: 'Романов',
@@ -68,9 +74,7 @@ function Team() {
       main_role: {
         title: 'Backend-разработчик'
       },
-      other_roles: {
-        title: ''
-      },
+      other_roles: [],
       photo: '/images/user-5.webp',
       first_name: 'Алексей',
       last_name: 'Шевич',
@@ -80,9 +84,7 @@ function Team() {
       main_role: {
         title: 'Backend-разработчик'
       },
-      other_roles: {
-        title: ''
-      },
+      other_roles: [],
       photo: '/images/user-6.webp',
       first_name: 'Николай',
       last_name: 'Павлов',
@@ -92,9 +94,7 @@ function Team() {
       main_role: {
         title: 'Frontend-разработчик'
       },
-      other_roles: {
-        title: ''
-      },
+      other_roles: [],
       photo: '/images/user-7.webp',
       first_name: 'Сергей',
       last_name: 'Бородулин',
@@ -104,9 +104,7 @@ function Team() {
       main_role: {
         title: 'PM'
       },
-      other_roles: {
-        title: ''
-      },
+      other_roles: [],
       photo: '/images/user-8.webp',
       first_name: 'Елена',
       last_name: 'Береза',
@@ -116,9 +114,7 @@ function Team() {
       main_role: {
         title: 'PM'
       },
-      other_roles: {
-        title: ''
-      },
+      other_roles: [],
       photo: '/images/user-9.webp',
       first_name: 'Нина',
       last_name: 'Попова',
@@ -128,15 +124,22 @@ function Team() {
       main_role: {
         title: 'Дизайнер'
       },
-      other_roles: {
-        title: ''
-      },
+      other_roles: [],
       photo: '/images/user-10.webp',
       first_name: 'Олег',
       last_name: 'Кипарисов',
       middle_name: ''
     },
   ]
+  // filter user by their roles (main and others)
+  const filterUsers = (value) => {
+    return usersData.filter(user => {
+      return (
+        user.main_role.title === value ||
+        user.other_roles.find(role => role.title === value)
+      )
+    })
+  }
   // data for every tabs on this page
   const tabs = [
     {
@@ -144,57 +147,35 @@ function Team() {
       tabTitle: 'Все',   // use in react-bootstrap Tab component
       contentTitle: 'Почему с нами хорошо работать?',
       contentText: 'У нас нет корпоративной иерархии, личных секретарей, отдельных кабинетов и ключевых показателей эффективности.  Мы любим свою работу и делаем ее хорошо с ответственностью за результат.\n\nНет должностей, есть роли в проекте. (тут идея про то, что сотрудник выбирает то, чем ему хочется в данный момент заниматься в проекте от своих умений)',
-      members: membersData  // array of members who must be on current tab
+      members: usersData  // array of members who must be on current tab
     },
     {
       eventKey: 'managers',
       tabTitle: 'Менеджеры',
       contentTitle: 'Менеджеры',
       contentText: 'Наша цель - забота о клиенте.',
-      members: membersData.filter(member =>  {
-        return (
-          member.main_role.title === 'PM' ||
-          member.other_roles.title === 'PM'
-        )
-      })
+      members: filterUsers('PM')
     },
     {
       eventKey: 'developers',
       tabTitle: 'Разработчики',
       contentTitle: 'Команда разработки',
       contentText: 'Делаем быстро, не забывая о качестве.',
-      members: membersData.filter(member => {
-        return (
-          member.main_role.title === 'Frontend-разработчик' ||
-          member.other_roles.title === 'Frontend-разработчик' ||
-          member.main_role.title === 'Backend-разработчик' ||
-          member.other_roles.title === 'Backend-разработчик'
-        )
-      })
+      members: [...filterUsers('Backend-разработчик'), ...filterUsers('Frontend-разработчик')]
     },
     {
       eventKey: 'designers',
       tabTitle: 'Дизайнеры',
       contentTitle: 'Команда UX/UI дизайна',
       contentText: 'Сделать не только красиво, но и — удобно.',
-      members: membersData.filter(member =>  {
-        return (
-          member.main_role.title === 'Дизайнер' ||
-          member.other_roles.title === 'Дизайнер'
-        )
-      })
+      members: filterUsers('Дизайнер')
     },
     {
       eventKey: 'testers',
       tabTitle: 'Тестировщики',
       contentTitle: 'Команда QA',
       contentText: 'Найти и обезвредить ошибки.',
-      members: membersData.filter(member =>  {
-        return (
-          member.main_role.title === 'QA' ||
-          member.other_roles.title === 'QA'
-        )
-      })
+      members: filterUsers('QA')
     },
   ]
 
@@ -251,7 +232,9 @@ function Team() {
                         const photo = member.photo
                         const name = `${member.first_name} ${member.last_name}`
                         const mainRole = member.main_role.title
-                        const roles = member.other_roles.title
+                        const roles = member.other_roles.length
+                          ? member.other_roles.map(role => role.title).join(' ')
+                          : null
                         const key = `${tab.eventKey}-${index}`
 
                         return (
@@ -261,7 +244,6 @@ function Team() {
                               name={ name }
                               mainRole={ mainRole }
                               roles={ roles }
-
                             />
                           </Col>
                         )
