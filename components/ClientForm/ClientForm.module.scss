@@ -42,14 +42,6 @@
     letter-spacing: .07em;
   }
 
-  // &__radios {
-  //   position: absolute;
-  //   // display: flex;
-  //   display: none;
-  //   right: $base * 3;
-  //   bottom: $base * 10;
-  // }
-
   &__checkbox {
     display: flex;
     align-items: center;
@@ -91,7 +83,7 @@
   .form {
 
     &__questions {
-      margin-bottom: $base * 6;  // 30 px
+      margin-bottom: $base * 6;    // 30 px
       padding-left: 0;
 
       .questions__item {
@@ -118,7 +110,7 @@
     &__questions {
 
       .questions__item + .questions__item {
-        margin-top: $base * 6;               // 30 px
+        margin-top: $base * 6;     // 30 px
       }
     }
   }

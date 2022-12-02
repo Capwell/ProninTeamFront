@@ -1,0 +1,81 @@
+@import '../../styles/variables.scss';
+
+.loader {
+  display: block;
+  position: relative;
+  width: 100%;
+  height: 100%;
+
+  &.xl {
+    max-width: $base * 12;  // 60 px
+    max-height: $base * 12; // 60 px
+  }
+
+  &.lg {
+    max-width: $base * 9;  // 45 px
+    max-height: $base * 9; // 45 px
+  }
+
+  &.md {
+    max-width: $base * 6;  // 30 px
+    max-height: $base * 6; // 30 px
+  }
+
+  &.sm {
+    max-width: $base * 3;  // 15 px
+    max-height: $base * 3; // 15 px
+  }
+
+  &__img {
+    width: 100%;
+    height: 100%;
+
+    & > rect {
+      animation: loading 1s ease-in-out infinite;
+    }
+
+    & > rect:nth-child(1) {
+      animation-delay: 0;
+    }
+
+    & > rect:nth-child(2) {
+      animation-delay: .1s;
+    }
+
+    & > rect:nth-child(3) {
+      animation-delay: .2s;
+    }
+
+    & > rect:nth-child(4) {
+      animation-delay: .3s;
+    }
+
+    & > rect:nth-child(5) {
+      animation-delay: .4s;
+    }
+
+    & > rect:nth-child(6) {
+      animation-delay: .5s;
+    }
+
+    & > rect:nth-child(7) {
+      animation-delay: .6s;
+    }
+
+    & > rect:nth-child(8) {
+      animation-delay: .7s;
+    }
+  }
+}
+
+@keyframes loading {
+  from {
+    fill: #e1e1e1;
+  }
+  50% {
+    fill: #333333;
+  }
+  to {
+    fill: #e1e1e1;
+  }
+}

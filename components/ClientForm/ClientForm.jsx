@@ -3,14 +3,15 @@ import { useState, useRef } from "react";
 import {
   Row,
   Col,
-  Form,
-  Button
+  Form
 } from "react-bootstrap";
 import { useFormik } from 'formik'
 import ReCAPTCHA from 'react-google-recaptcha'
 import SubmitModal from '../SubmitModal/SubmitModal'
 import PTFileInput from '../PTFileInput/PTFileInput'
 import stl from './ClientForm.module.scss'
+import PTButton from '../PTButton/PTButton'
+import api from '../../utils/api'
 
 function ClientForm() {
   // submit button availablity
@@ -20,6 +21,7 @@ function ClientForm() {
   // modal content type
   const [modalType, setModalType] = useState('')
   // recaptcha component
+  const [isLoading, setIsLoading] = useState(false)
   const recaptcha = useRef()
   const fileInput = useRef()
 
@@ -73,40 +75,37 @@ function ClientForm() {
     },
     // set function for success validation and submitting
     onSubmit: async values => {
-      // Execute the reCAPTCHA when the form is submitted
-      const token = await recaptcha.current.executeAsync();
-      // recaptchaRef.current.execute();
+      setIsLoading(true)
 
-      const fData = new FormData()
-      fData.append('name', values.name)
-      fData.append('communicate', values.communicate)
-      fData.append('message', values.message)
-      fData.append('file', values.file)
-      fData.append('is_agreed', values.is_agreed)
-      fData.append('token', token)
+      try {
+        // Execute the reCAPTCHA when the form is submitted
+        const token = await recaptcha.current.executeAsync();
 
-      await fetch(`${process.env.API_URL}/api/requests`, {               // send data to API
-        method: 'POST',
-        body: fData,
-      })
-      .then(res => {
-        if (res.ok) {  //show success modal
-          setModalType('success')
-          setModalShow(true)
-          setTimeout(() => setModalShow(false), 3000)
-          return res.json();
-        } else { // if error - reject promise and show error modal
-          setModalType('error')
-          setModalShow(true)
-          setTimeout(() => setModalShow(false), 3000)
-          return Promise.reject(`Ошибка: ${res.status}`);
-        }
-      })
+        const fData = new FormData()
+        fData.append('name', values.name)
+        fData.append('communicate', values.communicate)
+        fData.append('message', values.message)
+        fData.append('file', values.file)
+        fData.append('is_agreed', values.is_agreed)
+        fData.append('token', token)
+
+        await api.sendOffer(fData)
+
+        setModalType('success')
+        setModalShow(true)
+        setTimeout(() => setModalShow(false), 3000)
+      } catch (err) {
+        setModalType('error')
+        setModalShow(true)
+        setTimeout(() => setModalShow(false), 3000)
+      } finally {
+        setIsLoading(false)
+      }
     },
   })
   // check all values off form before submitting,
   // if is there some errors - show modal with error message and stop submitting
-  const presubmitCheck = e => {
+  const presubmitCheck = (e) => {
     e.preventDefault()
     // formik object with errors
     const errors = formik.errors
@@ -129,13 +128,14 @@ function ClientForm() {
       setModalType('messageOrFileErr')
       setModalShow(true)
       setTimeout(() => setModalShow(false), 5000)
+
       return false
     }
     // if everything is OK - submit form
     formik.handleSubmit(e)
   }
   // when file es attaching, write file data in formik.vales object
-  const onFileChange = fileData => {
+  const onFileChange = (fileData) => {
     formik.values.file = fileData;
 
     if (formik.values.message.length) {    // if there is a message
@@ -152,6 +152,7 @@ function ClientForm() {
     // Reset the reCAPTCHA when the request has failed or successeded
     recaptcha.current.reset();
   }
+
 
   return (
     <Form
@@ -346,14 +347,15 @@ function ClientForm() {
           lg={{ span: 'auto', order: 'first' }}
           className='d-flex justify-content-center'
         >
-          <Button
-            className='btn btn--primary'
-            type="submit"
-            disabled={ !isSubmitAvailable }
+          <PTButton
+            variant="primary"
+            text="Отправить ответы"
             onClick={ presubmitCheck }
-          >
-            Отправить ответы
-          </Button>
+            loader={ true }
+            isLoad={ isLoading }
+            disabled={ !isSubmitAvailable }
+            type="submit"
+          />
         </Col>
       </Row>
     </Form>

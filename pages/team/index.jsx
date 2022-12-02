@@ -1,140 +1,40 @@
 import { useRouter } from 'next/router'
 import {
-  Button,
   Tabs,
   Tab,
   Row,
-  Col
+  Col,
+  Container
 } from 'react-bootstrap'
 import stl from '../../styles/Team.module.scss'
 import PTHead from '../../components/PTHead/PTHead'
 import TeamMember from '../../components/TeamMember/TeamMember'
+import PTButton from '../../components/PTButton/PTButton'
+import api from '../../utils/api'
 
-function Team() {
+export async function getStaticProps() {
+  let usersData = null
+  try {
+    usersData = await api.getTeam()
+    // return { props: { usersData } }
+  } catch (err) {
+    console.log(err.message)
+  }
+  return { props: { usersData } }
+}
+
+function Team({ usersData }) {
   const router = useRouter()
-  // information about all team's members
-  const membersData = [
-    {
-      main_role: {
-        title: 'Seo'
-      },
-      other_roles: {
-        title: 'остальные роли'
-      },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
-    },
-    {
-      main_role: {
-        title: 'Seo'
-      },
-      other_roles: {
-        title: 'остальные роли'
-      },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
-    },
-    {
-      main_role: {
-        title: 'Seo'
-      },
-      other_roles: {
-        title: 'остальные роли'
-      },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
-    },
-    {
-      main_role: {
-        title: 'Seo'
-      },
-      other_roles: {
-        title: 'остальные роли'
-      },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
-    },
-    {
-      main_role: {
-        title: 'Seo'
-      },
-      other_roles: {
-        title: 'остальные роли'
-      },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
-    },
-    {
-      main_role: {
-        title: 'Seo'
-      },
-      other_roles: {
-        title: 'остальные роли'
-      },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
-    },
-    {
-      main_role: {
-        title: 'Seo'
-      },
-      other_roles: {
-        title: 'остальные роли'
-      },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
-    },
-    {
-      main_role: {
-        title: 'Seo'
-      },
-      other_roles: {
-        title: 'остальные роли'
-      },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
-    },
-    {
-      main_role: {
-        title: 'Seo'
-      },
-      other_roles: {
-        title: 'остальные роли'
-      },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
-    },
-    {
-      main_role: {
-        title: 'Seo'
-      },
-      other_roles: {
-        title: 'остальные роли'
-      },
-      photo: '/images/user-1.jpeg',
-      first_name: 'Андрей',
-      last_name: 'Пронин',
-      middle_name: 'Александрович'
-    },
-  ]
+
+  // filter user by their roles (main and others)
+  const filterUsers = (value) => {
+    return usersData.filter(user => {
+      return (
+        user.main_role.title === value ||
+        user.other_roles.find(role => role.title === value)
+      )
+    })
+  }
   // data for every tabs on this page
   const tabs = [
     {
@@ -142,31 +42,35 @@ function Team() {
       tabTitle: 'Все',   // use in react-bootstrap Tab component
       contentTitle: 'Почему с нами хорошо работать?',
       contentText: 'У нас нет корпоративной иерархии, личных секретарей, отдельных кабинетов и ключевых показателей эффективности.  Мы любим свою работу и делаем ее хорошо с ответственностью за результат.\n\nНет должностей, есть роли в проекте. (тут идея про то, что сотрудник выбирает то, чем ему хочется в данный момент заниматься в проекте от своих умений)',
-      members: membersData  // array of members who must be on current tab
+      members: usersData  // array of members who must be on current tab
     },
     {
       eventKey: 'managers',
       tabTitle: 'Менеджеры',
       contentTitle: 'Менеджеры',
-      contentText: 'Наша цель - забота о клиенте.'
+      contentText: 'Наша цель - забота о клиенте.',
+      members: filterUsers('PM')
     },
     {
       eventKey: 'developers',
       tabTitle: 'Разработчики',
       contentTitle: 'Команда разработки',
-      contentText: 'Делаем быстро, не забывая о качестве.'
+      contentText: 'Делаем быстро, не забывая о качестве.',
+      members: [...filterUsers('Backend-разработчик'), ...filterUsers('Frontend-разработчик')]
     },
     {
       eventKey: 'designers',
       tabTitle: 'Дизайнеры',
       contentTitle: 'Команда UX/UI дизайна',
-      contentText: 'Сделать не только красиво, но и — удобно.'
+      contentText: 'Сделать не только красиво, но и — удобно.',
+      members: filterUsers('Дизайнер')
     },
     {
       eventKey: 'testers',
       tabTitle: 'Тестировщики',
       contentTitle: 'Команда QA',
-      contentText: 'Найти и обезвредить ошибки.'
+      contentText: 'Найти и обезвредить ошибки.',
+      members: filterUsers('QA')
     },
   ]
 
@@ -180,22 +84,22 @@ function Team() {
         ogSiteName='ProninTeam'
       />
 
-{/* Back button */}
-      <Button
-        className="btn btn--back my-30"
-        onClick={() => router.back()}
+      <Container
+        as="section"
+        fluid="xxl"
+        className="mt-30 mb-20"
       >
-        <svg className='btn__icon' width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M25.2002 29.6L15.2002 19.6L25.2002 9.6" stroke="#333333" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-        </svg>
-        Назад
-      </Button>
+{/* Back button */}
+        <PTButton
+          className="mb-30"
+          variant="small-back"
+          onClick={ () => router.back() }
+        />
 
-      <section className={ stl.team }>
         <h1 className={ stl.team__title }>
           Наша команда
         </h1>
-
+{/* Tabs */}
         <Tabs
           defaultActiveKey={ tabs[0].eventKey }  // first tab is active by default
           id="team-tabs"
@@ -217,13 +121,15 @@ function Team() {
                     { tab.contentText }
                   </p>
 
-                  <Row as='ul' className={ stl.tab__members } sm='1' md='3' lg='4'>
+                  <Row as='ul' className={ stl.tab__members } xs='1' sm='2' md='3' lg='4'>
                     {
                       tab.members?.map((member, index) => {
                         const photo = member.photo
                         const name = `${member.first_name} ${member.last_name}`
                         const mainRole = member.main_role.title
-                        const roles = member.other_roles.title
+                        const roles = member.other_roles.length
+                          ? member.other_roles.map(role => role.title).join(' ')
+                          : null
                         const key = `${tab.eventKey}-${index}`
 
                         return (
@@ -233,7 +139,6 @@ function Team() {
                               name={ name }
                               mainRole={ mainRole }
                               roles={ roles }
-
                             />
                           </Col>
                         )
@@ -245,7 +150,7 @@ function Team() {
             })
           }
         </Tabs>
-      </section>
+      </Container>
     </>
   )
 }
