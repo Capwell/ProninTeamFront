@@ -20,7 +20,7 @@ export async function getStaticProps() {
   return { props: { casesData } }
 }
 
-function Cases({ casesData }) {
+function Cases({ casesData = [] }) {
   const router = useRouter()
 
   return (
