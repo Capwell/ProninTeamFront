@@ -19,6 +19,7 @@ const testInputLessThan2 = async (wrapper, input, errorElem) => {
   expect(wrapper).toHaveClass('invalid') // render red invalid label
   expect(errorElem).toContainHTML('Пожалуйста, введите не менее 2 символов')
 }
+
 // check validation with inputing MORE than 2 chars into field
 const testInputMoreThan2 = async (wrapper, input, errorElem) => {
   const user = userEvent.setup()
@@ -27,6 +28,7 @@ const testInputMoreThan2 = async (wrapper, input, errorElem) => {
   expect(wrapper).toHaveClass('valid') // render green valid label
   expect(errorElem).toContainHTML('')
 }
+
 // check input value with inputing MORE than 20 chars
 const testInputMoreThan20 = async (input) => {
   const user = userEvent.setup()
