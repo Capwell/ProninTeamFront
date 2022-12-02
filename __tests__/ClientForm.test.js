@@ -11,7 +11,7 @@ const testInputEmpty = async (wrapper, input, errorElem) => {
   expect(wrapper).toHaveClass('invalid') // render red invalid label
   expect(errorElem).toContainHTML('Обязательно')
 }
-// check validation with inputing LESS than 2 cars into field
+// check validation with inputing LESS than 2 chars into field
 const testInputLessThan2 = async (wrapper, input, errorElem) => {
   const user = userEvent.setup()
   await user.type(input, 'a')
@@ -19,7 +19,7 @@ const testInputLessThan2 = async (wrapper, input, errorElem) => {
   expect(wrapper).toHaveClass('invalid') // render red invalid label
   expect(errorElem).toContainHTML('Пожалуйста, введите не менее 2 символов')
 }
-// check validation with inputing MORE than 2 cars into field
+// check validation with inputing MORE than 2 chars into field
 const testInputMoreThan2 = async (wrapper, input, errorElem) => {
   const user = userEvent.setup()
   await user.type(input, 'absdef')
@@ -27,13 +27,13 @@ const testInputMoreThan2 = async (wrapper, input, errorElem) => {
   expect(wrapper).toHaveClass('valid') // render green valid label
   expect(errorElem).toContainHTML('')
 }
-// check input value with inputing MORE than 20 cars
+// check input value with inputing MORE than 20 chars
 const testInputMoreThan20 = async (input) => {
   const user = userEvent.setup()
   await user.type(input, 'Lorem ipsum dolor si amet')
   expect(input).toHaveValue('Lorem ipsum dolor si')
 }
-// check textarea value inputing LESS than 20 cars
+// check textarea value inputing LESS than 20 chars
 const testTextareaLessOrEmpty = async (wrapper, textarea, errorElem, isEmpty, isFile) => {
   const user = userEvent.setup()
   let file
@@ -65,7 +65,7 @@ const testTextareaLessOrEmpty = async (wrapper, textarea, errorElem, isEmpty, is
     }
   }
 }
-// check textarea value inputing MORE than 20 cars
+// check textarea value inputing MORE than 20 chars
 const testTextareaMoreThan20 = async (wrapper, textarea, errorElem, isFile) => {
   const user = userEvent.setup()
   let file
@@ -209,7 +209,7 @@ describe('Message Textarea', () => {
 })
 
 describe('File Input', () => {
-  
+
 })
 
 describe('Submit Button', () => {
