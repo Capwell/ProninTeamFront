@@ -13,7 +13,7 @@ import PTButton from '../../components/PTButton/PTButton'
 import api from '../../utils/api'
 
 export async function getStaticProps() {
-  let usersData = null
+  let usersData = []
   try {
     usersData = await api.getTeam()
     // return { props: { usersData } }
