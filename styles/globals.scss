@@ -728,8 +728,10 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   }
 }
 // ===== / ===== //
-
-body {
+html,
+body,
+#__next,
+main {
   height: 100%;
 }
 
@@ -741,7 +743,6 @@ a {
 #__next {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 .main {
