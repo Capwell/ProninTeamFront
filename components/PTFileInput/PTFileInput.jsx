@@ -65,7 +65,7 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
         type='file'
         onChange={ checkFile }
         { ...rest }
-        accept=".pdf, .doc, .docx, .txt, .png, .jpg, .jpeg, .gif, .ppt, .pptx, .xls, .xlsx, .rtf, .psd"
+        accept="image/*, .pdf, .doc, .docx, .txt, .ppt, .pptx, .xls, .xlsx, .rtf, .odt, .zip, .rar, .7z, .sit"
       />
 
       <button
