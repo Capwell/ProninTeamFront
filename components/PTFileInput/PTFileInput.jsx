@@ -6,7 +6,6 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
   const fileClose = useRef()
   const fileError = useRef()
   const [fileName, setFileName] = useState('')
-  // const [fileError, setFileError] = useState('')
 
   // check file presense and than get it's size and name
   const checkFile = e => {
@@ -29,6 +28,8 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
       fileChangeCallback(fileData) // send file data to formik.values object
       fileClose.current.classList.add('show')
     }
+
+    console.log(e.target.files[0])
   }
 
   const removeFile = () => {
@@ -64,6 +65,7 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
         type='file'
         onChange={ checkFile }
         { ...rest }
+        accept=".pdf, .doc, .docx, .txt, .png, .jpg, .jpeg, .gif, .ppt, .pptx, .xls, .xlsx, .rtf, .psd"
       />
 
       <button
