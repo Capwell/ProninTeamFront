@@ -35,7 +35,7 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
     fileClose.current.classList.remove('show')
     fileRef.current.value = ''
     setFileName('')
-    fileChangeCallback('')       // send file data to formik.values object
+    fileChangeCallback(null)       // send file data to formik.values object
   }
 
   return (

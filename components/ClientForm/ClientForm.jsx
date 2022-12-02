@@ -38,7 +38,7 @@ function ClientForm() {
       name: '',
       communicate: '',
       message: '',
-      file: '',
+      file: null,
       is_agreed: false
     },
     // set validate function
@@ -81,15 +81,24 @@ function ClientForm() {
         // Execute the reCAPTCHA when the form is submitted
         const token = await recaptcha.current.executeAsync();
 
-        const fData = new FormData()
-        fData.append('name', values.name)
-        fData.append('communicate', values.communicate)
-        fData.append('message', values.message)
-        fData.append('file', values.file)
-        fData.append('is_agreed', values.is_agreed)
-        fData.append('token', token)
+        const data = {
+          name: values.name,
+          communicate: values.communicate,
+          message: values.message,
+          file: values.file,
+          is_agreed: values.is_agreed,
+          token: token
+        }
 
-        await api.sendOffer(fData)
+        // const fData = new FormData()
+        // fData.append('name', values.name)
+        // fData.append('communicate', values.communicate)
+        // fData.append('message', values.message)
+        // fData.append('file', values.file)
+        // fData.append('is_agreed', values.is_agreed)
+        // fData.append('token', token)
+
+        await api.sendOffer(JSON.stringify(data))
 
         setModalType('success')
         setModalShow(true)
