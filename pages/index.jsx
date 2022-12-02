@@ -10,6 +10,7 @@ import ClientForm from '../components/ClientForm/ClientForm'
 import stl from '../styles/Home.module.scss'
 import PTButton from '../components/PTButton/PTButton'
 import CaseBanner from '../components/CaseBanner/CaseBanner'
+import api from '../utils/api'
 
 export async function getServerSideProps() {
   let caseData = []
