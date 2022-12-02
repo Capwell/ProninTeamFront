@@ -4,7 +4,9 @@ import { useRef, useState } from 'react';
 function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
   const fileLabel = useRef()
   const fileClose = useRef()
+  const fileError = useRef()
   const [fileName, setFileName] = useState('')
+  // const [fileError, setFileError] = useState('')
 
   // check file presense and than get it's size and name
   const checkFile = e => {
@@ -15,15 +17,18 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
 
       // check is file more than 10 MB
       if (size > 10 * 1024 * 1024) {
-        return false
+        fileError.current.innerText = 'Слишком большой файл'
+        setTimeout(() => fileError.current.innerText = '', 2000)
+        fileRef.current.value = ''
+
+        return
       }
 
       const name = fileData.name
       setFileName(name)
-      fileChangeCallback(fileData)       // send file data to formik.values object
+      fileChangeCallback(fileData) // send file data to formik.values object
       fileClose.current.classList.add('show')
-
-    } else return false
+    }
   }
 
   const removeFile = () => {
@@ -35,6 +40,12 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
 
   return (
     <Form.Group className="control--file">
+      <span
+        className="control__error"
+        data-testid="nameError"
+        ref={ fileError }
+      />
+
       <Form.Label className="control__label" htmlFor='file'>
         <div className="label__top">
           <span ref={ fileLabel }>
@@ -48,11 +59,11 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
       </Form.Label>
 
       <Form.Control
-        { ...rest }
         ref={ fileRef }
         className="control__input"
         type='file'
         onChange={ checkFile }
+        { ...rest }
       />
 
       <button
