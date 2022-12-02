@@ -15,7 +15,7 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.KEY }}
-        command_timeout: 20
+        command_timeout: 20m
         stack_file_name: docker-compose.yaml
         script: |
           cd ${{ secrets.REPO_NAME }}
