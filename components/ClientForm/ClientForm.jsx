@@ -185,11 +185,13 @@ function ClientForm() {
                   ? ' invalid' : ' valid' // --- yes - 'invalid', no - 'valid'
                 : ''                      // - if no visited - set empty
             )}
+            data-testid="nameWrapper"
           >
             <Form.Control
               className="control__input"
               type="text"
               id="name"
+              data-testid="nameInput"
               // placeholders are necessary for bootstrap floating labels
               placeholder="&nbsp;"
               maxLength='20'
@@ -200,7 +202,7 @@ function ClientForm() {
               Представьтесь, пожалуйста:
             </label>
 
-            <span className="control__error">
+            <span className="control__error" data-testid="nameError">
               { // if input is visited AND input has invalid data
                 formik.touched.name && formik.errors.name
                   ? formik.errors.name    // set error text
@@ -221,11 +223,13 @@ function ClientForm() {
                   ? ' invalid' : ' valid'   // --- yes -'invalid', no - 'valid'
                 : ''                        // - if no visited - set empty
             )}
+            data-testid="communicateWrapper"
           >
             <Form.Control
               className="control__input"
               type="text"
               id="communicate"
+              data-testid="communicateInput"
               // placeholders are necessary for bootstrap floating labels
               placeholder="&nbsp;"
               maxLength='20'
@@ -236,7 +240,7 @@ function ClientForm() {
               Как с вами связаться?
             </label>
 
-            <span className="control__error">
+            <span className="control__error" data-testid="communicateError">
               { // if input is visited AND input has invalid data
                 formik.touched.communicate && formik.errors.communicate
                   ? formik.errors.communicate     // set error text
@@ -334,6 +338,7 @@ function ClientForm() {
                 toggleSubmitAvailability(e)
               }}
               value={ formik.values.is_agreed }
+              data-testid="agreeCheck"
             />
 
             <Form.Check.Label className={ stl.checkbox__label }>
@@ -355,6 +360,7 @@ function ClientForm() {
             isLoad={ isLoading }
             disabled={ !isSubmitAvailable }
             type="submit"
+            data-testid="submitBtn"
           />
         </Col>
       </Row>

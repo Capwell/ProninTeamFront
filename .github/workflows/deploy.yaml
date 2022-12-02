@@ -1,9 +1,9 @@
 name: deploy_workflow
 
 on:
-  pull_request:
+  push:
     branches:
-      - master
+      - main
 
 jobs:
   deploy:
@@ -14,9 +14,11 @@ jobs:
       with:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
-        password: ${{ secrets.PASSWORD }}
+        key: ${{ secrets.KEY }}
+        command_timeout: 20m
         stack_file_name: docker-compose.yaml
         script: |
           cd ${{ secrets.REPO_NAME }}
           git pull
+          docker-compose down
           docker-compose up -d --build  
