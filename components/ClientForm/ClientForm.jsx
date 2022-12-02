@@ -3,14 +3,15 @@ import { useState, useRef } from "react";
 import {
   Row,
   Col,
-  Form,
-  Button
+  Form
 } from "react-bootstrap";
 import { useFormik } from 'formik'
 import ReCAPTCHA from 'react-google-recaptcha'
 import SubmitModal from '../SubmitModal/SubmitModal'
 import PTFileInput from '../PTFileInput/PTFileInput'
 import stl from './ClientForm.module.scss'
+import PTButton from '../PTButton/PTButton'
+import api from '../../utils/api'
 
 function ClientForm() {
   // submit button availablity
@@ -20,6 +21,7 @@ function ClientForm() {
   // modal content type
   const [modalType, setModalType] = useState('')
   // recaptcha component
+  const [isLoading, setIsLoading] = useState(false)
   const recaptcha = useRef()
   const fileInput = useRef()
 
@@ -73,39 +75,31 @@ function ClientForm() {
     },
     // set function for success validation and submitting
     onSubmit: async values => {
-      // Execute the reCAPTCHA when the form is submitted
-      const token = await recaptcha.current.executeAsync();
-
-      const fData = new FormData()
-      fData.append('name', values.name)
-      fData.append('communicate', values.communicate)
-      fData.append('message', values.message)
-      fData.append('file', values.file)
-      fData.append('is_agreed', values.is_agreed)
-      fData.append('token', token)
+      setIsLoading(true)
 
       try {
-        await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/requests`, {               // send data to API
-          method: 'POST',
-          body: fData,
-        })
-        .then(res => {
-          if (res.ok) {  //show success modal
-            setModalType('success')
-            setModalShow(true)
-            setTimeout(() => setModalShow(false), 3000)
-            return res.json();
-          } else { // if error - reject promise and show error modal
-            setModalType('error')
-            setModalShow(true)
-            setTimeout(() => setModalShow(false), 3000)
-            return Promise.reject(`Ошибка: ${res.status}`);
-          }
-        })
+        // Execute the reCAPTCHA when the form is submitted
+        const token = await recaptcha.current.executeAsync();
+
+        const fData = new FormData()
+        fData.append('name', values.name)
+        fData.append('communicate', values.communicate)
+        fData.append('message', values.message)
+        fData.append('file', values.file)
+        fData.append('is_agreed', values.is_agreed)
+        fData.append('token', token)
+
+        await api.sendOffer(fData)
+
+        setModalType('success')
+        setModalShow(true)
+        setTimeout(() => setModalShow(false), 3000)
       } catch (err) {
         setModalType('error')
         setModalShow(true)
         setTimeout(() => setModalShow(false), 3000)
+      } finally {
+        setIsLoading(false)
       }
     },
   })
@@ -159,6 +153,7 @@ function ClientForm() {
     recaptcha.current.reset();
   }
 
+
   return (
     <Form
       className={ stl.form }
@@ -190,11 +185,13 @@ function ClientForm() {
                   ? ' invalid' : ' valid' // --- yes - 'invalid', no - 'valid'
                 : ''                      // - if no visited - set empty
             )}
+            data-testid="nameWrapper"
           >
             <Form.Control
               className="control__input"
               type="text"
               id="name"
+              data-testid="nameInput"
               // placeholders are necessary for bootstrap floating labels
               placeholder="&nbsp;"
               maxLength='20'
@@ -205,7 +202,7 @@ function ClientForm() {
               Представьтесь, пожалуйста:
             </label>
 
-            <span className="control__error">
+            <span className="control__error" data-testid="nameError">
               { // if input is visited AND input has invalid data
                 formik.touched.name && formik.errors.name
                   ? formik.errors.name    // set error text
@@ -231,6 +228,7 @@ function ClientForm() {
               className="control__input"
               type="text"
               id="communicate"
+              data-testid="communicateInput"
               // placeholders are necessary for bootstrap floating labels
               placeholder="&nbsp;"
               maxLength='20'
@@ -241,7 +239,7 @@ function ClientForm() {
               Как с вами связаться?
             </label>
 
-            <span className="control__error">
+            <span className="control__error" data-testid="communicateError">
               { // if input is visited AND input has invalid data
                 formik.touched.communicate && formik.errors.communicate
                   ? formik.errors.communicate     // set error text
@@ -339,6 +337,7 @@ function ClientForm() {
                 toggleSubmitAvailability(e)
               }}
               value={ formik.values.is_agreed }
+              data-testid="agreeCheck"
             />
 
             <Form.Check.Label className={ stl.checkbox__label }>
@@ -352,14 +351,16 @@ function ClientForm() {
           lg={{ span: 'auto', order: 'first' }}
           className='d-flex justify-content-center'
         >
-          <Button
-            className='btn btn--primary'
-            type="submit"
-            disabled={ !isSubmitAvailable }
+          <PTButton
+            variant="primary"
+            text="Отправить ответы"
             onClick={ presubmitCheck }
-          >
-            Отправить ответы
-          </Button>
+            loader={ true }
+            isLoad={ isLoading }
+            disabled={ !isSubmitAvailable }
+            type="submit"
+            data-testid="submitBtn"
+          />
         </Col>
       </Row>
     </Form>

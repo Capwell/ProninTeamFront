@@ -17,6 +17,6 @@ jobs:
         password: ${{ secrets.PASSWORD }}
         stack_file_name: docker-compose.yaml
         script: |
-          cd pronin-team-demo
+          cd ${{ secrets.REPO_NAME }}
           git pull
           docker-compose up -d --build  

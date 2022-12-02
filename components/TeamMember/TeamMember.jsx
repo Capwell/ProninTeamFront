@@ -8,14 +8,16 @@ function TeamMember({ photo, name, mainRole, roles }) {
         <Image
           className={ stl.photo__img }
           src={ photo }
-          width='255'
-          height='255'
+          width="255"
+          height="260"
           alt={ 'Фото ' + name }
         />
       </div>
       <span className={ stl.member__name }>{ name }</span>
       <span className={ stl.member__mainRole }>{ mainRole }</span>
-      <span className={ stl.member__roles }>{ roles }</span>
+      {
+        roles && <span className={ stl.member__roles }>{ roles }</span>
+      }
     </div>
   )
 }

@@ -1,18 +1,28 @@
-import { useState } from "react";
+import { useState } from 'react';
 import {
   Row,
   Col,
-  Button
-} from "react-bootstrap";
-import PTHead from "../components/PTHead/PTHead"
-import VideoModal from "../components/VideoModal/VideoModal"
+  Button,
+  Container
+} from 'react-bootstrap';
+import PTHead from '../components/PTHead/PTHead'
+import VideoModal from '../components/VideoModal/VideoModal'
 import ClientForm from '../components/ClientForm/ClientForm'
-import stl from "../styles/Home.module.scss"
+import stl from '../styles/Home.module.scss'
+import PTButton from '../components/PTButton/PTButton'
+import CaseBanner from '../components/CaseBanner/CaseBanner'
+import Loader from '../components/Loader/Loader';
 
 function Home() {
-  const [showVideo, setShowVideo] = useState(false);
+  const [showVideo, setShowVideo] = useState(false)
   // open modal window with video
   const openVideo = () => setShowVideo(true)
+
+  const mainCase = {
+    logo: '/images/donorsearch-logo.svg',
+    description: 'Безусловно, высококачественный прототип будущего проекта способствует подготовке и реализации модели развития.',
+    color: '#ff2a23'
+  }
 
   return (
     <>
@@ -25,7 +35,11 @@ function Home() {
       />
 
 {/* Mission section */}
-      <section className={ stl.mission + ' mt-50 mt-lg-100 mb-70 mb-lg-80'}>
+      <Container
+        as="section"
+        fluid="xxl"
+        className={`${stl.mission} mt-50 mt-lg-100 mb-70 mb-lg-80`}
+      >
         <h1 className={ stl.mission__title }>
           Наша миссия
         </h1>
@@ -33,72 +47,80 @@ function Home() {
           Помочь вам создать программный продукт для развития бизнеса.<br />
           Гибко и быстро с возможностью вашего контроля каждого этапа разработки.
         </p>
-      </section>
+      </Container>
 
 {/* About section */}
       <a id="about" className="anchor" />
 
-      <Row as='section' className={ stl.about + ' mb-100 mb-lg-140' }>
-        <Col lg='7' className={ stl.about__text }>
-          <section className={ stl.about__how }>
-            <h3 className={ stl.how__title }>
-              Как мы это делаем:
-            </h3>
-            <p className={ stl.how__text }>
-              Обсуждаем <span>приоритеты</span> и делим работу на недельные отрезки.
-            </p>
-            <p className={ stl.how__text }>
-              В понедельник рассказываем, что будем делать — в пятницу вы видите живой результат.
-            </p>
-          </section>
+      <Container
+        as='section'
+        fluid="xxl"
+        className={`${stl.about} mb-100 mb-lg-140`}
+      >
+        <Row className="justify-content-between">
+          <Col lg='7' className={ stl.about__text }>
+            <section className={ stl.about__how }>
+              <h3 className={ stl.how__title }>
+                Как мы это делаем:
+              </h3>
+              <p className={ stl.how__text }>
+                Обсуждаем <span>приоритеты</span> и делим работу на недельные отрезки.
+              </p>
+              <p className={ stl.how__text }>
+                В понедельник рассказываем, что будем делать — в пятницу вы видите живой результат.
+              </p>
+            </section>
 
-          <section className={ stl.about__why }>
-            <h3 className={ stl.why__title }>
-              Зачем оно вам?
-            </h3>
-            <p className={ stl.why__text }>
-              <span>Скорость запуска</span> — первая версия проекта может выйти уже через неделю.
-            </p>
-            <p className={ stl.why__text }>
-              <span>Гибкость.</span> Возможность менять требования на ходу. Прозрачность и полный контроль.
-            </p>
-          </section>
-        </Col>
+            <section className={ stl.about__why }>
+              <h3 className={ stl.why__title }>
+                Зачем оно вам?
+              </h3>
+              <p className={ stl.why__text }>
+                <span>Скорость запуска</span> — первая версия проекта может выйти уже через неделю.
+              </p>
+              <p className={ stl.why__text }>
+                <span>Гибкость.</span> Возможность менять требования на ходу. Прозрачность и полный контроль.
+              </p>
+            </section>
+          </Col>
 
-        <Col
-          lg='auto'
-          className='
-            d-flex
-            justify-content-center
-            mt-30 mt-lg-0
-          '
-        >
-          <VideoModal
-            show={ showVideo }
-            setShow={ setShowVideo }
-          />
-          <div className={ stl.about__video }>
-            <a
-              className={ stl.video__thumbnail }
-              onClick={ openVideo }
+          <Col
+            lg='auto'
+            className='
+              d-flex
+              justify-content-center
+              mt-30 mt-lg-0
+            '
+          >
+            <VideoModal
+              show={ showVideo }
+              setShow={ setShowVideo }
             />
-            <span className={ stl.video__title }>За минуту просто и ясно о том, как пойдёт работа</span>
-            <span className={ stl.video__author }>Андрей Пронин СЕО</span>
+            <div className={ stl.about__video }>
+              <a
+                className={ stl.video__thumbnail }
+                onClick={ openVideo }
+              />
+              <span className={ stl.video__title }>За минуту просто и ясно о том, как пойдёт работа</span>
+              <span className={ stl.video__author }>Андрей Пронин СЕО</span>
 
-            <Button
-              className='btn btn--secondary'
-              onClick={ openVideo }
-            >
-              Смотреть видео
-            </Button>
-          </div>
-        </Col>
-      </Row>
-
+              <PTButton
+                variant="secondary"
+                text="Смотреть видео"
+                onClick={ openVideo }
+              />
+            </div>
+          </Col>
+        </Row>
+      </Container>
 {/* Brief section */}
       <a id="brief" className="anchor" />
 
-      <section className={ stl.brief + ' mb-100 mb-lg-140'}>
+      <Container
+        as='section'
+        fluid="xxl"
+        className={`${stl.brief} mb-100 mb-lg-140`}
+      >
         <h2 className={ stl.brief__title }>
           Хотите заказать проект?
         </h2>
@@ -120,18 +142,36 @@ function Home() {
         </p>
 
         <ClientForm />
-      </section>
+      </Container>
 
 {/* Cases section */}
       <a id="cases" className="anchor" />
 
-      <section className={ stl.cases + ' mb-100 mb-lg-150'}>
+      <section className={ stl.cases }>
+        <Container fluid="xxl">
+          <h2 className={ stl.cases__title }>
+            Пример наших работ
+          </h2>
+        </Container>
 
-        <h2 className={ stl.cases__title }>
-          Кейсы
-        </h2>
+        <CaseBanner
+          as='div'
+          caseColor={ mainCase.color }
+          logo={ mainCase.logo }
+          description={ mainCase.description }
+        />
 
-        <div className={ stl.cases__timeline }>
+        <Container fluid="xxl" className="d-flex justify-content-center">
+          <PTButton
+            variant="primary"
+            className="mt-20"
+            text="Посмотреть все кейсы"
+            href="/cases"
+          />
+        </Container>
+      </section>
+
+        {/* <div className={ stl.cases__timeline }>
           <ul className={ stl.timeline__list }>
 
             <li className={ stl.timeline__item }>
@@ -205,8 +245,7 @@ function Home() {
             </li>
 
           </ul>
-        </div>
-      </section>
+        </div> */}
 
     </>
   );

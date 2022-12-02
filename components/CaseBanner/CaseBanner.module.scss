@@ -1,0 +1,39 @@
+@import '../../styles/variables.scss';
+
+.banner {
+  position: relative;
+  height: $base * 120;           // 600 px
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    height: 100%;
+    padding-top: $base * 23;     // 115 px
+    padding-bottom: $base * 9;   // 45 px
+  }
+
+  &__logo {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    max-width: $base * 127;      // 635 px
+    min-height: $base * 27;      // 135 px
+    margin-bottom: $base * 19;   // 95 px
+
+    .logo__img {
+      object-fit: contain;
+      width: 100% !important;
+      position: relative !important;
+      height: unset !important;
+    }
+  }
+
+  &__description {
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 1.25;
+    letter-spacing: .045em;
+  }
+}

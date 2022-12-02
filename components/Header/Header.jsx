@@ -1,8 +1,8 @@
-import Link from "next/link";
-import { Button, Container, NavLink } from "react-bootstrap";
-import stl from "./Header.module.scss";
+import Link from 'next/link';
+import { useRef } from 'react';
+import { Button, Container, NavLink } from 'react-bootstrap';
 import PTLogo from '../PTLogo/PTLogo';
-import { useRef } from "react";
+import stl from './Header.module.scss';
 
 function Header() {
   const nav = useRef()
@@ -18,13 +18,13 @@ function Header() {
   }
 
   return (
-    <header className={ stl.header + ' py-35' }>
+    <header className={ `${stl.header} py-35` }>
       <Container fluid="xxl">
         <div className={ stl.header__inner }>
           <PTLogo />
 
           <Button
-            className={ stl.btn_burger + ' btn btn--burger' }
+            className={ `${stl.btn_burger} btn btn--burger` }
             onClick={ toogleNav }
           >
             <span />
@@ -37,26 +37,26 @@ function Header() {
             ref={ nav }
             onClick={ burgerMenuClickHandler }
           >
-            {/* <NavLink className={ stl.nav__link } href="#services">
+            <Link className={ stl.nav__link } href="/services">
               Услуги
-            </NavLink> */}
-            <NavLink className={ stl.nav__link } href="/#cases">
-              Кейсы
-            </NavLink>
-            <NavLink className={ stl.nav__link } href="/#about">
-              О нас
-            </NavLink>
-            <Link className={ stl.nav__link } href="/team">
-              Команда
             </Link>
-            <NavLink className={ stl.nav__link } href="/#brief">
+            <Link className={ stl.nav__link } href="/cases">
+              Кейсы
+            </Link>
+            {/* <NavLink className={ stl.nav__link } href="/#about">
+              О нас
+            </NavLink> */}
+            <Link className={ stl.nav__link } href="/team">
+              Наша команда
+            </Link>
+            <Link className={ stl.nav__link } href="/#brief">
               Стать клиентом
-            </NavLink>
+            </Link>
           </nav>
         </div>
       </Container>
     </header>
-  );
+  )
 }
 
-export default Header;
+export default Header

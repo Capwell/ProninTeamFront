@@ -1,20 +1,11 @@
 @import './variables.scss';
 
-.btn_back {
-  margin-bottom: $base * 20;  // 100 px
-  // margin-left: auto;
-}
-
-.btn_top {
-  margin-bottom: $base * 10;  // 50 px
-}
-
 .legal {
 
   &__title {
-    margin-bottom: $base * 6;   // 30 px
-    font-weight: 600;
+    margin-bottom: $base * 6;      // 30 px
     font-size: 3rem;
+    font-weight: 600;
     line-height: 1.25;
     letter-spacing: .04em;
   }
@@ -26,7 +17,7 @@
 
     .content__item {
       width: fit-content;
-      padding-left: $base * 2;        // 10 px
+      padding-left: $base * 2;     // 10 px
       line-height: 1.454;
       letter-spacing: .07em;
       cursor: pointer;
@@ -42,7 +33,7 @@
       }
 
       & + & {
-        margin-top: $base * 3;        // 15 px
+        margin-top: $base * 3;      // 15 px
       }
     }
 
@@ -61,19 +52,18 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    // flex-direction: column;
 
     .doc__title {
       margin-bottom: $base * 3;     // 15 px
-      font-weight: 600;
       font-size: 1.5rem;
+      font-weight: 600;
       line-height: 1.2;
       letter-spacing: .045em;
     }
 
     .doc__text {
       width: 100%;
-      margin-bottom: $base * 14;
+      margin-bottom: $base * 14;   // 70 px
 
       & > ul {
         padding-left: 1.5rem;

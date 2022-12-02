@@ -1,9 +1,4 @@
-import { useState } from "react";
-import {
-  Button,
-  Modal
-} from "react-bootstrap";
-import stl from './VideoModal.module.scss'
+import { Modal } from 'react-bootstrap'
 
 function VideoModal({ show, setShow }) {
 
@@ -11,7 +6,7 @@ function VideoModal({ show, setShow }) {
 
   return (
     <Modal
-      className='video-modal'
+      className="video-modal"
       show={ show }
       onHide={ handleClose }
       centered
@@ -20,7 +15,7 @@ function VideoModal({ show, setShow }) {
 
       <Modal.Body>
         <iframe
-          className='modal-video'
+          className="modal-video"
           src="https://www.youtube.com/embed/AbK2SViu6KQ?autoplay=1"
           title="YouTube video player"
           frameBorder="0"

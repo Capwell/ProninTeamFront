@@ -3,6 +3,7 @@ import { useRef, useState } from 'react';
 
 function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
   const fileLabel = useRef()
+  const fileClose = useRef()
   const [fileName, setFileName] = useState('')
 
   // check file presense and than get it's size and name
@@ -20,8 +21,16 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
       const name = fileData.name
       setFileName(name)
       fileChangeCallback(fileData)       // send file data to formik.values object
+      fileClose.current.classList.add('show')
 
     } else return false
+  }
+
+  const removeFile = () => {
+    fileClose.current.classList.remove('show')
+    fileRef.current.value = ''
+    setFileName('')
+    fileChangeCallback('')       // send file data to formik.values object
   }
 
   return (
@@ -45,6 +54,18 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
         type='file'
         onChange={ checkFile }
       />
+
+      <button
+        type="button"
+        className="control__btn"
+        ref={ fileClose }
+        onClick={ removeFile }
+      >
+        <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M0.707107 14.8492C0.316582 14.4587 0.316582 13.8255 0.707107 13.435L13.435 0.707093C13.8256 0.316569 14.4587 0.316569 14.8492 0.707093C15.2398 1.09762 15.2398 1.73078 14.8492 2.12131L2.12132 14.8492C1.7308 15.2398 1.09763 15.2398 0.707107 14.8492Z" fill="#333333"/>
+          <path d="M0.706956 0.707078C1.09748 0.316554 1.73064 0.316554 2.12117 0.707078L14.8491 13.435C15.2396 13.8255 15.2396 14.4587 14.8491 14.8492C14.4586 15.2397 13.8254 15.2397 13.4349 14.8492L0.706956 2.12129C0.316432 1.73077 0.316431 1.0976 0.706956 0.707078Z" fill="#333333"/>
+        </svg>
+      </button>
     </Form.Group>
   )
 }

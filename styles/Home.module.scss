@@ -23,13 +23,11 @@
 .about {
   position: relative;
 
-  justify-content: space-between;
-
   &__how,
   &__why {
 
     & + & {
-      margin-top: $base * 10;
+      margin-top: $base * 10;  // 50 px
     }
   }
 
@@ -38,7 +36,7 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    max-width: $base * 57;   // 185 px
+    max-width: $base * 57;     // 285 px
   }
 }
 
@@ -46,16 +44,16 @@
 .why {
 
   &__title {
-    font-weight: 600;
     font-size: 1.5rem;
+    font-weight: 600;
     line-height: 1.2;
-    letter-spacing: 0.045em;
+    letter-spacing: .045em;
     margin-bottom: $base * 3;  // 15 px
   }
 
   &__text {
     line-height: 1.25;
-    letter-spacing: 0.07em;
+    letter-spacing: .07em;
     margin-bottom: $base * 3;  // 15 px
 
     span {
@@ -74,7 +72,7 @@
     width: 100%;
     height: $base * 27;           // 135 px
     margin-bottom: $base * 4;     // 20 px
-    background-color: #d9d9d9;
+    background-color: $gray-100;
     cursor: pointer;
 
     &:before {
@@ -93,7 +91,7 @@
     font-size: .875rem;
     font-weight: 300;
     line-height: 1.2;
-    letter-spacing: 0.045em;
+    letter-spacing: .045em;
   }
 }
 // ===== / ===== //
@@ -107,7 +105,7 @@
     font-size: 2.5rem;
     font-weight: 600;
     line-height: 1.2;
-    letter-spacing: 0.04em;
+    letter-spacing: .04em;
   }
 
   &__text {
@@ -117,62 +115,19 @@
     font-size: 1.25rem;
     font-weight: 500;
     line-height: 1.454;
-    letter-spacing: 0.07em;
+    letter-spacing: .07em;
 
     .text__link {
-      color: $fc-link;
+      color: $c-info;
       white-space: nowrap;
 
       &:hover {
         text-decoration: underline;
-        // border-bottom: 1px solid $fc-link;
       }
 
       &:active {
-        color: #bac9ff;
+        color: $c-light;
       }
-    }
-  }
-}
-
-.radios {
-
-  &__radio {
-    position: relative;
-    padding: 0;
-
-    & + & {
-      margin-left: $base * 10;
-    }
-
-    .radio {
-
-      &__label {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 1.5rem;
-        height: 1.5rem;
-        cursor: pointer;
-      }
-
-      &__input {
-        position: absolute;
-        visibility: hidden;
-        opacity: 0;
-        z-index: -1;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
-        border: none;
-        margin: 0;
-        padding: 0;
-      }
-    }
-
-    .radio__input:checked + .radio__label > svg > path {
-      fill: $turquoise;
     }
   }
 }
@@ -180,11 +135,12 @@
 
 // ===== CASES ===== //
 .cases {
+  margin-bottom: $base * 20;     // 100 px
 
   &__title {
-    margin-bottom: $base * 6;       // 30 px
-    font-weight: 600;
+    margin-bottom: $base * 10;   // 50 px
     font-size: 2.5rem;
+    font-weight: 600;
     line-height: 1.2;
     letter-spacing: .04em;
   }
@@ -202,7 +158,7 @@
       left: 50%;
       width: 1px;
       height: 100%;
-      background-color: $fc-primary;
+      background-color: $c-primary;
     }
 
     .timeline__list {
@@ -230,7 +186,7 @@
           content: '';
           flex-grow: 1;
           height: 1px;
-          background-color: $fc-primary;
+          background-color: $c-primary;
         }
       }
 
@@ -376,7 +332,7 @@
           margin-bottom: $base * 3;    // 15 px
 
           & > span {
-            padding-left: $base * 4;     // 20 px
+            padding-left: $base * 4;   // 20 px
           }
         }
 
