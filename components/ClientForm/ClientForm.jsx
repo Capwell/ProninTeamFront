@@ -281,8 +281,9 @@ function ClientForm() {
                     ? ' invalid' : ' valid'   // ----- set 'invalid', else - 'valid;
                   : ''                        // --- set nothing if textarea is not visited
             )}
+            data-testid="messageWrapper"
           >
-            <span className="control__error">
+            <span className="control__error" data-testid="messageError">
               { // if input is visited AND input has invalid data
                 formik.touched.message && formik.errors.message
                   ? formik.errors.message       // set error text
@@ -297,6 +298,7 @@ function ClientForm() {
               rows="12"
               placeholder="Напишите письмо в свободной форме, либо ответьте на список вопросов"
               {...formik.getFieldProps('message')}
+              data-testid="messageTextarea"
             />
           </Form.Group>
         </Col>
@@ -309,6 +311,7 @@ function ClientForm() {
             fileChangeCallback={ onFileChange }
             id='file'
             name='file'
+            data-testid="fileInput"
           />
         </Col>
       </Row>
