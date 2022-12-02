@@ -1,28 +1,37 @@
 import { render, screen, fireEvent } from '@testing-library/react'
 import ClientForm from '../components/ClientForm/ClientForm'
+import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import { act } from 'react-dom/test-utils'
 
-const testInputLessThan2 = async (input, errorElem) => {
-  await act(() => {
-    fireEvent.input(input, {target: {value: 'a'}})
-    fireEvent.blur(input)
-  })
+// check validation with inputing LESS than 2 cars into field
+const testInputLessThan2 = async (wrapper, input, errorElem) => {
+  const user = userEvent.setup()
+  await user.type(input, 'a')
+  await user.click(errorElem) // emulation of onBlur effect
+  expect(wrapper).toHaveClass('invalid') // render red invalid label
   expect(errorElem).toContainHTML('Пожалуйста, введите не менее 2 символов')
 }
-
-const testInputMoreThan2 = async (input, errorElem) => {
-  await act(() => {
-    fireEvent.input(input, {target: {value: 'absdef'}})
-    fireEvent.blur(input)
-  })
+// check validation with inputing MORE than 2 cars into field
+const testInputMoreThan2 = async (wrapper, input, errorElem) => {
+  const user = userEvent.setup()
+  await user.type(input, 'absdef')
+  await user.click(errorElem) // emulation of onBlur effect
+  expect(wrapper).toHaveClass('valid') // render green valid label
   expect(errorElem).toContainHTML('')
+}
+// check input value with inputing MORE than 20 cars
+const testInputMoreThan20 = async (input) => {
+  const user = userEvent.setup()
+  await user.type(input, 'Lorem ipsum dolor si')
+  expect(input).toHaveValue('Lorem ipsum dolor si')
 }
 
 describe('Name Input', () => {
   test('validate less than 2 chars', async () => {
     render(<ClientForm/>)
     await testInputLessThan2(
+      screen.getByTestId('nameWrapper'),
       screen.getByTestId('nameInput'),
       screen.getByTestId('nameError')
     )
@@ -31,9 +40,15 @@ describe('Name Input', () => {
   test('validate more than 2 chars', async () => {
     render(<ClientForm/>)
     await testInputMoreThan2(
+      screen.getByTestId('nameWrapper'),
       screen.getByTestId('nameInput'),
       screen.getByTestId('nameError')
     )
+  })
+
+  test('validate more than 20 chars', async () => {
+    render(<ClientForm/>)
+    await testInputMoreThan20(screen.getByTestId('nameInput'))
   })
 })
 
@@ -41,6 +56,7 @@ describe('Communicate Input', () => {
   test('validate less than 2 chars', async () => {
     render(<ClientForm/>)
     await testInputLessThan2(
+      screen.getByTestId('communicateWrapper'),
       screen.getByTestId('communicateInput'),
       screen.getByTestId('communicateError')
     )
@@ -49,30 +65,27 @@ describe('Communicate Input', () => {
   test('validate more than 2 chars', async () => {
     render(<ClientForm/>)
     await testInputMoreThan2(
+      screen.getByTestId('communicateWrapper'),
       screen.getByTestId('communicateInput'),
       screen.getByTestId('communicateError')
     )
+  })
+
+  test('validate more than 20 chars', async () => {
+    render(<ClientForm/>)
+    await testInputMoreThan20(screen.getByTestId('communicateInput'))
   })
 })
 
 describe('Submit Button', () => {
   test('is disabled, if checkbox unchecked', async () => {
     render(<ClientForm/>)
-    const submitBtn = screen.getByTestId('submitBtn')
-    const agreeCheck = screen.getByTestId('agreeCheck')
-
-    expect(submitBtn).toBeDisabled() // btn must be disabled
-
-    await act(() => fireEvent.click(agreeCheck)) // check agree checkbox
-    expect(submitBtn).toBeEnabled() // btn must be enabled
+    expect(screen.getByTestId('submitBtn')).toBeDisabled()
   })
 
   test('is enabled if checkbox checked', async () => {
     render(<ClientForm/>)
-    const submitBtn = screen.getByTestId('submitBtn')
-    const agreeCheck = screen.getByTestId('agreeCheck')
-
-    await act(() => fireEvent.click(agreeCheck)) // check agree checkbox
-    expect(submitBtn).toBeEnabled() // btn must be enabled
+    await act(() => fireEvent.click(screen.getByTestId('agreeCheck')))
+    expect(screen.getByTestId('submitBtn')).toBeEnabled()
   })
 })
