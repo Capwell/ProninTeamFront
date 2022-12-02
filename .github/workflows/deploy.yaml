@@ -15,8 +15,10 @@ jobs:
         host: ${{ secrets.HOST }}
         username: ${{ secrets.USER }}
         key: ${{ secrets.KEY }}
+        command_timeout: 20
         stack_file_name: docker-compose.yaml
         script: |
           cd ${{ secrets.REPO_NAME }}
           git pull
+          docker-compose down
           docker-compose up -d --build  
