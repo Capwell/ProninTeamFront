@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
   Row,
   Col,
-  Button,
   Container
 } from 'react-bootstrap';
 import PTHead from '../components/PTHead/PTHead'
@@ -11,18 +10,23 @@ import ClientForm from '../components/ClientForm/ClientForm'
 import stl from '../styles/Home.module.scss'
 import PTButton from '../components/PTButton/PTButton'
 import CaseBanner from '../components/CaseBanner/CaseBanner'
-import Loader from '../components/Loader/Loader';
 
-function Home() {
+export async function getServerSideProps() {
+  let caseData = []
+
+  try {
+    caseData = await api.getMainCase()
+  } catch (err) {
+    console.log(err.message)
+  }
+
+  return { props: { caseData } }
+}
+
+function Home({ caseData = [] }) {
   const [showVideo, setShowVideo] = useState(false)
   // open modal window with video
   const openVideo = () => setShowVideo(true)
-
-  const mainCase = {
-    logo: '/images/donorsearch-logo.svg',
-    description: 'Безусловно, высококачественный прототип будущего проекта способствует подготовке и реализации модели развития.',
-    color: '#ff2a23'
-  }
 
   return (
     <>
@@ -154,12 +158,17 @@ function Home() {
           </h2>
         </Container>
 
-        <CaseBanner
-          as='div'
-          caseColor={ mainCase.color }
-          logo={ mainCase.logo }
-          description={ mainCase.description }
-        />
+        {
+          caseData.length
+            ? (<CaseBanner
+                as='div'
+                caseColor={ caseData.hex_color }
+                logo={ caseData.logo }
+                description={ caseData.text }
+                linkURL={ caseData.slug }
+              />)
+            : null
+        }
 
         <Container fluid="xxl" className="d-flex justify-content-center">
           <PTButton
