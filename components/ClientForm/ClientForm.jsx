@@ -223,6 +223,7 @@ function ClientForm() {
                   ? ' invalid' : ' valid'   // --- yes -'invalid', no - 'valid'
                 : ''                        // - if no visited - set empty
             )}
+            data-testid="communicateWrapper"
           >
             <Form.Control
               className="control__input"
