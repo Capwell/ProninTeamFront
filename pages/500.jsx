@@ -8,7 +8,7 @@ function Custom500() {
       <PTHead
         title="ProninTeam - 500: Ошибка на стороне сервера"
       />
-      <Container fluid="xxl" className={ stl.wrapper }>
+      <Container fluid="xxl" className={ `${stl.wrapper} mt-100 mb-115` }>
         <h1 className={ stl.title }>500</h1>
         <span className={ stl.description }>
           Произошла ошибка на стороне сервера
