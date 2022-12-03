@@ -3,225 +3,98 @@ import ClientForm from '../components/ClientForm/ClientForm'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 
-// check validation with empty input
-const testInputEmpty = async (wrapper, input, errorElem) => {
-  const user = userEvent.setup()
-  await user.click(input)
-  await user.click(errorElem)
-  expect(wrapper).toHaveClass('invalid') // render red invalid label
-  expect(errorElem).toContainHTML('Обязательно')
-}
-// check validation with inputing LESS than 2 chars into field
-const testInputLessThan2 = async (wrapper, input, errorElem) => {
-  const user = userEvent.setup()
-  await user.type(input, 'a')
-  await user.click(errorElem) // emulation of onBlur effect
-  expect(wrapper).toHaveClass('invalid') // render red invalid label
-  expect(errorElem).toContainHTML('Пожалуйста, введите не менее 2 символов')
+let nameInput, communicateInput, messageInput, fileInput, checkbox, submit, modal
+
+const file = new File(['hello'], 'hello.png', {type: 'image/png'})
+
+const rightData = {
+  name: 'John Doe',
+  communicate: '88005553535',
+  message: 'dis parturient montes nascetur ridiculus mus mauris vitae ultricies leo'
 }
 
-// check validation with inputing MORE than 2 chars into field
-const testInputMoreThan2 = async (wrapper, input, errorElem) => {
-  const user = userEvent.setup()
-  await user.type(input, 'absdef')
-  await user.click(errorElem) // emulation of onBlur effect
-  expect(wrapper).toHaveClass('valid') // render green valid label
-  expect(errorElem).toContainHTML('')
+const wrongData = {
+  name: 'a',
+  communicate: '1',
+  message: 'lorem ipsum'
 }
-
-// check input value with inputing MORE than 20 chars
-const testInputMoreThan20 = async (input) => {
+// input values in form data and send this form
+const inputData = async (nameState, communicateState, messageState, isFileState) => {
   const user = userEvent.setup()
-  await user.type(input, 'Lorem ipsum dolor si amet')
-  expect(input).toHaveValue('Lorem ipsum dolor si')
-}
-// check textarea value inputing LESS than 20 chars
-const testTextareaLessOrEmpty = async (wrapper, textarea, errorElem, isEmpty, isFile) => {
-  const user = userEvent.setup()
-  let file
 
-  if (isEmpty) {
-    await user.click(textarea)
-  } else {
-    await user.type(textarea, 'Lorem ipsum')
+  if (nameState[0]) {
+    if (nameState[1] === 'right') await user.type(nameInput, rightData.name)
+    else await user.type(nameInput, wrongData.name)
   }
 
-  await user.click(errorElem) // emulation of onBlur effect
-
-  if (isFile) {
-    file = new File(['hello'], 'hello.png', {type: 'image/png'})
-    await user.upload(screen.getByTestId('fileInput'), file)
+  if (communicateState[0]) {
+    if (communicateState[1] === 'right') await user.type(communicateInput, rightData.communicate)
+    else await user.type(communicateInput, wrongData.communicate)
   }
 
-  if (isEmpty) {
-    expect(wrapper).not.toHaveClass('invalid')
-    expect(wrapper).not.toHaveClass('valid')
-    expect(errorElem).toContainHTML('')
-  } else {
-    if (isFile) {
-      expect(wrapper).toHaveClass('valid') // render green valid label
-      expect(errorElem).toContainHTML('')
-    } else {
-      expect(wrapper).toHaveClass('invalid') // render red invalid label
-      expect(errorElem).toContainHTML('Введите не менее 20 символов')
-    }
-  }
-}
-// check textarea value inputing MORE than 20 chars
-const testTextareaMoreThan20 = async (wrapper, textarea, errorElem, isFile) => {
-  const user = userEvent.setup()
-  let file
-
-  await user.type(textarea, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet.')
-  await user.click(errorElem) // emulation of onBlur effect
-
-  if (isFile) {
-    file = new File(['hello'], 'hello.png', {type: 'image/png'})
-    await user.upload(screen.getByTestId('fileInput'), file)
+  if (messageState[0]) {
+    if (messageState[1] === 'right') await user.type(messageInput, rightData.message)
+    else await user.type(messageInput, wrongData.message)
   }
 
-  expect(textarea).toHaveValue('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris aliquet.')
-  expect(wrapper).toHaveClass('valid') // render green valid label
-  expect(errorElem).toContainHTML('')
+  if (isFileState) await user.upload(fileInput, file)
+
+  await user.click(checkbox)
+  await user.click(submit)
+
+  modal = screen.getByTestId('submitModal')
 }
 
-// render <ClientForm> before each test case
-beforeEach(() => {
-  render(<ClientForm/>)
-})
-
-describe('Name Input', () => {
-  test('is empty', async () => {
-    await testInputEmpty(
-      screen.getByTestId('nameWrapper'),
-      screen.getByTestId('nameInput'),
-      screen.getByTestId('nameError')
-    )
+describe('Form', () => {
+  beforeEach(() => {
+    render(<ClientForm/>)
+    nameInput = screen.getByTestId('nameInput')
+    communicateInput = screen.getByTestId('communicateInput')
+    messageInput = screen.getByTestId('messageTextarea')
+    fileInput = screen.getByTestId('fileInput')
+    checkbox = screen.getByTestId('agreeCheck')
+    submit = screen.getByTestId('submitBtn')
   })
 
-  test('is less than 2 chars', async () => {
-    await testInputLessThan2(
-      screen.getByTestId('nameWrapper'),
-      screen.getByTestId('nameInput'),
-      screen.getByTestId('nameError')
-    )
+  test('not sending if "Name" is empty', async () => {
+    await inputData([false], [true, 'right'], [true, 'right'], true)
+
+    expect(modal).toBeVisible()
+    expect(modal).toHaveTextContent(/Пожалуйста, заполните все обязательные поля./)
   })
 
-  test('is more than 2 chars', async () => {
-    await testInputMoreThan2(
-      screen.getByTestId('nameWrapper'),
-      screen.getByTestId('nameInput'),
-      screen.getByTestId('nameError')
-    )
+  test('not sending if "Name" is invalid', async () => {
+    await inputData([true, 'wrong'], [true, 'right'], [true, 'right'], true)
+
+    expect(modal).toBeVisible()
+    expect(modal).toHaveTextContent(/Пожалуйста, заполните все обязательные поля./)
   })
 
-  test('is more than 20 chars', async () => {
-    await testInputMoreThan20(screen.getByTestId('nameInput'))
-  })
-})
+  test('not sending if "Communicate" is empty', async () => {
+    await inputData([true, 'right'], [false], [true, 'right'], true)
 
-describe('Communicate Input', () => {
-  test('is empty', async () => {
-    await testInputEmpty(
-      screen.getByTestId('communicateWrapper'),
-      screen.getByTestId('communicateInput'),
-      screen.getByTestId('communicateError')
-    )
+    expect(modal).toBeVisible()
+    expect(modal).toHaveTextContent(/Пожалуйста, заполните все обязательные поля./)
   })
 
-  test('is less than 2 chars', async () => {
-    await testInputLessThan2(
-      screen.getByTestId('communicateWrapper'),
-      screen.getByTestId('communicateInput'),
-      screen.getByTestId('communicateError')
-    )
+  test('not sending if "Communicate" is invalid', async () => {
+    await inputData([true, 'right'], [true, 'wrong'], [true, 'right'], true)
+
+    expect(modal).toBeVisible()
+    expect(modal).toHaveTextContent(/Пожалуйста, заполните все обязательные поля./)
   })
 
-  test('is more than 2 chars', async () => {
-    await testInputMoreThan2(
-      screen.getByTestId('communicateWrapper'),
-      screen.getByTestId('communicateInput'),
-      screen.getByTestId('communicateError')
-    )
+  test('not sending if "Message" and "File" is empty', async () => {
+    await inputData([true, 'right'], [true, 'right'], [false], false)
+
+    expect(modal).toBeVisible()
+    expect(modal).toHaveTextContent(/Пожалуйста, расскажите про свой проект\.Вы можете или ответить на наши вопросы или прикрепить файл\.Так уже наш первый разговор будет предметным\.С уважением, ProninTeam/)
   })
 
-  test('is more than 20 chars', async () => {
-    await testInputMoreThan20(screen.getByTestId('communicateInput'))
-  })
-})
+  test('not sending if "File" is empty and "Message" is invalid', async () => {
+    await inputData([true, 'right'], [true, 'right'], [true, 'wrong'], false)
 
-describe('Message Textarea', () => {
-  test('is empty WITH NO file', async () => {
-    await testTextareaLessOrEmpty(
-      screen.getByTestId('messageWrapper'),
-      screen.getByTestId('messageTextarea'),
-      screen.getByTestId('messageError'),
-      true,
-      false
-    )
-  })
-
-  test('is empty WITH file', async () => {
-    await testTextareaLessOrEmpty(
-      screen.getByTestId('messageWrapper'),
-      screen.getByTestId('messageTextarea'),
-      screen.getByTestId('messageError'),
-      true,
-      true
-    )
-  })
-
-  test('is less then 20 chars WITH NO file', async () => {
-    await testTextareaLessOrEmpty(
-      screen.getByTestId('messageWrapper'),
-      screen.getByTestId('messageTextarea'),
-      screen.getByTestId('messageError'),
-      false,
-      false
-    )
-  })
-
-  test('is less then 20 chars WITH file', async () => {
-    await testTextareaLessOrEmpty(
-      screen.getByTestId('messageWrapper'),
-      screen.getByTestId('messageTextarea'),
-      screen.getByTestId('messageError'),
-      false,
-      true
-    )
-  })
-
-  test('is more then 20 chars WITH NO file', async () => {
-    await testTextareaMoreThan20(
-      screen.getByTestId('messageWrapper'),
-      screen.getByTestId('messageTextarea'),
-      screen.getByTestId('messageError'),
-      false
-    )
-  })
-
-  test('is more then 20 chars WITH file', async () => {
-    await testTextareaMoreThan20(
-      screen.getByTestId('messageWrapper'),
-      screen.getByTestId('messageTextarea'),
-      screen.getByTestId('messageError'),
-      true
-    )
-  })
-})
-
-describe('File Input', () => {
-
-})
-
-describe('Submit Button', () => {
-  test('is disabled, if checkbox unchecked', async () => {
-    expect(screen.getByTestId('submitBtn')).toBeDisabled()
-  })
-
-  test('is enabled, if checkbox checked', async () => {
-    const user = userEvent.setup()
-    await user.click(screen.getByTestId('agreeCheck'))
-    expect(screen.getByTestId('submitBtn')).toBeEnabled()
+    expect(modal).toBeVisible()
+    expect(modal).toHaveTextContent(/Пожалуйста, расскажите про свой проект\.Вы можете или ответить на наши вопросы или прикрепить файл\.Так уже наш первый разговор будет предметным\.С уважением, ProninTeam/)
   })
 })

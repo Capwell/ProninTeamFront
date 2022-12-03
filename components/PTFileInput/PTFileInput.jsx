@@ -3,9 +3,10 @@ import { useRef, useState } from 'react';
 
 function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
   const fileLabel = useRef()
-  const fileClose = useRef()
+  const fileRemove = useRef()
   const fileError = useRef()
   const [fileName, setFileName] = useState('')
+  const [isRemoveDisabled, setIsRemoveDisabled] = useState(true)
 
   // check file presense and than get it's size and name
   const checkFile = e => {
@@ -26,28 +27,28 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
       const name = fileData.name
       setFileName(name)
       fileChangeCallback(fileData) // send file data to formik.values object
-      fileClose.current.classList.add('show')
+      fileRemove.current.classList.add('show')
+      setIsRemoveDisabled(false)
     }
-
-    console.log(e.target.files[0])
   }
 
   const removeFile = () => {
-    fileClose.current.classList.remove('show')
+    fileRemove.current.classList.remove('show')
     fileRef.current.value = ''
     setFileName('')
     fileChangeCallback(null)       // send file data to formik.values object
+    setIsRemoveDisabled(true)
   }
 
   return (
     <Form.Group className="control--file">
       <span
         className="control__error"
-        data-testid="nameError"
+        data-testid="fileError"
         ref={ fileError }
       />
 
-      <Form.Label className="control__label" htmlFor='file'>
+      <Form.Label className="control__label" htmlFor='file' data-testid="fileLabel">
         <div className="label__top">
           <span ref={ fileLabel }>
             { fileName || 'Прикрепить файл' }
@@ -66,13 +67,16 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
         onChange={ checkFile }
         { ...rest }
         accept="image/*, .pdf, .doc, .docx, .txt, .ppt, .pptx, .xls, .xlsx, .rtf, .odt, .zip, .rar, .7z, .sit"
+        data-testid="fileInput"
       />
 
       <button
         type="button"
         className="control__btn"
-        ref={ fileClose }
+        ref={ fileRemove }
         onClick={ removeFile }
+        disabled={ isRemoveDisabled }
+        data-testid="fileRemove"
       >
         <svg width="12" height="12" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M0.707107 14.8492C0.316582 14.4587 0.316582 13.8255 0.707107 13.435L13.435 0.707093C13.8256 0.316569 14.4587 0.316569 14.8492 0.707093C15.2398 1.09762 15.2398 1.73078 14.8492 2.12131L2.12132 14.8492C1.7308 15.2398 1.09763 15.2398 0.707107 14.8492Z" fill="#333333"/>

@@ -320,7 +320,7 @@ function ClientForm() {
             fileChangeCallback={ onFileChange }
             id='file'
             name='file'
-            data-testid="fileInput"
+            // data-testid="fileInput"
           />
         </Col>
       </Row>

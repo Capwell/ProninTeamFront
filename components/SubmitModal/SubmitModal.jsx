@@ -15,6 +15,7 @@ function SubmitModal({ show, onHide, type }) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
       backdrop="static"
+      data-testid="submitModal"
     >
       <Modal.Body className='submit-modal__text'>
         {
@@ -33,7 +34,7 @@ function SubmitModal({ show, onHide, type }) {
           ) ||
           type === 'success' && (
             <p>
-              <b>Спасибо! Мы приняли Вашу заявку и скоро свяжемся Вами.</b>
+              <b>Спасибо! Мы приняли Вашу заявку и скоро свяжемся c Вами.</b>
               <br/><br/>
               С уважением, ProninTeam
             </p>
