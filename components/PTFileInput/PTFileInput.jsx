@@ -4,6 +4,7 @@ import { useRef, useState } from 'react';
 function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
   const fileLabel = useRef()
   const fileClose = useRef()
+  const fileError = useRef()
   const [fileName, setFileName] = useState('')
 
   // check file presense and than get it's size and name
@@ -15,26 +16,37 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
 
       // check is file more than 10 MB
       if (size > 10 * 1024 * 1024) {
-        return false
+        fileError.current.innerText = 'Слишком большой файл'
+        setTimeout(() => fileError.current.innerText = '', 2000)
+        fileRef.current.value = ''
+
+        return
       }
 
       const name = fileData.name
       setFileName(name)
-      fileChangeCallback(fileData)       // send file data to formik.values object
+      fileChangeCallback(fileData) // send file data to formik.values object
       fileClose.current.classList.add('show')
+    }
 
-    } else return false
+    console.log(e.target.files[0])
   }
 
   const removeFile = () => {
     fileClose.current.classList.remove('show')
     fileRef.current.value = ''
     setFileName('')
-    fileChangeCallback('')       // send file data to formik.values object
+    fileChangeCallback(null)       // send file data to formik.values object
   }
 
   return (
     <Form.Group className="control--file">
+      <span
+        className="control__error"
+        data-testid="nameError"
+        ref={ fileError }
+      />
+
       <Form.Label className="control__label" htmlFor='file'>
         <div className="label__top">
           <span ref={ fileLabel }>
@@ -48,11 +60,12 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
       </Form.Label>
 
       <Form.Control
-        { ...rest }
         ref={ fileRef }
         className="control__input"
         type='file'
         onChange={ checkFile }
+        { ...rest }
+        accept="image/*, .pdf, .doc, .docx, .txt, .ppt, .pptx, .xls, .xlsx, .rtf, .odt, .zip, .rar, .7z, .sit"
       />
 
       <button

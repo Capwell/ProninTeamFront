@@ -3,7 +3,7 @@
 .footer {
   margin-top: auto;
   background-color: white;
-  box-shadow: $box-shadow;
+  box-shadow: $footer-box-shadow;
 
   &__logo {
 
@@ -27,7 +27,7 @@
     justify-content: flex-end;
 
     .nav__link {
-      color: $fc-primary;
+      color: $c-primary;
       font-weight: 600;
       line-height: 1.25;
 
@@ -76,7 +76,7 @@
       }
 
       &__link {
-        color: $fc-primary;
+        color: $c-primary;
         font-weight: 500;
         line-height: 1.25;
         white-space: nowrap;

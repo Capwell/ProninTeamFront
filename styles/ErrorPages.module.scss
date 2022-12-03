@@ -1,0 +1,21 @@
+@import './variables.scss';
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.title {
+  font-size: 19.375rem;
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: .04em;
+}
+
+.description {
+  font-size: 1.75rem;
+  line-height: 1;
+}

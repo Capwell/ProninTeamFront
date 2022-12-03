@@ -10,6 +10,14 @@ const api = {
     return this._handleResponse(res)
   },
 
+  async getMainCase() {
+    let res = await fetch(`${this.url}/cases/main_page/`, {
+      method: "GET"
+    })
+
+    return this._handleResponse(res)
+  },
+
   async getCases() {
     let res = await fetch(`${this.url}/cases/`, {
       method: "GET"

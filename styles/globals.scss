@@ -53,7 +53,7 @@ $aspect-ratios: (
   "21x9": calc(9 / 21 * 100%)
 );
 
-$body-color: $fc-primary;
+$body-color: $c-primary;
 $font-family-base: 'Montserrat', sans-serif;
 
 // ===== HEADINGS ===== //
@@ -360,7 +360,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
 
   .control__input {
     width: 100%;
-    border-color: $fc-primary;
+    border-color: $c-primary;
     border-radius: 0;
     padding: $base * 5;           // 25 px
     line-height: 1.454;
@@ -368,12 +368,12 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     resize: none;
 
     &:focus {
-      border-color: $fc-primary;
+      border-color: $c-primary;
       box-shadow: none;
     }
 
     &::placeholder {
-      color: $fc-secondary;
+      color: $gray-500;
       line-height: 1.454;
       letter-spacing: .07em;
     }
@@ -386,7 +386,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     overflow: hidden;
     width: 100%;
     margin-bottom: 4px;
-    color: #d53030;
+    color: $c-danger;
     font-size: .875rem;
     line-height: 1.143;
   }
@@ -455,7 +455,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
 
       span:first-child {
         margin-right: .4rem;
-        border-bottom: 1px solid $fc-primary;
+        border-bottom: 1px solid $c-primary;
         max-width: $base * 42;         // 210 px
         text-overflow: ellipsis;
         overflow: hidden;
@@ -464,7 +464,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     }
 
     & > span {
-      color: $fc-light-gray;
+      color: $gray-400;
       font-size: .875rem;
       line-height: 1;
       letter-spacing: .07em;
@@ -516,6 +516,17 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     &:hover > svg {
       transform: scale(1.25)
     }
+  }
+
+  .control__error {
+    position: absolute;
+    top: -1.2rem;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    color: $c-danger;
+    font-size: .875rem;
+    line-height: 1.143;
   }
 
   @media screen and (max-width: 575px) {
@@ -717,8 +728,10 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   }
 }
 // ===== / ===== //
-
-body {
+html,
+body,
+#__next,
+main {
   height: 100%;
 }
 
@@ -730,7 +743,6 @@ a {
 #__next {
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
 }
 
 .main {
