@@ -3,28 +3,23 @@ $base: 5px;                  // basic step value
 $logo-width: $base * 30;     // 150 px
 $logo-height: $base * 6;     // 30 px
 $header-height: $base * 20;  // 100 px
-
-$fc-secondary: #828282;
-$fc-gray: #4f4f4f;
-$fc-light-gray: #aaaaaa;
-$fc-link: #6284ff;
-$light-gray: #bdbdbd;
-$turquoise: #30d5c8;
-$danger: #d53030;
-
+// ===== COLORS ===== //
+// ----- Gray ----- //
 $gray-100: #d9d9d9;
-
-// ===== PALLETTE ===== //
-$c-primary: #333333;
-$c-secondary: #b0b0b0;
+$gray-200: #bdbdbd;
+$gray-300: #b0b0b0;
+$gray-400: #aaaaaa;
+$gray-500: #828282;
+$gray-600: #4f4f4f;
+$gray-700: #333333;
+// ----- / ----- //
+// ----- Main Pallette ----- //
+$c-primary: $gray-700;
+$c-secondary: $gray-300;
 $c-success: #30d5c8;
 $c-danger: #d53030;
 $c-info: #6284ff;
 $c-light: #bac9ff;
-// ===== / ===== //
+// ----- / ----- //
 $header-box-shadow: 0px 4px 4px rgba(black, .07);
 $footer-box-shadow: 0px -4px 4px rgba(black, .07);
-
-// ===== TEXT ===== //
-$fc-primary: $c-primary;
-// ===== / ===== //
