@@ -10,21 +10,128 @@ import stl from '../../styles/Team.module.scss'
 import PTHead from '../../components/PTHead/PTHead'
 import TeamMember from '../../components/TeamMember/TeamMember'
 import PTButton from '../../components/PTButton/PTButton'
-import api from '../../utils/api'
+// import api from '../../utils/api'
 
-export async function getStaticProps() {
-  let usersData = []
-  try {
-    usersData = await api.getTeam()
-    // return { props: { usersData } }
-  } catch (err) {
-    console.log(err.message)
-  }
-  return { props: { usersData } }
-}
+// export async function getStaticProps() {
+//   let usersData = []
+//   try {
+//     usersData = await api.getTeam()
+//     // return { props: { usersData } }
+//   } catch (err) {
+//     console.log(err.message)
+//   }
+//   return { props: { usersData } }
+// }
+
+const usersData = [
+  {
+    main_role: {
+      title: 'Seo'
+    },
+    other_roles: [
+      { title: 'Backend-разработчик' }
+    ],
+    photo: '/images/user-1.webp',
+    first_name: 'Андрей',
+    last_name: 'Пронин',
+    middle_name: 'Александрович'
+  },
+  {
+    main_role: {
+      title: 'QA'
+    },
+    other_roles: [],
+    photo: '/images/user-2.webp',
+    first_name: 'Александр',
+    last_name: 'Грабовский',
+    middle_name: ''
+  },
+  {
+    main_role: {
+      title: 'PM'
+    },
+    other_roles: [],
+    photo: '/images/user-3.webp',
+    first_name: 'Каролина',
+    last_name: 'Павлычева',
+    middle_name: ''
+  },
+  {
+    main_role: {
+      title: 'Frontend-разработчик'
+    },
+    other_roles: [],
+    photo: '/images/user-4.webp',
+    first_name: 'Егор',
+    last_name: 'Романов',
+    middle_name: 'Иванович'
+  },
+  {
+    main_role: {
+      title: 'Backend-разработчик'
+    },
+    other_roles: [],
+    photo: '/images/user-5.webp',
+    first_name: 'Алексей',
+    last_name: 'Шевич',
+    middle_name: ''
+  },
+  {
+    main_role: {
+      title: 'Backend-разработчик'
+    },
+    other_roles: [],
+    photo: '/images/user-6.webp',
+    first_name: 'Николай',
+    last_name: 'Павлов',
+    middle_name: ''
+  },
+  {
+    main_role: {
+      title: 'Frontend-разработчик'
+    },
+    other_roles: [],
+    photo: '/images/user-7.webp',
+    first_name: 'Сергей',
+    last_name: 'Бородулин',
+    middle_name: ''
+  },
+  {
+    main_role: {
+      title: 'PM'
+    },
+    other_roles: [],
+    photo: '/images/user-8.webp',
+    first_name: 'Елена',
+    last_name: 'Береза',
+    middle_name: ''
+  },
+  {
+    main_role: {
+      title: 'PM'
+    },
+    other_roles: [],
+    photo: '/images/user-9.webp',
+    first_name: 'Нина',
+    last_name: 'Попова',
+    middle_name: ''
+  },
+  {
+    main_role: {
+      title: 'Дизайнер'
+    },
+    other_roles: [],
+    photo: '/images/user-10.webp',
+    first_name: 'Олег',
+    last_name: 'Кипарисов',
+    middle_name: ''
+  },
+]
+
 
 // function Team({ usersData = [] }) {
-function Team({ usersData }) {
+// function Team({ usersData }) {
+function Team() {
   const router = useRouter()
 
   // filter user by their roles (main and others)
