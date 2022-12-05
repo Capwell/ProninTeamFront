@@ -6,14 +6,14 @@ import {
   Form
 } from "react-bootstrap";
 import { useFormik } from 'formik'
-import ReCAPTCHA from 'react-google-recaptcha'
+// import ReCAPTCHA from 'react-google-recaptcha'
 import SubmitModal from '../SubmitModal/SubmitModal'
 import PTFileInput from '../PTFileInput/PTFileInput'
 import stl from './ClientForm.module.scss'
 import PTButton from '../PTButton/PTButton'
 import api from '../../utils/api'
 
-function ClientForm() {
+function ClientForm({ className }) {
   // submit button availablity
   const [isSubmitAvailable, setIsSubmitAvailable] = useState(false)
   // modal visibility
@@ -22,7 +22,9 @@ function ClientForm() {
   const [modalType, setModalType] = useState('')
   // recaptcha component
   const [isLoading, setIsLoading] = useState(false)
-  const recaptcha = useRef()
+
+  // const recaptcha = useRef()
+  
   const fileInput = useRef()
 
   // toggle submit button availability
@@ -79,16 +81,9 @@ function ClientForm() {
 
       try {
         // Execute the reCAPTCHA when the form is submitted
-        const token = await recaptcha.current.executeAsync();
-
-        // const data = {
-        //   name: values.name,
-        //   communicate: values.communicate,
-        //   message: values.message,
-        //   file: values.file,
-        //   is_agreed: values.is_agreed,
-        //   token: token
-        // }
+        // recaptcha.current.execute();
+        // const token = await recaptcha.current.executeAsync()
+        // recaptcha.current.reset()
 
         const fData = new FormData()
         fData.append('name', values.name)
@@ -96,7 +91,7 @@ function ClientForm() {
         fData.append('message', values.message)
         fData.append('file', values.file)
         fData.append('is_agreed', values.is_agreed)
-        fData.append('token', token)
+        // fData.append('token', token)
 
         await api.sendOffer(fData)
 
@@ -154,18 +149,18 @@ function ClientForm() {
     }
   }
   // google recaptcha change handler
-  const onReCAPTCHAChange = async (captchaCode) => {
-    // If the reCAPTCHA code is null or undefined indicating that
-    // the reCAPTCHA was expired then return early
-    if (!captchaCode) return
-    // Reset the reCAPTCHA when the request has failed or successeded
-    recaptcha.current.reset();
-  }
+  // const onReCAPTCHAChange = async (captchaCode) => {
+  //   // If the reCAPTCHA code is null or undefined indicating that
+  //   // the reCAPTCHA was expired then return early
+  //   if (!captchaCode) return
+  //   // Reset the reCAPTCHA when the request has failed or successeded
+  //   recaptcha.current.reset();
+  // }
 
 
   return (
     <Form
-      className={ stl.form }
+      className={ `${className} ${stl.form}` }
       method="POST"
       noValidate    // remove default HTML validation
     >
@@ -176,13 +171,33 @@ function ClientForm() {
         onHide={ () => setModalShow(false) }
       />
 {/* Google Recaptcha component (v3) */}
-      <ReCAPTCHA
+      {/* <ReCAPTCHA
         ref={ recaptcha }
         size="invisible" // using invisible recaptcha
         // special key, generated for this site
         sitekey={ process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }
         onChange={ onReCAPTCHAChange }
-      />
+      /> */}
+
+        <h2 className={ stl.form__title }>
+          Хотите заказать проект?
+        </h2>
+
+        <p className={ stl.form__contacts }>
+          Позвоните <a
+            className={ stl.contacts__link }
+            href='tel:+79272703006'>
+              +7 927 270-30-06
+          </a>,
+          напишите в
+          telegram: <a
+            className={ stl.contacts__link }
+            href='https://t.me/andpronin'
+            target='_blank'
+            rel="noreferrer">
+              @andpronin
+          </a> или заполните форму:
+        </p>
 {/* Name input */}
       <Row className='mb-40'>
         <Col>
@@ -313,20 +328,21 @@ function ClientForm() {
         </Col>
       </Row>
   {/* File input */}
-      <Row className='mb-30 mb-lg-50'>
+      <Row className='mb-30 mb-lg-45'>
         <Col>
           <PTFileInput
             fileRef={ fileInput }
             fileChangeCallback={ onFileChange }
             id='file'
             name='file'
-            data-testid="fileInput"
+            // data-testid="fileInput"
           />
         </Col>
       </Row>
   {/* Form text */}
-      <p className={ stl.form__text + ' mb-70'}>
-        Ваши ответы позволят нам подготовиться к встрече или звонку.<br />
+      <p className={ stl.form__text + ' mb-40'}>
+        Пожалуйста, расскажите про свой проект.<br/>
+        Вы можете или ответить на наши вопросы, или прикрепить файл с описанием.<br/>
         Так первый разговор будет предметным.
       </p>
   {/* Submit button and legal */}

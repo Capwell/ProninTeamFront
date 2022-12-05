@@ -5,17 +5,52 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  flex-grow: 1;
 }
 
 .title {
   font-size: 19.375rem;
   font-weight: 300;
-  line-height: 1.2;
+  line-height: 1;
   letter-spacing: .04em;
+  margin-bottom: $base * 6; // 30 px
 }
 
 .description {
   font-size: 1.75rem;
   line-height: 1;
+  text-align: center;
+}
+
+@media screen and (max-width: 991px) {
+
+  .title {
+    font-size: 16rem;
+  }
+
+  .description {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .title {
+    font-size: 13rem;
+  }
+
+  .description {
+    font-size: 1.25rem;
+  }
+}
+
+@media screen and (max-width: 575px) {
+
+  .title {
+    font-size: 7rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
 }

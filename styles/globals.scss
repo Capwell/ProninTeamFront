@@ -15,17 +15,23 @@ $spacers: (
   40: $spacer * 8,    // 40 px
   45: $spacer * 9,    // 45 px
   50: $spacer * 10,   // 50 px
+  55: $spacer * 11,   // 55 px
   60: $spacer * 12,   // 60 px
+  65: $spacer * 13,   // 65 px
   70: $spacer * 14,   // 70 px
   75: $spacer * 15,   // 75 px
   80: $spacer * 16,   // 80 px
+  85: $spacer * 17,   // 85 px
   90: $spacer * 18,   // 90 px
   100: $spacer * 20,  // 100 px
   110: $spacer * 22,  // 110 px
   115: $spacer * 23,  // 115 px
+  120: $spacer * 24,  // 120 px
+  125: $spacer * 25,  // 125 px
   140: $spacer * 28,  // 140 px
   150: $spacer * 30,  // 150 px
   170: $spacer * 34,  // 170 px
+  200: $spacer * 40   // 200 px
 );
 // values of media queries
 $grid-breakpoints: (
@@ -127,6 +133,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     width: $base * 57;     // 285 px
     height: $base * 16;    // 80 px
     font-weight: 500;
+    padding: 0 $base * 3; // 0 - 15 px
   }
 
   &-primary {
@@ -236,6 +243,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     border: none;
     flex-direction: column;
     justify-content: space-between !important;
+    padding: 0;
 
     & > span {
       width: 100%;
@@ -261,7 +269,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
 
   .control__input {
     width: 100%;
-    height: $base * 14;              // 70 px
+    height: 69px;
     border: none;
     border-bottom: 1px solid $c-primary;
     border-radius: 0;
@@ -282,6 +290,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   }
 
   .control__label {
+    top: 1px;
     width: auto;
     height: auto;
     border: none;
@@ -363,7 +372,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     border-color: $c-primary;
     border-radius: 0;
     padding: $base * 5;           // 25 px
-    line-height: 1.454;
+    line-height: 1.45;
     letter-spacing: .07em;
     resize: none;
 
@@ -430,14 +439,15 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     justify-content: space-between;
     width: fit-content;
     margin-bottom: 0;
-    padding-left: $base * 13;       // 65 px
+    padding-top: 7px;
+    padding-left: $base * 12;       // 60 px
     font-weight: 500;
     cursor: pointer;
 
     &:before {
       content: url('../public/images/paper-clip.svg');
       position: absolute;
-      top: 0;
+      top: 2px;
       left: 0;
     }
 
@@ -447,7 +457,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
 
       span {
         height: 1rem;
-        margin-bottom: $base * 2;     // 10 px
+        margin-bottom: 7px;
         line-height: 1;
         letter-spacing: .07em;
         white-space: nowrap;
@@ -741,21 +751,24 @@ body {
   min-height: -moz-available;
 }
 
-#__next,
-main {
+#__next {
+  display: flex;
+  flex-direction: column;
   height: 100%;
+  min-height: 100vh;
+  // rules that allows to make bottom-fixed footer for every height of content
+}
+
+.main {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  height: 100%;
+  padding-top: $header-height;
 }
 
 a {
   color: inherit;
   text-decoration: none;
-}
-// rules that allows to make bottom-fixed footer for every height of content
-#__next {
-  display: flex;
-  flex-direction: column;
-}
-
-.main {
-  padding-top: $header-height;
 }

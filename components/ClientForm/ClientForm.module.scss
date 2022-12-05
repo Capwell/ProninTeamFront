@@ -2,6 +2,38 @@
 
 .form {
   position: relative;
+  padding-top: 1px;
+
+  &__title {
+    margin-bottom: $base * 6;    // 30 px
+    font-size: 2.5rem;
+    font-weight: 600;
+    line-height: 1.2;
+    letter-spacing: .04em;
+  }
+
+  &__contacts {
+    width: 100%;
+    max-width: $base * 146;      // 730 px
+    margin-bottom: $base * 10;   // 50 px
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.45;
+    letter-spacing: .07em;
+
+    .contacts__link {
+      color: $c-info;
+      white-space: nowrap;
+
+      &:hover {
+        text-decoration: underline;
+      }
+
+      &:active {
+        color: $c-light;
+      }
+    }
+  }
 
   &__input_name,
   &__input_communicate {
@@ -27,7 +59,7 @@
       .item__text {
         color: $gray-600;
         font-size: .9375rem;
-        line-height: 1.454;
+        line-height: 1.45;
         letter-spacing: .07em;
       }
     }
@@ -38,6 +70,8 @@
   }
 
   &__text {
+    width: 100%;
+    max-width: 410px;
     line-height: 1.25;
     letter-spacing: .07em;
   }
@@ -59,7 +93,7 @@
       max-width: $base * 84;     // 420 px
       font-size: .875rem;
       font-weight: 500;
-      line-height: 1.454;
+      line-height: 1.45;
       letter-spacing: .07em;
       user-select: none;
 
@@ -81,6 +115,10 @@
 @media screen and (max-width: 767px) {
 
   .form {
+
+    &__title {
+      text-align: center;
+    }
 
     &__questions {
       margin-bottom: $base * 6;    // 30 px
@@ -106,6 +144,10 @@
 @media screen and (max-width: 575px) {
 
   .form {
+
+    &__title {
+      font-size: 1.8rem;
+    }
 
     &__questions {
 
