@@ -94,7 +94,7 @@ function Services() {
                   className={ stl.item__btn }
                   variant="primary"
                   text="Посмотреть пример"
-                  href="#"
+                  href="/cases/pronin-team/"
                 />
               </div>
             </Col>
@@ -115,7 +115,7 @@ function Services() {
                   className={ stl.item__btn }
                   variant="primary"
                   text="Посмотреть пример"
-                  href="#"
+                  href="/cases/unity/"
                 />
               </div>
             </Col>
@@ -136,7 +136,7 @@ function Services() {
                   className={ stl.item__btn }
                   variant="primary"
                   text="Посмотреть пример"
-                  href="#"
+                  href="/cases/donor-search"
                 />
               </div>
             </Col>

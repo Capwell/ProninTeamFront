@@ -130,7 +130,7 @@ function Home({ caseData = [] }) {
       </Container>
 
 {/* Cases section */}
-      <a id="cases" className="anchor" />
+      {/* <a id="cases" className="anchor" />
 
       <section className={ stl.cases }>
         <Container fluid="xxl">
@@ -159,84 +159,7 @@ function Home({ caseData = [] }) {
             href="/cases"
           />
         </Container>
-      </section>
-
-        {/* <div className={ stl.cases__timeline }>
-          <ul className={ stl.timeline__list }>
-
-            <li className={ stl.timeline__item }>
-              <div className={ stl.item__title }>
-                <span>Спринт 1. (9 - 14 ноября)</span>
-              </div>
-
-              <div className={ stl.item__text }>
-                Провели подготовительную работу:
-                <br/><br/>
-                <ul>
-                  <li>Провели переговоры с заказчиком, подготовили фич-лист;</li>
-                  <li>Нарисовали и согласовали варфреймы;</li>
-                  <li>Купили домен. Настроили домен (SSL, NS зоны);</li>
-                  <li>Создали Джангo проект с расширенной базовой моделью пользователя.</li>
-                </ul>
-              </div>
-            </li>
-
-            <li className={ stl.timeline__item }>
-              <div className={ stl.item__title }>
-                <span>Спринт 2. (14 - 21 ноября)</span>
-              </div>
-
-              <div className={ stl.item__text }>
-                Подготовили MVP сайта
-                <br/><br/>
-                <ul>
-                  <li>Нарисовали дизайн по варфреймам;</li>
-                  <li>Подготовили и реализовали форму заявки клиента;</li>
-                  <li>Настроили CI CD;</li>
-                  <li>
-                    Подготовили текст юридических документов:<br/>
-                    - Согласие на обработку персональных данных;<br/>
-                    - Политику обработки персональных данных;
-                  </li>
-                  <li>Настроили капчу;</li>
-                  <li>Подготовили контент для MVP;</li>
-                  <li>
-                    <b>17 ноября</b> — проанализировали полученные материалы и приняли решение сделать лендинг в качестве MVP;
-                  </li>
-                  <li>Переделали варфреймы и дизайн.</li>
-                </ul>
-              </div>
-            </li>
-
-            <li className={ stl.timeline__item }>
-              <div className={ stl.item__title }>
-                <span>Спринт 3. (21 - 28 ноября)</span>
-              </div>
-
-              <div className={ stl.item__text }>
-                <ul>
-                  <li>Нарисовали Ui kit;</li>
-                  <li>Сделали варфрейм и дизайн страницы Команда;</li>
-                  <li>Сделали страницу Команда;</li>
-                  <li>Настроили CI/CD;</li>
-                  <li>Допилили раздел правовые документы;</li>
-                  <li>
-                    Доработали форму заявки:<br/>
-                    - Cохранение согласия пользователя,<br/>
-                    - Валидация полей формы,<br/>
-                    - Прикрепление файла к заявке,<br/>
-                    - Настроили helptext;<br/>
-                  </li>
-                  <li>Написали тесты на логику работы формы и энд поинт;</li>
-                  <li>Настроили адаптивку для мобильной версии;</li>
-                  <li>Настроили CORS.</li>
-                </ul>
-              </div>
-            </li>
-
-          </ul>
-        </div> */}
-
+      </section> */}
     </>
   );
 }
