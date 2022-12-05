@@ -2,6 +2,7 @@
 
 .form {
   position: relative;
+  padding-top: 1px;
 
   &__title {
     margin-bottom: $base * 6;    // 30 px
@@ -17,7 +18,7 @@
     margin-bottom: $base * 10;   // 50 px
     font-size: 1.25rem;
     font-weight: 500;
-    line-height: 1.454;
+    line-height: 1.45;
     letter-spacing: .07em;
 
     .contacts__link {
@@ -58,7 +59,7 @@
       .item__text {
         color: $gray-600;
         font-size: .9375rem;
-        line-height: 1.454;
+        line-height: 1.45;
         letter-spacing: .07em;
       }
     }
@@ -69,6 +70,8 @@
   }
 
   &__text {
+    width: 100%;
+    max-width: 410px;
     line-height: 1.25;
     letter-spacing: .07em;
   }
@@ -90,7 +93,7 @@
       max-width: $base * 84;     // 420 px
       font-size: .875rem;
       font-weight: 500;
-      line-height: 1.454;
+      line-height: 1.45;
       letter-spacing: .07em;
       user-select: none;
 

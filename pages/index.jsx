@@ -43,7 +43,7 @@ function Home({ caseData = [] }) {
       <Container
         as="section"
         fluid="xxl"
-        className={`${stl.mission} mt-50 mt-lg-100 mb-70 mb-lg-80`}
+        className={`${stl.mission} mt-50 mt-lg-100 mb-70 mb-lg-75`}
       >
         <h1 className={ stl.mission__title }>
           Наша миссия

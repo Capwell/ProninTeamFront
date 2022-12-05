@@ -27,12 +27,12 @@ function Services() {
           onClick={ () => router.back() }
         />
 
-        <h1 className={ `${stl.services__title} mb-50 mb-lg-100` }>
+        <h1 className={ `${stl.services__title} mb-50 mb-lg-85` }>
           Услуги
         </h1>
 
-        <section className={ `${stl.services__text} mb-70 mb-lg-140` }>
-          <h2 className={ `${stl.text__title} mb-30 mb-lg-50` }>
+        <section className={ `${stl.services__text} mb-60 mb-lg-125` }>
+          <h2 className={ `${stl.text__title} mb-25` }>
             Поддержка сайтов
           </h2>
 
@@ -68,7 +68,7 @@ function Services() {
         </section>
 
         <section className={ `${stl.services__variants} mb-70 mb-lg-110` }>
-          <h2 className={ `${stl.variants__title} mb-40 mb-lg-75` }>
+          <h2 className={ `${stl.variants__title} mb-40 mb-lg-65` }>
             3 варианта начала работ<br/>
             по поддержке и разработке сайта
           </h2>
@@ -87,7 +87,8 @@ function Services() {
                   <br/>
                   После оплаты счета начинаем, исполняем и сдаем услуги.<br/>
                   <br/>
-                  Все максимально просто. Оценку и счет постараемся сделать уже в день обращения.
+                  Все максимально просто.<br/>
+                  Оценку и счет постараемся сделать уже в день обращения.
                 </p>
                 <PTButton
                   className={ stl.item__btn }

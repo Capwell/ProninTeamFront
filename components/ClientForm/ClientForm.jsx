@@ -324,7 +324,7 @@ function ClientForm({ className }) {
         </Col>
       </Row>
   {/* File input */}
-      <Row className='mb-30 mb-lg-50'>
+      <Row className='mb-30 mb-lg-45'>
         <Col>
           <PTFileInput
             fileRef={ fileInput }
@@ -336,8 +336,9 @@ function ClientForm({ className }) {
         </Col>
       </Row>
   {/* Form text */}
-      <p className={ stl.form__text + ' mb-70'}>
-        Ваши ответы позволят нам подготовиться к встрече или звонку.<br />
+      <p className={ stl.form__text + ' mb-40'}>
+        Пожалуйста, расскажите про свой проект.<br/>
+        Вы можете или ответить на наши вопросы, или прикрепить файл с описанием.<br/>
         Так первый разговор будет предметным.
       </p>
   {/* Submit button and legal */}
