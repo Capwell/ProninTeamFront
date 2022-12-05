@@ -2,8 +2,11 @@ import { Container } from 'react-bootstrap'
 import stl from '../styles/ErrorPages.module.scss'
 import PTHead from '../components/PTHead/PTHead'
 import PTButton from '../components/PTButton/PTButton'
+import { useRouter } from 'next/router'
 
 function Custom500() {
+  const router = useRouter()
+  
   return (
     <>
       <PTHead
