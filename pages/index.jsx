@@ -126,26 +126,6 @@ function Home({ caseData = [] }) {
         fluid="xxl"
         className={`${stl.brief} mb-100 mb-lg-140`}
       >
-        <h2 className={ stl.brief__title }>
-          Хотите заказать проект?
-        </h2>
-
-        <p className={ stl.brief__text }>
-          Позвоните <a
-            className={ stl.text__link }
-            href='tel:+79272703006'>
-              +7 927 270-30-06
-          </a>,
-          напишите в
-          telegram: <a
-            className={ stl.text__link }
-            href='https://t.me/andpronin'
-            target='_blank'
-            rel="noreferrer">
-              @andpronin
-          </a> или заполните форму:
-        </p>
-
         <ClientForm />
       </Container>
 

@@ -13,7 +13,7 @@ import stl from './ClientForm.module.scss'
 import PTButton from '../PTButton/PTButton'
 import api from '../../utils/api'
 
-function ClientForm() {
+function ClientForm({ className }) {
   // submit button availablity
   const [isSubmitAvailable, setIsSubmitAvailable] = useState(false)
   // modal visibility
@@ -80,15 +80,6 @@ function ClientForm() {
       try {
         // Execute the reCAPTCHA when the form is submitted
         const token = await recaptcha.current.executeAsync();
-
-        // const data = {
-        //   name: values.name,
-        //   communicate: values.communicate,
-        //   message: values.message,
-        //   file: values.file,
-        //   is_agreed: values.is_agreed,
-        //   token: token
-        // }
 
         const fData = new FormData()
         fData.append('name', values.name)
@@ -165,7 +156,7 @@ function ClientForm() {
 
   return (
     <Form
-      className={ stl.form }
+      className={ `${className} ${stl.form}` }
       method="POST"
       noValidate    // remove default HTML validation
     >
@@ -183,6 +174,26 @@ function ClientForm() {
         sitekey={ process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }
         onChange={ onReCAPTCHAChange }
       />
+
+        <h2 className={ stl.form__title }>
+          Хотите заказать проект?
+        </h2>
+
+        <p className={ stl.form__contacts }>
+          Позвоните <a
+            className={ stl.contacts__link }
+            href='tel:+79272703006'>
+              +7 927 270-30-06
+          </a>,
+          напишите в
+          telegram: <a
+            className={ stl.contacts__link }
+            href='https://t.me/andpronin'
+            target='_blank'
+            rel="noreferrer">
+              @andpronin
+          </a> или заполните форму:
+        </p>
 {/* Name input */}
       <Row className='mb-40'>
         <Col>

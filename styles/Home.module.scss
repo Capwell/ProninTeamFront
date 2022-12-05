@@ -95,44 +95,6 @@
   }
 }
 // ===== / ===== //
-
-// ===== BRIEF ===== //
-.brief {
-  position: relative;
-
-  &__title {
-    margin-bottom: $base * 6;    // 30 px
-    font-size: 2.5rem;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: .04em;
-  }
-
-  &__text {
-    width: 100%;
-    max-width: $base * 146;      // 730 px
-    margin-bottom: $base * 10;   // 50 px
-    font-size: 1.25rem;
-    font-weight: 500;
-    line-height: 1.454;
-    letter-spacing: .07em;
-
-    .text__link {
-      color: $c-info;
-      white-space: nowrap;
-
-      &:hover {
-        text-decoration: underline;
-      }
-
-      &:active {
-        color: $c-light;
-      }
-    }
-  }
-}
-// ===== / ===== //
-
 // ===== CASES ===== //
 .cases {
   margin-bottom: $base * 20;     // 100 px
@@ -264,14 +226,6 @@
     }
   }
 
-  .brief {
-    position: relative;
-
-    &__title {
-      text-align: center;
-    }
-  }
-
   .cases {
 
     &__timeline:before {
@@ -309,13 +263,6 @@
 }
 
 @media screen and (max-width: 575px) {
-
-  .brief {
-
-    &__title {
-      font-size: 1.8rem;
-    }
-  }
 
   .cases {
 

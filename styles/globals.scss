@@ -26,6 +26,7 @@ $spacers: (
   140: $spacer * 28,  // 140 px
   150: $spacer * 30,  // 150 px
   170: $spacer * 34,  // 170 px
+  200: $spacer * 40   // 200 px
 );
 // values of media queries
 $grid-breakpoints: (
@@ -127,6 +128,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     width: $base * 57;     // 285 px
     height: $base * 16;    // 80 px
     font-weight: 500;
+    padding: 0 $base * 3; // 0 - 15 px
   }
 
   &-primary {
@@ -236,6 +238,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     border: none;
     flex-direction: column;
     justify-content: space-between !important;
+    padding: 0;
 
     & > span {
       width: 100%;
