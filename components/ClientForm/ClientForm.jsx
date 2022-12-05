@@ -6,7 +6,7 @@ import {
   Form
 } from "react-bootstrap";
 import { useFormik } from 'formik'
-import ReCAPTCHA from 'react-google-recaptcha'
+// import ReCAPTCHA from 'react-google-recaptcha'
 import SubmitModal from '../SubmitModal/SubmitModal'
 import PTFileInput from '../PTFileInput/PTFileInput'
 import stl from './ClientForm.module.scss'
@@ -22,7 +22,9 @@ function ClientForm({ className }) {
   const [modalType, setModalType] = useState('')
   // recaptcha component
   const [isLoading, setIsLoading] = useState(false)
-  const recaptcha = useRef()
+
+  // const recaptcha = useRef()
+  
   const fileInput = useRef()
 
   // toggle submit button availability
@@ -79,7 +81,9 @@ function ClientForm({ className }) {
 
       try {
         // Execute the reCAPTCHA when the form is submitted
-        const token = await recaptcha.current.executeAsync();
+        // recaptcha.current.execute();
+        // const token = await recaptcha.current.executeAsync()
+        // recaptcha.current.reset()
 
         const fData = new FormData()
         fData.append('name', values.name)
@@ -87,7 +91,7 @@ function ClientForm({ className }) {
         fData.append('message', values.message)
         fData.append('file', values.file)
         fData.append('is_agreed', values.is_agreed)
-        fData.append('token', token)
+        // fData.append('token', token)
 
         await api.sendOffer(fData)
 
@@ -145,13 +149,13 @@ function ClientForm({ className }) {
     }
   }
   // google recaptcha change handler
-  const onReCAPTCHAChange = async (captchaCode) => {
-    // If the reCAPTCHA code is null or undefined indicating that
-    // the reCAPTCHA was expired then return early
-    if (!captchaCode) return
-    // Reset the reCAPTCHA when the request has failed or successeded
-    recaptcha.current.reset();
-  }
+  // const onReCAPTCHAChange = async (captchaCode) => {
+  //   // If the reCAPTCHA code is null or undefined indicating that
+  //   // the reCAPTCHA was expired then return early
+  //   if (!captchaCode) return
+  //   // Reset the reCAPTCHA when the request has failed or successeded
+  //   recaptcha.current.reset();
+  // }
 
 
   return (
@@ -167,13 +171,13 @@ function ClientForm({ className }) {
         onHide={ () => setModalShow(false) }
       />
 {/* Google Recaptcha component (v3) */}
-      <ReCAPTCHA
+      {/* <ReCAPTCHA
         ref={ recaptcha }
         size="invisible" // using invisible recaptcha
         // special key, generated for this site
         sitekey={ process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }
         onChange={ onReCAPTCHAChange }
-      />
+      /> */}
 
         <h2 className={ stl.form__title }>
           Хотите заказать проект?

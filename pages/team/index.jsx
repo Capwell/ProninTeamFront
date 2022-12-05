@@ -23,7 +23,8 @@ export async function getStaticProps() {
   return { props: { usersData } }
 }
 
-function Team({ usersData = [] }) {
+// function Team({ usersData = [] }) {
+function Team({ usersData }) {
   const router = useRouter()
 
   // filter user by their roles (main and others)

@@ -9,22 +9,24 @@ import VideoModal from '../components/VideoModal/VideoModal'
 import ClientForm from '../components/ClientForm/ClientForm'
 import stl from '../styles/Home.module.scss'
 import PTButton from '../components/PTButton/PTButton'
-import CaseBanner from '../components/CaseBanner/CaseBanner'
-import api from '../utils/api'
 
-export async function getServerSideProps() {
-  let caseData = []
+// import CaseBanner from '../components/CaseBanner/CaseBanner'
+// import api from '../utils/api'
 
-  try {
-    caseData = await api.getMainCase()
-  } catch (err) {
-    console.log(err.message)
-  }
+// export async function getServerSideProps() {
+//   let caseData = []
 
-  return { props: { caseData } }
-}
+//   try {
+//     caseData = await api.getMainCase()
+//   } catch (err) {
+//     console.log(err.message)
+//   }
 
-function Home({ caseData = [] }) {
+//   return { props: { caseData } }
+// }
+
+// function Home({ caseData = [] }) {
+function Home() {
   const [showVideo, setShowVideo] = useState(false)
   // open modal window with video
   const openVideo = () => setShowVideo(true)

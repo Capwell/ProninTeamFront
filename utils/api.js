@@ -37,7 +37,7 @@ const api = {
   _handleResponse(res) {
     if (res.ok) return res.json()
     // если ошибка, отклоняем промис
-    else return Promise.reject(`Ошибка: ${res.status}`)
+    else throw new Error(res.status)
   }
 }
 
