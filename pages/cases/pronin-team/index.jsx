@@ -25,7 +25,7 @@ function CasePage() {
 {/* Banner */}
       <div className={ `${stl.banner} mb-100` }>
         <Container fluid="xxl">
-          <Row className={ `${stl.banner__inner} py-60 mb-100` }>
+          <Row className={ `${stl.banner__inner} py-60` }>
             <Col lg className="mb-40 mb-lg-0">
               <div className={ stl.banner__logo }>
                 <Image
@@ -51,50 +51,56 @@ function CasePage() {
         fluid="xxl"
         className={ `${ stl.stage } ${ stl.stage_first } mb-100 mb-lg-170` }
       >
-
-        <h2 className={ `${stl.stage__title} mb-25` }>
-          <span>Первый этап</span> — подготовительная работа
-        </h2>
-
-        <p className={ `${stl.stage__description} mb-50 mb-lg-90` }>
-          Мы начали подготовительную работу<br/>
-          по разработке сайта нашей компании.<br/>
-          <br/>
-          <strong>Задача</strong> была сделать многостраничный сайт, чтобы пользователь смог ознакомиться с нашей командой, подробно узнать о наших услугах, реализованных кейсах и оформить заявку на создание программного продукта.
-        </p>
-
-        <div className={ stl.stage__block }>
-          <section className={ `${stl.stage__todo} mb-50 mb-lg-0 me-0 me-lg-30` }>
-            <h2 className={ stl.todo__title }>
-              Что сделали:
+        <Row className="mb-50 mb-lg-90">
+          <Col lg="10">
+            <h2 className={ `${stl.stage__title} mb-25` }>
+              <span>Первый этап</span> — подготовительная работа
             </h2>
 
-            <ul className={ stl.todo__list }>
-              <li className={ stl.todo__item }>
-                Подготовили детальный фич-лист.
-              </li>
-              <li className={ stl.todo__item }>
-                Спроектировали симпатичные варфреймы для каждой страницы сайта.
-              </li>
-              <li className={ stl.todo__item }>
-                Купили и настроили домен.
-              </li>
-              <li className={ stl.todo__item }>
-                Создали Django проект с расширенной базовой моделью пользователя.
-              </li>
-            </ul>
-          </section>
+            <p className={ `${stl.stage__description}` }>
+              Мы начали подготовительную работу<br/>
+              по разработке сайта нашей компании.<br/>
+              <br/>
+              <strong>Задача</strong> была сделать многостраничный сайт, чтобы пользователь смог ознакомиться с нашей командой, подробно узнать о наших услугах, реализованных кейсах и оформить заявку на создание программного продукта.
+            </p>
+          </Col>
+        </Row>
 
-          <div className={ `${stl.stage__img} mx-auto mx-lg-0 ms-lg-30` }>
-            <Image
-              className={ stl.img__img }
-              src="/images/cases/pronin-team/stage-1.webp"
-              alt="Варфреймы первого этапа"
-              width="475"
-              height="555"
-            />
-          </div>
-        </div>
+        <Row className="justify-content-between align-items-center">
+          <Col lg="6" className="mb-50 mb-lg-0">
+            <section className={ stl.stage__todo }>
+              <h2 className={ stl.todo__title }>
+                Что сделали:
+              </h2>
+
+              <ul className={ stl.todo__list }>
+                <li className={ stl.todo__item }>
+                  Подготовили детальный фич-лист.
+                </li>
+                <li className={ stl.todo__item }>
+                  Спроектировали симпатичные варфреймы для каждой страницы сайта.
+                </li>
+                <li className={ stl.todo__item }>
+                  Купили и настроили домен.
+                </li>
+                <li className={ stl.todo__item }>
+                  Создали Django проект с расширенной базовой моделью пользователя.
+                </li>
+              </ul>
+            </section>
+          </Col>
+          <Col xs="auto" lg="6" xl="5" className="mx-auto mx-lg-0">
+            <div className={ stl.stage__img }>
+              <Image
+                className={ stl.img__img }
+                src="/images/cases/pronin-team/stage-1.webp"
+                alt="Варфреймы первого этапа"
+                width="475"
+                height="555"
+              />
+            </div>
+          </Col>
+        </Row>
       </Container>
 {/* Stage 2 */}
       <Container
@@ -106,15 +112,19 @@ function CasePage() {
           <span>Второй этап</span> — подготовка MVP сайта
         </h2>
 
-        <div className={ `${stl.stage__content}` }>
-          <div className={ `${stl.stage__block} mb-50 mb-xl-0` }>
-            <p className={ `${stl.stage__description} mb-50 mb-xl-110` }>
+        <Row className="mb-50 mb-xl-110">
+          <Col xl="7">
+            <p className={ stl.stage__description }>
               <strong>После того как мы собрали весь контент для сайта,</strong><br/>
               мы решили катить емкий и красивый лэндинг (вместо многостраничного объемного сайта).<br/>
               <br/>
               К слову, нам нравится работать с Agile за эту возможность — изменять требования и оперативно подстраиваться под них.
             </p>
+          </Col>
+        </Row>
 
+        <Row>
+          <Col lg="6" xl="7" className="mb-50 mb-lg-0">
             <section className={ stl.stage__todo }>
               <h2 className={ stl.todo__title }>
                 Что сделали:
@@ -157,18 +167,25 @@ function CasePage() {
                 </li>
               </ul>
             </section>
-          </div>
+          </Col>
 
-          <div className={ `${stl.stage__img} mx-auto mx-xl-0 ms-xl-30` }>
-            <Image
-              className={ stl.img__img }
-              src="/images/cases/pronin-team/stage-2.webp"
-              alt="Варфреймы первого этапа"
-              width="475"
-              height="425"
-            />
-          </div>
-        </div>
+          <Col
+            xs="auto"
+            lg="6"
+            xl="5"
+            className="d-flex align-items-xl-start mx-auto mx-xl-0"
+          >
+            <div className={ stl.stage__img }>
+              <Image
+                className={ stl.img__img }
+                src="/images/cases/pronin-team/stage-2.webp"
+                alt="Варфреймы второго этапа"
+                width="475"
+                height="425"
+              />
+            </div>
+          </Col>
+        </Row>
       </Container>
 {/* Stage 3 */}
       <Container
@@ -176,50 +193,57 @@ function CasePage() {
         fluid="xxl"
         className={ `${ stl.stage } ${ stl.stage_third } mb-170` }
       >
-
-        <h2 className={ `${stl.stage__title} mb-50` }>
-          <span>Третий этап</span> — доработка MVP
-        </h2>
-
-        <p className={ `${stl.stage__description} mb-75` }>
-          Итак, на входе у нас был еще сырой, но работающий MVP и мы приступили к важным <b>доработкам</b>.
-        </p>
-
-        <div className={ stl.stage__block }>
-          <section className={ `${stl.stage__todo} mb-50 mb-lg-0 me-0 me-lg-25` }>
-            <h2 className={ stl.todo__title }>
-              Что сделали:
+        <Row className="mb-50 mb-lg-95">
+          <Col lg="10">
+            <h2 className={ `${stl.stage__title} mb-50` }>
+              <span>Третий этап</span> — доработка MVP
             </h2>
 
-            <ul className={ stl.todo__list }>
-              <li className={ stl.todo__item }>
-                Сформировали дизайн - систему и UI-kit.
-              </li>
-              <li className={ stl.todo__item }>
-                Настроили CI/CD.
-              </li>
-              <li className={ stl.todo__item }>
-                Доработали форму заявки (чтобы все «кнопочки» работали).
-              </li>
-              <li className={ stl.todo__item }>
-                Настроили адаптивное отображение для мобильной версии.
-              </li>
-              <li className={ stl.todo__item }>
-                Решили все-таки сделать отдельную страницу про нашу команду. Спроектировали дизайн, сделали фронт и бэк.
-              </li>
-            </ul>
-          </section>
+            <p className={ `${stl.stage__description}` }>
+              Итак, на входе у нас был еще сырой, но работающий MVP и мы приступили к важным <b>доработкам</b>.
+            </p>
+          </Col>
+        </Row>
 
-          <div className={ `${stl.stage__img} mx-auto` }>
-            <Image
-              className={ stl.img__img }
-              src="/images/cases/pronin-team/stage-1.webp"
-              alt="Варфреймы первого этапа"
-              width="475"
-              height="555"
-            />
-          </div>
-        </div>
+        <Row className="justify-content-between align-items-center">
+          <Col lg="6" xl="7" className="mb-50 mb-lg-0">
+            <section className={ stl.stage__todo }>
+              <h2 className={ stl.todo__title }>
+                Что сделали:
+              </h2>
+
+              <ul className={ stl.todo__list }>
+                <li className={ stl.todo__item }>
+                  Сформировали дизайн - систему и UI-kit.
+                </li>
+                <li className={ stl.todo__item }>
+                  Настроили CI/CD.
+                </li>
+                <li className={ stl.todo__item }>
+                  Доработали форму заявки (чтобы все «кнопочки» работали).
+                </li>
+                <li className={ stl.todo__item }>
+                  Настроили адаптивное отображение для мобильной версии.
+                </li>
+                <li className={ stl.todo__item }>
+                  Решили все-таки сделать отдельную страницу про нашу команду. Спроектировали дизайн, сделали фронт и бэк.
+                </li>
+              </ul>
+            </section>
+          </Col>
+
+          <Col xs="auto" lg="6" xl="5" className="mx-auto mx-lg-0">
+            <div className={ stl.stage__img }>
+              <Image
+                className={ stl.img__img }
+                src="/images/cases/pronin-team/stage-3.webp"
+                alt="Варфреймы третьего этапа"
+                width="475"
+                height="555"
+              />
+            </div>
+          </Col>
+        </Row>
       </Container>
     </>
   )
