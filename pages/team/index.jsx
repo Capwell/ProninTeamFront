@@ -25,8 +25,6 @@ export async function getStaticProps() {
   }
 }
 
-// function Team({ usersData = [] }) {
-// function Team() {
 function Team({ usersData }) {
   const router = useRouter()
 

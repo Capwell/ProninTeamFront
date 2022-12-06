@@ -19,8 +19,6 @@ export async function getStaticProps() {
   }
 }
 
-// function Cases({ casesData = [] }) {
-// function Cases() {
 function Cases({ casesData }) {
   const router = useRouter()
 
