@@ -9,24 +9,24 @@ import VideoModal from '../components/VideoModal/VideoModal'
 import ClientForm from '../components/ClientForm/ClientForm'
 import stl from '../styles/Home.module.scss'
 import PTButton from '../components/PTButton/PTButton'
+import CaseBanner from '../components/CaseBanner/CaseBanner'
+import api from '../utils/api'
 
-// import CaseBanner from '../components/CaseBanner/CaseBanner'
-// import api from '../utils/api'
+export async function getStaticProps() {
+  try {
+    let caseData
+    const { data, errors } = await api.getMainCase()
 
-// export async function getServerSideProps() {
-//   let caseData = []
+    if (errors || !data) caseData = []
 
-//   try {
-//     caseData = await api.getMainCase()
-//   } catch (err) {
-//     console.log(err.message)
-//   }
+    return { props: { caseData } }
+  } catch (err) {
+    return { notFound: true }
+  }
+}
 
-//   return { props: { caseData } }
-// }
-
-// function Home({ caseData = [] }) {
-function Home() {
+// function Home() {
+function Home({ caseData }) {
   const [showVideo, setShowVideo] = useState(false)
   // open modal window with video
   const openVideo = () => setShowVideo(true)
@@ -132,7 +132,7 @@ function Home() {
       </Container>
 
 {/* Cases section */}
-      {/* <a id="cases" className="anchor" />
+      <a id="cases" className="anchor" />
 
       <section className={ stl.cases }>
         <Container fluid="xxl">
@@ -161,7 +161,7 @@ function Home() {
             href="/cases"
           />
         </Container>
-      </section> */}
+      </section>
     </>
   );
 }

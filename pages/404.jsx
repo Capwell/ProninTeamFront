@@ -6,7 +6,7 @@ import { useRouter } from 'next/router'
 
 function Custom404() {
   const router = useRouter()
-  
+
   return (
     <>
       <PTHead
@@ -15,7 +15,6 @@ function Custom404() {
 
       <Container fluid="xxl" className="mt-30">
         <PTButton
-          className="mb-30"
           variant="small-back"
           onClick={ () => router.back() }
         />
