@@ -7,20 +7,17 @@ import CaseBanner from '../../components/CaseBanner/CaseBanner'
 import api from '../../utils/api'
 
 export async function getStaticProps() {
+  let casesData
+
   try {
-    let casesData
-    const { data, errors } = await api.getCases()
-
-    if (errors || !data) casesData = []
-
-    return { props: { casesData } }
+    casesData = await api.getCases()
   } catch (err) {
-    return { notFound: true }
+    casesData = []
+  } finally {
+    return { props: { casesData } }
   }
 }
 
-// function Cases({ casesData = [] }) {
-// function Cases() {
 function Cases({ casesData }) {
   const router = useRouter()
 

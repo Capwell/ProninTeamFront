@@ -13,20 +13,17 @@ import PTButton from '../../components/PTButton/PTButton'
 import api from '../../utils/api'
 
 export async function getStaticProps() {
+  let usersData
+
   try {
-    let usersData
-    const { data, errors } = await api.getTeam()
-
-    if (errors || !data) usersData = []
-
-    return { props: { usersData } }
+    usersData = await api.getTeam()
   } catch (err) {
-    return { notFound: true }
+    usersData = []
+  } finally {
+    return { props: { usersData } }
   }
 }
 
-// function Team({ usersData = [] }) {
-// function Team() {
 function Team({ usersData }) {
   const router = useRouter()
 

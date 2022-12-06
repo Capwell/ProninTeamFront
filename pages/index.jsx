@@ -13,15 +13,14 @@ import CaseBanner from '../components/CaseBanner/CaseBanner'
 import api from '../utils/api'
 
 export async function getStaticProps() {
+  let caseData
+
   try {
-    let caseData
-    const { data, errors } = await api.getMainCase()
-
-    if (errors || !data) caseData = []
-
-    return { props: { caseData } }
+    caseData = await api.getMainCase()
   } catch (err) {
-    return { notFound: true }
+    caseData = []
+  } finally {
+    return { props: { caseData } }
   }
 }
 
