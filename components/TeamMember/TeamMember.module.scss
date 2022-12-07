@@ -15,6 +15,7 @@
     border-radius: 50%;
     padding-top: 101.9%;            // aspect ratio 51:52 (255x260)
     overflow: hidden;
+    // transition: box-shadow .15s ease-in-out;
 
     .photo__img {
       position: absolute;
@@ -44,4 +45,11 @@
     font-weight: 600;
     margin-bottom: 3px;
   }
+
+  // &:hover {
+
+  //   .member__photo {
+  //     box-shadow: 0px 0px 20px 0px rgba($c-success, .5);
+  //   }
+  // }
 }

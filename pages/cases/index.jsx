@@ -6,13 +6,44 @@ import stl from '../../styles/Cases.module.scss'
 import CaseBanner from '../../components/CaseBanner/CaseBanner'
 import api from '../../utils/api'
 
+const casesDataLocal = [
+  {
+    title: 'DonorSearch',
+    hex_color: '#FF2A23',
+    logo: '/images/cases/donorsearch-logo.svg',
+    is_on_main_page: false,
+    is_visible: true,
+    slug: 'donor-search',
+    text: 'Закрываем основные IT-потребности заказчика, накопившиеся за 12-ти летнюю историю проекта.'
+  },
+  {
+    title: 'Unity',
+    hex_color: '#FF2A23',
+    logo: '/images/cases/unity-logo.svg',
+    is_on_main_page: false,
+    is_visible: true,
+    slug: 'unity',
+    text: 'Разработали раздел для популяризации донорства.'
+  },
+  {
+    title: 'ProninTeam',
+    hex_color: '#30D5C8',
+    logo: '/images/cases/proninteam-logo.svg',
+    is_on_main_page: true,
+    is_visible: true,
+    slug: 'pronin-team',
+    text: 'Разработали сайт компании PrininTeam с нуля за 4 недели',
+  }
+]
+
+
 export async function getStaticProps() {
   let casesData
 
   try {
     casesData = await api.getCases()
   } catch (err) {
-    casesData = []
+    casesData = casesDataLocal
   } finally {
     return { props: { casesData } }
   }

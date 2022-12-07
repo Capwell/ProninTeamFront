@@ -12,13 +12,23 @@ import PTButton from '../components/PTButton/PTButton'
 import CaseBanner from '../components/CaseBanner/CaseBanner'
 import api from '../utils/api'
 
+const mainCaseLocal = [{
+  title: 'Unity',
+  hex_color: '#FF2A23',
+  logo: '/images/cases/unity-logo.svg',
+  is_on_main_page: false,
+  is_visible: true,
+  slug: 'unity',
+  text: 'Разработали раздел для популяризации донорства.'
+}]
+
 export async function getStaticProps() {
   let caseData
 
   try {
     caseData = await api.getMainCase()
   } catch (err) {
-    caseData = []
+    caseData = mainCaseLocal
   } finally {
     return { props: { caseData } }
   }
@@ -144,10 +154,10 @@ function Home({ caseData }) {
           caseData.length
             ? (<CaseBanner
                 as='div'
-                caseColor={ caseData.hex_color }
-                logo={ caseData.logo }
-                description={ caseData.text }
-                linkURL={ caseData.slug }
+                caseColor={ caseData[0].hex_color }
+                logo={ caseData[0].logo }
+                description={ caseData[0].text }
+                linkURL={ caseData[0].slug }
               />)
             : null
         }

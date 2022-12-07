@@ -7,7 +7,7 @@ function TeamMember({ photo, name, mainRole, roles }) {
       <div className={ stl.member__photo }>
         <Image
           className={ stl.photo__img }
-          src={ photo }
+          src={ photo || '/images/team/no-photo.svg' }
           width="255"
           height="260"
           alt={ 'Фото ' + name }
