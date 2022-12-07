@@ -89,14 +89,17 @@ function CasePage() {
               </ul>
             </section>
           </Col>
-          <Col xs="auto" lg="6" xl="5" className="mx-auto mx-lg-0">
+          <Col
+            xs="12"
+            lg="6"
+            xl="5"
+          >
             <div className={ stl.stage__img }>
               <Image
                 className={ stl.img__img }
                 src="/images/cases/pronin-team/stage-1.webp"
                 alt="Варфреймы первого этапа"
-                width="475"
-                height="555"
+                fill
               />
             </div>
           </Col>
@@ -170,18 +173,17 @@ function CasePage() {
           </Col>
 
           <Col
-            xs="auto"
+            xs="12"
             lg="6"
             xl="5"
-            className="d-flex align-items-xl-start mx-auto mx-xl-0"
+            className="d-flex align-items-center align-items-xl-start mx-auto mx-xl-0"
           >
             <div className={ stl.stage__img }>
               <Image
                 className={ stl.img__img }
                 src="/images/cases/pronin-team/stage-2.webp"
                 alt="Варфреймы второго этапа"
-                width="475"
-                height="425"
+                fill
               />
             </div>
           </Col>
@@ -232,7 +234,12 @@ function CasePage() {
             </section>
           </Col>
 
-          <Col xs="auto" lg="6" xl="5" className="mx-auto mx-lg-0">
+          <Col
+            xs="12"
+            lg="6"
+            xl="5"
+            className="mx-auto mx-lg-0"
+          >
             <div className={ stl.stage__img }>
               <Image
                 className={ stl.img__img }
@@ -240,6 +247,7 @@ function CasePage() {
                 alt="Варфреймы третьего этапа"
                 width="475"
                 height="555"
+
               />
             </div>
           </Col>

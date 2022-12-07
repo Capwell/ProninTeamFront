@@ -111,13 +111,16 @@
   }
 
   &__img {
+    display: flex;
     position: relative;
     width: 100%;
     max-width: $base * 89;      // 445 px
 
     .img__img {
+      position: relative !important;
       width: 100% !important;
       height: auto !important;    // 475 px
+      object-fit: contain;
     }
   }
 
@@ -139,7 +142,6 @@
 .stage_second {
 
   .stage__img {
-    position: relative;
     top: -190px;
   }
 }
@@ -173,6 +175,17 @@
     &__description {
       font-size: 1rem;
       line-height: 1.4;
+    }
+
+    &__img {
+      height: $base * 84;    // 420 px
+      max-width: none;
+
+      .img__img {
+        width: auto !important;
+        height: 100% !important;    // 475 px
+        margin: 0 auto;
+      }
     }
 
     &__todo {

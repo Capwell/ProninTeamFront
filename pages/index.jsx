@@ -127,7 +127,7 @@ function Home({ caseData }) {
         fluid="xxl"
         className={`${stl.brief} mb-100 mb-lg-140`}
       >
-        <ClientForm />
+        <ClientForm targetPage="Home"/>
       </Container>
 
 {/* Cases section */}
