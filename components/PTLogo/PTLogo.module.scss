@@ -9,6 +9,10 @@
     align-items: center;
     justify-content: center;
 
+    .logo__img path {
+      transition: fill .15s ease-in-out;
+    }
+
     &:hover > .logo__img path:nth-child(3) {
       fill: $c-success;
     }
