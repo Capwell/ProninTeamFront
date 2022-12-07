@@ -16,7 +16,7 @@ function ClientForm({ className, targetPage }) {
   const [isLoading, setIsLoading] = useState(false) // loading state
   const fileInput = useRef()
   const captchaToken = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
-
+  const formRef = useRef()
   // Add reCaptcha script (componentDidMount)
   useEffect(() => {
     const script = document.createElement('script')
@@ -38,7 +38,6 @@ function ClientForm({ className, targetPage }) {
       name: '',
       communicate: '',
       message: '',
-      file: null,
       is_agreed: false,
       token: ''
     },
@@ -89,9 +88,11 @@ function ClientForm({ className, targetPage }) {
               fData.append('name', values.name)
               fData.append('communicate', values.communicate)
               fData.append('message', values.message)
-              fData.append('file', values.file)
+              fData.append('file', fileInput.current.files[0] || '')
               fData.append('is_agreed', values.is_agreed)
               fData.append('token', token)
+
+              console.log(fData.get('file'))
               // send FormData to server
               await api.sendOffer(fData)
               // if no errors
@@ -140,15 +141,15 @@ function ClientForm({ className, targetPage }) {
   }
 
   // when file es attaching, write file data in formik.vales object
-  const onFileChange = (fileData) => {
-    formik.setFieldValue('file', fileData)
-    // if there is a message
-    if (formik.values.message.length) {
-      // and if file is attached - remove message errors
-      if (fileData) formik.setFieldError('message', undefined)
-      else formik.validateField('message') // else - validate message input
-    }
-  }
+  // const onFileChange = (fileData) => {
+  //   formik.setFieldValue('file', fileData)
+  //   // if there is a message
+  //   if (formik.values.message.length) {
+  //     // and if file is attached - remove message errors
+  //     if (fileData) formik.setFieldError('message', undefined)
+  //     else formik.validateField('message') // else - validate message input
+  //   }
+  // }
 
   return (
     <Form
@@ -316,7 +317,7 @@ function ClientForm({ className, targetPage }) {
         <Col>
           <PTFileInput
             fileRef={ fileInput }
-            fileChangeCallback={ onFileChange }
+            // fileChangeCallback={ onFileChange }
             id='file'
             name='file'
             // data-testid="fileInput"

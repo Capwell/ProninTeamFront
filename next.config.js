@@ -5,6 +5,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  images: {
+    deviceSizes: [320, 575, 767, 991, 1150],
+  }
 
   // webpack(config) {
   //   config.module.rules.push({

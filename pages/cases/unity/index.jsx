@@ -80,6 +80,7 @@ function CasePage() {
                 src="/images/cases/unity/stage-1.webp"
                 alt="Прототипы страниц Unity"
                 fill
+                quality="85"
               />
             </div>
           </li>
@@ -94,6 +95,7 @@ function CasePage() {
                 src="/images/cases/unity/stage-2.webp"
                 alt="Дизайн страниц Unity"
                 fill
+                quality="85"
               />
             </div>
           </li>
@@ -111,6 +113,7 @@ function CasePage() {
                     src="/images/cases/unity/stage-3-before.webp"
                     alt="Личный кабинет организации: до"
                     fill
+                    quality="85"
                   />
                 </div>
               </Col>
@@ -127,6 +130,7 @@ function CasePage() {
                     src="/images/cases/unity/stage-3-after.webp"
                     alt="Личный кабинет организации: после"
                     fill
+                    quality="85"
                   />
                 </div>
               </Col>

@@ -1,7 +1,7 @@
 import { Form } from 'react-bootstrap';
 import { useRef, useState } from 'react';
 
-function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
+function PTFileInput({ fileRef, ...rest }) {
   const fileLabel = useRef()
   const fileRemove = useRef()
   const fileError = useRef()
@@ -26,7 +26,7 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
 
       const name = fileData.name
       setFileName(name)
-      fileChangeCallback(fileData) // send file data to formik.values object
+      // fileChangeCallback(fileData) // send file data to formik.values object
       fileRemove.current.classList.add('show')
       setIsRemoveDisabled(false)
     }
@@ -36,7 +36,7 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
     fileRemove.current.classList.remove('show')
     fileRef.current.value = ''
     setFileName('')
-    fileChangeCallback(null)       // send file data to formik.values object
+    // fileChangeCallback(null)       // send file data to formik.values object
     setIsRemoveDisabled(true)
   }
 
