@@ -4,6 +4,7 @@ import { Row, Col, Form } from "react-bootstrap"
 import { useFormik } from 'formik'
 import SubmitModal from '../SubmitModal/SubmitModal'
 import PTInputText from '../PTInputText/PTInputText'
+import PTTextarea from '../PTTextarea/PTTextarea'
 import PTFileInput from '../PTFileInput/PTFileInput'
 import PTButton from '../PTButton/PTButton'
 import stl from './ClientForm.module.scss'
@@ -133,7 +134,6 @@ function ClientForm({ className, targetPage }) {
 
     formik.handleSubmit(e)
   }
-
   // when file es attaching, write file data in formik.vales object
   const onFileChange = (fileData) => {
     formik.setFieldValue('file', fileData)
@@ -164,6 +164,30 @@ function ClientForm({ className, targetPage }) {
 
     return err
   }
+  // check errors on textarea
+  const textareaErrorHandler = (inputName) => {
+    const err = { status: undefined, text: '' }
+    // if textarea is empty
+    if (!formik.values[inputName].length) {
+      err.status = undefined
+      err.text = ''
+    } else { // if textarea is not empty
+      if (formik.touched[inputName]) { // and if textarea was touched
+        if (formik.errors[inputName]) { // and there are some errors
+          err.status = true
+          err.text = formik.errors[inputName]
+        } else { // if textarea is touched and not empty and no errors
+          err.status = false
+          err.text = ''
+        }
+      } else { // if textarea is not touched
+        err.status = undefined
+        err.text = ''
+      }
+    }
+
+    return err
+  }
 
   return (
     <Form
@@ -178,7 +202,7 @@ function ClientForm({ className, targetPage }) {
         type={ modalType }
         onHide={ () => setModalShow(false) }
       />
-
+{/* Header of form */}
       <h2 className={ stl.form__title }>
         Хотите заказать проект?
       </h2>
@@ -244,35 +268,13 @@ function ClientForm({ className, targetPage }) {
         </Col>
 {/* Message textarea */}
         <Col lg={{ span: '6', order: 'first' }}>
-          <Form.Group className={
-            'control--textarea' + (
-              !formik.values.message.length   // if textarea is empty
-                ? ''                          // - set nothing
-                : formik.touched.message      // - else if textarea is visited
-                  ? formik.errors.message     // --- and if textarea has errors
-                    ? ' invalid' : ' valid'   // ----- set 'invalid', else - 'valid;
-                  : ''                        // --- set nothing if textarea is not visited
-            )}
-            data-testid="messageWrapper"
-          >
-            <span className="control__error" data-testid="messageError">
-              { // if input is visited AND input has invalid data
-                formik.touched.message && formik.errors.message
-                  ? formik.errors.message       // set error text
-                  : null                        // set nothing
-              }
-            </span>
-
-            <Form.Control
-              as="textarea"
-              className="control__input"
-              id="message"
-              rows="12"
-              placeholder="Напишите письмо в свободной форме, либо ответьте на список вопросов"
-              {...formik.getFieldProps('message')}
-              data-testid="messageTextarea"
-            />
-          </Form.Group>
+          <PTTextarea
+            id="message"
+            placeholder="Напишите письмо в свободной форме, либо ответьте на список вопросов"
+            isError={ textareaErrorHandler('message') }
+            rows="12"
+            {...formik.getFieldProps('message')}
+          />
         </Col>
       </Row>
   {/* File input */}
