@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from 'react'
 import { Row, Col, Form } from "react-bootstrap"
 import { useFormik } from 'formik'
 import SubmitModal from '../SubmitModal/SubmitModal'
+import PTInputText from '../PTInputText/PTInputText'
 import PTFileInput from '../PTFileInput/PTFileInput'
 import PTButton from '../PTButton/PTButton'
 import stl from './ClientForm.module.scss'
@@ -142,7 +143,26 @@ function ClientForm({ className, targetPage }) {
       if (fileData) formik.setFieldError('message', undefined)
       else formik.validateField('message') // else - validate message input
     }
-    console.log(formik.errors)
+  }
+  // check errors on text inputs
+  const inputTextErrorHandler = (inputName) => {
+    const err = { status: undefined, text: '' }
+    // if input was touched
+    if (formik.touched[inputName]) {
+      // and if formik.errors object has field with name of input
+      if (formik.errors[inputName]) {
+        err.status = true
+        err.text = formik.errors[inputName]
+      } else {
+        err.status = false
+        err.text = ''
+      }
+    } else { // if input isn't touched - don't set any valid classes
+      err.status = undefined
+      err.text = ''
+    }
+
+    return err
   }
 
   return (
@@ -181,77 +201,25 @@ function ClientForm({ className, targetPage }) {
 {/* Name input */}
       <Row className='mb-40'>
         <Col>
-          <Form.Floating
-            className={
-              stl.form__input_name + ' control--text' + (
-              formik.touched.name         // check is input visited (touched)
-                ? formik.errors.name      // - if visited - check is input has invalid data
-                  ? ' invalid' : ' valid' // --- yes - 'invalid', no - 'valid'
-                : ''                      // - if no visited - set empty
-            )}
-            data-testid="nameWrapper"
-          >
-            <Form.Control
-              className="control__input"
-              type="text"
-              id="name"
-              data-testid="nameInput"
-              // placeholders are necessary for bootstrap floating labels
-              placeholder="&nbsp;"
-              maxLength='20'
-              {...formik.getFieldProps('name')}
-            />
-
-            <label className="control__label" htmlFor="brief-name">
-              Представьтесь, пожалуйста:
-            </label>
-
-            <span className="control__error" data-testid="nameError">
-              { // if input is visited AND input has invalid data
-                formik.touched.name && formik.errors.name
-                  ? formik.errors.name    // set error text
-                  : null                  // set nothing
-              }
-            </span>
-          </Form.Floating>
+          <PTInputText
+            id="name"
+            label="Представьтесь, пожалуйста:"
+            isError={ inputTextErrorHandler('name') }
+            maxLength='20'
+            {...formik.getFieldProps('name')}
+          />
         </Col>
       </Row>
 {/* Communicate input */}
       <Row className='mb-70'>
         <Col className='position-relative'>
-          <Form.Floating
-            className={
-              stl.form__input_communicate + ' control--text' + (
-              formik.touched.communicate    // check is input visited (touched)
-                ? formik.errors.communicate // - if visited - check is input has invalid data
-                  ? ' invalid' : ' valid'   // --- yes -'invalid', no - 'valid'
-                : ''                        // - if no visited - set empty
-            )}
-            data-testid="communicateWrapper"
-          >
-            <Form.Control
-              className="control__input"
-              type="text"
-              id="communicate"
-              data-testid="communicateInput"
-              // placeholders are necessary for bootstrap floating labels
-              placeholder="&nbsp;"
-              maxLength='20'
-              {...formik.getFieldProps('communicate')}
-            />
-
-            <label className="control__label" htmlFor="brief-communicate">
-              Как с вами связаться?
-            </label>
-
-            <span className="control__error" data-testid="communicateError">
-              { // if input is visited AND input has invalid data
-                formik.touched.communicate && formik.errors.communicate
-                  ? formik.errors.communicate     // set error text
-                  : null                          // set nothing
-              }
-            </span>
-          </Form.Floating>
+          <PTInputText
+            id="communicate"
+            label="Как с вами связаться?"
+            isError={ inputTextErrorHandler('communicate') }
+            maxLength='20'
+            {...formik.getFieldProps('communicate')}
+          />
         </Col>
       </Row>
 {/* Message questions */}

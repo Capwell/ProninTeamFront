@@ -35,11 +35,6 @@
     }
   }
 
-  &__input_name,
-  &__input_communicate {
-    max-width: $base * 146;       // 730 px
-  }
-
   &__questions {
     list-style-type: none;
     padding-left: 0;
