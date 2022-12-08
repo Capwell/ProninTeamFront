@@ -2,13 +2,12 @@
 
 .form {
   position: relative;
-  padding-top: 1px;
 
   &__title {
     margin-bottom: $base * 6;    // 30 px
     font-size: 2.5rem;
     font-weight: 600;
-    line-height: 1.2;
+    line-height: 1.225;
     letter-spacing: .04em;
   }
 
@@ -18,7 +17,7 @@
     margin-bottom: $base * 10;   // 50 px
     font-size: 1.25rem;
     font-weight: 500;
-    line-height: 1.45;
+    line-height: 1.454;
     letter-spacing: .07em;
 
     .contacts__link {

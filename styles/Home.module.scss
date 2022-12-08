@@ -5,7 +5,7 @@
   position: relative;
 
   &__title {
-    margin-bottom: 6px;
+    margin-bottom: $base;     // 5 px
     font-size: 3rem;
     line-height: 1.25;
     letter-spacing: .04em;
@@ -18,17 +18,37 @@
   }
 }
 // ===== / ===== //
-
 // ===== ABOUT ===== //
 .about {
   position: relative;
-  padding-top: 2px;
 
   &__how,
   &__why {
 
     & + & {
-      margin-top: $base * 10;  // 50 px
+      margin-top: $base * 9;      // 45 px
+    }
+
+    .how,
+    .why {
+
+      &__title {
+        margin-bottom: $base * 3;  // 15 px
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1.35;
+        letter-spacing: .045em;
+      }
+
+      &__text {
+        line-height: 1.25;
+        letter-spacing: .07em;
+        margin-bottom: $base * 3;  // 15 px
+
+        span {
+          font-weight: 500;
+        }
+      }
     }
   }
 
@@ -38,61 +58,39 @@
     flex-direction: column;
     width: 100%;
     max-width: $base * 57;     // 285 px
-  }
-}
 
-.how,
-.why {
+    .video {
 
-  &__title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    line-height: 1.2;
-    letter-spacing: .045em;
-    margin-bottom: $base * 3;  // 15 px
-  }
+      &__thumbnail {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: $base * 27;           // 135 px
+        margin-bottom: $base * 3;     // 15 px
+        background-color: $gray-100;
+        cursor: pointer;
 
-  &__text {
-    line-height: 1.25;
-    letter-spacing: .07em;
-    margin-bottom: $base * 3;  // 15 px
+        &:before {
+          content: url('../public/images/play-button.svg');
+        }
+      }
 
-    span {
-      font-weight: 500;
+      &__title {
+        margin-bottom: $base;     // 5 px
+        font-weight: 500;
+        line-height: 1.3;
+      }
+
+      &__author {
+        margin-bottom: $base * 7;  // 35 px
+        font-size: .875rem;
+        font-weight: 300;
+        line-height: 1.2;
+        letter-spacing: .045em;
+      }
     }
-  }
-}
-
-.video {
-
-  &__thumbnail {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: $base * 27;           // 135 px
-    margin-bottom: 12px;
-    background-color: $gray-100;
-    cursor: pointer;
-
-    &:before {
-      content: url('../public/images/play-button.svg');
-    }
-  }
-
-  &__title {
-    margin-bottom: 7px;
-    font-weight: 500;
-    line-height: 1.3;
-  }
-
-  &__author {
-    margin-bottom: 31px;
-    font-size: .875rem;
-    font-weight: 300;
-    line-height: 1.2;
-    letter-spacing: .045em;
   }
 }
 // ===== / ===== //

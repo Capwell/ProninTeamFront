@@ -62,7 +62,7 @@ function Services() {
               <strong>Консультации.</strong> Увеличиваем присутствие в интернете на сторонних площадках.
             </li>
             <li className={ `${stl.list__item}` }>
-              Размещение сайтов в дата-центре netangels.ru
+              Размещение сайтов в дата-центре <a href="https://www.netangels.ru/" target="_blank">netangels.ru</a>
             </li>
           </ul>
         </section>
