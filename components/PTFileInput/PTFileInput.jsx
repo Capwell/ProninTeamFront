@@ -36,7 +36,7 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
     fileRemove.current.classList.remove('show')
     fileRef.current.value = ''
     setFileName('')
-    fileChangeCallback(null)
+    fileChangeCallback('')
     setIsRemoveDisabled(true)
   }
 

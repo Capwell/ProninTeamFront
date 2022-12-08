@@ -38,6 +38,7 @@ function ClientForm({ className, targetPage }) {
       name: '',
       communicate: '',
       message: '',
+      file: '',
       is_agreed: false,
       token: ''
     },
@@ -83,15 +84,8 @@ function ClientForm({ className, targetPage }) {
             try {
               // set recaptcha token to formik values state
               formik.setFieldValue('token', token)
-              // create FormData obj with all values
-              const fData = new FormData()
-              fData.append('name', values.name)
-              fData.append('communicate', values.communicate)
-              fData.append('message', values.message)
-              fData.append('file', fileInput.current.files[0] || '')
-              fData.append('is_agreed', values.is_agreed)
-              fData.append('token', token)
-
+              // create FormData obj with all values from form
+              const fData = new FormData(formRef.current)
               // send FormData to server
               await api.sendOffer(fData)
               // if no errors
@@ -141,13 +135,14 @@ function ClientForm({ className, targetPage }) {
 
   // when file es attaching, write file data in formik.vales object
   const onFileChange = (fileData) => {
-    // formik.setFieldValue('file', fileData)
+    formik.setFieldValue('file', fileData)
     // if there is a message
     if (formik.values.message.length) {
       // and if file is attached - remove message errors
       if (fileData) formik.setFieldError('message', undefined)
       else formik.validateField('message') // else - validate message input
     }
+    console.log(formik.errors)
   }
 
   return (
@@ -155,6 +150,7 @@ function ClientForm({ className, targetPage }) {
       className={ `${className} ${stl.form}` }
       method="POST"
       noValidate    // remove default HTML validation
+      ref={ formRef }
     >
 {/* Modal Window */}
       <SubmitModal
