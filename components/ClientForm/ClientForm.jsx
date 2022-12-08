@@ -92,7 +92,6 @@ function ClientForm({ className, targetPage }) {
               fData.append('is_agreed', values.is_agreed)
               fData.append('token', token)
 
-              console.log(fData.get('file'))
               // send FormData to server
               await api.sendOffer(fData)
               // if no errors
