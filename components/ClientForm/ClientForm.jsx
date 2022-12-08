@@ -141,15 +141,15 @@ function ClientForm({ className, targetPage }) {
   }
 
   // when file es attaching, write file data in formik.vales object
-  // const onFileChange = (fileData) => {
-  //   formik.setFieldValue('file', fileData)
-  //   // if there is a message
-  //   if (formik.values.message.length) {
-  //     // and if file is attached - remove message errors
-  //     if (fileData) formik.setFieldError('message', undefined)
-  //     else formik.validateField('message') // else - validate message input
-  //   }
-  // }
+  const onFileChange = (fileData) => {
+    // formik.setFieldValue('file', fileData)
+    // if there is a message
+    if (formik.values.message.length) {
+      // and if file is attached - remove message errors
+      if (fileData) formik.setFieldError('message', undefined)
+      else formik.validateField('message') // else - validate message input
+    }
+  }
 
   return (
     <Form
@@ -317,10 +317,9 @@ function ClientForm({ className, targetPage }) {
         <Col>
           <PTFileInput
             fileRef={ fileInput }
-            // fileChangeCallback={ onFileChange }
+            fileChangeCallback={ onFileChange }
             id='file'
             name='file'
-            // data-testid="fileInput"
           />
         </Col>
       </Row>
@@ -381,6 +380,5 @@ function ClientForm({ className, targetPage }) {
     </Form>
   )
 }
-
 
 export default ClientForm
