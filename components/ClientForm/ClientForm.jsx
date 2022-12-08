@@ -1,31 +1,28 @@
-import Link from "next/link";
-import { useState, useRef } from "react";
-import {
-  Row,
-  Col,
-  Form
-} from "react-bootstrap";
+import Link from 'next/link'
+import { useState, useRef, useEffect } from 'react'
+import { Row, Col, Form } from "react-bootstrap"
 import { useFormik } from 'formik'
-// import ReCAPTCHA from 'react-google-recaptcha'
 import SubmitModal from '../SubmitModal/SubmitModal'
 import PTFileInput from '../PTFileInput/PTFileInput'
-import stl from './ClientForm.module.scss'
 import PTButton from '../PTButton/PTButton'
+import stl from './ClientForm.module.scss'
 import api from '../../utils/api'
 
-function ClientForm({ className }) {
-  // submit button availablity
-  const [isSubmitAvailable, setIsSubmitAvailable] = useState(false)
-  // modal visibility
-  const [modalShow, setModalShow] = useState(false)
-  // modal content type
-  const [modalType, setModalType] = useState('')
-  // recaptcha component
-  const [isLoading, setIsLoading] = useState(false)
+function ClientForm({ className, targetPage }) {
 
-  // const recaptcha = useRef()
-  
+  const [isSubmitAvailable, setIsSubmitAvailable] = useState(false) // submit button availablity
+  const [modalShow, setModalShow] = useState(false) // modal visibility
+  const [modalType, setModalType] = useState('') // modal content type
+  const [isLoading, setIsLoading] = useState(false) // loading state
   const fileInput = useRef()
+  const captchaToken = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+  const formRef = useRef()
+  // Add reCaptcha script (componentDidMount)
+  useEffect(() => {
+    const script = document.createElement('script')
+    script.src = `https://www.google.com/recaptcha/api.js?render=${captchaToken}`
+    document.body.appendChild(script)
+  }, [])
 
   // toggle submit button availability
   const toggleSubmitAvailability = e => {
@@ -33,6 +30,7 @@ function ClientForm({ className }) {
     if (e.target.checked) setIsSubmitAvailable(true)
     else setIsSubmitAvailable(false)
   }
+
   // use formik library for validate and submit form
   const formik = useFormik({
     // set initial values for form's inputs
@@ -40,8 +38,8 @@ function ClientForm({ className }) {
       name: '',
       communicate: '',
       message: '',
-      file: null,
-      is_agreed: false
+      is_agreed: false,
+      token: ''
     },
     // set validate function
     validate: values => {
@@ -76,45 +74,47 @@ function ClientForm({ className }) {
       return errors;
     },
     // set function for success validation and submitting
-    onSubmit: async values => {
+    onSubmit: async (values) => {
       setIsLoading(true)
+      // call grecaptcha.execute on submit event
+      window.grecaptcha.ready(async () => {
+        window.grecaptcha.execute(captchaToken, { action: "submit" })
+          .then(async (token) => {
+            try {
+              // set recaptcha token to formik values state
+              formik.setFieldValue('token', token)
+              // create FormData obj with all values
+              const fData = new FormData()
+              fData.append('name', values.name)
+              fData.append('communicate', values.communicate)
+              fData.append('message', values.message)
+              fData.append('file', fileInput.current.files[0] || '')
+              fData.append('is_agreed', values.is_agreed)
+              fData.append('token', token)
 
-      try {
-        // Execute the reCAPTCHA when the form is submitted
-        // recaptcha.current.execute();
-        // const token = await recaptcha.current.executeAsync()
-        // recaptcha.current.reset()
-
-        const fData = new FormData()
-        fData.append('name', values.name)
-        fData.append('communicate', values.communicate)
-        fData.append('message', values.message)
-        fData.append('file', values.file)
-        fData.append('is_agreed', values.is_agreed)
-        // fData.append('token', token)
-
-        await api.sendOffer(fData)
-
-        setModalType('success')
-        setModalShow(true)
-        setTimeout(() => setModalShow(false), 3000)
-      } catch (err) {
-        setModalType('error')
-        setModalShow(true)
-        setTimeout(() => setModalShow(false), 3000)
-      } finally {
-        setIsLoading(false)
-      }
+              // send FormData to server
+              await api.sendOffer(fData)
+              // if no errors
+              setModalType('success') // show success modal
+              setModalShow(true)
+              setTimeout(() => setModalShow(false), 3000) // close it in 3 sec
+            } catch (err) {
+              setModalType('error') // show error modal
+              setModalShow(true)
+              setTimeout(() => setModalShow(false), 3000) // close it in 3 sec
+            } finally {
+              setIsLoading(false)
+            }
+          })
+      })
     },
   })
   // check all values off form before submitting,
   // if is there some errors - show modal with error message and stop submitting
   const presubmitCheck = (e) => {
     e.preventDefault()
-    // formik object with errors
-    const errors = formik.errors
-    // formik object with inputs values
-    const values = formik.values
+    const errors = formik.errors // formik object with errors
+    const values = formik.values // formik object with inputs values
 
     // if required fields (name, communicate, checkbox) are empty or invalid
     if (errors.name || errors.communicate || errors.is_agreed) {
@@ -135,28 +135,20 @@ function ClientForm({ className }) {
 
       return false
     }
-    // if everything is OK - submit form
+
     formik.handleSubmit(e)
   }
+
   // when file es attaching, write file data in formik.vales object
   const onFileChange = (fileData) => {
-    formik.values.file = fileData;
-
-    if (formik.values.message.length) {    // if there is a message
-                                           // and if file is attached - remove message errors
+    // formik.setFieldValue('file', fileData)
+    // if there is a message
+    if (formik.values.message.length) {
+      // and if file is attached - remove message errors
       if (fileData) formik.setFieldError('message', undefined)
       else formik.validateField('message') // else - validate message input
     }
   }
-  // google recaptcha change handler
-  // const onReCAPTCHAChange = async (captchaCode) => {
-  //   // If the reCAPTCHA code is null or undefined indicating that
-  //   // the reCAPTCHA was expired then return early
-  //   if (!captchaCode) return
-  //   // Reset the reCAPTCHA when the request has failed or successeded
-  //   recaptcha.current.reset();
-  // }
-
 
   return (
     <Form
@@ -170,34 +162,26 @@ function ClientForm({ className }) {
         type={ modalType }
         onHide={ () => setModalShow(false) }
       />
-{/* Google Recaptcha component (v3) */}
-      {/* <ReCAPTCHA
-        ref={ recaptcha }
-        size="invisible" // using invisible recaptcha
-        // special key, generated for this site
-        sitekey={ process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }
-        onChange={ onReCAPTCHAChange }
-      /> */}
 
-        <h2 className={ stl.form__title }>
-          Хотите заказать проект?
-        </h2>
+      <h2 className={ stl.form__title }>
+        Хотите заказать проект?
+      </h2>
 
-        <p className={ stl.form__contacts }>
-          Позвоните <a
-            className={ stl.contacts__link }
-            href='tel:+79272703006'>
-              +7 927 270-30-06
-          </a>,
-          напишите в
-          telegram: <a
-            className={ stl.contacts__link }
-            href='https://t.me/andpronin'
-            target='_blank'
-            rel="noreferrer">
-              @andpronin
-          </a> или заполните форму:
-        </p>
+      <p className={ stl.form__contacts }>
+        Позвоните <a
+          className={ stl.contacts__link }
+          href='tel:+79272703006'>
+            +7 927 270-30-06
+        </a>,
+        напишите в
+        telegram: <a
+          className={ stl.contacts__link }
+          href='https://t.me/andpronin'
+          target='_blank'
+          rel="noreferrer">
+            @andpronin
+        </a> или заполните форму:
+      </p>
 {/* Name input */}
       <Row className='mb-40'>
         <Col>
@@ -335,7 +319,6 @@ function ClientForm({ className }) {
             fileChangeCallback={ onFileChange }
             id='file'
             name='file'
-            // data-testid="fileInput"
           />
         </Col>
       </Row>
@@ -383,11 +366,12 @@ function ClientForm({ className }) {
           <PTButton
             variant="primary"
             text="Отправить ответы"
-            onClick={ presubmitCheck }
             loader={ true }
             isLoad={ isLoading }
             disabled={ !isSubmitAvailable }
             type="submit"
+            onClick={ presubmitCheck }
+            data-action="submit"
             data-testid="submitBtn"
           />
         </Col>
@@ -395,6 +379,5 @@ function ClientForm({ className }) {
     </Form>
   )
 }
-
 
 export default ClientForm

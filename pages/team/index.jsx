@@ -10,20 +10,9 @@ import stl from '../../styles/Team.module.scss'
 import PTHead from '../../components/PTHead/PTHead'
 import TeamMember from '../../components/TeamMember/TeamMember'
 import PTButton from '../../components/PTButton/PTButton'
-// import api from '../../utils/api'
+import api from '../../utils/api'
 
-// export async function getStaticProps() {
-//   let usersData = []
-//   try {
-//     usersData = await api.getTeam()
-//     // return { props: { usersData } }
-//   } catch (err) {
-//     console.log(err.message)
-//   }
-//   return { props: { usersData } }
-// }
-
-const usersData = [
+const usersDataLocal = [
   {
     main_role: {
       title: 'Seo'
@@ -31,107 +20,106 @@ const usersData = [
     other_roles: [
       { title: 'Backend-разработчик' }
     ],
-    photo: '/images/user-1.webp',
+    photo: '/images/team/a_pronin.webp',
     first_name: 'Андрей',
-    last_name: 'Пронин',
-    middle_name: 'Александрович'
+    last_name: 'Пронин'
   },
   {
     main_role: {
       title: 'QA'
     },
     other_roles: [],
-    photo: '/images/user-2.webp',
+    photo: '/images/team/a_grabovskij.webp',
     first_name: 'Александр',
-    last_name: 'Грабовский',
-    middle_name: ''
+    last_name: 'Грабовский'
   },
   {
     main_role: {
       title: 'PM'
     },
     other_roles: [],
-    photo: '/images/user-3.webp',
+    photo: '/images/team/k_pavlycheva.webp',
     first_name: 'Каролина',
-    last_name: 'Павлычева',
-    middle_name: ''
+    last_name: 'Павлычева'
   },
   {
     main_role: {
       title: 'Frontend-разработчик'
     },
     other_roles: [],
-    photo: '/images/user-4.webp',
+    photo: '/images/team/e_romanov.webp',
     first_name: 'Егор',
-    last_name: 'Романов',
-    middle_name: 'Иванович'
+    last_name: 'Романов'
   },
   {
     main_role: {
       title: 'Backend-разработчик'
     },
     other_roles: [],
-    photo: '/images/user-5.webp',
+    photo: '/images/team/a_shevich.webp',
     first_name: 'Алексей',
-    last_name: 'Шевич',
-    middle_name: ''
+    last_name: 'Шевич'
   },
   {
     main_role: {
       title: 'Backend-разработчик'
     },
     other_roles: [],
-    photo: '/images/user-6.webp',
+    photo: '/images/team/n_pavlov.webp',
     first_name: 'Николай',
-    last_name: 'Павлов',
-    middle_name: ''
+    last_name: 'Павлов'
   },
   {
     main_role: {
       title: 'Frontend-разработчик'
     },
     other_roles: [],
-    photo: '/images/user-7.webp',
+    photo: '/images/team/s_borodulin.webp',
     first_name: 'Сергей',
-    last_name: 'Бородулин',
-    middle_name: ''
+    last_name: 'Бородулин'
   },
   {
     main_role: {
       title: 'PM'
     },
     other_roles: [],
-    photo: '/images/user-8.webp',
+    photo: '/images/team/e_bereza.webp',
     first_name: 'Елена',
-    last_name: 'Береза',
-    middle_name: ''
+    last_name: 'Береза'
   },
   {
     main_role: {
       title: 'PM'
     },
     other_roles: [],
-    photo: '/images/user-9.webp',
+    photo: '/images/team/n_popova.webp',
     first_name: 'Нина',
-    last_name: 'Попова',
-    middle_name: ''
+    last_name: 'Попова'
   },
   {
     main_role: {
       title: 'Дизайнер'
     },
     other_roles: [],
-    photo: '/images/user-10.webp',
+    photo: '/images/team/o_kiparisov.webp',
     first_name: 'Олег',
-    last_name: 'Кипарисов',
-    middle_name: ''
+    last_name: 'Кипарисов'
   },
 ]
 
+export async function getStaticProps() {
+  let usersData
 
-// function Team({ usersData = [] }) {
-// function Team({ usersData }) {
-function Team() {
+  try {
+    usersData = await api.getTeam()
+  } catch (err) {
+    usersData = usersDataLocal
+  } finally {
+    return { props: { usersData } }
+  }
+}
+
+function Team({ usersData }) {
   const router = useRouter()
 
   // filter user by their roles (main and others)
@@ -262,15 +250,5 @@ function Team() {
     </>
   )
 }
-
-// // This gets called on every request
-// export async function getServerSideProps() {
-//   // Fetch data from external API
-//   const res = await fetch(`https://.../data`)
-//   const data = await res.json()
-
-//   // Pass data to the page via props
-//   return { props: { data } }
-// }
 
 export default Team

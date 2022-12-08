@@ -9,24 +9,33 @@ import VideoModal from '../components/VideoModal/VideoModal'
 import ClientForm from '../components/ClientForm/ClientForm'
 import stl from '../styles/Home.module.scss'
 import PTButton from '../components/PTButton/PTButton'
+import CaseBanner from '../components/CaseBanner/CaseBanner'
+import api from '../utils/api'
 
-// import CaseBanner from '../components/CaseBanner/CaseBanner'
-// import api from '../utils/api'
+const mainCaseLocal = [{
+  title: 'Unity',
+  hex_color: '#FF2A23',
+  logo: '/images/cases/unity-logo.svg',
+  is_on_main_page: false,
+  is_visible: true,
+  slug: 'unity',
+  text: 'Разработали раздел для популяризации донорства.'
+}]
 
-// export async function getServerSideProps() {
-//   let caseData = []
+export async function getStaticProps() {
+  let caseData
 
-//   try {
-//     caseData = await api.getMainCase()
-//   } catch (err) {
-//     console.log(err.message)
-//   }
+  try {
+    caseData = await api.getMainCase()
+  } catch (err) {
+    caseData = mainCaseLocal
+  } finally {
+    return { props: { caseData } }
+  }
+}
 
-//   return { props: { caseData } }
-// }
-
-// function Home({ caseData = [] }) {
-function Home() {
+// function Home() {
+function Home({ caseData }) {
   const [showVideo, setShowVideo] = useState(false)
   // open modal window with video
   const openVideo = () => setShowVideo(true)
@@ -128,11 +137,11 @@ function Home() {
         fluid="xxl"
         className={`${stl.brief} mb-100 mb-lg-140`}
       >
-        <ClientForm />
+        <ClientForm targetPage="Home"/>
       </Container>
 
 {/* Cases section */}
-      {/* <a id="cases" className="anchor" />
+      <a id="cases" className="anchor" />
 
       <section className={ stl.cases }>
         <Container fluid="xxl">
@@ -145,10 +154,10 @@ function Home() {
           caseData.length
             ? (<CaseBanner
                 as='div'
-                caseColor={ caseData.hex_color }
-                logo={ caseData.logo }
-                description={ caseData.text }
-                linkURL={ caseData.slug }
+                caseColor={ caseData[0].hex_color }
+                logo={ caseData[0].logo }
+                description={ caseData[0].text }
+                linkURL={ caseData[0].slug }
               />)
             : null
         }
@@ -161,7 +170,7 @@ function Home() {
             href="/cases"
           />
         </Container>
-      </section> */}
+      </section>
     </>
   );
 }

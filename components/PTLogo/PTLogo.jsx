@@ -1,16 +1,11 @@
 import stl from './PTLogo.module.scss'
 import Link from 'next/link'
-import logoImg from '../../public/images/pronin-team-logo-default.svg';
 
 function PTLogo() {
   return (
     <div className={ stl.logo }>
-      <Link href={"/"} className={ stl.logo__link }>
-        {/* <Image
-          className={ stl.logo__img }
-          src={ logoImg }
-          alt="Pronin Team Logo"
-        /> */}
+      <Link href="/" className={ stl.logo__link }>
+
         <svg className={ stl.logo__img } width="150" height="30" viewBox="0 0 150 30" fill="none" xmlns="http://www.w3.org/2000/svg">
           <g clipPath="url(#clip0_1_108)">
             <path d="M30.0742 0V30H0V20H20.0495V0H30.0742Z" fill="#333333"/>

@@ -26,7 +26,7 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
 
       const name = fileData.name
       setFileName(name)
-      fileChangeCallback(fileData) // send file data to formik.values object
+      fileChangeCallback(fileData)
       fileRemove.current.classList.add('show')
       setIsRemoveDisabled(false)
     }
@@ -36,7 +36,7 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
     fileRemove.current.classList.remove('show')
     fileRef.current.value = ''
     setFileName('')
-    fileChangeCallback(null)       // send file data to formik.values object
+    fileChangeCallback(null)
     setIsRemoveDisabled(true)
   }
 

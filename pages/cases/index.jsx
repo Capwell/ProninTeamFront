@@ -4,27 +4,13 @@ import PTHead from '../../components/PTHead/PTHead'
 import PTButton from '../../components/PTButton/PTButton'
 import stl from '../../styles/Cases.module.scss'
 import CaseBanner from '../../components/CaseBanner/CaseBanner'
-// import api from '../../utils/api'
+import api from '../../utils/api'
 
-// export async function getStaticProps() {
-//   let casesData = []
-
-//   try {
-//     const allData = await api.getCases()
-//     // filter only visible cases
-//     casesData = allData.filter(caseData => caseData.is_visible === true)
-//   } catch (err) {
-//     console.log(err.message)
-//   }
-
-//   return { props: { casesData } }
-// }
-
-const casesData = [
+const casesDataLocal = [
   {
     title: 'DonorSearch',
     hex_color: '#FF2A23',
-    logo: '/images/donorsearch-logo.svg',
+    logo: '/images/cases/donorsearch-logo.svg',
     is_on_main_page: false,
     is_visible: true,
     slug: 'donor-search',
@@ -33,7 +19,7 @@ const casesData = [
   {
     title: 'Unity',
     hex_color: '#FF2A23',
-    logo: '/images/unity-logo.svg',
+    logo: '/images/cases/unity-logo.svg',
     is_on_main_page: false,
     is_visible: true,
     slug: 'unity',
@@ -42,18 +28,28 @@ const casesData = [
   {
     title: 'ProninTeam',
     hex_color: '#30D5C8',
-    logo: '/images/proninteam-logo.svg',
+    logo: '/images/cases/proninteam-logo.svg',
     is_on_main_page: true,
     is_visible: true,
     slug: 'pronin-team',
-    text: 'Разработали сайт компании ProninTeam с нуля за 4 недели.',
+    text: 'Разработали сайт компании PrininTeam с нуля за 4 недели',
   }
 ]
 
 
-// function Cases({ casesData = [] }) {
-// function Cases({ casesData }) {
-function Cases() {
+export async function getStaticProps() {
+  let casesData
+
+  try {
+    casesData = await api.getCases()
+  } catch (err) {
+    casesData = casesDataLocal
+  } finally {
+    return { props: { casesData } }
+  }
+}
+
+function Cases({ casesData }) {
   const router = useRouter()
 
   return (
