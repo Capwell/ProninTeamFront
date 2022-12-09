@@ -13,6 +13,7 @@ import CaseBanner from '../components/CaseBanner/CaseBanner'
 import api from '../utils/api'
 import Image from 'next/image';
 
+
 const mainCaseLocal = [{
   title: 'Unity',
   hex_color: '#FF2A23',

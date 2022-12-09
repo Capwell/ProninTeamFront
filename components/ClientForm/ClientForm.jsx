@@ -206,7 +206,7 @@ function ClientForm({ className, targetPage }) {
       <h2 className={ stl.form__title }>
         Хотите заказать проект?
       </h2>
-
+      
       <p className={ stl.form__contacts }>
         Позвоните <a
           className={ stl.contacts__link }
