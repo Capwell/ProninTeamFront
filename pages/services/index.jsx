@@ -12,12 +12,12 @@ function Services() {
     <>
 {/* TODO: доделать голову */}
       <PTHead
-        title="ProninTeam - Услуги"
-        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
+        title="Услуги ProninTeam"
+        description='В айти компании можно заказать услуги по разработке и поддержке сайтов. Администрирование серверов и сайтов. Дизайн. Верстка. Программирование. Информационная поддержка. Интеграция. Продвижение сайта.'
         ogType='website'
         ogUrl="https://proninteam.ru/services"
         ogImg='/images/pronin-team-og-img.webp'
-        ogSiteName='ProninTeam'
+        ogSiteName='Услуги ProninTeam по разработке и поддержке сайтов.'
       />
 
       <Container
