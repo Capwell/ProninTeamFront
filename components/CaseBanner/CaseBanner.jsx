@@ -21,21 +21,23 @@ function CaseBanner({ as, className, caseColor, logo, description, linkURL }) {
         fluid="xxl"
         className={ stl.banner__inner }
       >
-        <div className={ stl.banner__logo }>
-          <Image
-            className={ stl.logo__img }
-            src={ logo }
-            alt="Case image"
-            fill
-          />
+        <div className={ `${ stl.banner__header } pt-45 pt-xl-0 mb-45 pb-xl-50` }>
+          <div className={ stl.banner__logo }>
+            <Image
+              className={ stl.logo__img }
+              src={ logo }
+              alt="Case image"
+              fill
+            />
+          </div>
         </div>
 
-        <p className={ stl.banner__description }>
+        <p className={ `${ stl.banner__description } mb-20` }>
           { description }
         </p>
 
         <PTButton
-          className="mt-auto ms-auto"
+          className="mt-auto mb-30 mb-xl-45 ms-auto"
           variant="colored"
           href={ `/cases/${linkURL}` }
           btnColor={ caseColor }

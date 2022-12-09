@@ -15,7 +15,7 @@ import api from '../../utils/api'
 const usersDataLocal = [
   {
     main_role: {
-      title: 'Seo'
+      title: 'СЕО'
     },
     other_roles: [
       { title: 'Backend-разработчик' }
@@ -125,7 +125,7 @@ function Team({ usersData }) {
       eventKey: 'all',   // use in react-bootstrap Tab component
       tabTitle: 'Все',   // use in react-bootstrap Tab component
       contentTitle: 'Почему с нами хорошо работать?',
-      contentText: 'У нас нет корпоративной иерархии, личных секретарей, отдельных кабинетов и ключевых показателей эффективности.  Мы любим свою работу и делаем ее хорошо с ответственностью за результат.\n\nНет должностей, есть роли в проекте. (тут идея про то, что сотрудник выбирает то, чем ему хочется в данный момент заниматься в проекте от своих умений)',
+      contentText: 'У нас нет корпоративной иерархии, личных секретарей, отдельных кабинетов и ключевых показателей эффективности. Мы любим свою работу и делаем ее хорошо с ответственностью за результат.\n\nНет должностей, есть роли в проекте (тут идея про то, что сотрудник выбирает то, чем ему хочется в данный момент заниматься в проекте, в зависимости от своих умений и навыков)',
       members: usersData  // array of members who must be on current tab
     },
     {
@@ -218,7 +218,7 @@ function Team({ usersData }) {
                         const key = `${tab.eventKey}-${index}`
 
                         return (
-                          <Col key={ key } as='li' className='mb-40 mb-md-60 mb-lg-80'>
+                          <Col key={ key } as='li' className='mb-50'>
                             <TeamMember
                               photo={ photo }
                               name={ name }

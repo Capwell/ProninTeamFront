@@ -38,18 +38,23 @@
 .description {
 
   &__title {
-    font-size: 2.5rem;
+    font-size: 2rem;
     font-weight: 700;
     line-height: 1.225;
     letter-spacing: .04em;
   }
 
-  &__text {
+  & > p {
     width: 100%;
     max-width: $base * 165;   // 825 px
     font-size: 1.25rem;
     font-weight: 400;
     line-height: 1.6;
+  }
+
+  & strong,
+  & b {
+    font-weight: 600;
   }
 }
 
@@ -66,7 +71,7 @@
     padding-left: 0;
     font-size: 1.25rem;
     font-weight: 500;
-    line-height: 1.384;
+    line-height: 1.7;
     list-style: none;
   }
 
@@ -75,7 +80,7 @@
     flex-direction: column;
 
     & + & {
-      margin-top: $base * 16;    // 80 px
+      margin-top: $base * 14;    // 70 px
     }
 
     .item__text {
@@ -90,7 +95,7 @@
       .img__img {
         position: relative !important;
         width: 100% !important;
-        height: auto !important;    // 475 px
+        height: auto !important;
       }
     }
   }
@@ -98,7 +103,7 @@
 
 .arrow {
   position: absolute;
-  top: 50%;
+  top: 52%;
   left: 0;
   width: 100%;
 }
@@ -116,7 +121,7 @@
     max-width: $base * 111;   // 555 px
     font-size: 1.25rem;
     font-weight: 500;
-    line-height: 1.6;
+    line-height: 1.7;
   }
 }
 
@@ -127,6 +132,10 @@
 
     &__inner {
       flex-direction: column;
+    }
+
+    &__title {
+      font-size: 2rem;
     }
 
     &__logo {

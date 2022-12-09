@@ -31,7 +31,7 @@
     max-width: $base * 68;      // 340 px
     font-size: 3rem;
     font-weight: 700;
-    line-height: 1.23;
+    line-height: 1.25;
     letter-spacing: .04em;
     text-align: right;
   }
@@ -58,7 +58,11 @@
   &__description {
     font-size: 1.25rem;
     font-weight: 400;
-    line-height: 1.6;
+    line-height: 1.65;
+
+    p + p {
+      margin-top: 19px;
+    }
   }
 
   &__todo {
@@ -68,7 +72,7 @@
     flex: 1 1 auto;
 
     .todo__title {
-      margin-bottom: $base * 9;   // 45 px
+      margin-bottom: $base * 7;   // 40 px
       font-size: 2rem;
       font-weight: 700;
       line-height: 1.225;
@@ -84,6 +88,7 @@
 
     .todo__item {
       position: relative;
+      line-height: 1.6;
 
       &:before {
         position: absolute;
@@ -106,7 +111,7 @@
     }
 
     .todo__item + .todo__item {
-      margin-top: $base * 10;     // 50 px
+      margin-top: $base * 6;     // 30 px
     }
   }
 
@@ -142,7 +147,7 @@
 .stage_second {
 
   .stage__img {
-    top: -190px;
+    top: -$base * 34;   // 170 px
   }
 }
 
@@ -165,8 +170,9 @@
     }
 
     &__title {
-      text-align: center;
+      font-size: 2rem;
       max-width: none;
+      text-align: center;
     }
   }
 
@@ -178,12 +184,12 @@
     }
 
     &__img {
-      height: $base * 84;    // 420 px
+      height: 100%;
+      max-height: $base * 84;    // 420 px
       max-width: none;
 
       .img__img {
-        width: auto !important;
-        height: 100% !important;    // 475 px
+        height: 100% !important;
         margin: 0 auto;
       }
     }

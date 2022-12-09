@@ -10,7 +10,7 @@ const casesDataLocal = [
   {
     title: 'DonorSearch',
     hex_color: '#FF2A23',
-    logo: '/images/cases/donorsearch-logo.svg',
+    logo: '/images/cases/donor-search-logo.webp',
     is_on_main_page: false,
     is_visible: true,
     slug: 'donor-search',
@@ -19,7 +19,7 @@ const casesDataLocal = [
   {
     title: 'Unity',
     hex_color: '#FF2A23',
-    logo: '/images/cases/unity-logo.svg',
+    logo: '/images/cases/unity-logo.webp',
     is_on_main_page: false,
     is_visible: true,
     slug: 'unity',
@@ -28,11 +28,11 @@ const casesDataLocal = [
   {
     title: 'ProninTeam',
     hex_color: '#30D5C8',
-    logo: '/images/cases/proninteam-logo.svg',
+    logo: '/images/cases/pronin-team-logo.webp',
     is_on_main_page: true,
     is_visible: true,
     slug: 'pronin-team',
-    text: 'Разработали сайт компании PrininTeam с нуля за 4 недели',
+    text: 'Разработали сайт компании ProninTeam с нуля за 4 недели',
   }
 ]
 
@@ -54,7 +54,7 @@ function Cases({ casesData }) {
       <Container
         as="section"
         fluid="xxl"
-        className="mt-30 mb-20"
+        className="mt-30"
       >
 {/* Back button */}
         <PTButton
@@ -68,7 +68,7 @@ function Cases({ casesData }) {
         </h1>
       </Container>
 
-      <ul className={ `${stl.cases__list} mb-100` }>
+      <ul className={ `${stl.cases__list} mb-100 mb-lg-200` }>
         {
           casesData.map((caseItem, index) => {
             return (

@@ -16,8 +16,8 @@ import Image from 'next/image';
 const mainCaseLocal = [{
   title: 'Unity',
   hex_color: '#FF2A23',
-  logo: '/images/cases/unity-logo.svg',
-  is_on_main_page: false,
+  logo: '/images/cases/unity-logo.webp',
+  is_on_main_page: true,
   is_visible: true,
   slug: 'unity',
   text: 'Разработали раздел для популяризации донорства.'

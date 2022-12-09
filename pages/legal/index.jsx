@@ -28,9 +28,9 @@ function Legal() {
       />
 
 {/* Back button */}
-      <Container fluid="xxl" className="mt-40 mb-100">
+      <Container fluid="xxl" className="mt-30 mb-100">
         <PTButton
-          className="mb-40"
+          className="mb-30"
           variant="small-back"
           onClick={ () => router.back() }
         />
