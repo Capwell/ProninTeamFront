@@ -9,7 +9,8 @@ function PTHead({
   ogImg,
   ogSiteName,
   twitterCard,
-  twitterSite
+  twitterSite,
+  twitterImg
 }) {
 
   return (
@@ -33,12 +34,11 @@ function PTHead({
       <meta property="og:locale" content="ru_RU" />
       <meta property="og:locale:alternate" content="en_US" />
 
-      <meta name="twitter:card" content={ twitterCard } />
-      <meta name="twitter:site" content={ twitterSite } />
+      { twitterCard && <meta name="twitter:card" content={ twitterCard } /> }
+      { twitterSite && <meta name="twitter:site" content={ twitterSite } /> }
       <meta name="twitter:title" content={ title } />
       <meta name="twitter:description" content={ description } />
-      <meta name="twitter:image" content={ twitterImg } />
-      <meta name="twitter:image" content={ ogImg } />
+      { twitterImg && <meta name="twitter:image" content={ twitterImg } /> }
     </Head>
   )
 }
