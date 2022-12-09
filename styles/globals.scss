@@ -28,9 +28,12 @@ $spacers: (
   115: $spacer * 23,  // 115 px
   120: $spacer * 24,  // 120 px
   125: $spacer * 25,  // 125 px
+  130: $spacer * 26,  // 130 px
   140: $spacer * 28,  // 140 px
+  145: $spacer * 29,  // 145 px
   150: $spacer * 30,  // 150 px
   170: $spacer * 34,  // 170 px
+  190: $spacer * 38,  // 190 px
   200: $spacer * 40   // 200 px
 );
 // values of media queries
@@ -174,7 +177,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     @extend .btn-primary;
   }
 
-  &--small {
+  &-small {
     @include button-variant(
       transparent,           // backgorund
       transparent,           // border-color
@@ -212,7 +215,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
 
   &-small-back,
   &-small-up {
-    @extend .btn--small;
+    @extend .btn-small;
   }
 
   &--burger {
@@ -266,6 +269,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
 .control--text {
   position: relative;
   width: 100%;
+  max-width: $base * 146;            // 730 px
 
   .control__input {
     width: 100%;

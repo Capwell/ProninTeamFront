@@ -3,6 +3,8 @@ import { useState, useRef, useEffect } from 'react'
 import { Row, Col, Form } from "react-bootstrap"
 import { useFormik } from 'formik'
 import SubmitModal from '../SubmitModal/SubmitModal'
+import PTInputText from '../PTInputText/PTInputText'
+import PTTextarea from '../PTTextarea/PTTextarea'
 import PTFileInput from '../PTFileInput/PTFileInput'
 import PTButton from '../PTButton/PTButton'
 import stl from './ClientForm.module.scss'
@@ -38,6 +40,7 @@ function ClientForm({ className, targetPage }) {
       name: '',
       communicate: '',
       message: '',
+      file: '',
       is_agreed: false,
       token: ''
     },
@@ -83,15 +86,8 @@ function ClientForm({ className, targetPage }) {
             try {
               // set recaptcha token to formik values state
               formik.setFieldValue('token', token)
-              // create FormData obj with all values
-              const fData = new FormData()
-              fData.append('name', values.name)
-              fData.append('communicate', values.communicate)
-              fData.append('message', values.message)
-              fData.append('file', fileInput.current.files[0] || '')
-              fData.append('is_agreed', values.is_agreed)
-              fData.append('token', token)
-
+              // create FormData obj with all values from form
+              const fData = new FormData(formRef.current)
               // send FormData to server
               await api.sendOffer(fData)
               // if no errors
@@ -138,10 +134,9 @@ function ClientForm({ className, targetPage }) {
 
     formik.handleSubmit(e)
   }
-
   // when file es attaching, write file data in formik.vales object
   const onFileChange = (fileData) => {
-    // formik.setFieldValue('file', fileData)
+    formik.setFieldValue('file', fileData)
     // if there is a message
     if (formik.values.message.length) {
       // and if file is attached - remove message errors
@@ -149,12 +144,57 @@ function ClientForm({ className, targetPage }) {
       else formik.validateField('message') // else - validate message input
     }
   }
+  // check errors on text inputs
+  const inputTextErrorHandler = (inputName) => {
+    const err = { status: undefined, text: '' }
+    // if input was touched
+    if (formik.touched[inputName]) {
+      // and if formik.errors object has field with name of input
+      if (formik.errors[inputName]) {
+        err.status = true
+        err.text = formik.errors[inputName]
+      } else {
+        err.status = false
+        err.text = ''
+      }
+    } else { // if input isn't touched - don't set any valid classes
+      err.status = undefined
+      err.text = ''
+    }
+
+    return err
+  }
+  // check errors on textarea
+  const textareaErrorHandler = (inputName) => {
+    const err = { status: undefined, text: '' }
+    // if textarea is empty
+    if (!formik.values[inputName].length) {
+      err.status = undefined
+      err.text = ''
+    } else { // if textarea is not empty
+      if (formik.touched[inputName]) { // and if textarea was touched
+        if (formik.errors[inputName]) { // and there are some errors
+          err.status = true
+          err.text = formik.errors[inputName]
+        } else { // if textarea is touched and not empty and no errors
+          err.status = false
+          err.text = ''
+        }
+      } else { // if textarea is not touched
+        err.status = undefined
+        err.text = ''
+      }
+    }
+
+    return err
+  }
 
   return (
     <Form
       className={ `${className} ${stl.form}` }
       method="POST"
       noValidate    // remove default HTML validation
+      ref={ formRef }
     >
 {/* Modal Window */}
       <SubmitModal
@@ -162,11 +202,11 @@ function ClientForm({ className, targetPage }) {
         type={ modalType }
         onHide={ () => setModalShow(false) }
       />
-
+{/* Header of form */}
       <h2 className={ stl.form__title }>
         Хотите заказать проект?
       </h2>
-
+      
       <p className={ stl.form__contacts }>
         Позвоните <a
           className={ stl.contacts__link }
@@ -185,77 +225,25 @@ function ClientForm({ className, targetPage }) {
 {/* Name input */}
       <Row className='mb-40'>
         <Col>
-          <Form.Floating
-            className={
-              stl.form__input_name + ' control--text' + (
-              formik.touched.name         // check is input visited (touched)
-                ? formik.errors.name      // - if visited - check is input has invalid data
-                  ? ' invalid' : ' valid' // --- yes - 'invalid', no - 'valid'
-                : ''                      // - if no visited - set empty
-            )}
-            data-testid="nameWrapper"
-          >
-            <Form.Control
-              className="control__input"
-              type="text"
-              id="name"
-              data-testid="nameInput"
-              // placeholders are necessary for bootstrap floating labels
-              placeholder="&nbsp;"
-              maxLength='20'
-              {...formik.getFieldProps('name')}
-            />
-
-            <label className="control__label" htmlFor="brief-name">
-              Представьтесь, пожалуйста:
-            </label>
-
-            <span className="control__error" data-testid="nameError">
-              { // if input is visited AND input has invalid data
-                formik.touched.name && formik.errors.name
-                  ? formik.errors.name    // set error text
-                  : null                  // set nothing
-              }
-            </span>
-          </Form.Floating>
+          <PTInputText
+            id="name"
+            label="Представьтесь, пожалуйста:"
+            isError={ inputTextErrorHandler('name') }
+            maxLength='20'
+            {...formik.getFieldProps('name')}
+          />
         </Col>
       </Row>
 {/* Communicate input */}
       <Row className='mb-70'>
         <Col className='position-relative'>
-          <Form.Floating
-            className={
-              stl.form__input_communicate + ' control--text' + (
-              formik.touched.communicate    // check is input visited (touched)
-                ? formik.errors.communicate // - if visited - check is input has invalid data
-                  ? ' invalid' : ' valid'   // --- yes -'invalid', no - 'valid'
-                : ''                        // - if no visited - set empty
-            )}
-            data-testid="communicateWrapper"
-          >
-            <Form.Control
-              className="control__input"
-              type="text"
-              id="communicate"
-              data-testid="communicateInput"
-              // placeholders are necessary for bootstrap floating labels
-              placeholder="&nbsp;"
-              maxLength='20'
-              {...formik.getFieldProps('communicate')}
-            />
-
-            <label className="control__label" htmlFor="brief-communicate">
-              Как с вами связаться?
-            </label>
-
-            <span className="control__error" data-testid="communicateError">
-              { // if input is visited AND input has invalid data
-                formik.touched.communicate && formik.errors.communicate
-                  ? formik.errors.communicate     // set error text
-                  : null                          // set nothing
-              }
-            </span>
-          </Form.Floating>
+          <PTInputText
+            id="communicate"
+            label="Как с вами связаться?"
+            isError={ inputTextErrorHandler('communicate') }
+            maxLength='20'
+            {...formik.getFieldProps('communicate')}
+          />
         </Col>
       </Row>
 {/* Message questions */}
@@ -280,35 +268,13 @@ function ClientForm({ className, targetPage }) {
         </Col>
 {/* Message textarea */}
         <Col lg={{ span: '6', order: 'first' }}>
-          <Form.Group className={
-            'control--textarea' + (
-              !formik.values.message.length   // if textarea is empty
-                ? ''                          // - set nothing
-                : formik.touched.message      // - else if textarea is visited
-                  ? formik.errors.message     // --- and if textarea has errors
-                    ? ' invalid' : ' valid'   // ----- set 'invalid', else - 'valid;
-                  : ''                        // --- set nothing if textarea is not visited
-            )}
-            data-testid="messageWrapper"
-          >
-            <span className="control__error" data-testid="messageError">
-              { // if input is visited AND input has invalid data
-                formik.touched.message && formik.errors.message
-                  ? formik.errors.message       // set error text
-                  : null                        // set nothing
-              }
-            </span>
-
-            <Form.Control
-              as="textarea"
-              className="control__input"
-              id="message"
-              rows="12"
-              placeholder="Напишите письмо в свободной форме, либо ответьте на список вопросов"
-              {...formik.getFieldProps('message')}
-              data-testid="messageTextarea"
-            />
-          </Form.Group>
+          <PTTextarea
+            id="message"
+            placeholder="Напишите письмо в свободной форме, либо ответьте на список вопросов"
+            isError={ textareaErrorHandler('message') }
+            rows="12"
+            {...formik.getFieldProps('message')}
+          />
         </Col>
       </Row>
   {/* File input */}

@@ -31,10 +31,10 @@
         content: '•';
         width: 1rem;
       }
+    }
 
-      & + & {
-        margin-top: $base * 3;      // 15 px
-      }
+    .content__item + .content__item {
+      margin-top: $base * 3;      // 15 px
     }
 
     .content__link {

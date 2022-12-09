@@ -10,7 +10,7 @@ const casesDataLocal = [
   {
     title: 'DonorSearch',
     hex_color: '#FF2A23',
-    logo: '/images/cases/donorsearch-logo.svg',
+    logo: '/images/cases/donor-search-logo.webp',
     is_on_main_page: false,
     is_visible: true,
     slug: 'donor-search',
@@ -19,7 +19,7 @@ const casesDataLocal = [
   {
     title: 'Unity',
     hex_color: '#FF2A23',
-    logo: '/images/cases/unity-logo.svg',
+    logo: '/images/cases/unity-logo.webp',
     is_on_main_page: false,
     is_visible: true,
     slug: 'unity',
@@ -28,26 +28,13 @@ const casesDataLocal = [
   {
     title: 'ProninTeam',
     hex_color: '#30D5C8',
-    logo: '/images/cases/proninteam-logo.svg',
+    logo: '/images/cases/pronin-team-logo.webp',
     is_on_main_page: true,
     is_visible: true,
     slug: 'pronin-team',
-    text: 'Разработали сайт компании PrininTeam с нуля за 4 недели',
+    text: 'Разработали сайт компании ProninTeam с нуля за 4 недели',
   }
 ]
-
-
-export async function getStaticProps() {
-  let casesData
-
-  try {
-    casesData = await api.getCases()
-  } catch (err) {
-    casesData = casesDataLocal
-  } finally {
-    return { props: { casesData } }
-  }
-}
 
 function Cases({ casesData }) {
   const router = useRouter()
@@ -57,12 +44,17 @@ function Cases({ casesData }) {
 {/* TODO: доделать голову */}
       <PTHead
         title="ProninTeam - Кейсы"
+        description='Можно посмотреть примеры услуг, оказанных компанией на примере реальных кейсов. Закрываем накопившиеся IT-потребности заказчика. Разработали раздел сайта. Разработали сайт компании с нуля за 4 недели'
+        ogType='website'
+        ogUrl="https://proninteam.ru/cases"
+        ogImg='/images/pronin-team-og-img.webp'
+        ogSiteName='Результат услуг ProninTeam на примере реальных кейсов'
       />
 
       <Container
         as="section"
         fluid="xxl"
-        className="mt-30 mb-20"
+        className="mt-30"
       >
 {/* Back button */}
         <PTButton
@@ -76,7 +68,7 @@ function Cases({ casesData }) {
         </h1>
       </Container>
 
-      <ul className={ `${stl.cases__list} mb-100` }>
+      <ul className={ `${stl.cases__list} mb-100 mb-lg-200` }>
         {
           casesData.map((caseItem, index) => {
             return (
@@ -94,6 +86,18 @@ function Cases({ casesData }) {
       </ul>
     </>
   )
+}
+
+export async function getServerSideProps(context) {
+  let casesData
+
+  try {
+    casesData = await api.getCases()
+  } catch (err) {
+    casesData = casesDataLocal
+  } finally {
+    return { props: { casesData } }
+  }
 }
 
 export default Cases

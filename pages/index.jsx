@@ -11,28 +11,18 @@ import stl from '../styles/Home.module.scss'
 import PTButton from '../components/PTButton/PTButton'
 import CaseBanner from '../components/CaseBanner/CaseBanner'
 import api from '../utils/api'
+import Image from 'next/image';
+
 
 const mainCaseLocal = [{
   title: 'Unity',
   hex_color: '#FF2A23',
-  logo: '/images/cases/unity-logo.svg',
-  is_on_main_page: false,
+  logo: '/images/cases/unity-logo.webp',
+  is_on_main_page: true,
   is_visible: true,
   slug: 'unity',
   text: 'Разработали раздел для популяризации донорства.'
 }]
-
-export async function getStaticProps() {
-  let caseData
-
-  try {
-    caseData = await api.getMainCase()
-  } catch (err) {
-    caseData = mainCaseLocal
-  } finally {
-    return { props: { caseData } }
-  }
-}
 
 // function Home() {
 function Home({ caseData }) {
@@ -43,11 +33,12 @@ function Home({ caseData }) {
   return (
     <>
       <PTHead
-        title='ProninTeam'
-        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
-        ogType='website'
-        ogImg='/images/pronin-team-og-img.webp'
-        ogSiteName='ProninTeam'
+        title="ProninTeam"
+        description="Сюда надо будет написать какое-то описание для каждой отдельной страницы"
+        ogType="website"
+        ogImg="/images/pronin-team-og-img.webp"
+        ogUrl="https://proninteam.ru"
+        ogSiteName="ProninTeam"
       />
 
 {/* Mission section */}
@@ -113,10 +104,16 @@ function Home({ caseData }) {
               setShow={ setShowVideo }
             />
             <div className={ stl.about__video }>
-              <a
+              <div
                 className={ stl.video__thumbnail }
                 onClick={ openVideo }
-              />
+              >
+                <Image
+                  src="/images/video-preview.webp"
+                  alt="Андрей Пронин"
+                  fill
+                />
+              </div>
               <span className={ stl.video__title }>За минуту просто и ясно о том, как пойдёт работа</span>
               <span className={ stl.video__author }>Андрей Пронин СЕО</span>
 
@@ -143,9 +140,9 @@ function Home({ caseData }) {
 {/* Cases section */}
       <a id="cases" className="anchor" />
 
-      <section className={ stl.cases }>
+      <section className={ `${stl.cases} mb-125` }>
         <Container fluid="xxl">
-          <h2 className={ stl.cases__title }>
+          <h2 className={ `${stl.cases__title} mb-50` }>
             Пример наших работ
           </h2>
         </Container>
@@ -162,10 +159,10 @@ function Home({ caseData }) {
             : null
         }
 
-        <Container fluid="xxl" className="d-flex justify-content-center">
+        <Container fluid="xxl" className="d-flex mt-30">
           <PTButton
-            variant="primary"
-            className="mt-20"
+            variant="small"
+            className={ `${stl.cases__btn} ms-auto` }
             text="Посмотреть все кейсы"
             href="/cases"
           />
@@ -173,6 +170,18 @@ function Home({ caseData }) {
       </section>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  let caseData
+
+  try {
+    caseData = await api.getMainCase()
+  } catch (err) {
+    caseData = mainCaseLocal
+  } finally {
+    return { props: { caseData } }
+  }
 }
 
 export default Home

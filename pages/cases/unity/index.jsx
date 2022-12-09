@@ -12,6 +12,11 @@ function CasePage() {
     <>
       <PTHead
         title="ProninTeam - Кейс: Unity"
+        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
+        ogType='website'
+        ogUrl="https://proninteam.ru/cases/unity"
+        ogImg='/images/pronin-team-og-img.webp'
+        ogSiteName='ProninTeam'
       />
 
       <Container fluid="xxl" className="mt-30 mb-30 mb-lg-110">
@@ -43,19 +48,19 @@ function CasePage() {
       <Container
         as="section"
         fluid="xxl"
-        className={ `${ stl.description } mb-50 mb-lg-80` }
+        className={ `${ stl.description } mb-40 mb-lg-55` }
       >
         <h2 className={ `${stl.description__title} mb-25` }>
           Unity
         </h2>
 
-        <p className={ `${stl.description__text} mb-20` }>
+        <p className="mb-20">
           Сервис <b>Unity</b> развивается совместно некоммерческими организациями <strong>Российский Красный Крест</strong> и <strong>DonorSearch</strong>
         </p>
-        <p className={ `${stl.description__text} mb-20` }>
-          В рамках этого проекта было создан раздел для популяризации донорстваи отслеживании импакта.
+        <p className="mb-20">
+          В рамках этого проекта было создан раздел для популяризации донорства и&nbsp;отслеживании импакта.
         </p>
-        <p className={ stl.description__text }>
+        <p>
           Используемые технологии: <b>Python, Django Rest Framework, React, Next.JS, Redux</b>
         </p>
       </Container>
@@ -63,16 +68,17 @@ function CasePage() {
       <Container
         as="section"
         fluid="xxl"
-        className={ `${ stl.todo } mb-80` }
+        className="mb-50 mb-lg-70"
       >
-        <h2 className={ `${ stl.todo__title } mb-30 mb-lg-50` }>
+        <h2 className={ `${ stl.todo__title } mb-25 mb-lg-35` }>
           Что сделали:
         </h2>
 
         <ul className={ stl.todo__list }>
           <li className={ stl.todo__item }>
-            <p className={ `${stl.item__text} mb-40 mb-lg-80` }>
-              1. Прототипы страниц. (Личный кабинет организации, редактирование организации, доноры организации, мероприятия организации, создание/редактирование мероприятий, партнёры организации)
+            <p className={ `${stl.item__text} mb-40 mb-lg-70` }>
+              1. Прототипы страниц. (Личный кабинет организации, редактирование организации,<br/>
+              доноры организации, мероприятия организации, создание/редактирование мероприятий, партнёры организации)
             </p>
             <div className={ stl.item__img }>
               <Image
@@ -86,7 +92,7 @@ function CasePage() {
           </li>
 
           <li className={ stl.todo__item }>
-            <p className={ `${stl.item__text} mb-40 mb-lg-80` }>
+            <p className={ `${stl.item__text} mb-40 mb-lg-70` }>
               2. По прототипам был сделан дизайн
             </p>
             <div className={ stl.item__img }>
@@ -101,7 +107,7 @@ function CasePage() {
           </li>
 
           <li className={ stl.todo__item }>
-            <p className={ `${stl.item__text} mb-40 mb-lg-80` }>
+            <p className={ `${stl.item__text} mb-40 mb-lg-60` }>
               3. Добавлена логика и доработан личный кабинет организации.
             </p>
             <Row className="d-flex justify-content-between">
@@ -123,7 +129,7 @@ function CasePage() {
                 </svg>
               </Col>
               <Col md="5">
-                <span className="d-block mb-15">Стало</span>
+                <span className="d-block mb-5">Стало</span>
                 <div className={ stl.item__img }>
                   <Image
                     className={ stl.img__img }
@@ -142,10 +148,10 @@ function CasePage() {
       <Container
         as="section"
         fluid="xxl"
-        className={ `${ stl.result } mb-60 mb-lg-100` }
+        className={ `${ stl.result } mb-50 mb-lg-75` }
       >
-        <h2 className={ `${ stl.result__title } mb-30 mb-lg-50` }>
-          Итог
+        <h2 className={ `${ stl.result__title } mb-30 mb-lg-30` }>
+          Итог:
         </h2>
 
         <p className={ stl.result__text }>

@@ -13,6 +13,11 @@ function CasePage() {
     <>
       <PTHead
         title="ProninTeam - Кейс: ProninTeam"
+        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
+        ogType='website'
+        ogUrl="https://proninteam.ru/cases/pronin-team"
+        ogImg='/images/pronin-team-og-img.webp'
+        ogSiteName='ProninTeam'
       />
 
       <Container fluid="xxl" className="mt-30">
@@ -49,25 +54,28 @@ function CasePage() {
       <Container
         as="section"
         fluid="xxl"
-        className={ `${ stl.stage } ${ stl.stage_first } mb-100 mb-lg-170` }
+        className={ `${ stl.stage } ${ stl.stage_first } mb-100 mb-lg-190` }
       >
         <Row className="mb-50 mb-lg-90">
           <Col lg="10">
-            <h2 className={ `${stl.stage__title} mb-25` }>
+            <h2 className={ `${ stl.stage__title } mb-25` }>
               <span>Первый этап</span> — подготовительная работа
             </h2>
 
-            <p className={ `${stl.stage__description}` }>
-              Мы начали подготовительную работу<br/>
-              по разработке сайта нашей компании.<br/>
-              <br/>
-              <strong>Задача</strong> была сделать многостраничный сайт, чтобы пользователь смог ознакомиться с нашей командой, подробно узнать о наших услугах, реализованных кейсах и оформить заявку на создание программного продукта.
-            </p>
+            <div className={ `${ stl.stage__description }` }>
+              <p>
+                Мы начали подготовительную работу<br/>
+                по разработке сайта нашей компании.
+              </p>
+              <p>
+                <strong>Задача</strong> была сделать многостраничный сайт, чтобы пользователь смог ознакомиться с&nbsp;нашей командой, подробно узнать о наших услугах, реализованных кейсах и&nbsp;оформить заявку на создание программного продукта.
+              </p>
+            </div>
           </Col>
         </Row>
 
         <Row className="justify-content-between align-items-center">
-          <Col lg="6" className="mb-50 mb-lg-0">
+          <Col lg="6" className="mb-50 mb-lg-0 mb-lg-15">
             <section className={ stl.stage__todo }>
               <h2 className={ stl.todo__title }>
                 Что сделали:
@@ -89,6 +97,7 @@ function CasePage() {
               </ul>
             </section>
           </Col>
+
           <Col
             xs="12"
             lg="6"
@@ -109,20 +118,23 @@ function CasePage() {
       <Container
         as="section"
         fluid="xxl"
-        className={ `${stl.stage} ${stl.stage_second} mb-100 mb-lg-170` }
+        className={ `${stl.stage} ${stl.stage_second} mb-100 mb-lg-145` }
       >
         <h2 className={ `${stl.stage__title} mb-25 mb-lg-50` }>
           <span>Второй этап</span> — подготовка MVP сайта
         </h2>
 
-        <Row className="mb-50 mb-xl-110">
+        <Row className="mb-50 mb-xl-80">
           <Col xl="7">
-            <p className={ stl.stage__description }>
-              <strong>После того как мы собрали весь контент для сайта,</strong><br/>
-              мы решили катить емкий и красивый лэндинг (вместо многостраничного объемного сайта).<br/>
-              <br/>
-              К слову, нам нравится работать с Agile за эту возможность&nbsp;—&nbsp;изменять требования и оперативно подстраиваться под них.
-            </p>
+            <div className={ stl.stage__description }>
+              <p>
+                <b>После того как мы собрали весь контент для сайта,</b><br/>
+                мы решили катить емкий и красивый лэндинг (вместо многостраничного объемного сайта).
+              </p>
+              <p>
+                К слову, нам нравится работать с Agile за эту возможность&nbsp;—&nbsp;изменять требования и оперативно подстраиваться под них.
+              </p>
+            </div>
           </Col>
         </Row>
 
@@ -138,13 +150,10 @@ function CasePage() {
                   Создали бэк и фронт для нашего лендинга.
                 </li>
                 <li className={ stl.todo__item }>
-                  Подготовили черновой вариант формы для отправки заявки новых клиентов.
+                  Подготовили черновой вариант формы<br/>для отправки заявки новых клиентов.
                 </li>
                 <li className={ stl.todo__item }>
-                  Купили и настроили домен.
-                </li>
-                <li className={ stl.todo__item }>
-                  На втором этапе также было много чего другого, но не менее важного:<br/>
+                  На втором этапе также было много чего другого,<br/>но не менее важного:<br/>
                   <br/>
                   Подготовили тексты <b>юридических</b> документов:<br/>
                   <br/>
@@ -195,7 +204,7 @@ function CasePage() {
         fluid="xxl"
         className={ `${ stl.stage } ${ stl.stage_third } mb-170` }
       >
-        <Row className="mb-50 mb-lg-95">
+        <Row className="mb-50 mb-lg-80">
           <Col lg="10">
             <h2 className={ `${stl.stage__title} mb-50` }>
               <span>Третий этап</span> — доработка MVP
@@ -208,7 +217,7 @@ function CasePage() {
         </Row>
 
         <Row className="justify-content-between align-items-center">
-          <Col lg="6" xl="7" className="mb-50 mb-lg-0">
+          <Col lg="6" xl="7" className="mb-50 mb-lg-30">
             <section className={ stl.stage__todo }>
               <h2 className={ stl.todo__title }>
                 Что сделали:
@@ -228,7 +237,7 @@ function CasePage() {
                   Настроили адаптивное отображение для мобильной версии.
                 </li>
                 <li className={ stl.todo__item }>
-                  Решили все-таки сделать отдельную страницу про нашу команду. Спроектировали дизайн, сделали фронт и бэк.
+                  Решили все-таки сделать отдельную страницу про нашу команду. Спроектировали дизайн,<br/>сделали фронт и бэк.
                 </li>
               </ul>
             </section>

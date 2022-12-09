@@ -20,12 +20,17 @@ function Legal() {
 {/* TODO: доделать голову */}
       <PTHead
         title='ProninTeam - Правовая информация'
+        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
+        ogType='website'
+        ogUrl="https://proninteam.ru/legal"
+        ogImg='/images/pronin-team-og-img.webp'
+        ogSiteName='ProninTeam'
       />
 
 {/* Back button */}
-      <Container fluid="xxl" className="mt-40 mb-100">
+      <Container fluid="xxl" className="mt-30 mb-100">
         <PTButton
-          className="mb-40"
+          className="mb-30"
           variant="small-back"
           onClick={ () => router.back() }
         />
