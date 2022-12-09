@@ -63,17 +63,16 @@
 
       &__thumbnail {
         position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
         width: 100%;
         height: $base * 27;           // 135 px
         margin-bottom: $base * 3;     // 15 px
         background-color: $gray-100;
         cursor: pointer;
 
-        &:before {
-          content: url('../public/images/play-button.svg');
+        & > img {
+          width: 100%;
+          height: auto;
+          object-fit: contain;
         }
       }
 
@@ -96,119 +95,18 @@
 // ===== / ===== //
 // ===== CASES ===== //
 .cases {
-  margin-bottom: $base * 20;     // 100 px
 
   &__title {
-    margin-bottom: $base * 10;   // 50 px
     font-size: 2.5rem;
     font-weight: 600;
     line-height: 1.2;
     letter-spacing: .04em;
   }
 
-  &__timeline {
-    position: relative;
-    display: flex;
-    flex-direction: column;
+  &__btn {
     width: 100%;
-
-    &:before {
-      content: '';
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      width: 1px;
-      height: 100%;
-      background-color: $c-primary;
-    }
-
-    .timeline__list {
-      display: flex;
-      flex-direction: column;
-      list-style-type: none;
-      padding-left: 0;
-    }
-
-    .timeline__item {
-      position: relative;
-      width: 50%;
-
-      .item__title {
-        position: relative;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: $base * 4;        // 20 px
-        font-weight: 600;
-        line-height: 1.454;
-        letter-spacing: .07em;
-
-        &:after {
-          content: '';
-          flex-grow: 1;
-          height: 1px;
-          background-color: $c-primary;
-        }
-      }
-
-      .item__text {
-        width: 100%;
-        font-size: .875rem;
-        line-height: 1.43;
-        letter-spacing: .07em;
-
-        ul {
-          margin-bottom: 0;
-          padding-left: 1.5rem;
-        }
-
-        ul > li {
-          position: relative;
-          list-style-type: none;
-
-          &:before {
-            content: '•';
-            position: absolute;
-            left: -1rem;
-          }
-        }
-      }
-
-      // every odd items must be on the left
-      &:nth-of-type(odd) {
-        align-self: flex-start;
-        flex-direction: row;
-
-        .item__title {
-
-          span {
-            padding-right: $base * 10;   // 50 px
-          }
-        }
-
-        .item__text {
-          padding-right: $base * 3;      // 15 px
-        }
-      }
-
-      // every even items must be on the right
-      &:nth-of-type(even) {
-        align-self: flex-end;
-
-        .item__title {
-          text-align: right;
-          flex-direction: row-reverse;
-
-          span {
-            padding-left: $base * 10;     // 50 px
-          }
-        }
-
-        .item__text {
-          padding-left: $base * 3;        // 15 px
-        }
-      }
-    }
+    max-width: $base * 57;    // 285 px
+    text-decoration: underline;
   }
 }
 

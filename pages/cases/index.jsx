@@ -36,19 +36,6 @@ const casesDataLocal = [
   }
 ]
 
-
-export async function getStaticProps() {
-  let casesData
-
-  try {
-    casesData = await api.getCases()
-  } catch (err) {
-    casesData = casesDataLocal
-  } finally {
-    return { props: { casesData } }
-  }
-}
-
 function Cases({ casesData }) {
   const router = useRouter()
 
@@ -57,6 +44,11 @@ function Cases({ casesData }) {
 {/* TODO: доделать голову */}
       <PTHead
         title="ProninTeam - Кейсы"
+        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
+        ogType='website'
+        ogUrl="https://proninteam.ru/cases"
+        ogImg='/images/pronin-team-og-img.webp'
+        ogSiteName='ProninTeam'
       />
 
       <Container
@@ -94,6 +86,18 @@ function Cases({ casesData }) {
       </ul>
     </>
   )
+}
+
+export async function getServerSideProps(context) {
+  let casesData
+
+  try {
+    casesData = await api.getCases()
+  } catch (err) {
+    casesData = casesDataLocal
+  } finally {
+    return { props: { casesData } }
+  }
 }
 
 export default Cases

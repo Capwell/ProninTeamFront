@@ -20,6 +20,11 @@ function Legal() {
 {/* TODO: доделать голову */}
       <PTHead
         title='ProninTeam - Правовая информация'
+        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
+        ogType='website'
+        ogUrl="https://proninteam.ru/legal"
+        ogImg='/images/pronin-team-og-img.webp'
+        ogSiteName='ProninTeam'
       />
 
 {/* Back button */}

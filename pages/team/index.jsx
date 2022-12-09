@@ -107,18 +107,6 @@ const usersDataLocal = [
   },
 ]
 
-export async function getStaticProps() {
-  let usersData
-
-  try {
-    usersData = await api.getTeam()
-  } catch (err) {
-    usersData = usersDataLocal
-  } finally {
-    return { props: { usersData } }
-  }
-}
-
 function Team({ usersData }) {
   const router = useRouter()
 
@@ -176,6 +164,7 @@ function Team({ usersData }) {
         title='ProninTeam - Команда'
         description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
         ogType='website'
+        ogUrl="https://proninteam.ru/team"
         ogImg='/images/pronin-team-og-img.webp'
         ogSiteName='ProninTeam'
       />
@@ -249,6 +238,18 @@ function Team({ usersData }) {
       </Container>
     </>
   )
+}
+
+export async function getStaticProps(context) {
+  let usersData
+
+  try {
+    usersData = await api.getTeam()
+  } catch (err) {
+    usersData = usersDataLocal
+  } finally {
+    return { props: { usersData } }
+  }
 }
 
 export default Team

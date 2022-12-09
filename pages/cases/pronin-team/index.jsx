@@ -13,6 +13,11 @@ function CasePage() {
     <>
       <PTHead
         title="ProninTeam - Кейс: ProninTeam"
+        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
+        ogType='website'
+        ogUrl="https://proninteam.ru/cases/pronin-team"
+        ogImg='/images/pronin-team-og-img.webp'
+        ogSiteName='ProninTeam'
       />
 
       <Container fluid="xxl" className="mt-30">
