@@ -5,6 +5,8 @@ import PTButton from '../../components/PTButton/PTButton'
 import stl from '../../styles/Cases.module.scss'
 import CaseBanner from '../../components/CaseBanner/CaseBanner'
 import api from '../../utils/api'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 const casesDataLocal = [
   {
@@ -36,8 +38,22 @@ const casesDataLocal = [
   }
 ]
 
-function Cases({ casesData }) {
+// function Cases({ casesData }) {
+function Cases() {
   const router = useRouter()
+  const [casesData, getCasesData] = useState([])
+
+  const getData = async () => {
+    const data = await api.getCases()
+    if (!data || !data.length) {
+      return casesDataLocal
+    }
+    return data
+  }
+
+  useEffect(async () => {
+    getCasesData(await getData())
+  }, [])
 
   return (
     <>
@@ -71,16 +87,18 @@ function Cases({ casesData }) {
       <ul className={ `${stl.cases__list} mb-100 mb-lg-200` }>
         {
           casesData.map((caseItem, index) => {
-            return (
-              <CaseBanner
-                as="li"
-                key={ `case-${index}` }
-                caseColor={ caseItem.hex_color }
-                logo={ caseItem.logo }
-                description={ caseItem.text }
-                linkURL={ caseItem.slug }
-              />
-            )
+            if (caseItem.logo && caseItem.text && caseItem.slug) {
+              return (
+                <CaseBanner
+                  as="li"
+                  key={ `case-${index}` }
+                  caseColor={ caseItem.hex_color || '#ffffff' }
+                  logo={ caseItem.logo }
+                  description={ caseItem.text }
+                  linkURL={ caseItem.slug }
+                />
+              )
+            } else return null
           })
         }
       </ul>
@@ -88,16 +106,16 @@ function Cases({ casesData }) {
   )
 }
 
-export async function getServerSideProps(context) {
-  let casesData
+// export async function getServerSideProps(context) {
+//   let casesData
 
-  try {
-    casesData = await api.getCases()
-  } catch (err) {
-    casesData = casesDataLocal
-  } finally {
-    return { props: { casesData } }
-  }
-}
+//   try {
+//     casesData = await api.getCases()
+//   } catch (err) {
+//     casesData = casesDataLocal
+//   } finally {
+//     return { props: { casesData } }
+//   }
+// }
 
 export default Cases

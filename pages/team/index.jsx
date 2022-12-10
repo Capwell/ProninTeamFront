@@ -11,6 +11,8 @@ import PTHead from '../../components/PTHead/PTHead'
 import TeamMember from '../../components/TeamMember/TeamMember'
 import PTButton from '../../components/PTButton/PTButton'
 import api from '../../utils/api'
+import { useEffect } from 'react'
+import { useState } from 'react'
 
 const usersDataLocal = [
   {
@@ -107,14 +109,28 @@ const usersDataLocal = [
   },
 ]
 
-function Team({ usersData }) {
+// function Team({ usersData }) {
+function Team() {
   const router = useRouter()
+  const [usersData, getUsersData] = useState([])
+
+  const getData = async () => {
+    const data = await api.getTeam()
+    if (!data || !data.length) {
+      return usersDataLocal
+    }
+    return data
+  }
+
+  useEffect(async () => {
+    getUsersData(await getData())
+  }, [])
 
   // filter user by their roles (main and others)
   const filterUsers = (value) => {
-    return usersData?.filter(user => {
+    return usersData.filter(user => {
       return (
-        user.main_role.title === value ||
+        (user.main_role && user.main_role.title === value) ||
         user.other_roles.find(role => role.title === value)
       )
     })
@@ -211,7 +227,9 @@ function Team({ usersData }) {
                       tab.members?.map((member, index) => {
                         const photo = member.photo
                         const name = `${member.first_name} ${member.last_name}`
-                        const mainRole = member.main_role.title
+                        const mainRole = member.main_role
+                          ? member.main_role.title
+                          : 'Нет роли'
                         const roles = member.other_roles.length
                           ? member.other_roles.map(role => role.title).join(' ')
                           : null
@@ -240,16 +258,16 @@ function Team({ usersData }) {
   )
 }
 
-export async function getStaticProps(context) {
-  let usersData
+// export async function getServerSideProps(context) {
+//   let usersData
 
-  try {
-    usersData = await api.getTeam()
-  } catch (err) {
-    usersData = usersDataLocal
-  } finally {
-    return { props: { usersData } }
-  }
-}
+//   try {
+//     usersData = await api.getTeam()
+//   } catch (err) {
+//     usersData = usersDataLocal
+//   } finally {
+//     return { props: { usersData } }
+//   }
+// }
 
 export default Team

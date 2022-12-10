@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState } from 'react'
+import { useEffect } from 'react'
 import {
   Row,
   Col,
@@ -13,7 +14,6 @@ import CaseBanner from '../components/CaseBanner/CaseBanner'
 import api from '../utils/api'
 import Image from 'next/image';
 
-
 const mainCaseLocal = [{
   title: 'Unity',
   hex_color: '#FF2A23',
@@ -24,9 +24,23 @@ const mainCaseLocal = [{
   text: 'Разработали раздел для популяризации донорства.'
 }]
 
-// function Home() {
-function Home({ caseData }) {
+// function Home({ caseData }) {
+function Home() {
   const [showVideo, setShowVideo] = useState(false)
+  const [mainCaseData, getMainCaseData] = useState([])
+
+  const getData = async () => {
+    const data = await api.getMainCase()
+    if (!data || !data.length) {
+      return mainCaseLocal
+    }
+    return data
+  }
+
+  useEffect(async () => {
+    getMainCaseData(await getData())
+  }, [])
+
   // open modal window with video
   const openVideo = () => setShowVideo(true)
 
@@ -148,13 +162,13 @@ function Home({ caseData }) {
         </Container>
 
         {
-          caseData.length
+          mainCaseData.length
             ? (<CaseBanner
                 as='div'
-                caseColor={ caseData[0].hex_color }
-                logo={ caseData[0].logo }
-                description={ caseData[0].text }
-                linkURL={ caseData[0].slug }
+                caseColor={ mainCaseData[0].hex_color || '#ffffff' }
+                logo={ mainCaseData[0].logo }
+                description={ mainCaseData[0].text }
+                linkURL={ mainCaseData[0].slug }
               />)
             : null
         }
@@ -172,16 +186,16 @@ function Home({ caseData }) {
   );
 }
 
-export async function getServerSideProps(context) {
-  let caseData
+// export async function getServerSideProps(context) {
+//   let caseData
 
-  try {
-    caseData = await api.getMainCase()
-  } catch (err) {
-    caseData = mainCaseLocal
-  } finally {
-    return { props: { caseData } }
-  }
-}
+//   try {
+//     caseData = await api.getMainCase()
+//   } catch (err) {
+//     caseData = mainCaseLocal
+//   } finally {
+//     return { props: { caseData } }
+//   }
+// }
 
 export default Home

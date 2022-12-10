@@ -26,6 +26,7 @@ function CaseBanner({ as, className, caseColor, logo, description, linkURL }) {
             <Image
               className={ stl.logo__img }
               src={ logo }
+              loader={ () => logo }
               alt="Case image"
               fill
             />
