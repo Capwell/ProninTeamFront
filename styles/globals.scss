@@ -115,8 +115,8 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   visibility: hidden;
 
   @media screen and (max-width: 767px) {
-    // header height + 20 px
-    top: calc(($header-height + ($base * 4)) * -1);
+    // header height + 10 px
+    top: calc(($header-height + ($base * 2)) * -1);
   }
 }
 // ===== / ===== //
@@ -721,7 +721,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   }
 
   @media screen and (max-width: 767px) {
-    top: calc($header-height - $base * 4);  // 100 - 20 = 80 px
+    top: calc($header-height - $base * 6);  // 100 - 30 = 70 px
     column-gap: $base * 4;       // 20 px
     row-gap: $base * 2;          // 10 px
 
@@ -778,7 +778,7 @@ body {
   padding-top: $header-height;
 
   @media screen and (max-width: 767px) {
-    padding-top: calc($header-height - $base * 4);  // 100 - 20 = 80 px
+    padding-top: calc($header-height - $base * 6);  // 100 - 30 = 70 px
   }
 }
 

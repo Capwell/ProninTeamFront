@@ -46,6 +46,7 @@
 
     &__header {
       height: 40%;
+      align-items: center;
     }
   }
 }
@@ -56,6 +57,18 @@
 
     &__description {
       font-size: 1.25rem;
+    }
+  }
+}
+
+@media screen and (max-width: 575px) {
+
+  .banner {
+    height: $base * 90;    // 450 px
+
+    &__header {
+      height: 35%;
+      align-items: center;
     }
   }
 }

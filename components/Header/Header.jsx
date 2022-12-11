@@ -1,30 +1,57 @@
-import Link from 'next/link';
-import { useRef } from 'react';
-import { Button, Container, NavLink } from 'react-bootstrap';
-import PTLogo from '../PTLogo/PTLogo';
-import stl from './Header.module.scss';
+import Link from 'next/link'
+import { useState, useRef } from 'react'
+import { Button, Container } from 'react-bootstrap'
+import PTLogo from '../PTLogo/PTLogo'
+import stl from './Header.module.scss'
 
 function Header() {
   const nav = useRef()
+  const [isAnimation, setIsAnimation] = useState(false)
+
+  const showNav = (menuElem) => {
+    menuElem.style.display = 'flex'
+
+    setTimeout(() => {
+      menuElem.classList.add(stl.shown)
+    }, 0)
+  }
+
+  const hideNav = (menuElem) => {
+    menuElem.classList.remove(stl.shown)
+
+    setTimeout(() => {
+      menuElem.style.display = 'none'
+    }, 350)
+  }
 
   const toogleNav = () => {
-    nav.current.classList.toggle(stl.shown)
+    // if menu is opening - block clicking
+    if (isAnimation) return
+
+    const menu = nav.current
+    setIsAnimation(true) // start animation
+
+    menu.classList.contains(stl.shown)
+    ? hideNav(menu)
+    : showNav(menu)
+    // finish animation after 700 ms
+    setTimeout(() => setIsAnimation(false), 500)
   }
 
   const burgerMenuClickHandler = e => {
     if (e.target.classList.contains(stl.nav__link)) {
-      nav.current.classList.remove(stl.shown)
+      hideNav(nav.current)
     }
   }
 
   return (
-    <header className={ `${stl.header} py-25 py-lg-35` }>
+    <header className={ `${stl.header} py-20 py-lg-35` }>
       <Container fluid="xxl">
         <div className={ stl.header__inner }>
           <PTLogo />
 
           <Button
-            className={ `${stl.btn_burger} btn btn--burger` }
+            className={ `${ stl.btn_burger } btn btn--burger` }
             onClick={ toogleNav }
           >
             <span />

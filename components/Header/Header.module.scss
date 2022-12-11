@@ -32,7 +32,7 @@
       color: $c-primary;
       font-weight: 600;
       line-height: 1.25;
-      transition: all .15s ease-in-out;
+      transition: color .15s ease-in-out;
 
       &:first-child {
         margin-left: -$logo-width;  // -150 px
@@ -82,20 +82,23 @@
     &__nav {
       display: none;
       width: 100%;
+      height: auto;
       right: 0;
       left: 0;
       flex-direction: column;
-      padding-top: $base * 7;       // 35 px
       background-color: white;
       overflow: hidden;
-
-      &.shown {
-        display: flex;
-      }
+      max-height: 0;
+      transition: all .35s ease-in-out;
 
       .nav__link {
+        margin-top: $base * 4;    // 20 px
+        opacity: 0;
+        transition: opacity .35s ease-in-out,
+                    color .15s ease-in-out;
 
         &:first-child {
+          margin-top: $base * 8;  // 40 px
           margin-left: 0;
         }
 
@@ -105,9 +108,16 @@
         }
       }
 
+      &.shown {
+        max-height: 180px;
+
+        .nav__link {
+          opacity: 1;
+        }
+      }
+
       .nav__link + .nav__link {
         margin-left: 0;
-        margin-top: $base * 4;    // 20 px
       }
     }
   }

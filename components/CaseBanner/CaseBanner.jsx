@@ -38,7 +38,7 @@ function CaseBanner({ as, className, caseColor, logo, description, linkURL }) {
         </p>
 
         <PTButton
-          className="mt-auto mb-30 mb-xl-45 ms-auto"
+          className="mx-auto mx-md-0 mt-auto mb-30 mb-xl-45 ms-md-auto"
           variant="colored"
           href={ `/cases/${linkURL}` }
           btnColor={ caseColor }
