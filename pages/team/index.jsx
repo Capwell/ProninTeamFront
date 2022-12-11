@@ -13,7 +13,8 @@ import PTButton from '../../components/PTButton/PTButton'
 import api from '../../utils/api'
 import { useEffect } from 'react'
 import { useState } from 'react'
-
+import Loader from '../../components/Loader/Loader'
+// if fetching is failed - use this local data
 const usersDataLocal = [
   {
     main_role: {
@@ -113,17 +114,25 @@ const usersDataLocal = [
 function Team() {
   const router = useRouter()
   const [usersData, getUsersData] = useState([])
-
+  const [isDataLoading, setIsDataLoading] = useState(true)
+  // fetch data and set it to the state
   const getData = async () => {
-    const data = await api.getTeam()
-    if (!data || !data.length) {
-      return usersDataLocal
+    try {
+      const data = await api.getTeam()
+      if (!data || !data.length) {
+        getUsersData(usersDataLocal)
+      }
+      getUsersData(data)
+    } catch (err) {
+      getUsersData(usersDataLocal)
+    } finally {
+      setIsDataLoading(false)
     }
-    return data
   }
-
-  useEffect(async () => {
-    getUsersData(await getData())
+  // fetch data only after the page is mounted (componentDidMount)
+  useEffect(() => {
+    // setIsDataLoading(true)
+    getData()
   }, [])
 
   // filter user by their roles (main and others)
@@ -221,33 +230,36 @@ function Team() {
                   <p className={ stl.tab__description }>
                     { tab.contentText }
                   </p>
+                  {
+                    isDataLoading
+                    ? <Loader className="my-50 mx-auto" size="lg" />
+                    : <Row as='ul' className={ stl.tab__members } xs='1' sm='2' md='3' lg='4'>
+                        {
+                          tab.members?.map((member, index) => {
+                            const photo = member.photo
+                            const name = `${member.first_name} ${member.last_name}`
+                            const mainRole = member.main_role
+                              ? member.main_role.title
+                              : 'Нет роли'
+                            const roles = member.other_roles.length
+                              ? member.other_roles.map(role => role.title).join(' ')
+                              : null
+                            const key = `${tab.eventKey}-${index}`
 
-                  <Row as='ul' className={ stl.tab__members } xs='1' sm='2' md='3' lg='4'>
-                    {
-                      tab.members?.map((member, index) => {
-                        const photo = member.photo
-                        const name = `${member.first_name} ${member.last_name}`
-                        const mainRole = member.main_role
-                          ? member.main_role.title
-                          : 'Нет роли'
-                        const roles = member.other_roles.length
-                          ? member.other_roles.map(role => role.title).join(' ')
-                          : null
-                        const key = `${tab.eventKey}-${index}`
-
-                        return (
-                          <Col key={ key } as='li' className='mb-50'>
-                            <TeamMember
-                              photo={ photo }
-                              name={ name }
-                              mainRole={ mainRole }
-                              roles={ roles }
-                            />
-                          </Col>
-                        )
-                      })
-                    }
-                  </Row>
+                            return (
+                              <Col key={ key } as='li' className='mb-50'>
+                                <TeamMember
+                                  photo={ photo }
+                                  name={ name }
+                                  mainRole={ mainRole }
+                                  roles={ roles }
+                                />
+                              </Col>
+                            )
+                          })
+                        }
+                      </Row>
+                  }
                 </Tab>
               )
             })

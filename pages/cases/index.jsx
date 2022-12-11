@@ -7,7 +7,8 @@ import CaseBanner from '../../components/CaseBanner/CaseBanner'
 import api from '../../utils/api'
 import { useEffect } from 'react'
 import { useState } from 'react'
-
+import Loader from '../../components/Loader/Loader'
+// if fetching is failed - use this local data
 const casesDataLocal = [
   {
     title: 'DonorSearch',
@@ -42,17 +43,23 @@ const casesDataLocal = [
 function Cases() {
   const router = useRouter()
   const [casesData, getCasesData] = useState([])
-
+  const [isDataLoading, setIsDataLoading] = useState(true)
+  // fetch data and set it to the state
   const getData = async () => {
-    const data = await api.getCases()
-    if (!data || !data.length) {
-      return casesDataLocal
+    try {
+      const data = await api.getCases()
+      if (!data || !data.length) getCasesData(casesDataLocal)
+      getCasesData(data)
+    } catch (err) {
+      getCasesData(casesDataLocal)
+    } finally {
+      setIsDataLoading(false)
     }
-    return data
   }
-
-  useEffect(async () => {
-    getCasesData(await getData())
+  // fetch data only after the page is mounted (componentDidMount)
+  useEffect(() => {
+    // setIsDataLoading(true)
+    getData()
   }, [])
 
   return (
@@ -86,20 +93,22 @@ function Cases() {
 
       <ul className={ `${stl.cases__list} mb-100 mb-lg-200` }>
         {
-          casesData.map((caseItem, index) => {
-            if (caseItem.logo && caseItem.text && caseItem.slug) {
-              return (
-                <CaseBanner
-                  as="li"
-                  key={ `case-${index}` }
-                  caseColor={ caseItem.hex_color || '#ffffff' }
-                  logo={ caseItem.logo }
-                  description={ caseItem.text }
-                  linkURL={ caseItem.slug }
-                />
-              )
-            } else return null
-          })
+          isDataLoading
+          ? <Loader className="my-50 mx-auto" size="lg" />
+          : casesData.map((caseItem, index) => {
+              if (caseItem.logo && caseItem.text && caseItem.slug) {
+                return (
+                  <CaseBanner
+                    as="li"
+                    key={ `case-${index}` }
+                    caseColor={ caseItem.hex_color || '#ffffff' }
+                    logo={ caseItem.logo }
+                    description={ caseItem.text }
+                    linkURL={ caseItem.slug }
+                  />
+                )
+              } else return null
+            })
         }
       </ul>
     </>

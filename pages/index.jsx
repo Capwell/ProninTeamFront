@@ -1,22 +1,23 @@
+import Image from 'next/image'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import {
   Row,
   Col,
   Container
-} from 'react-bootstrap';
+} from 'react-bootstrap'
 import PTHead from '../components/PTHead/PTHead'
 import VideoModal from '../components/VideoModal/VideoModal'
 import ClientForm from '../components/ClientForm/ClientForm'
-import stl from '../styles/Home.module.scss'
 import PTButton from '../components/PTButton/PTButton'
+import Loader from '../components/Loader/Loader'
 import CaseBanner from '../components/CaseBanner/CaseBanner'
+import stl from '../styles/Home.module.scss'
 import api from '../utils/api'
-import Image from 'next/image';
-
+// if fetching is failed - use this local data
 const mainCaseLocal = [{
   title: 'Unity',
-  hex_color: '#FF2A23',
+  hex_color: '#ff2a23',
   logo: '/images/cases/unity-logo.webp',
   is_on_main_page: true,
   is_visible: true,
@@ -28,17 +29,25 @@ const mainCaseLocal = [{
 function Home() {
   const [showVideo, setShowVideo] = useState(false)
   const [mainCaseData, getMainCaseData] = useState([])
-
+  const [isDataLoading, setIsDataLoading] = useState(true)
+  // fetch data and set it to the state
   const getData = async () => {
-    const data = await api.getMainCase()
-    if (!data || !data.length) {
-      return mainCaseLocal
+    try {
+      const data = await api.getMainCase()
+      if (!data || !data.length) {
+        getMainCaseData(mainCaseLocal)
+      }
+      getMainCaseData(data)
+    } catch (err) {
+      getMainCaseData(mainCaseLocal)
+    } finally {
+      setIsDataLoading(false)
     }
-    return data
   }
-
-  useEffect(async () => {
-    getMainCaseData(await getData())
+  // fetch data only after the page is mounted (componentDidMount)
+  useEffect(() => {
+    // setIsDataLoading(true)
+    getData()
   }, [])
 
   // open modal window with video
@@ -162,15 +171,15 @@ function Home() {
         </Container>
 
         {
-          mainCaseData.length
-            ? (<CaseBanner
-                as='div'
-                caseColor={ mainCaseData[0].hex_color || '#ffffff' }
-                logo={ mainCaseData[0].logo }
-                description={ mainCaseData[0].text }
-                linkURL={ mainCaseData[0].slug }
-              />)
-            : null
+          isDataLoading
+          ? <Loader className="my-50 mx-auto" size="lg" />
+          : <CaseBanner
+              as='div'
+              caseColor={ mainCaseData[0].hex_color || '#ffffff' }
+              logo={ mainCaseData[0].logo }
+              description={ mainCaseData[0].text }
+              linkURL={ mainCaseData[0].slug }
+            />
         }
 
         <Container fluid="xxl" className="d-flex mt-30">

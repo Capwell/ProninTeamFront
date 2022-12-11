@@ -11,6 +11,7 @@ const nextConfig = {
     domains: [
       'proninteam.ru',
     ],
+    unoptimized: true,
   }
 }
 
