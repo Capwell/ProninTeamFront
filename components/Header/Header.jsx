@@ -18,7 +18,7 @@ function Header() {
   }
 
   return (
-    <header className={ `${stl.header} py-35` }>
+    <header className={ `${stl.header} py-25 py-lg-35` }>
       <Container fluid="xxl">
         <div className={ stl.header__inner }>
           <PTLogo />
@@ -43,9 +43,6 @@ function Header() {
             <Link className={ stl.nav__link } href="/cases">
               Кейсы
             </Link>
-            {/* <NavLink className={ stl.nav__link } href="/#about">
-              О нас
-            </NavLink> */}
             <Link className={ stl.nav__link } href="/team">
               Наша команда
             </Link>

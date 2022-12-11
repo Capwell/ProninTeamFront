@@ -113,6 +113,11 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   // header height + 30 px
   top: calc(($header-height + ($base * 6)) * -1);
   visibility: hidden;
+
+  @media screen and (max-width: 767px) {
+    // header height + 20 px
+    top: calc(($header-height + ($base * 4)) * -1);
+  }
 }
 // ===== / ===== //
 // ===== BUTTONS ===== //
@@ -246,7 +251,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
     border: none;
     flex-direction: column;
     justify-content: space-between !important;
-    padding: 0;
+    padding: 4px 0;
 
     & > span {
       width: 100%;
@@ -716,6 +721,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   }
 
   @media screen and (max-width: 767px) {
+    top: calc($header-height - $base * 4);  // 100 - 20 = 80 px
     column-gap: $base * 4;       // 20 px
     row-gap: $base * 2;          // 10 px
 
@@ -770,6 +776,10 @@ body {
   flex-grow: 1;
   height: 100%;
   padding-top: $header-height;
+
+  @media screen and (max-width: 767px) {
+    padding-top: calc($header-height - $base * 4);  // 100 - 20 = 80 px
+  }
 }
 
 a {

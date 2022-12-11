@@ -42,7 +42,7 @@
 @media screen and (max-width: 991px) {
 
   .banner {
-    height: $base * 90;    // 450 px
+    height: $base * 100;    // 500 px
 
     &__header {
       height: 40%;
@@ -56,11 +56,6 @@
 
     &__description {
       font-size: 1.25rem;
-    }
-
-    &__logo {
-      max-width: none;
-      height: $base * 20;    // 100 px
     }
   }
 }
