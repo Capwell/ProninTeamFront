@@ -1,7 +1,7 @@
 import { Form } from 'react-bootstrap';
 import { useRef, useState } from 'react';
 
-function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
+function PTFileInput({ className, fileRef, fileChangeCallback, ...rest }) {
   const fileLabel = useRef()
   const fileRemove = useRef()
   const fileError = useRef()
@@ -41,7 +41,7 @@ function PTFileInput({ fileRef, fileChangeCallback, ...rest }) {
   }
 
   return (
-    <Form.Group className="control--file">
+    <Form.Group className={ `${ className } control--file` }>
       <span
         className="control__error"
         data-testid="fileError"

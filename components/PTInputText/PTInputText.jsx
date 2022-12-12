@@ -13,12 +13,12 @@ function PTInputText({
 
   return (
     <FloatingLabel
-      className={ 'control--text' + (
+      className={ `control--text ${
         isError.status !== undefined
         ? isError.status === true
-          ? ' invalid' : ' valid'
+          ? 'invalid' : 'valid'
         : ''
-      ) + `${className || ''}`}
+       } ${ className }` }
       data-testid={`${id}Wrapper`}
     >
       <FormControl
