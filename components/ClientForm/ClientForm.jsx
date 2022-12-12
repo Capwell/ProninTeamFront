@@ -5,7 +5,7 @@ import { useFormik } from 'formik'
 import SubmitModal from '../SubmitModal/SubmitModal'
 import PTInputText from '../PTInputText/PTInputText'
 import PTTextarea from '../PTTextarea/PTTextarea'
-import PTFileInput from '../PTFileInput/PTFileInput'
+import PTInputFile from '../PTInputFile/PTInputFile'
 import PTButton from '../PTButton/PTButton'
 import stl from './ClientForm.module.scss'
 import api from '../../utils/api'
@@ -73,11 +73,10 @@ function ClientForm({ className, targetPage }) {
         errors.is_agreed = 'Обязательно'
       }
 
-      return errors;
+      return errors
     },
     // set function for success validation and submitting
     onSubmit: async (values) => {
-
       setIsLoading(true)
       // call grecaptcha.execute on submit event
       window.grecaptcha.ready(async () => {
@@ -101,9 +100,6 @@ function ClientForm({ className, targetPage }) {
           })
       })
     },
-
-    validateOnBlur: false,
-    validateOnChange: true
   })
   // check all values off form before submitting,
   // if is there some errors - show modal with error message and stop submitting
@@ -144,8 +140,8 @@ function ClientForm({ className, targetPage }) {
   // check errors on inputs
   const inputErrorHandler = (inputName) => {
     const err = { status: undefined, text: '' }
-    // if input is empty
-    if (!formik.values[inputName].length) {
+    // if input is message and it is empty
+    if (inputName === 'message' && !formik.values[inputName].length) {
       err.status = undefined
       err.text = ''
     } else {
@@ -249,7 +245,7 @@ function ClientForm({ className, targetPage }) {
         </Col>
       </Row>
   {/* File input */}
-      <PTFileInput
+      <PTInputFile
         className='mb-30 mb-lg-45'
         fileRef={ fileInput }
         fileChangeCallback={ onFileChange }

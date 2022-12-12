@@ -1,7 +1,7 @@
 import { Form } from 'react-bootstrap';
 import { useRef, useState } from 'react';
 
-function PTFileInput({ className, fileRef, fileChangeCallback, ...rest }) {
+function PTInputFile({ className, fileRef, fileChangeCallback, ...rest }) {
   const fileLabel = useRef()
   const fileRemove = useRef()
   const fileError = useRef()
@@ -87,4 +87,4 @@ function PTFileInput({ className, fileRef, fileChangeCallback, ...rest }) {
   )
 }
 
-export default PTFileInput
+export default PTInputFile

@@ -1,0 +1,66 @@
+@import '../../styles/variables.scss';
+
+.control--textarea {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: $base * 50;        // 250 px
+
+  .control__input {
+    width: 100%;
+    border-color: $c-primary;
+    border-radius: 0;
+    padding: $base * 5;           // 25 px
+    line-height: 1.45;
+    letter-spacing: .07em;
+    resize: none;
+
+    &:focus {
+      border-color: $c-primary;
+      box-shadow: none;
+    }
+
+    &::placeholder {
+      color: $gray-500;
+      line-height: 1.454;
+      letter-spacing: .07em;
+    }
+  }
+
+  .control__error {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    overflow: hidden;
+    width: 100%;
+    margin-bottom: 4px;
+    color: $c-danger;
+    font-size: .875rem;
+    line-height: 1.143;
+  }
+
+  &.valid,
+  &.invalid {
+
+    &:after {
+      position: absolute;
+      top: 5px;
+      right: 5px;
+    }
+  }
+
+  &.valid:after {
+    content: url('../../public/images/input-valid.svg');
+  }
+
+  &.invalid:after {
+    content: url('../../public/images/input-invalid.svg');
+  }
+
+  @media screen and (max-width: 575px) {
+
+    .control__input {
+      padding: $base * 5 $base * 3;           // 25 px - 15 px
+    }
+  }
+}
