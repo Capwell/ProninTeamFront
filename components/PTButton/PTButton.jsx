@@ -19,6 +19,7 @@ function PTButton({
       className={ className }
       variant={ variant }
       onClick={ onClick }
+      href={ href }
       { ...rest }
     >
       { !isLoad && (

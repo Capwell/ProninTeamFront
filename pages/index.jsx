@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { useState } from 'react'
 import { useEffect } from 'react'
 import { Row, Col, Container } from 'react-bootstrap'
@@ -171,12 +172,12 @@ function Home() {
         }
 
         <Container fluid="xxl" className="d-flex mt-30">
-          <PTButton
-            variant="small"
-            className={ `${stl.cases__btn} ms-auto` }
-            text="Посмотреть все кейсы"
+          <Link
+            className={ `${stl.cases__btn} btn btn-small ms-auto` }
             href="/cases"
-          />
+          >
+            Посмотреть все кейсы
+          </Link>
         </Container>
       </section>
     </>
