@@ -1,6 +1,6 @@
 import { Modal } from 'react-bootstrap'
 
-function VideoModal({ show, setShow }) {
+function ModalVideo({ show, setShow }) {
 
   const handleClose = () => setShow(false)
 
@@ -28,4 +28,4 @@ function VideoModal({ show, setShow }) {
   )
 }
 
-export default VideoModal
+export default ModalVideo

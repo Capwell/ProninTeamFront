@@ -1,6 +1,6 @@
 import { Modal } from "react-bootstrap";
 
-function SubmitModal({ show, onHide, type }) {
+function ModalSubmit({ show, onHide, type }) {
 
   return (
     <Modal
@@ -51,4 +51,4 @@ function SubmitModal({ show, onHide, type }) {
   )
 }
 
-export default SubmitModal
+export default ModalSubmit

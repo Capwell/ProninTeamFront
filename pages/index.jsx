@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { Row, Col, Container } from 'react-bootstrap'
 import PTHead from '../components/PTHead/PTHead'
-import VideoModal from '../components/VideoModal/VideoModal'
+import ModalVideo from '../components/ModalVideo/ModalVideo'
 import ClientForm from '../components/ClientForm/ClientForm'
 import PTButton from '../components/PTButton/PTButton'
 import Loader from '../components/Loader/Loader'
@@ -109,10 +109,11 @@ function Home() {
               mt-30 mt-lg-0
             '
           >
-            <VideoModal
+            <ModalVideo
               show={ showVideo }
               setShow={ setShowVideo }
             />
+
             <div className={ stl.about__video }>
               <div
                 className={ stl.video__thumbnail }

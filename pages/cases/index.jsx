@@ -1,13 +1,13 @@
 import { useRouter } from 'next/router'
 import { Container } from 'react-bootstrap'
-import PTHead from '../../components/PTHead/PTHead'
-import PTButton from '../../components/PTButton/PTButton'
-import stl from '../../styles/Cases.module.scss'
-import CaseBanner from '../../components/CaseBanner/CaseBanner'
-import api from '../../utils/api'
 import { useEffect } from 'react'
 import { useState } from 'react'
+import PTHead from '../../components/PTHead/PTHead'
+import PTButton from '../../components/PTButton/PTButton'
+import CaseBanner from '../../components/CaseBanner/CaseBanner'
 import Loader from '../../components/Loader/Loader'
+import stl from '../../styles/Cases.module.scss'
+import api from '../../utils/api'
 import { casesDataLocal } from '../../public/mockData'
 
 // function Cases({ casesData }) {
@@ -29,7 +29,6 @@ function Cases() {
   }
   // fetch data only after the page is mounted (componentDidMount)
   useEffect(() => {
-    // setIsDataLoading(true)
     getData()
   }, [])
 

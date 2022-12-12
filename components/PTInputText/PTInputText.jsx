@@ -5,7 +5,7 @@ import FormControl from 'react-bootstrap/FormControl'
 function PTInputText({
   id,                      // HTML "id" attribute
   className = '',          // classes outside
-  placeholder = '&nbsp;',  // bootstrap floating labels needs placeholder
+  placeholder = ' ',  // bootstrap floating labels needs placeholder
   label,                   // text on input
   isError,                 // state for choose validation classes and show error's message
   ...rest                  // other parameters

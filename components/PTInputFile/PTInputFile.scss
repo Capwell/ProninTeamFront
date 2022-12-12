@@ -82,7 +82,7 @@
 
   .control__btn {
     position: absolute;
-    top: 0;
+    top: 8px;
     right: 0;
     display: none;
     justify-content: center;
@@ -98,8 +98,8 @@
       display: flex;
     }
 
-    &:hover > svg {
-      transform: scale(1.25)
+    &:hover > svg > path {
+      fill: $c-success;
     }
   }
 

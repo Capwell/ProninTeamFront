@@ -2,7 +2,7 @@ import Link from 'next/link'
 import { useState, useRef, useEffect } from 'react'
 import { Row, Col, Form } from "react-bootstrap"
 import { useFormik } from 'formik'
-import SubmitModal from '../SubmitModal/SubmitModal'
+import ModalSubmit from '../ModalSubmit/ModalSubmit'
 import PTInputText from '../PTInputText/PTInputText'
 import PTTextarea from '../PTTextarea/PTTextarea'
 import PTInputFile from '../PTInputFile/PTInputFile'
@@ -170,7 +170,7 @@ function ClientForm({ className, targetPage }) {
       ref={ formRef }
     >
 {/* Modal Window */}
-      <SubmitModal
+      <ModalSubmit
         show={ modalShow }
         type={ modalType }
         onHide={ () => setModalShow(false) }
