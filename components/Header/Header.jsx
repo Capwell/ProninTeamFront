@@ -9,19 +9,13 @@ function Header() {
   const [isAnimation, setIsAnimation] = useState(false)
 
   const showNav = (menuElem) => {
-    menuElem.style.display = 'flex'
-
-    setTimeout(() => {
-      menuElem.classList.add(stl.shown)
-    }, 0)
+    menuElem.classList.add(stl.shown)
+    nav.current.addEventListener('click', burgerMenuClickHandler)
   }
 
   const hideNav = (menuElem) => {
     menuElem.classList.remove(stl.shown)
-
-    setTimeout(() => {
-      menuElem.style.display = 'none'
-    }, 350)
+    nav.current.removeEventListener('click', burgerMenuClickHandler)
   }
 
   const toogleNav = () => {
@@ -62,7 +56,7 @@ function Header() {
           <nav
             className={ stl.header__nav }
             ref={ nav }
-            onClick={ burgerMenuClickHandler }
+            // onClick={ burgerMenuClickHandler }
           >
             <Link className={ stl.nav__link } href="/services">
               Услуги

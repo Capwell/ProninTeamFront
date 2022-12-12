@@ -1,11 +1,7 @@
 import Image from 'next/image'
 import { useState } from 'react'
 import { useEffect } from 'react'
-import {
-  Row,
-  Col,
-  Container
-} from 'react-bootstrap'
+import { Row, Col, Container } from 'react-bootstrap'
 import PTHead from '../components/PTHead/PTHead'
 import VideoModal from '../components/VideoModal/VideoModal'
 import ClientForm from '../components/ClientForm/ClientForm'
@@ -14,16 +10,7 @@ import Loader from '../components/Loader/Loader'
 import CaseBanner from '../components/CaseBanner/CaseBanner'
 import stl from '../styles/Home.module.scss'
 import api from '../utils/api'
-// if fetching is failed - use this local data
-const mainCaseLocal = [{
-  title: 'Unity',
-  hex_color: '#ff2a23',
-  logo: '/images/cases/unity-logo.webp',
-  is_on_main_page: true,
-  is_visible: true,
-  slug: 'unity',
-  text: 'Разработали раздел для популяризации донорства.'
-}]
+import { mainCaseLocal } from '../public/mockData'
 
 // function Home({ caseData }) {
 function Home() {
