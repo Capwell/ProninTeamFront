@@ -1,0 +1,129 @@
+@import '../../styles/variables.scss';
+
+._wrapper_header,
+._wrapper_footer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+
+  ._link {
+    color: $c-primary;
+    font-weight: 600;
+    line-height: 1.25;
+    transition: color .15s ease-in-out,
+                opacity .35s ease-in-out;
+
+    &:hover {
+      color: $c-success;
+    }
+
+    &:active {
+      color: $c-secondary;
+    }
+  }
+
+  ._link + ._link {
+    margin-left: $base * 10       // 50 px
+  }
+}
+// navigation in header
+._wrapper_header {
+  justify-content: center;
+
+  ._link {
+
+    &:first-child {
+      margin-left: -$logo-width;  // -150 px
+    }
+
+    &:last-child {
+      position: absolute;
+      right: 0;
+    }
+  }
+}
+
+._btn {
+  display: none !important;
+  margin-left: auto;
+}
+
+// navigation in footer
+._wrapper_footer {
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 991px) {
+
+  ._wrapper_header,
+  ._wrapper_footer {
+
+    ._link + ._link {
+      margin-left: $base * 6      // 30 px
+    }
+  }
+}
+
+@media screen and (max-width: 767px) {
+  // navigation in header
+  ._wrapper_header {
+    width: 100%;
+    height: auto;
+    right: 0;
+    left: 0;
+    flex-direction: column;
+    background-color: white;
+    overflow: hidden;
+    max-height: 0;
+    transition: all .35s ease-in-out;
+
+    ._link {
+      margin-top: $base * 4;    // 20 px
+      opacity: 0;
+
+      &:first-child {
+        margin-top: $base * 8;  // 40 px
+        margin-left: 0;
+      }
+
+      &:last-child {
+        position: relative;
+        right: auto;
+      }
+    }
+
+    ._link + ._link {
+      margin-left: 0;
+    }
+
+    &.shown {
+      max-height: 180px;
+
+      ._link {
+        opacity: 1;
+      }
+    }
+  }
+
+  ._btn {
+    display: flex !important;
+  }
+  // navigation in footer
+  ._wrapper_footer {
+    justify-content: center;
+  }
+}
+
+@media screen and (max-width: 575px) {
+
+  ._wrapper_footer {
+    flex-direction: column;
+    align-items: flex-start;
+
+    ._link + ._link {
+      margin-left: 0;
+      margin-top: $base * 2;    // 10 px
+    }
+  }
+}

@@ -1,6 +1,6 @@
 @import '../../styles/variables.scss';
 
-.header {
+._wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -10,115 +10,10 @@
   box-shadow: $header-box-shadow;
   z-index: 1000;
 
-  &__inner {
+  ._inner {
     position: relative;
     display: flex;
     flex-wrap: wrap;
-  }
-
-  .btn_burger {
-    display: none;
-    margin-left: auto;
-  }
-
-  &__nav {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-grow: 1;
-
-    .nav__link {
-      color: $c-primary;
-      font-weight: 600;
-      line-height: 1.25;
-      transition: color .15s ease-in-out;
-
-      &:first-child {
-        margin-left: -$logo-width;  // -150 px
-      }
-
-      &:last-child {
-        position: absolute;
-        right: 0;
-      }
-
-      &:hover {
-        color: $c-success;
-      }
-
-      &:active {
-        color: $c-secondary;
-      }
-    }
-
-    .nav__link + .nav__link {
-      margin-left: $base * 10       // 50 px
-    }
-  }
-}
-
-@media screen and (max-width: 991px) {
-
-  .header {
-
-    &__nav {
-
-      .nav__link + .nav__link {
-        margin-left: $base * 6      // 30 px
-      }
-    }
-  }
-}
-
-@media screen and (max-width: 767px) {
-
-  .header {
-
-    .btn_burger {
-      display: flex;
-    }
-
-    &__nav {
-      display: flex;
-      width: 100%;
-      height: auto;
-      right: 0;
-      left: 0;
-      flex-direction: column;
-      background-color: white;
-      overflow: hidden;
-      max-height: 0;
-      transition: all .35s ease-in-out;
-
-      .nav__link {
-        margin-top: $base * 4;    // 20 px
-        opacity: 0;
-        transition: opacity .35s ease-in-out,
-                    color .15s ease-in-out;
-
-        &:first-child {
-          margin-top: $base * 8;  // 40 px
-          margin-left: 0;
-        }
-
-        &:last-child {
-          position: relative;
-          right: auto;
-        }
-      }
-
-      &.shown {
-        max-height: 180px;
-
-        .nav__link {
-          opacity: 1;
-        }
-      }
-
-      .nav__link + .nav__link {
-        margin-left: 0;
-      }
-    }
+    justify-content: space-between;
   }
 }

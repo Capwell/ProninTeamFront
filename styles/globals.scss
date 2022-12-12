@@ -135,6 +135,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   align-items: center;
   line-height: 1.454;
   letter-spacing: .07em;
+  background-color: transparent;
 
   &-primary,
   &-secondary {
@@ -222,53 +223,9 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   &-small-up {
     @extend .btn-small;
   }
-
-  &--burger {
-    @include button-size(
-      4px,                   // padding-y
-      0,                     // padding-x
-      1rem,                  // font-size
-      0                      // border-radius
-    );
-
-    @include button-variant(
-      transparent,           // backgorund
-      transparent,           // border-color
-      $c-primary,            // color
-      transparent,           // hover - background
-      transparent,           // hover - border-color
-      $c-primary,            // hover - color
-      transparent,           // active - background
-      transparent,           // active - border-color
-      $c-secondary,          // active - color
-      transparent,           // disable - backgorund
-      transparent,           // disable - border-color
-      rgba($c-primary, .3)   // disable - color
-    );
-
-    width: $base * 6;        // 30 px
-    height: $base * 6;       // 30 px
-    border: none;
-    flex-direction: column;
-    justify-content: space-between !important;
-    padding: 4px 0;
-
-    & > span {
-      width: 100%;
-      height: 4px;
-      background-color: $c-primary;
-      transition: all .15s ease-in-out;
-    }
-
-    &:hover > span {
-      background-color: $c-success;
-    }
-
-    &:active > span {
-      background-color: $c-secondary;
-    }
-  }
 }
+// ----- Burger Button ----- //
+@import '../components/PTNav/BurgerBtn/BurgerBtn.scss';
 // ===== / ===== //
 // ===== INPUTS ===== //
 .control--text {

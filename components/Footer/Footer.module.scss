@@ -5,47 +5,6 @@
   background-color: white;
   box-shadow: $footer-box-shadow;
 
-  &__logo {
-
-    .logo {
-
-      &__link {
-        display: flex;
-      }
-
-      &__img {
-        width: $logo-width;   // 150 px
-        height: $logo-height; // 30 px
-      }
-    }
-  }
-
-  &__nav {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-
-    .nav__link {
-      color: $c-primary;
-      font-weight: 600;
-      line-height: 1.25;
-      transition: all .15s ease-in-out;
-
-      &:hover {
-        color: $c-success;
-      }
-
-      &:active {
-        color: $c-secondary;
-      }
-    }
-
-    .nav__link + .nav__link {
-      margin-left: $base * 10;          // 50 px
-    }
-  }
-
   &__legal {
     font-size: .875rem;
     font-weight: 400;
@@ -87,24 +46,9 @@
   }
 }
 
-@media screen and (max-width: 992px) {
-  .footer {
-
-    &__nav {
-
-      .nav__link + .nav__link {
-        margin-left: $base * 6;    // 30 px
-      }
-    }
-  }
-}
-
 @media screen and (max-width: 767px) {
-  .footer {
 
-    &__nav {
-      justify-content: center;
-    }
+  .footer {
 
     &__group {
       text-align: center;
@@ -113,17 +57,8 @@
 }
 
 @media screen and (max-width: 575px) {
+  
   .footer {
-
-    &__nav {
-      flex-direction: column;
-      align-items: flex-start;
-
-      .nav__link + .nav__link {
-        margin-left: 0;
-        margin-top: $base * 2;    // 10 px
-      }
-    }
 
     &__group {
       width: 100%;
