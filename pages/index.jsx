@@ -34,6 +34,7 @@ function Home() {
   }
   // fetch data only after the page is mounted (componentDidMount)
   useEffect(() => { getData() }, [])
+
   // open modal window with video
   const openVideo = () => setShowVideo(true)
 
