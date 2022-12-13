@@ -25,9 +25,7 @@ function Cases() {
     }
   }
   // fetch data only after the page is mounted (componentDidMount)
-  useEffect(() => {
-    getData()
-  }, [])
+  useEffect(() => { getData() }, [])
 
   return (
     <>

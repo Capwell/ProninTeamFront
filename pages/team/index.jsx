@@ -3,7 +3,6 @@ import { Tabs, Tab, Container, Row, Col } from 'react-bootstrap'
 import PTHead from '../../components/PTHead/PTHead'
 import Loader from '../../components/Loader/Loader'
 import TeamMember from '../../components/TeamMember/TeamMember'
-import PTButton from '../../components/PTButton/PTButton'
 import stl from '../../styles/Team.module.scss'
 import api from '../../utils/api'
 import { usersDataLocal } from '../../public/mockData'
@@ -27,10 +26,7 @@ function Team() {
     }
   }
   // fetch data only after the page is mounted (componentDidMount)
-  useEffect(() => {
-    // setIsDataLoading(true)
-    getData()
-  }, [])
+  useEffect(() => { getData() }, [])
 
   // filter user by their roles (main and others)
   const filterUsers = (value) => {
