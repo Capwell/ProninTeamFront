@@ -2,7 +2,6 @@
 
 // ===== MISSION ===== //
 .mission {
-  position: relative;
 
   &__title {
     margin-bottom: $base;     // 5 px
@@ -20,7 +19,6 @@
 // ===== / ===== //
 // ===== ABOUT ===== //
 .about {
-  position: relative;
 
   &__how,
   &__why {
@@ -29,31 +27,31 @@
       margin-top: $base * 9;      // 45 px
     }
 
-    .how,
-    .why {
+    .how__title,
+    .why__title {
+      margin-bottom: $base * 3;  // 15 px
+      font-size: 1.5rem;
+      font-weight: 600;
+      line-height: 1.35;
+      letter-spacing: .045em;
+    }
 
-      &__title {
-        margin-bottom: $base * 3;  // 15 px
-        font-size: 1.5rem;
-        font-weight: 600;
-        line-height: 1.35;
-        letter-spacing: .045em;
+    p {
+      margin-bottom: 0;
+      line-height: 1.25;
+      letter-spacing: .07em;
+
+      & > b {
+        font-weight: 500;
       }
+    }
 
-      &__text {
-        line-height: 1.25;
-        letter-spacing: .07em;
-        margin-bottom: $base * 3;  // 15 px
-
-        span {
-          font-weight: 500;
-        }
-      }
+    p + p {
+      margin-top: $base * 3;    // 15 px
     }
   }
 
   &__video {
-    position: relative;
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -64,14 +62,14 @@
       &__thumbnail {
         position: relative;
         width: 100%;
-        height: $base * 27;           // 135 px
+        height: auto;
+        max-height: $base * 27;       // 135 px
         margin-bottom: $base * 3;     // 15 px
         background-color: $gray-100;
         cursor: pointer;
 
         & > img {
-          width: 100%;
-          height: auto;
+          position: relative !important;
           object-fit: contain;
         }
       }
@@ -122,41 +120,6 @@
       }
     }
   }
-
-  .cases {
-
-    &__timeline:before {
-      left: 0;
-    }
-
-    .timeline__item {
-      width: 100%;
-
-      &:nth-of-type(odd),
-      &:nth-of-type(even) {
-        align-self: flex-start;
-
-        .item__title {
-          text-align: right;
-          flex-direction: row-reverse;
-
-          span {
-            padding-right: 0;
-            padding-left: $base * 10;    // 50 px
-          }
-        }
-
-        .item__text {
-          padding-left: $base * 6;       // 30 px
-          padding-right: 0;
-        }
-      }
-    }
-
-    .timeline__item + .timeline__item {
-      margin-top: $base * 10;            // 50 px
-    }
-  }
 }
 
 @media screen and (max-width: 575px) {
@@ -165,29 +128,6 @@
 
     &__title {
       font-size: 1.8rem;
-    }
-
-    .timeline__item {
-
-      &:nth-of-type(odd),
-      &:nth-of-type(even) {
-
-        .item__title {
-          margin-bottom: $base * 3;    // 15 px
-
-          & > span {
-            padding-left: $base * 4;   // 20 px
-          }
-        }
-
-        .item__text {
-          padding-left: $base * 3;     // 15 px
-        }
-      }
-    }
-
-    .timeline__item + .timeline__item {
-      margin-top: $base * 8;            // 40 px
     }
   }
 }

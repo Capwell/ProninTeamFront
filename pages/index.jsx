@@ -33,11 +33,7 @@ function Home() {
     }
   }
   // fetch data only after the page is mounted (componentDidMount)
-  useEffect(() => {
-    // setIsDataLoading(true)
-    getData()
-  }, [])
-
+  useEffect(() => { getData() }, [])
   // open modal window with video
   const openVideo = () => setShowVideo(true)
 
@@ -51,68 +47,60 @@ function Home() {
         ogUrl="https://proninteam.ru"
         ogSiteName="ProninTeam"
       />
-{/* Mission section */}
+{/* Mission */}
       <Container
         as="section"
         fluid="xxl"
-        className={`${stl.mission} mt-50 mt-lg-100 mb-70 mb-lg-75`}
+        className={ `mt-60 mt-lg-100 mb-60 mb-lg-75` }
       >
         <h1 className={ stl.mission__title }>
           Наша миссия
         </h1>
+
         <p className={ stl.mission__text }>
           Помочь вам создать программный продукт для развития бизнеса.<br />
           Гибко и быстро с возможностью вашего контроля каждого этапа разработки.
         </p>
       </Container>
-
-{/* About section */}
-      <a id="about" className="anchor" />
-
+{/* About */}
       <Container
-        as='section'
+        as="section"
         fluid="xxl"
-        className={`${stl.about} mb-100 mb-lg-140`}
+        className={ `mb-100 mb-lg-140` }
       >
         <Row className="justify-content-between">
-          <Col lg='7' className={ stl.about__text }>
+          <Col xs="12" lg="7" className={ stl.about__text }>
             <section className={ stl.about__how }>
-              <h3 className={ stl.how__title }>
+              <h2 className={ stl.how__title }>
                 Как мы это делаем:
-              </h3>
-              <p className={ stl.how__text }>
-                Обсуждаем <span>приоритеты</span> и делим работу на недельные отрезки.
+              </h2>
+              <p>
+                Обсуждаем <b>приоритеты</b> и делим работу на недельные отрезки.
               </p>
-              <p className={ stl.how__text }>
+              <p>
                 В понедельник рассказываем, что будем делать — в пятницу вы видите живой результат.
               </p>
             </section>
 
             <section className={ stl.about__why }>
-              <h3 className={ stl.why__title }>
+              <h2 className={ stl.why__title }>
                 Зачем оно вам?
-              </h3>
-              <p className={ stl.why__text }>
-                <span>Скорость запуска</span> — первая версия проекта может выйти уже через неделю.
+              </h2>
+              <p>
+                <b>Скорость запуска</b> — первая версия проекта может выйти уже через неделю.
               </p>
-              <p className={ stl.why__text }>
-                <span>Гибкость.</span> Возможность менять требования на ходу. Прозрачность и полный контроль.
+              <p>
+                <b>Гибкость.</b> Возможность менять требования на ходу. Прозрачность и полный контроль.
               </p>
             </section>
           </Col>
 
           <Col
-            lg='auto'
-            className='
-              d-flex
-              justify-content-center
-              mt-30 mt-lg-0
-            '
+            xs="12"
+            lg="auto"
+            className="d-flex justify-content-center mt-30 mt-lg-0"
           >
-            <ModalVideo
-              show={ showVideo }
-              setShow={ setShowVideo }
-            />
+            <ModalVideo show={ showVideo } setShow={ setShowVideo } />
 
             <div className={ stl.about__video }>
               <div
@@ -125,8 +113,14 @@ function Home() {
                   fill
                 />
               </div>
-              <span className={ stl.video__title }>За минуту просто и ясно о том, как пойдёт работа</span>
-              <span className={ stl.video__author }>Андрей Пронин СЕО</span>
+
+              <span className={ stl.video__title }>
+                За минуту просто и ясно о том, как пойдёт работа
+              </span>
+
+              <span className={ stl.video__author }>
+                Андрей Пронин СЕО
+              </span>
 
               <PTButton
                 variant="secondary"
@@ -143,17 +137,14 @@ function Home() {
       <Container
         as='section'
         fluid="xxl"
-        className={`${stl.brief} mb-100 mb-lg-140`}
+        className={`${ stl.brief } mb-100 mb-lg-140`}
       >
         <ClientForm targetPage="Home"/>
       </Container>
-
 {/* Cases section */}
-      <a id="cases" className="anchor" />
-
-      <section className={ `${stl.cases} mb-125` }>
+      <section className={ `${ stl.cases } mb-80 mb-lg-125` }>
         <Container fluid="xxl">
-          <h2 className={ `${stl.cases__title} mb-50` }>
+          <h2 className={ `${ stl.cases__title } mb-30 mb-lg-50` }>
             Пример наших работ
           </h2>
         </Container>
@@ -172,7 +163,7 @@ function Home() {
 
         <Container fluid="xxl" className="d-flex mt-30">
           <Link
-            className={ `${stl.cases__btn} btn btn-small ms-auto` }
+            className={ `${ stl.cases__btn } btn btn-small mx-auto me-lg-0 ms-lg-auto` }
             href="/cases"
           >
             Посмотреть все кейсы
@@ -180,7 +171,7 @@ function Home() {
         </Container>
       </section>
     </>
-  );
+  )
 }
 
 // export async function getServerSideProps(context) {

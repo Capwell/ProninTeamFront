@@ -1,7 +1,7 @@
 import Link from 'next/link'
 import { useState, useRef } from 'react'
-import stl from './PTNav.module.scss'
 import BurgerBtn from './BurgerBtn/BurgerBtn'
+import stl from './PTNav.module.scss'
 
 function PTNav({ layout, links = [] }) {
   const [isAnimation, setIsAnimation] = useState(false)

@@ -107,7 +107,7 @@ export const mainCaseLocal = [
   {
     title: 'Unity',
     hex_color: '#ff2a23',
-    logo: '/images/cases/unity-logo.webp',
+    logo: '/images/cases/unity/unity-logo.webp',
     is_on_main_page: true,
     is_visible: true,
     slug: 'unity',
