@@ -3,7 +3,6 @@ import Link from 'next/link'
 import { Container, Row, Col } from 'react-bootstrap'
 import PTHead from '../../../components/PTHead/PTHead'
 import PTButton from '../../../components/PTButton/PTButton'
-import PTBreadcrumb from '../../../components/PTBreadcrumb/PTBreadcrumb'
 import stl from './pronin-team.module.scss'
 
 function CasePage() {
@@ -18,8 +17,6 @@ function CasePage() {
         ogImg='/images/pronin-team-og-img.webp'
         ogSiteName='ProninTeam'
       />
-
-      <PTBreadcrumb />
 {/* Banner */}
       <div className={ `${ stl.banner } mt-lg-80 mb-60 mb-lg-100` }>
         <Container fluid="xxl">

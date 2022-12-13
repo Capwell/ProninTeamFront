@@ -51,7 +51,6 @@ function Home() {
         ogUrl="https://proninteam.ru"
         ogSiteName="ProninTeam"
       />
-
 {/* Mission section */}
       <Container
         as="section"

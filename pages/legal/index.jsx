@@ -3,7 +3,6 @@ import { Container } from 'react-bootstrap'
 import PTHead from '../../components/PTHead/PTHead'
 import PTButton from '../../components/PTButton/PTButton'
 import stl from '../../styles/Legal.module.scss'
-import PTBreadcrumb from '../../components/PTBreadcrumb/PTBreadcrumb'
 
 function Legal() {
   // scroll to top on button click
@@ -25,8 +24,6 @@ function Legal() {
         ogImg='/images/pronin-team-og-img.webp'
         ogSiteName='ProninTeam'
       />
-
-      <PTBreadcrumb />
 
       <Container as="section" fluid="xxl" className="mb-100">
         <h1 className={ stl.legal__title }>

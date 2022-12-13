@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Tabs, Tab, Container, Row, Col } from 'react-bootstrap'
 import PTHead from '../../components/PTHead/PTHead'
-import PTBreadcrumb from '../../components/PTBreadcrumb/PTBreadcrumb'
 import Loader from '../../components/Loader/Loader'
 import TeamMember from '../../components/TeamMember/TeamMember'
 import PTButton from '../../components/PTButton/PTButton'
@@ -91,8 +90,6 @@ function Team() {
         ogImg='/images/pronin-team-og-img.webp'
         ogSiteName='ProninTeam'
       />
-
-      <PTBreadcrumb />
 
       <Container as="section" fluid="xxl" className="mb-20">
         <h1 className={ stl.team__title }>

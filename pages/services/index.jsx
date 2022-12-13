@@ -3,7 +3,6 @@ import PTHead from '../../components/PTHead/PTHead'
 import PTButton from '../../components/PTButton/PTButton'
 import ClientForm from '../../components/ClientForm/ClientForm'
 import stl from '../../styles/Services.module.scss'
-import PTBreadcrumb from '../../components/PTBreadcrumb/PTBreadcrumb'
 
 function Services() {
 
@@ -18,8 +17,6 @@ function Services() {
         ogSiteName='Услуги ProninTeam по разработке и поддержке сайтов.'
       />
 
-      <PTBreadcrumb/>
-      
       <Container as="section" fluid="xxl" className="mb-20">
         <h1 className={ `${stl.services__title} mb-50 mb-lg-85` }>
           Услуги

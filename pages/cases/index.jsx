@@ -2,13 +2,11 @@ import { Container } from 'react-bootstrap'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import PTHead from '../../components/PTHead/PTHead'
-import PTButton from '../../components/PTButton/PTButton'
 import CaseBanner from '../../components/CaseBanner/CaseBanner'
 import Loader from '../../components/Loader/Loader'
 import stl from '../../styles/Cases.module.scss'
 import api from '../../utils/api'
 import { casesDataLocal } from '../../public/mockData'
-import PTBreadcrumb from '../../components/PTBreadcrumb/PTBreadcrumb'
 
 // function Cases({ casesData }) {
 function Cases() {
@@ -41,8 +39,6 @@ function Cases() {
         ogImg='/images/pronin-team-og-img.webp'
         ogSiteName='Результат услуг ProninTeam на примере реальных кейсов'
       />
-
-      <PTBreadcrumb/>
 
       <Container as="section" fluid="xxl" className="mb-100">
         <h1 className={ stl.cases__title}>
