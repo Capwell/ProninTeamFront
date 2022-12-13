@@ -17,8 +17,9 @@ function Team() {
       const data = await api.getTeam()
       if (!data || !data.length) {
         getUsersData(usersDataLocal)
+      } else {
+        getUsersData(data)
       }
-      getUsersData(data)
     } catch (err) {
       getUsersData(usersDataLocal)
     } finally {

@@ -24,8 +24,9 @@ function Home() {
       const data = await api.getMainCase()
       if (!data || !data.length) {
         getMainCaseData(mainCaseLocal)
+      } else {
+        getMainCaseData(data)
       }
-      getMainCaseData(data)
     } catch (err) {
       getMainCaseData(mainCaseLocal)
     } finally {

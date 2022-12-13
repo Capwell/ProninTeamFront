@@ -16,8 +16,11 @@ function Cases() {
   const getData = async () => {
     try {
       const data = await api.getCases()
-      if (!data || !data.length) getCasesData(casesDataLocal)
-      getCasesData(data)
+      if (!data || !data.length) {
+        getCasesData(casesDataLocal)
+      } else {
+        getCasesData(data)
+      }
     } catch (err) {
       getCasesData(casesDataLocal)
     } finally {
