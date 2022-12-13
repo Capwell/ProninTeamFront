@@ -1,10 +1,12 @@
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { Container } from 'react-bootstrap'
 import PTHead from '../../components/PTHead/PTHead'
 import PTButton from '../../components/PTButton/PTButton'
 import stl from '../../styles/Legal.module.scss'
 
 function Legal() {
+  const router = useRouter()
   // scroll to top on button click
   const scrollToTop = () =>{
     window.scrollTo({
@@ -15,7 +17,6 @@ function Legal() {
 
   return (
     <>
-{/* TODO: доделать голову */}
       <PTHead
         title='ProninTeam - Правовая информация'
         description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
