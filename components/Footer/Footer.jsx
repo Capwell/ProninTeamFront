@@ -1,11 +1,7 @@
 import Link from 'next/link'
-import {
-  NavLink,
-  Container,
-  Row,
-  Col
-} from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import PTLogo from '../PTLogo/PTLogo'     // custom logo component
+import PTNav from '../PTNav/PTNav'
 import stl from './Footer.module.scss'
 
 function Footer() {
@@ -17,7 +13,7 @@ function Footer() {
           <Row>
             <Col
               xs={{ span: 12, order: 'first' }}
-              lg={{ span: 3 }}
+              lg="3"
               className="d-flex justify-content-center justify-content-lg-start mb-35"
             >
               <PTLogo />
@@ -25,33 +21,25 @@ function Footer() {
 
             <Col
               xs={{ span: 6, order: 2 }}
-              md={{ span: 12 }}
-              lg={{ span: 9 }}
+              md="12"
+              lg="9"
               className="mb-15 mb-lg-35"
             >
-              <nav className={ stl.footer__nav }>
-                <Link className={ stl.nav__link } href="/#brief">
-                  Стать клиентом
-                </Link>
-                <Link className={ stl.nav__link } href="/services">
-                  Услуги
-                </Link>
-                <Link className={ stl.nav__link } href="/cases">
-                  Кейсы
-                </Link>
-                {/* <NavLink className={ stl.nav__link } href="/#about">
-                  О нас
-                </NavLink> */}
-                <Link className={ stl.nav__link } href="/team">
-                  Наша команда
-                </Link>
-              </nav>
+              <PTNav
+                layout="footer"
+                links={[
+                  ['/#brief', 'Стать клиентом'],
+                  ['/services', 'Услуги'],
+                  ['/cases', 'Кейсы'],
+                  ['/team', 'Наша команда']
+                ]}
+              />
             </Col>
 
             <Col
               xs={{ span: 12, order: 4 }}
               lg={{ span: 6, order: 3 }}
-              xl={{ span: 4 }}
+              xl="4"
               className="
                 d-flex
                 justify-content-center justify-content-lg-start
@@ -78,7 +66,7 @@ function Footer() {
 
             <Col
               xs={{ span: 6, order: 3 }}
-              md={{ span: 12 }}
+              md="12"
               lg={{ span: 6, order: 4 }}
               xl={{ span: 4, order: 'last' }}
               className='

@@ -11,110 +11,41 @@ import PTHead from '../../components/PTHead/PTHead'
 import TeamMember from '../../components/TeamMember/TeamMember'
 import PTButton from '../../components/PTButton/PTButton'
 import api from '../../utils/api'
+import { useEffect } from 'react'
+import { useState } from 'react'
+import Loader from '../../components/Loader/Loader'
+import { usersDataLocal } from '../../public/mockData'
 
-const usersDataLocal = [
-  {
-    main_role: {
-      title: 'СЕО'
-    },
-    other_roles: [
-      { title: 'Backend-разработчик' }
-    ],
-    photo: '/images/team/a_pronin.webp',
-    first_name: 'Андрей',
-    last_name: 'Пронин'
-  },
-  {
-    main_role: {
-      title: 'QA'
-    },
-    other_roles: [],
-    photo: '/images/team/a_grabovskij.webp',
-    first_name: 'Александр',
-    last_name: 'Грабовский'
-  },
-  {
-    main_role: {
-      title: 'PM'
-    },
-    other_roles: [],
-    photo: '/images/team/k_pavlycheva.webp',
-    first_name: 'Каролина',
-    last_name: 'Павлычева'
-  },
-  {
-    main_role: {
-      title: 'Frontend-разработчик'
-    },
-    other_roles: [],
-    photo: '/images/team/e_romanov.webp',
-    first_name: 'Егор',
-    last_name: 'Романов'
-  },
-  {
-    main_role: {
-      title: 'Backend-разработчик'
-    },
-    other_roles: [],
-    photo: '/images/team/a_shevich.webp',
-    first_name: 'Алексей',
-    last_name: 'Шевич'
-  },
-  {
-    main_role: {
-      title: 'Backend-разработчик'
-    },
-    other_roles: [],
-    photo: '/images/team/n_pavlov.webp',
-    first_name: 'Николай',
-    last_name: 'Павлов'
-  },
-  {
-    main_role: {
-      title: 'Frontend-разработчик'
-    },
-    other_roles: [],
-    photo: '/images/team/s_borodulin.webp',
-    first_name: 'Сергей',
-    last_name: 'Бородулин'
-  },
-  {
-    main_role: {
-      title: 'PM'
-    },
-    other_roles: [],
-    photo: '/images/team/e_bereza.webp',
-    first_name: 'Елена',
-    last_name: 'Береза'
-  },
-  {
-    main_role: {
-      title: 'PM'
-    },
-    other_roles: [],
-    photo: '/images/team/n_popova.webp',
-    first_name: 'Нина',
-    last_name: 'Попова'
-  },
-  {
-    main_role: {
-      title: 'Дизайнер'
-    },
-    other_roles: [],
-    photo: '/images/team/o_kiparisov.webp',
-    first_name: 'Олег',
-    last_name: 'Кипарисов'
-  },
-]
-
-function Team({ usersData }) {
+// function Team({ usersData }) {
+function Team() {
   const router = useRouter()
+  const [usersData, getUsersData] = useState([])
+  const [isDataLoading, setIsDataLoading] = useState(true)
+  // fetch data and set it to the state
+  const getData = async () => {
+    try {
+      const data = await api.getTeam()
+      if (!data || !data.length) {
+        getUsersData(usersDataLocal)
+      }
+      getUsersData(data)
+    } catch (err) {
+      getUsersData(usersDataLocal)
+    } finally {
+      setIsDataLoading(false)
+    }
+  }
+  // fetch data only after the page is mounted (componentDidMount)
+  useEffect(() => {
+    // setIsDataLoading(true)
+    getData()
+  }, [])
 
   // filter user by their roles (main and others)
   const filterUsers = (value) => {
-    return usersData?.filter(user => {
+    return usersData.filter(user => {
       return (
-        user.main_role.title === value ||
+        (user.main_role && user.main_role.title === value) ||
         user.other_roles.find(role => role.title === value)
       )
     })
@@ -205,31 +136,36 @@ function Team({ usersData }) {
                   <p className={ stl.tab__description }>
                     { tab.contentText }
                   </p>
+                  {
+                    isDataLoading
+                    ? <Loader className="my-50 mx-auto" size="lg" />
+                    : <Row as='ul' className={ stl.tab__members } xs='1' sm='2' md='3' lg='4'>
+                        {
+                          tab.members?.map((member, index) => {
+                            const photo = member.photo
+                            const name = `${member.first_name} ${member.last_name}`
+                            const mainRole = member.main_role
+                              ? member.main_role.title
+                              : 'Нет роли'
+                            const roles = member.other_roles.length
+                              ? member.other_roles.map(role => role.title).join(' ')
+                              : null
+                            const key = `${tab.eventKey}-${index}`
 
-                  <Row as='ul' className={ stl.tab__members } xs='1' sm='2' md='3' lg='4'>
-                    {
-                      tab.members?.map((member, index) => {
-                        const photo = member.photo
-                        const name = `${member.first_name} ${member.last_name}`
-                        const mainRole = member.main_role.title
-                        const roles = member.other_roles.length
-                          ? member.other_roles.map(role => role.title).join(' ')
-                          : null
-                        const key = `${tab.eventKey}-${index}`
-
-                        return (
-                          <Col key={ key } as='li' className='mb-50'>
-                            <TeamMember
-                              photo={ photo }
-                              name={ name }
-                              mainRole={ mainRole }
-                              roles={ roles }
-                            />
-                          </Col>
-                        )
-                      })
-                    }
-                  </Row>
+                            return (
+                              <Col key={ key } as='li' className='mb-50'>
+                                <TeamMember
+                                  photo={ photo }
+                                  name={ name }
+                                  mainRole={ mainRole }
+                                  roles={ roles }
+                                />
+                              </Col>
+                            )
+                          })
+                        }
+                      </Row>
+                  }
                 </Tab>
               )
             })
@@ -240,16 +176,16 @@ function Team({ usersData }) {
   )
 }
 
-export async function getStaticProps(context) {
-  let usersData
+// export async function getServerSideProps(context) {
+//   let usersData
 
-  try {
-    usersData = await api.getTeam()
-  } catch (err) {
-    usersData = usersDataLocal
-  } finally {
-    return { props: { usersData } }
-  }
-}
+//   try {
+//     usersData = await api.getTeam()
+//   } catch (err) {
+//     usersData = usersDataLocal
+//   } finally {
+//     return { props: { usersData } }
+//   }
+// }
 
 export default Team

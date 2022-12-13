@@ -8,6 +8,7 @@ function TeamMember({ photo, name, mainRole, roles }) {
         <Image
           className={ stl.photo__img }
           src={ photo || '/images/team/no-photo.svg' }
+          loader={ () => photo || '/images/team/no-photo.svg' }
           width="255"
           height="260"
           alt={ 'Фото ' + name }

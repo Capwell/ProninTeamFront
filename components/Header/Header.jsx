@@ -1,58 +1,24 @@
-import Link from 'next/link';
-import { useRef } from 'react';
-import { Button, Container, NavLink } from 'react-bootstrap';
-import PTLogo from '../PTLogo/PTLogo';
-import stl from './Header.module.scss';
+import { Container } from 'react-bootstrap'
+import PTLogo from '../PTLogo/PTLogo'
+import PTNav from '../PTNav/PTNav'
+import stl from './Header.module.scss'
 
 function Header() {
-  const nav = useRef()
-
-  const toogleNav = () => {
-    nav.current.classList.toggle(stl.shown)
-  }
-
-  const burgerMenuClickHandler = e => {
-    if (e.target.classList.contains(stl.nav__link)) {
-      nav.current.classList.remove(stl.shown)
-    }
-  }
 
   return (
-    <header className={ `${stl.header} py-35` }>
+    <header className={ `${stl._wrapper} py-20 py-lg-35` }>
       <Container fluid="xxl">
-        <div className={ stl.header__inner }>
+        <div className={ stl._inner }>
           <PTLogo />
-
-          <Button
-            className={ `${stl.btn_burger} btn btn--burger` }
-            onClick={ toogleNav }
-          >
-            <span />
-            <span />
-            <span />
-          </Button>
-
-          <nav
-            className={ stl.header__nav }
-            ref={ nav }
-            onClick={ burgerMenuClickHandler }
-          >
-            <Link className={ stl.nav__link } href="/services">
-              Услуги
-            </Link>
-            <Link className={ stl.nav__link } href="/cases">
-              Кейсы
-            </Link>
-            {/* <NavLink className={ stl.nav__link } href="/#about">
-              О нас
-            </NavLink> */}
-            <Link className={ stl.nav__link } href="/team">
-              Наша команда
-            </Link>
-            <Link className={ stl.nav__link } href="/#brief">
-              Стать клиентом
-            </Link>
-          </nav>
+          <PTNav
+            layout="header"
+            links={[
+              ['/services', 'Услуги'],
+              ['/cases', 'Кейсы'],
+              ['/team', 'Наша команда'],
+              ['/#brief', 'Стать клиентом']
+            ]}
+          />
         </div>
       </Container>
     </header>

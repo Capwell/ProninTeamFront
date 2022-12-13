@@ -8,6 +8,10 @@ const nextConfig = {
   },
   images: {
     deviceSizes: [320, 575, 767, 991, 1150],
+    domains: [
+      'proninteam.ru',
+    ],
+    unoptimized: true,
   }
 }
 

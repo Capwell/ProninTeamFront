@@ -1,32 +1,43 @@
-import { useState } from 'react';
-import {
-  Row,
-  Col,
-  Container
-} from 'react-bootstrap';
+import Image from 'next/image'
+import Link from 'next/link'
+import { useState } from 'react'
+import { useEffect } from 'react'
+import { Row, Col, Container } from 'react-bootstrap'
 import PTHead from '../components/PTHead/PTHead'
-import VideoModal from '../components/VideoModal/VideoModal'
+import ModalVideo from '../components/ModalVideo/ModalVideo'
 import ClientForm from '../components/ClientForm/ClientForm'
-import stl from '../styles/Home.module.scss'
 import PTButton from '../components/PTButton/PTButton'
+import Loader from '../components/Loader/Loader'
 import CaseBanner from '../components/CaseBanner/CaseBanner'
+import stl from '../styles/Home.module.scss'
 import api from '../utils/api'
-import Image from 'next/image';
+import { mainCaseLocal } from '../public/mockData'
 
-
-const mainCaseLocal = [{
-  title: 'Unity',
-  hex_color: '#FF2A23',
-  logo: '/images/cases/unity-logo.webp',
-  is_on_main_page: true,
-  is_visible: true,
-  slug: 'unity',
-  text: 'Разработали раздел для популяризации донорства.'
-}]
-
-// function Home() {
-function Home({ caseData }) {
+// function Home({ caseData }) {
+function Home() {
   const [showVideo, setShowVideo] = useState(false)
+  const [mainCaseData, getMainCaseData] = useState([])
+  const [isDataLoading, setIsDataLoading] = useState(true)
+  // fetch data and set it to the state
+  const getData = async () => {
+    try {
+      const data = await api.getMainCase()
+      if (!data || !data.length) {
+        getMainCaseData(mainCaseLocal)
+      }
+      getMainCaseData(data)
+    } catch (err) {
+      getMainCaseData(mainCaseLocal)
+    } finally {
+      setIsDataLoading(false)
+    }
+  }
+  // fetch data only after the page is mounted (componentDidMount)
+  useEffect(() => {
+    // setIsDataLoading(true)
+    getData()
+  }, [])
+
   // open modal window with video
   const openVideo = () => setShowVideo(true)
 
@@ -99,10 +110,11 @@ function Home({ caseData }) {
               mt-30 mt-lg-0
             '
           >
-            <VideoModal
+            <ModalVideo
               show={ showVideo }
               setShow={ setShowVideo }
             />
+
             <div className={ stl.about__video }>
               <div
                 className={ stl.video__thumbnail }
@@ -148,40 +160,40 @@ function Home({ caseData }) {
         </Container>
 
         {
-          caseData.length
-            ? (<CaseBanner
-                as='div'
-                caseColor={ caseData[0].hex_color }
-                logo={ caseData[0].logo }
-                description={ caseData[0].text }
-                linkURL={ caseData[0].slug }
-              />)
-            : null
+          isDataLoading
+          ? <Loader className="my-50 mx-auto" size="lg" />
+          : <CaseBanner
+              as='div'
+              caseColor={ mainCaseData[0].hex_color || '#ffffff' }
+              logo={ mainCaseData[0].logo }
+              description={ mainCaseData[0].text }
+              linkURL={ mainCaseData[0].slug }
+            />
         }
 
         <Container fluid="xxl" className="d-flex mt-30">
-          <PTButton
-            variant="small"
-            className={ `${stl.cases__btn} ms-auto` }
-            text="Посмотреть все кейсы"
+          <Link
+            className={ `${stl.cases__btn} btn btn-small ms-auto` }
             href="/cases"
-          />
+          >
+            Посмотреть все кейсы
+          </Link>
         </Container>
       </section>
     </>
   );
 }
 
-export async function getServerSideProps(context) {
-  let caseData
+// export async function getServerSideProps(context) {
+//   let caseData
 
-  try {
-    caseData = await api.getMainCase()
-  } catch (err) {
-    caseData = mainCaseLocal
-  } finally {
-    return { props: { caseData } }
-  }
-}
+//   try {
+//     caseData = await api.getMainCase()
+//   } catch (err) {
+//     caseData = mainCaseLocal
+//   } finally {
+//     return { props: { caseData } }
+//   }
+// }
 
 export default Home

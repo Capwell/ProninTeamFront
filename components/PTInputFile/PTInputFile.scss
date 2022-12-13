@@ -1,0 +1,127 @@
+@import '../../styles/variables.scss';
+
+.control--file {
+  position: relative;
+  width: fit-content;
+  max-width: $base * 85;      // 425 px
+  padding-right: 1.5rem;
+
+  .control__label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: fit-content;
+    margin-bottom: 0;
+    padding-top: 7px;
+    padding-left: $base * 12;       // 60 px
+    font-weight: 500;
+    cursor: pointer;
+
+    &:before {
+      content: url('../../public/images/paper-clip.svg');
+      position: absolute;
+      top: 2px;
+      left: 0;
+    }
+
+    .label__top {
+      display: flex;
+      flex-wrap: wrap;
+
+      span {
+        height: 1rem;
+        margin-bottom: 7px;
+        line-height: 1;
+        letter-spacing: .07em;
+        white-space: nowrap;
+      }
+
+      span:first-child {
+        margin-right: .4rem;
+        border-bottom: 1px solid $c-primary;
+        max-width: $base * 42;         // 210 px
+        text-overflow: ellipsis;
+        overflow: hidden;
+        white-space: nowrap;
+        transition: all .15s ease-in-out;
+      }
+    }
+
+    & > span {
+      color: $gray-400;
+      font-size: .875rem;
+      line-height: 1;
+      letter-spacing: .07em;
+    }
+
+    &:hover .label__top > span:first-child {
+      color: $c-success;
+      border-color: $c-success;
+    }
+
+    &:active .label__top > span:first-child {
+      color: $gray-300;
+      border-color: $gray-300;
+    }
+  }
+
+  .control__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: 0;
+    padding: 0;
+    border: none;
+    visibility: hidden;
+    opacity: 0;
+    z-index: -1;
+    overflow: hidden;
+    clip: rect(0 0 0 0);
+  }
+
+  .control__btn {
+    position: absolute;
+    top: 8px;
+    right: 0;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    width: 1rem;
+    height: 1rem;
+    border: none;
+    padding: 0;
+    background: transparent;
+    transition: all .15s ease-in-out;
+
+    &.show {
+      display: flex;
+    }
+
+    &:hover > svg > path {
+      fill: $c-success;
+    }
+  }
+
+  .control__error {
+    position: absolute;
+    top: -1.2rem;
+    left: 0;
+    overflow: hidden;
+    width: 100%;
+    color: $c-danger;
+    font-size: .875rem;
+    line-height: 1.143;
+  }
+
+  @media screen and (max-width: 575px) {
+
+    .control--file {
+      max-width: $base * 56;       // 280 px
+    }
+
+    .control__label {
+      padding-left: $base * 10;    // 50 px
+    }
+  }
+}

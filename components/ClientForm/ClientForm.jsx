@@ -2,10 +2,10 @@ import Link from 'next/link'
 import { useState, useRef, useEffect } from 'react'
 import { Row, Col, Form } from "react-bootstrap"
 import { useFormik } from 'formik'
-import SubmitModal from '../SubmitModal/SubmitModal'
+import ModalSubmit from '../ModalSubmit/ModalSubmit'
 import PTInputText from '../PTInputText/PTInputText'
 import PTTextarea from '../PTTextarea/PTTextarea'
-import PTFileInput from '../PTFileInput/PTFileInput'
+import PTInputFile from '../PTInputFile/PTInputFile'
 import PTButton from '../PTButton/PTButton'
 import stl from './ClientForm.module.scss'
 import api from '../../utils/api'
@@ -19,6 +19,7 @@ function ClientForm({ className, targetPage }) {
   const fileInput = useRef()
   const captchaToken = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
   const formRef = useRef()
+
   // Add reCaptcha script (componentDidMount)
   useEffect(() => {
     const script = document.createElement('script')
@@ -41,40 +42,38 @@ function ClientForm({ className, targetPage }) {
       communicate: '',
       message: '',
       file: '',
-      is_agreed: false,
-      token: ''
+      is_agreed: false
     },
     // set validate function
     validate: values => {
       const errors = {}
       // Name validation
-      if (!values.name) errors.name = 'Обязательно';
+      if (!values.name) errors.name = 'Обязательно'
       else if (values.name.length < 2) {
-        errors.name = 'Пожалуйста, введите не менее 2 символов';
+        errors.name = 'Пожалуйста, введите не менее 2 символов'
       } else if (values.name.length > 20) {
-        errors.name = 'Пожалуйста, введите не более 20 символов';
+        errors.name = 'Пожалуйста, введите не более 20 символов'
       }
       // Communicate validation
-      if (!values.communicate) {
-        errors.communicate = 'Обязательно';
-      } else if (values.communicate.length < 2) {
-        errors.communicate = 'Пожалуйста, введите не менее 2 символов';
+      if (!values.communicate) errors.communicate = 'Обязательно'
+      else if (values.communicate.length < 2) {
+        errors.communicate = 'Пожалуйста, введите не менее 2 символов'
       } else if (values.communicate.length > 20) {
-        errors.communicate = 'Пожалуйста, введите не более 20 символов';
+        errors.communicate = 'Пожалуйста, введите не более 20 символов'
       }
       // Message validation
       if (
         !fileInput.current.files[0] &&
         (values.message && values.message.length < 20)
       ) {
-        errors.message = 'Введите не менее 20 символов';
+        errors.message = 'Введите не менее 20 символов'
       }
       // Checkbox validation
       if (!values.is_agreed) {
         errors.is_agreed = 'Обязательно'
       }
 
-      return errors;
+      return errors
     },
     // set function for success validation and submitting
     onSubmit: async (values) => {
@@ -84,21 +83,18 @@ function ClientForm({ className, targetPage }) {
         window.grecaptcha.execute(captchaToken, { action: "submit" })
           .then(async (token) => {
             try {
-              // set recaptcha token to formik values state
-              formik.setFieldValue('token', token)
               // create FormData obj with all values from form
               const fData = new FormData(formRef.current)
+              fData.append('token', token)
               // send FormData to server
               await api.sendOffer(fData)
               // if no errors
               setModalType('success') // show success modal
-              setModalShow(true)
-              setTimeout(() => setModalShow(false), 3000) // close it in 3 sec
             } catch (err) {
               setModalType('error') // show error modal
+            } finally {
               setModalShow(true)
               setTimeout(() => setModalShow(false), 3000) // close it in 3 sec
-            } finally {
               setIsLoading(false)
             }
           })
@@ -114,14 +110,11 @@ function ClientForm({ className, targetPage }) {
 
     // if required fields (name, communicate, checkbox) are empty or invalid
     if (errors.name || errors.communicate || errors.is_agreed) {
-      // set type of modal for render right text
-      setModalType('requiredErr')
-      // show modal
-      setModalShow(true)
-      // close modal after 3 secs
-      setTimeout(() => setModalShow(false), 3000)
-      // stop submitting
-      return false
+      setModalType('requiredErr') // set type of modal
+      setModalShow(true) // show modal
+      setTimeout(() => setModalShow(false), 3000) // close modal after 3 secs
+
+      return false // stop submitting
     }
     // if message input is empty AND file is NOT attached
     if ((errors.message || !values.message) && !values.file) {
@@ -144,43 +137,23 @@ function ClientForm({ className, targetPage }) {
       else formik.validateField('message') // else - validate message input
     }
   }
-  // check errors on text inputs
-  const inputTextErrorHandler = (inputName) => {
+  // check errors on inputs
+  const inputErrorHandler = (inputName) => {
     const err = { status: undefined, text: '' }
-    // if input was touched
-    if (formik.touched[inputName]) {
-      // and if formik.errors object has field with name of input
-      if (formik.errors[inputName]) {
-        err.status = true
-        err.text = formik.errors[inputName]
-      } else {
-        err.status = false
-        err.text = ''
-      }
-    } else { // if input isn't touched - don't set any valid classes
+    // if input is message and it is empty
+    if (inputName === 'message' && !formik.values[inputName].length) {
       err.status = undefined
       err.text = ''
-    }
-
-    return err
-  }
-  // check errors on textarea
-  const textareaErrorHandler = (inputName) => {
-    const err = { status: undefined, text: '' }
-    // if textarea is empty
-    if (!formik.values[inputName].length) {
-      err.status = undefined
-      err.text = ''
-    } else { // if textarea is not empty
-      if (formik.touched[inputName]) { // and if textarea was touched
+    } else {
+      if (formik.touched[inputName]) { // and if input was touched
         if (formik.errors[inputName]) { // and there are some errors
           err.status = true
           err.text = formik.errors[inputName]
-        } else { // if textarea is touched and not empty and no errors
+        } else {
           err.status = false
           err.text = ''
         }
-      } else { // if textarea is not touched
+      } else { // if input is not touched
         err.status = undefined
         err.text = ''
       }
@@ -197,7 +170,7 @@ function ClientForm({ className, targetPage }) {
       ref={ formRef }
     >
 {/* Modal Window */}
-      <SubmitModal
+      <ModalSubmit
         show={ modalShow }
         type={ modalType }
         onHide={ () => setModalShow(false) }
@@ -206,7 +179,7 @@ function ClientForm({ className, targetPage }) {
       <h2 className={ stl.form__title }>
         Хотите заказать проект?
       </h2>
-      
+
       <p className={ stl.form__contacts }>
         Позвоните <a
           className={ stl.contacts__link }
@@ -223,29 +196,23 @@ function ClientForm({ className, targetPage }) {
         </a> или заполните форму:
       </p>
 {/* Name input */}
-      <Row className='mb-40'>
-        <Col>
-          <PTInputText
-            id="name"
-            label="Представьтесь, пожалуйста:"
-            isError={ inputTextErrorHandler('name') }
-            maxLength='20'
-            {...formik.getFieldProps('name')}
-          />
-        </Col>
-      </Row>
+      <PTInputText
+        id="name"
+        className='mb-40'
+        label="Представьтесь, пожалуйста:"
+        isError={ inputErrorHandler('name') }
+        maxLength='20'
+        {...formik.getFieldProps('name')}
+      />
 {/* Communicate input */}
-      <Row className='mb-70'>
-        <Col className='position-relative'>
-          <PTInputText
-            id="communicate"
-            label="Как с вами связаться?"
-            isError={ inputTextErrorHandler('communicate') }
-            maxLength='20'
-            {...formik.getFieldProps('communicate')}
-          />
-        </Col>
-      </Row>
+      <PTInputText
+        id="communicate"
+        className='mb-70'
+        label="Как с вами связаться?"
+        isError={ inputErrorHandler('communicate') }
+        maxLength='20'
+        {...formik.getFieldProps('communicate')}
+      />
 {/* Message questions */}
       <Row className='mb-30'>
         <Col lg={{ span: '6', order: 'last' }}>
@@ -271,23 +238,20 @@ function ClientForm({ className, targetPage }) {
           <PTTextarea
             id="message"
             placeholder="Напишите письмо в свободной форме, либо ответьте на список вопросов"
-            isError={ textareaErrorHandler('message') }
+            isError={ inputErrorHandler('message') }
             rows="12"
             {...formik.getFieldProps('message')}
           />
         </Col>
       </Row>
   {/* File input */}
-      <Row className='mb-30 mb-lg-45'>
-        <Col>
-          <PTFileInput
-            fileRef={ fileInput }
-            fileChangeCallback={ onFileChange }
-            id='file'
-            name='file'
-          />
-        </Col>
-      </Row>
+      <PTInputFile
+        className='mb-30 mb-lg-45'
+        fileRef={ fileInput }
+        fileChangeCallback={ onFileChange }
+        id='file'
+        name='file'
+      />
   {/* Form text */}
       <p className={ stl.form__text + ' mb-40'}>
         Пожалуйста, расскажите про свой проект.<br/>

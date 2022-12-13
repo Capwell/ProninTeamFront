@@ -9,8 +9,6 @@
     flex-direction: column;
     justify-content: flex-start;
     height: 100%;
-    // padding-top: $base * 19;     // 95 px
-    // padding-bottom: $base * 9;   // 45 px
   }
 
   &__header {
@@ -42,10 +40,11 @@
 @media screen and (max-width: 991px) {
 
   .banner {
-    height: $base * 90;    // 450 px
+    height: $base * 100;    // 500 px
 
     &__header {
       height: 40%;
+      align-items: center;
     }
   }
 }
@@ -57,10 +56,17 @@
     &__description {
       font-size: 1.25rem;
     }
+  }
+}
 
-    &__logo {
-      max-width: none;
-      height: $base * 20;    // 100 px
+@media screen and (max-width: 575px) {
+
+  .banner {
+    height: $base * 90;    // 450 px
+
+    &__header {
+      height: 35%;
+      align-items: center;
     }
   }
 }
