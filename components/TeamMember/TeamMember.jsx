@@ -1,16 +1,15 @@
 import Image from 'next/image'
 import stl from './TeamMember.module.scss'
 
-function TeamMember({ photo, name, mainRole, roles }) {
+function TeamMember({ className = '', photo, name, mainRole, roles }) {
   return (
-    <div className={ stl.member }>
+    <div className={ `${ stl.member } ${ className }` }>
       <div className={ stl.member__photo }>
         <Image
           className={ stl.photo__img }
           src={ photo || '/images/team/no-photo.svg' }
           loader={ () => photo || '/images/team/no-photo.svg' }
-          width="255"
-          height="260"
+          fill
           alt={ 'Фото ' + name }
         />
       </div>

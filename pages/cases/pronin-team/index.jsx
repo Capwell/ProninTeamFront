@@ -35,7 +35,7 @@ function CasePage() {
               <div className={ stl.banner__logo }>
                 <Image
                   className={ stl.logo__img }
-                  src="/images/cases/pronin-team/proninteam-logo.svg"
+                  src="/images/cases/pronin-team/pronin-team-logo.webp"
                   alt="ProninTeam Logo"
                   fill
                 />
