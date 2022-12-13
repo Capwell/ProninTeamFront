@@ -1,13 +1,11 @@
-import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { Container, Row, Col } from 'react-bootstrap'
 import PTHead from '../../../components/PTHead/PTHead'
-import PTButton from '../../../components/PTButton/PTButton'
 import TeamMember from '../../../components/TeamMember/TeamMember'
+import PTBreadcrumb from '../../../components/PTBreadcrumb/PTBreadcrumb'
 import stl from './donor-search.module.scss'
 
 function CasePage() {
-  const router = useRouter()
 
   return (
     <>
@@ -20,14 +18,9 @@ function CasePage() {
         ogSiteName='ProninTeam'
       />
 
-      <Container fluid="xxl" className="mt-30 mb-30 mb-lg-110">
-        <PTButton
-          variant="small-back"
-          onClick={ () => router.back() }
-        />
-      </Container>
+      <PTBreadcrumb />
 {/* Banner */}
-      <div className={ `${ stl.banner } mb-60 mb-lg-100` }>
+      <div className={ `${ stl.banner } mt-lg-80 mb-60 mb-lg-100` }>
         <Container fluid="xxl">
           <div className={ `${ stl.banner__inner } py-55` }>
             <div className={ stl.banner__logo }>

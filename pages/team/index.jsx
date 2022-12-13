@@ -1,24 +1,16 @@
-import { useRouter } from 'next/router'
-import {
-  Tabs,
-  Tab,
-  Row,
-  Col,
-  Container
-} from 'react-bootstrap'
-import stl from '../../styles/Team.module.scss'
+import { useEffect, useState } from 'react'
+import { Tabs, Tab, Container, Row, Col } from 'react-bootstrap'
 import PTHead from '../../components/PTHead/PTHead'
+import PTBreadcrumb from '../../components/PTBreadcrumb/PTBreadcrumb'
+import Loader from '../../components/Loader/Loader'
 import TeamMember from '../../components/TeamMember/TeamMember'
 import PTButton from '../../components/PTButton/PTButton'
+import stl from '../../styles/Team.module.scss'
 import api from '../../utils/api'
-import { useEffect } from 'react'
-import { useState } from 'react'
-import Loader from '../../components/Loader/Loader'
 import { usersDataLocal } from '../../public/mockData'
 
 // function Team({ usersData }) {
 function Team() {
-  const router = useRouter()
   const [usersData, getUsersData] = useState([])
   const [isDataLoading, setIsDataLoading] = useState(true)
   // fetch data and set it to the state
@@ -100,18 +92,9 @@ function Team() {
         ogSiteName='ProninTeam'
       />
 
-      <Container
-        as="section"
-        fluid="xxl"
-        className="mt-30 mb-20"
-      >
-{/* Back button */}
-        <PTButton
-          className="mb-30"
-          variant="small-back"
-          onClick={ () => router.back() }
-        />
+      <PTBreadcrumb />
 
+      <Container as="section" fluid="xxl" className="mb-20">
         <h1 className={ stl.team__title }>
           Наша команда
         </h1>

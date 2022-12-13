@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import { Container } from 'react-bootstrap'
 import { useEffect } from 'react'
 import { useState } from 'react'
@@ -9,10 +8,10 @@ import Loader from '../../components/Loader/Loader'
 import stl from '../../styles/Cases.module.scss'
 import api from '../../utils/api'
 import { casesDataLocal } from '../../public/mockData'
+import PTBreadcrumb from '../../components/PTBreadcrumb/PTBreadcrumb'
 
 // function Cases({ casesData }) {
 function Cases() {
-  const router = useRouter()
   const [casesData, getCasesData] = useState([])
   const [isDataLoading, setIsDataLoading] = useState(true)
   // fetch data and set it to the state
@@ -34,7 +33,6 @@ function Cases() {
 
   return (
     <>
-{/* TODO: доделать голову */}
       <PTHead
         title="ProninTeam - Кейсы"
         description='Можно посмотреть примеры услуг, оказанных компанией на примере реальных кейсов. Закрываем накопившиеся IT-потребности заказчика. Разработали раздел сайта. Разработали сайт компании с нуля за 4 недели'
@@ -44,19 +42,10 @@ function Cases() {
         ogSiteName='Результат услуг ProninTeam на примере реальных кейсов'
       />
 
-      <Container
-        as="section"
-        fluid="xxl"
-        className="mt-30"
-      >
-{/* Back button */}
-        <PTButton
-          className="mb-30"
-          variant="small-back"
-          onClick={ () => router.back() }
-        />
+      <PTBreadcrumb/>
 
-        <h1 className={ `${stl.cases__title} mb-100` }>
+      <Container as="section" fluid="xxl" className="mb-100">
+        <h1 className={ stl.cases__title}>
           Кейсы
         </h1>
       </Container>

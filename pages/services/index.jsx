@@ -1,16 +1,14 @@
-import { useRouter } from 'next/router'
 import { Container, Row, Col } from 'react-bootstrap'
 import PTHead from '../../components/PTHead/PTHead'
 import PTButton from '../../components/PTButton/PTButton'
 import ClientForm from '../../components/ClientForm/ClientForm'
 import stl from '../../styles/Services.module.scss'
+import PTBreadcrumb from '../../components/PTBreadcrumb/PTBreadcrumb'
 
 function Services() {
-  const router = useRouter()
 
   return (
     <>
-{/* TODO: доделать голову */}
       <PTHead
         title="Услуги ProninTeam"
         description='В айти компании можно заказать услуги по разработке и поддержке сайтов. Администрирование серверов и сайтов. Дизайн. Верстка. Программирование. Информационная поддержка. Интеграция. Продвижение сайта.'
@@ -20,18 +18,9 @@ function Services() {
         ogSiteName='Услуги ProninTeam по разработке и поддержке сайтов.'
       />
 
-      <Container
-        as="section"
-        fluid="xxl"
-        className="mt-30 mb-20"
-      >
-{/* Back button */}
-        <PTButton
-          className="mb-30"
-          variant="small-back"
-          onClick={ () => router.back() }
-        />
-
+      <PTBreadcrumb/>
+      
+      <Container as="section" fluid="xxl" className="mb-20">
         <h1 className={ `${stl.services__title} mb-50 mb-lg-85` }>
           Услуги
         </h1>
