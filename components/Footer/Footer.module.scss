@@ -1,80 +1,79 @@
 @import '../../styles/variables.scss';
 
-.footer {
+._wrapper {
   margin-top: auto;
   background-color: white;
   box-shadow: $footer-box-shadow;
 
-  &__legal {
+  ._legal {
     font-size: .875rem;
     font-weight: 400;
     line-height: 1.2;
     text-decoration-line: underline;
   }
 
-  &__copyright {
+  ._copyright {
     font-size: .875rem;
     white-space: nowrap;
   }
 
-  &__group {
+  ._contact {
     display: flex;
     flex-direction: column;
     width: fit-content;
     text-align: right;
 
-    & + & {
-      margin-left: $base * 8;      // 40 px
+    ._contact_title {
+      font-size: .875rem;
+      line-height: 1.215;
+      letter-spacing: .045em;
+      margin-bottom: $base * 2;  // 10 px
     }
 
-    .group {
+    ._contact_link {
+      color: $c-primary;
+      font-weight: 500;
+      line-height: 1.25;
+      white-space: nowrap;
+      transition: color .15s ease-in-out;
 
-      &__title {
-        font-size: .875rem;
-        line-height: 1.215;
-        letter-spacing: .045em;
-        margin-bottom: $base * 2;  // 10 px
-      }
-
-      &__link {
-        color: $c-primary;
-        font-weight: 500;
-        line-height: 1.25;
-        white-space: nowrap;
+      &:hover {
+        color: $c-info;
       }
     }
+  }
+
+  ._contact + ._contact {
+    margin-left: $base * 8;      // 40 px
   }
 }
 
 @media screen and (max-width: 767px) {
 
-  .footer {
+  ._wrapper {
 
-    &__group {
+    ._contact {
       text-align: center;
     }
   }
 }
 
 @media screen and (max-width: 575px) {
-  
-  .footer {
 
-    &__group {
+  ._wrapper {
+
+    ._contact {
       width: 100%;
       text-align: right;
 
-      & + & {
-        margin-top: $base * 2;    // 10 px
-        margin-left: 0;           // 40 px
+      ._contact_link {
+        font-size: .875rem;
       }
+    }
 
-      .group {
-
-        &__link {
-          font-size: .875rem;
-        }
-      }
+    ._contact + ._contact {
+      margin-top: $base * 2;    // 10 px
+      margin-left: 0;           // 40 px
     }
   }
 }

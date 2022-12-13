@@ -7,10 +7,10 @@ import stl from './Footer.module.scss'
 function Footer() {
   return (
     <>
-      <footer className={ `${stl.footer} py-35 py-md-45` }>
+      <footer className={ `${ stl._wrapper } py-35 py-md-45` }>
         <Container fluid="xxl">
-
           <Row>
+{/* Logo */}
             <Col
               xs={{ span: 12, order: 'first' }}
               lg="3"
@@ -18,12 +18,12 @@ function Footer() {
             >
               <PTLogo />
             </Col>
-
+{/* Menu */}
             <Col
               xs={{ span: 6, order: 2 }}
               md="12"
               lg="9"
-              className="mb-15 mb-lg-35"
+              className="mb-35"
             >
               <PTNav
                 layout="footer"
@@ -35,7 +35,7 @@ function Footer() {
                 ]}
               />
             </Col>
-
+{/* Legal link */}
             <Col
               xs={{ span: 12, order: 4 }}
               lg={{ span: 6, order: 3 }}
@@ -46,48 +46,47 @@ function Footer() {
                 align-items-end
               "
             >
-              <Link className={ stl.footer__legal } href="/legal#privacy">
+              <Link className={ stl._legal } href="/legal#privacy">
                 Политика конфиденциальности
               </Link>
             </Col>
-
+{/* Copyright */}
             <Col
               xs={{ span: 12, order: 'last'}}
               xl={{ span: 4, order: 4 }}
               className="
                 d-flex align-items-xl-end justify-content-center
-                mt-35 mt-xl-0
+                mt-15 mt-lg-35 mt-xl-0
               "
             >
-              <span className={ stl.footer__copyright }>
+              <span className={ stl._copyright }>
                 © ProninTeam 2022
               </span>
             </Col>
-
+{/* Contacts */}
             <Col
               xs={{ span: 6, order: 3 }}
               md="12"
               lg={{ span: 6, order: 4 }}
               xl={{ span: 4, order: 'last' }}
-              className='
+              className="
                 d-flex
                 flex-column flex-md-row
-                justify-content-md-center justify-content-lg-end
-                mb-15 mb-lg-0
-              '
+                justify-content-between justify-content-md-center justify-content-lg-end
+                mb-35 mb-lg-0
+              "
             >
-              <div className={ stl.footer__group }>
-                <span className={ stl.group__title }>Позвонить</span>
-                <a className={ stl.group__link } href="tel:+79272703006">+7 927 270-30-06</a>
+              <div className={ stl._contact }>
+                <span className={ stl._contact_title }>Позвонить</span>
+                <a className={ stl._contact_link } href="tel:+79272703006">+7 927 270-30-06</a>
               </div>
 
-              <div className={ stl.footer__group }>
-                <span className={ stl.group__title }>Написать</span>
-                <a className={ stl.group__link } href="mailto:mail@yandex.ru">mail@yandex.ru</a>
+              <div className={ stl._contact }>
+                <span className={ stl._contact_title }>Написать</span>
+                <a className={ stl._contact_link } href="mailto:mail@yandex.ru">mail@yandex.ru</a>
               </div>
             </Col>
           </Row>
-
         </Container>
       </footer>
     </>
