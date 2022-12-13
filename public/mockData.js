@@ -77,7 +77,7 @@ export const casesDataLocal = [
   {
     title: 'DonorSearch',
     hex_color: '#FF2A23',
-    logo: '/images/cases/donor-search-logo.webp',
+    logo: '/images/cases/donor-search/donor-search-logo.webp',
     is_on_main_page: false,
     is_visible: true,
     slug: 'donor-search',
@@ -86,8 +86,8 @@ export const casesDataLocal = [
   {
     title: 'Unity',
     hex_color: '#FF2A23',
-    logo: '/images/cases/unity-logo.webp',
-    is_on_main_page: false,
+    logo: '/images/cases/unity/unity-logo.webp',
+    is_on_main_page: true,
     is_visible: true,
     slug: 'unity',
     text: 'Разработали раздел для популяризации донорства.'
@@ -95,8 +95,8 @@ export const casesDataLocal = [
   {
     title: 'ProninTeam',
     hex_color: '#30D5C8',
-    logo: '/images/cases/pronin-team-logo.webp',
-    is_on_main_page: true,
+    logo: '/images/cases/pronin-team/pronin-team-logo.webp',
+    is_on_main_page: false,
     is_visible: true,
     slug: 'pronin-team',
     text: 'Разработали сайт компании ProninTeam с нуля за 4 недели',
@@ -106,8 +106,8 @@ export const casesDataLocal = [
 export const mainCaseLocal = [
   {
     title: 'Unity',
-    hex_color: '#ff2a23',
-    logo: '/images/cases/unity-logo.webp',
+    hex_color: '#FF2A23',
+    logo: '/images/cases/unity/unity-logo.webp',
     is_on_main_page: true,
     is_visible: true,
     slug: 'unity',

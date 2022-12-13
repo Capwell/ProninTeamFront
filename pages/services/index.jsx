@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { Container, Row, Col } from 'react-bootstrap'
 import PTHead from '../../components/PTHead/PTHead'
 import PTButton from '../../components/PTButton/PTButton'
@@ -6,11 +6,9 @@ import ClientForm from '../../components/ClientForm/ClientForm'
 import stl from '../../styles/Services.module.scss'
 
 function Services() {
-  const router = useRouter()
 
   return (
     <>
-{/* TODO: доделать голову */}
       <PTHead
         title="Услуги ProninTeam"
         description='В айти компании можно заказать услуги по разработке и поддержке сайтов. Администрирование серверов и сайтов. Дизайн. Верстка. Программирование. Информационная поддержка. Интеграция. Продвижение сайта.'
@@ -20,18 +18,7 @@ function Services() {
         ogSiteName='Услуги ProninTeam по разработке и поддержке сайтов.'
       />
 
-      <Container
-        as="section"
-        fluid="xxl"
-        className="mt-30 mb-20"
-      >
-{/* Back button */}
-        <PTButton
-          className="mb-30"
-          variant="small-back"
-          onClick={ () => router.back() }
-        />
-
+      <Container as="section" fluid="xxl" className="mb-20">
         <h1 className={ `${stl.services__title} mb-50 mb-lg-85` }>
           Услуги
         </h1>
@@ -45,35 +32,35 @@ function Services() {
             <li className={ `${stl.list__item}` }>
               <strong>Администрирование серверов и сайтов.</strong> Обеспечение безопасности. Резервное копирование. Антивирусная защита. Автоматическое тестирование. Мониторинг 24/7.
             </li>
-            <li className={ `${stl.list__item}` }>
+            <li className={ `${ stl.list__item }` }>
               <strong>Дизайн.</strong> Редизайн сайта, обработка фото, баннеры.
             </li>
-            <li className={ `${stl.list__item}` }>
+            <li className={ `${ stl.list__item }` }>
               <strong>Верстка.</strong> Создание новых разделов, лендингов, промо-страниц.
             </li>
-            <li className={ `${stl.list__item}` }>
+            <li className={ `${ stl.list__item }` }>
               <strong>Программирование</strong> новых функциональных модулей на сайте.
             </li>
-            <li className={ `${stl.list__item}` }>
+            <li className={ `${ stl.list__item }` }>
               <strong>Информационная поддержка.</strong> Заполнение карточек товарных позиций, актуализация информации, развитие разделов с описаниями, статьями и новостями.
             </li>
-            <li className={ `${stl.list__item}` }>
+            <li className={ `${ stl.list__item }` }>
               <strong>Интеграция.</strong> С внешними системами, как внутри компании, так и во внешнем контуре.
             </li>
-            <li className={ `${stl.list__item}` }>
+            <li className={ `${ stl.list__item }` }>
               <strong>Продвижение сайта.</strong> Контекстная реклама, таргетированная реклама, поисковая оптимизация (SEO).
             </li>
-            <li className={ `${stl.list__item}` }>
+            <li className={ `${ stl.list__item }` }>
               <strong>Консультации.</strong> Увеличиваем присутствие в интернете на сторонних площадках.
             </li>
-            <li className={ `${stl.list__item}` }>
+            <li className={ `${ stl.list__item }` }>
               Размещение сайтов в дата-центре <a href="https://www.netangels.ru/" target="_blank" rel="noreferrer">netangels.ru</a>
             </li>
           </ul>
         </section>
 
-        <section className={ `${stl.services__variants} mb-70 mb-lg-110` }>
-          <h2 className={ `${stl.variants__title} mb-40 mb-lg-65` }>
+        <section className={ `${ stl.services__variants } mb-70 mb-lg-110` }>
+          <h2 className={ `${ stl.variants__title } mb-40 mb-lg-65` }>
             3 варианта начала работ<br/>
             по поддержке и разработке сайта
           </h2>
@@ -87,6 +74,7 @@ function Services() {
                 <h3 className={ stl.item__title }>
                   Быстросайт
                 </h3>
+
                 <p className={ stl.item__description }>
                   Если задача типовая и сделать ее можно в течение месяца - мы ее оцениваем, готовим договор и выставляем счёт.<br/>
                   <br/>
@@ -95,12 +83,13 @@ function Services() {
                   Всё максимально просто.<br/>
                   Оценку и счёт постараемся сделать уже в день обращения.
                 </p>
-                <PTButton
-                  className={ stl.item__btn }
-                  variant="primary"
-                  text="Посмотреть пример"
+
+                <Link
+                  className={ `${ stl.item__btn } btn btn-primary` }
                   href="/cases/pronin-team/"
-                />
+                >
+                  Посмотреть пример
+                </Link>
               </div>
             </Col>
 
@@ -109,6 +98,7 @@ function Services() {
                 <h3 className={ stl.item__title }>
                   Несколько крупных, но разовых задач
                 </h3>
+
                 <p className={ stl.item__description }>
                   Несколько крупных, но разовых задач, требующих написания технических заданий.<br/>
                   <br/>
@@ -116,12 +106,13 @@ function Services() {
                   <br/>
                   Оцениваем объемы. Выставляем счета с существенными скидками на цену часа. Получаем оплату. Исполняем и сдаем. Параллельно оцениваем следующие задачи.
                 </p>
-                <PTButton
-                  className={ stl.item__btn }
-                  variant="primary"
-                  text="Посмотреть пример"
+
+                <Link
+                  className={ `${ stl.item__btn } btn btn-primary` }
                   href="/cases/unity/"
-                />
+                >
+                  Посмотреть пример
+                </Link>
               </div>
             </Col>
 
@@ -130,6 +121,7 @@ function Services() {
                 <h3 className={ stl.item__title }>
                   Постоянный поток задач
                 </h3>
+
                 <p className={ stl.item__description }>
                   Подписываем абонентский договор с очень выгодной ценой. <br/>
                   <br/>
@@ -137,12 +129,13 @@ function Services() {
                   <br/>
                   Проект стартует и ведется максимально быстро.
                 </p>
-                <PTButton
-                  className={ stl.item__btn }
-                  variant="primary"
-                  text="Посмотреть пример"
+
+                <Link
+                  className={ `${ stl.item__btn } btn btn-primary` }
                   href="/cases/donor-search"
-                />
+                >
+                  Посмотреть пример
+                </Link>
               </div>
             </Col>
           </Row>

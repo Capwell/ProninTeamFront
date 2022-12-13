@@ -1,9 +1,7 @@
-import { useRouter } from 'next/router'
 import { Container } from 'react-bootstrap'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import PTHead from '../../components/PTHead/PTHead'
-import PTButton from '../../components/PTButton/PTButton'
 import CaseBanner from '../../components/CaseBanner/CaseBanner'
 import Loader from '../../components/Loader/Loader'
 import stl from '../../styles/Cases.module.scss'
@@ -12,15 +10,17 @@ import { casesDataLocal } from '../../public/mockData'
 
 // function Cases({ casesData }) {
 function Cases() {
-  const router = useRouter()
   const [casesData, getCasesData] = useState([])
   const [isDataLoading, setIsDataLoading] = useState(true)
   // fetch data and set it to the state
   const getData = async () => {
     try {
       const data = await api.getCases()
-      if (!data || !data.length) getCasesData(casesDataLocal)
-      getCasesData(data)
+      if (!data || !data.length) {
+        getCasesData(casesDataLocal)
+      } else {
+        getCasesData(data)
+      }
     } catch (err) {
       getCasesData(casesDataLocal)
     } finally {
@@ -28,13 +28,10 @@ function Cases() {
     }
   }
   // fetch data only after the page is mounted (componentDidMount)
-  useEffect(() => {
-    getData()
-  }, [])
+  useEffect(() => { getData() }, [])
 
   return (
     <>
-{/* TODO: доделать голову */}
       <PTHead
         title="ProninTeam - Кейсы"
         description='Можно посмотреть примеры услуг, оказанных компанией на примере реальных кейсов. Закрываем накопившиеся IT-потребности заказчика. Разработали раздел сайта. Разработали сайт компании с нуля за 4 недели'
@@ -44,19 +41,8 @@ function Cases() {
         ogSiteName='Результат услуг ProninTeam на примере реальных кейсов'
       />
 
-      <Container
-        as="section"
-        fluid="xxl"
-        className="mt-30"
-      >
-{/* Back button */}
-        <PTButton
-          className="mb-30"
-          variant="small-back"
-          onClick={ () => router.back() }
-        />
-
-        <h1 className={ `${stl.cases__title} mb-100` }>
+      <Container as="section" fluid="xxl" className="mb-100">
+        <h1 className={ stl.cases__title}>
           Кейсы
         </h1>
       </Container>

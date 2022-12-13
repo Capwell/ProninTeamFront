@@ -4,9 +4,6 @@ const api = {
   async sendOffer(data) {
     let res = await fetch(`${this.url}/offers/`, {
       method: "POST",
-      // headers: {
-      //   'Content-Type': 'multipart/form-data'
-      // },
       body: data,
     })
 

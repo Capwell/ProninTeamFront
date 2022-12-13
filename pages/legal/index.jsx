@@ -1,12 +1,10 @@
-import PTHead from '../../components/PTHead/PTHead'
-import { useRouter } from 'next/router'
-import { Container } from 'react-bootstrap'
-import stl from '../../styles/Legal.module.scss'
 import Link from 'next/link'
+import { Container } from 'react-bootstrap'
+import PTHead from '../../components/PTHead/PTHead'
 import PTButton from '../../components/PTButton/PTButton'
+import stl from '../../styles/Legal.module.scss'
 
 function Legal() {
-  const router = useRouter()
   // scroll to top on button click
   const scrollToTop = () =>{
     window.scrollTo({
@@ -27,14 +25,7 @@ function Legal() {
         ogSiteName='ProninTeam'
       />
 
-{/* Back button */}
-      <Container fluid="xxl" className="mt-30 mb-100">
-        <PTButton
-          className="mb-30"
-          variant="small-back"
-          onClick={ () => router.back() }
-        />
-
+      <Container as="section" fluid="xxl" className="mb-100">
         <h1 className={ stl.legal__title }>
           Правовая информация
         </h1>

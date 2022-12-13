@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router'
 import Image from 'next/image'
 import Link from 'next/link'
 import { Container, Row, Col } from 'react-bootstrap'
@@ -7,7 +6,6 @@ import PTButton from '../../../components/PTButton/PTButton'
 import stl from './pronin-team.module.scss'
 
 function CasePage() {
-  const router = useRouter()
 
   return (
     <>
@@ -19,23 +17,15 @@ function CasePage() {
         ogImg='/images/pronin-team-og-img.webp'
         ogSiteName='ProninTeam'
       />
-
-      <Container fluid="xxl" className="mt-30">
-        <PTButton
-          className="mb-110"
-          variant="small-back"
-          onClick={ () => router.back() }
-        />
-      </Container>
 {/* Banner */}
-      <div className={ `${stl.banner} mb-100` }>
+      <div className={ `${ stl.banner } mt-lg-80 mb-60 mb-lg-100` }>
         <Container fluid="xxl">
-          <Row className={ `${stl.banner__inner} py-60` }>
+          <Row className={ `${ stl.banner__inner } py-60` }>
             <Col lg className="mb-40 mb-lg-0">
               <div className={ stl.banner__logo }>
                 <Image
                   className={ stl.logo__img }
-                  src="/images/cases/pronin-team/proninteam-logo.svg"
+                  src="/images/cases/pronin-team/pronin-team-logo.webp"
                   alt="ProninTeam Logo"
                   fill
                 />

@@ -26,7 +26,14 @@ const ColoredBanner = styled.div`
   }
 `
 
-function CaseBanner({ as, className = '', caseColor, logo, description, linkURL }) {
+function CaseBanner({
+  as = 'div',
+  className = '',
+  caseColor = '#ffffff',
+  logo,
+  description,
+  linkURL
+}) {
 
   return(
     <ColoredBanner
