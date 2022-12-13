@@ -112,5 +112,5 @@ export const mainCaseLocal = [
     is_visible: true,
     slug: 'unity',
     text: 'Разработали раздел для популяризации донорства.'
-  },
+  }
 ]
