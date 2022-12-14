@@ -84,7 +84,7 @@ function Legal() {
           </div>
 {/* Button to top */}
           <PTButton
-            className="mb-20"
+            className="mb-30"
             variant="small-up"
             onClick={ scrollToTop }
           />
@@ -336,6 +336,7 @@ function Legal() {
           </div>
 {/* Button to top */}
           <PTButton
+            className="mb-30"
             variant="small-up"
             onClick={ scrollToTop }
           />
