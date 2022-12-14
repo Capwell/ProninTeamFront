@@ -1,11 +1,8 @@
 @import './variables.scss';
 
-.team {
-
-  &__title {
-    margin-bottom: $base * 5;     // 25 px
-    letter-spacing: .04em;
-  }
+._title {
+  margin-bottom: $base * 5;     // 25 px
+  letter-spacing: .04em;
 }
 
 .tab {

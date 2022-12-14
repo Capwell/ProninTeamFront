@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Tabs, Tab, Container, Row, Col } from 'react-bootstrap'
 import PTHead from '../../components/PTHead/PTHead'
 import Loader from '../../components/Loader/Loader'
-import TeamMember from '../../components/TeamMember/TeamMember'
+import PersonCard from '../../components/PersonCard/PersonCard'
 import stl from '../../styles/Team.module.scss'
 import api from '../../utils/api'
 import { usersDataLocal } from '../../public/mockData'
@@ -80,16 +80,16 @@ function Team() {
   return (
     <>
       <PTHead
-        title='ProninTeam - Команда'
-        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
-        ogType='website'
+        title="ProninTeam - Команда"
+        description="Сюда надо будет написать какое-то описание для каждой отдельной страницы"
+        ogType="website"
         ogUrl="https://proninteam.ru/team"
-        ogImg='/images/pronin-team-og-img.webp'
-        ogSiteName='ProninTeam'
+        ogImg="/images/pronin-team-og-img.webp"
+        ogSiteName="ProninTeam"
       />
 
       <Container as="section" fluid="xxl" className="mb-20">
-        <h1 className={ stl.team__title }>
+        <h1 className={ stl._title }>
           Наша команда
         </h1>
 {/* Tabs */}
@@ -116,22 +116,18 @@ function Team() {
                   {
                     isDataLoading
                     ? <Loader className="my-50 mx-auto" size="lg" />
-                    : <Row as='ul' className={ stl.tab__members } xs='1' sm='2' md='3' lg='4'>
+                    : <Row as="ul" className={ stl.tab__members } xs="1" sm="2" md="3" lg="4">
                         {
                           tab.members?.map((member, index) => {
                             const photo = member.photo
-                            const name = `${member.first_name} ${member.last_name}`
-                            const mainRole = member.main_role
-                              ? member.main_role.title
-                              : 'Нет роли'
-                            const roles = member.other_roles.length
-                              ? member.other_roles.map(role => role.title).join(' ')
-                              : null
-                            const key = `${tab.eventKey}-${index}`
+                            const name = `${ member.first_name } ${ member.last_name }`
+                            const mainRole = member.main_role.title
+                            const roles = member.other_roles.map(role => role.title).join(' ')
+                            const key = `${ tab.eventKey }-${ index }`
 
                             return (
-                              <Col key={ key } as='li' className='mb-50'>
-                                <TeamMember
+                              <Col key={ key } as="li" className="mb-50">
+                                <PersonCard
                                   photo={ photo }
                                   name={ name }
                                   mainRole={ mainRole }

@@ -1,6 +1,6 @@
 @import '../../styles/variables.scss';
 
-.member {
+._wrapper {
   position: relative;
   display: flex;
   flex-direction: column;
@@ -8,7 +8,7 @@
   width: 100%;
   text-align: center;
 
-  &__photo {
+  ._photo {
     position: relative;
     width: 100%;
     max-width: $base * 51;        // 255 px
@@ -24,7 +24,7 @@
     }
   }
 
-  &__name {
+  ._name {
     margin-bottom: $base * 2;     // 10 px
     font-size: .9375rem;
     font-weight: 700;
@@ -33,18 +33,18 @@
     text-align: center;
   }
 
-  &__mainRole,
-  &__roles {
+  ._mainRole,
+  ._roles {
     font-size: .9375rem;
     line-height: 1;
     letter-spacing: .07em;
   }
 
-  &__mainRole {
+  ._mainRole {
     font-size: .9375rem;
   }
 
-  &__roles {
+  ._roles {
     margin-top: $base;
     font-size: .875rem;
   }

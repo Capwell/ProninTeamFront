@@ -1,42 +1,30 @@
+@use "sass:map";
 @import './variables.scss';
 
-$grid-gutter-width: 30px !default;   // bootstrap columns' gap size
+// ===== SPACERS ===== //
+$spacer-value: $base-value;  // numeric value of spsacer
+$spacer: $base;              // 1 unit of size (5px, based on '$base' var)
+// generate map for bootstrap spacing classes
+@function create_spacers_map($value) {
+  $map: ();
+  // set values to map from 0 to max
+  @for $i from 0 to 80 {
+    // setting value in format (
+    //   5: $spacer * 1;
+    //   10: $spacer * 2;
+    //   ...
+    // )
+    $map: map.set($map, $value * $i, $spacer * $i);
+  };
 
-// size postfixes for margin and padding's classes of bootstrap
-$spacer: $base;       // 1 unit of size (5px, based on '$base' var)
-$spacers: (
-  0: 0,               // 0 px
-  5: $spacer,         // 5 px
-  15: $spacer * 3,    // 15 px
-  20: $spacer * 4,    // 20 px
-  25: $spacer * 5,    // 25 px
-  30: $spacer * 6,    // 30 px
-  35: $spacer * 7,    // 35 px
-  40: $spacer * 8,    // 40 px
-  45: $spacer * 9,    // 45 px
-  50: $spacer * 10,   // 50 px
-  55: $spacer * 11,   // 55 px
-  60: $spacer * 12,   // 60 px
-  65: $spacer * 13,   // 65 px
-  70: $spacer * 14,   // 70 px
-  75: $spacer * 15,   // 75 px
-  80: $spacer * 16,   // 80 px
-  85: $spacer * 17,   // 85 px
-  90: $spacer * 18,   // 90 px
-  100: $spacer * 20,  // 100 px
-  110: $spacer * 22,  // 110 px
-  115: $spacer * 23,  // 115 px
-  120: $spacer * 24,  // 120 px
-  125: $spacer * 25,  // 125 px
-  130: $spacer * 26,  // 130 px
-  140: $spacer * 28,  // 140 px
-  145: $spacer * 29,  // 145 px
-  150: $spacer * 30,  // 150 px
-  170: $spacer * 34,  // 170 px
-  190: $spacer * 38,  // 190 px
-  200: $spacer * 40,  // 200 px
-  400: $spacer * 80   // 400 px
-);
+  @return $map;
+}
+// add values in bootstrap spacing map
+$spacers: create_spacers_map($base-value);
+// ===== / ===== //
+
+// ===== GRID ===== //
+$grid-gutter-width: $base * 6 !default;   // bootstrap columns' gap size (30 px)
 // values of media queries
 $grid-breakpoints: (
   xs: 0,
@@ -46,6 +34,9 @@ $grid-breakpoints: (
   xl: 992px,
   xxl: 1150px
 );
+// ===== / ===== //
+
+// ===== CONTAINERS ===== //
 // widths of container for every screen size
 $container-max-widths: (
   sm: 540px,
@@ -54,14 +45,8 @@ $container-max-widths: (
   xl: 1000px,
   xxl: 1150px
 );
-$container-padding-x: 2.5rem; // padding-left & padding-right of container
-// settings for ratio components
-$aspect-ratios: (
-  "1x1": 100%,
-  "4x3": calc(3 / 4 * 100%),
-  "16x9": calc(9 / 16 * 100%),
-  "21x9": calc(9 / 21 * 100%)
-);
+$container-padding-x: 2.5rem;
+// ===== / ===== //
 
 $body-color: $c-primary;
 $font-family-base: 'Montserrat', sans-serif;
@@ -71,33 +56,32 @@ $headings-font-weight: 600;
 // ===== / ===== //
 
 // ===== FLOATING INPUTS & LABELS ===== //
-// label
+// ----- Label ----- //
 $form-floating-label-opacity: 1;
 $form-floating-label-transform: scale(.695) translateY(-.5rem) translateX(.9rem);
 
 @media screen and (max-width: 575px) {
   $form-floating-label-transform: scale(1.3) translateY(-.5rem) translateX(.9rem);
 }
-// input
+// ----- Input ----- //
 $form-floating-line-height: 1.2;
 $form-floating-input-padding-b: 0;
 // ===== / ===== //
 
 // ===== CHECKBOXES ===== //
-// default
+// ----- Default ----- //
 $form-check-input-width: 1.25em;
 $form-check-input-border: 1px solid $c-secondary;
 $form-check-input-border-radius: 0;
-// focus
+// ----- Focus ----- //
 $form-check-input-focus-border: $c-primary;
 $form-check-input-focus-box-shadow: none;
-// checked
+// ----- Checked ----- //
 $form-check-input-checked-border-color: $c-primary;
 $form-check-input-checked-bg-color: white;
 $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' height='20' viewBox='0 0 20 20' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M7.77794 15.4444L3.3335 11L4.88905 9.44444L7.77794 12.3333L15.1113 5L16.6668 6.55556L7.77794 15.4444Z' fill='black'/%3E%3C/svg%3E%0A");
 // ===== / ===== //
 
-// Option A: Include all of Bootstrap
 // Include any default variable overrides here (though functions won't be available)
 @import "../node_modules/bootstrap/scss/bootstrap";
 
@@ -107,6 +91,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   visibility: hidden;
 }
 // ===== / ===== //
+
 // ===== ANCHORS ===== //
 .anchor {
   display: block;
@@ -121,6 +106,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
   }
 }
 // ===== / ===== //
+
 // ===== BUTTONS ===== //
 .btn {
   @include button-size(
@@ -247,103 +233,10 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
 // ===== / ===== //
 
 // ===== TABS ===== //
-.nav-tabs {                       // bootstrap default class
-  position: sticky;
-  top: $header-height;
-  border: none;
-  padding-top: $base * 8;         // 40 px
-  padding-bottom: $base * 2;      // 10 px
-  background-color: white;
-  z-index: 10;
-
-  & > .nav-item {                 // bootstrap default class
-    position: relative;
-
-    & > .nav-link {               // bootstrap default class
-      position: relative;
-      width: 100%;
-      min-width: $base * 23;      // 115 px
-      margin-bottom: 0;
-      padding-top: $base * 4;     // 20 px
-      padding-bottom: $base * 2;  // 10 px
-      padding-left: 0;
-      padding-right: 0;
-      border: none;
-      color: $c-primary;
-      line-height: 1.454;
-      letter-spacing: .07em;
-      text-align: left;
-
-      &:before {
-        content: '';
-        position: absolute;
-        top: -3px;
-        left: 0;
-        width: 100%;
-        max-width: $base * 23;     // 115 px
-        height: 3px;
-        background-color: $c-primary;
-        transition: all .15s ease-in-out;
-      }
-
-      &.active {
-        color: $c-success;
-
-        &:before {
-          background-color: $c-success;
-        }
-      }
-    }
-  }
-
-  .nav-item + .nav-item {
-    margin-left: $base * 10;    // 50 px
-  }
-
-  @media screen and (max-width: 991px) {
-
-    & > .nav-item {
-
-      & > .nav-link {
-        min-width: $base * 16;   // 80 px
-      }
-    }
-
-    .nav-item + .nav-item {
-      margin-left: $base * 6;    // 30 px
-    }
-  }
-
-  @media screen and (max-width: 767px) {
-    top: calc($header-height - $base * 6);  // 100 - 30 = 70 px
-    column-gap: $base * 4;       // 20 px
-    row-gap: $base * 2;          // 10 px
-
-    & > .nav-item {
-      position: relative;
-
-      & > .nav-link {
-        min-width: $base * 10;   // 50 px
-        padding-top: $base * 2;  // 10 px
-      }
-    }
-
-    .nav-item + .nav-item {
-      margin-left: 0;
-    }
-  }
-}
-
-.tab-content {
-  padding-top: $base * 8;       // 40 px
-  margin-bottom: $base * 4;     // 20 px
-
-  @media screen and (max-width: 767px) {
-    padding-top: $base * 8;     // 40 px
-  }
-}
+@import './tabs.scss';
 // ===== / ===== //
 
+// ===== COMMON STYLES ===== //
 html {
   height: -webkit-fill-available;
   height: -moz-available;
@@ -381,3 +274,4 @@ a {
   color: inherit;
   text-decoration: none;
 }
+// ===== / ===== //

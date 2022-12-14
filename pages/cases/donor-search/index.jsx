@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Container, Row, Col } from 'react-bootstrap'
 import PTHead from '../../../components/PTHead/PTHead'
-import TeamMember from '../../../components/TeamMember/TeamMember'
+import PersonCard from '../../../components/PersonCard/PersonCard'
 import stl from './donor-search.module.scss'
 
 function CasePage() {
@@ -72,7 +72,7 @@ function CasePage() {
             lg="3"
             className="d-flex justify-content-center align-items-end mb-40 mb-md-0"
           >
-            <TeamMember
+            <PersonCard
               photo="/images/cases/donor-search/ruslan-shekurov.webp"
               name="Руслан Шекуров"
               mainRole="СЕО DonorSearch"
