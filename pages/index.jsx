@@ -13,6 +13,8 @@ import stl from '../styles/Home.module.scss'
 import api from '../utils/api'
 import { mainCaseLocal } from '../public/mockData'
 
+import PTModal from '../components/PTModal/PTModal'
+
 // function Home({ caseData }) {
 function Home() {
   const [showVideo, setShowVideo] = useState(false)
@@ -103,6 +105,13 @@ function Home() {
             className="d-flex justify-content-center mt-30 mt-lg-0"
           >
             <ModalVideo show={ showVideo } setShow={ setShowVideo } />
+{/* TODO: доделать компонент модалки */}
+            {/* <PTModal
+              type="video"
+              show={ showVideo }
+              onHide={ () => setShowVideo(false) }
+              videoSrc="https://www.youtube.com/embed/AbK2SViu6KQ?autoplay=1"
+            /> */}
 
             <div className={ stl.about__video }>
               <div

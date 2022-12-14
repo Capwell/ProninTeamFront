@@ -9,12 +9,14 @@ import PTInputFile from '../PTInputFile/PTInputFile'
 import PTButton from '../PTButton/PTButton'
 import stl from './ClientForm.module.scss'
 import api from '../../utils/api'
+import PTModal from '../PTModal/PTModal'
 
 function ClientForm({ className, targetPage }) {
 
   const [isSubmitAvailable, setIsSubmitAvailable] = useState(false) // submit button availablity
   const [modalShow, setModalShow] = useState(false) // modal visibility
   const [modalType, setModalType] = useState('') // modal content type
+  // const [modalErr, setModalErr] = useState('') // modal error
   const [isLoading, setIsLoading] = useState(false) // loading state
   const fileInput = useRef()
   const captchaToken = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
@@ -96,6 +98,7 @@ function ClientForm({ className, targetPage }) {
               setModalType('success') // show success modal
             } catch (err) {
               setModalType('error') // show error modal
+              // setModalErr('error') // show error modal
             } finally {
               setModalShow(true)
               setTimeout(() => setModalShow(false), 3000) // close it in 3 sec
@@ -115,6 +118,7 @@ function ClientForm({ className, targetPage }) {
     // if required fields (name, communicate, checkbox) are empty or invalid
     if (errors.name || errors.communicate || errors.is_agreed) {
       setModalType('requiredErr') // set type of modal
+      // setModalErr('required') // set type of modal
       setModalShow(true) // show modal
       setTimeout(() => setModalShow(false), 3000) // close modal after 3 secs
 
@@ -123,6 +127,7 @@ function ClientForm({ className, targetPage }) {
     // if message input is empty AND file is NOT attached
     if ((errors.message || !values.message) && !values.file) {
       setModalType('messageOrFileErr')
+      // setModalErr('message-or-file')
       setModalShow(true)
       setTimeout(() => setModalShow(false), 5000)
 
@@ -173,6 +178,13 @@ function ClientForm({ className, targetPage }) {
       ref={ formRef }
     >
 {/* Modal Window */}
+{/* TODO: доделать компонент модалки */}
+      {/* <PTModal
+        type="submit"
+        err={ modalErr }
+        show={ modalShow }
+        onHide={ () => setModalShow(false) }
+      /> */}
       <ModalSubmit
         show={ modalShow }
         type={ modalType }
