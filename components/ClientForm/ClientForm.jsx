@@ -41,7 +41,6 @@ function ClientForm({ className, targetPage }) {
       name: '',
       communicate: '',
       message: '',
-      file: '',
       is_agreed: false
     },
     // set validate function
@@ -49,22 +48,22 @@ function ClientForm({ className, targetPage }) {
       const errors = {}
       // Name validation
       if (!values.name) errors.name = 'Обязательно'
-      else if (values.name.length < 2) {
+      else if (values.name.trim().length < 2) {
         errors.name = 'Пожалуйста, введите не менее 2 символов'
-      } else if (values.name.length > 20) {
+      } else if (values.name.trim().length > 20) {
         errors.name = 'Пожалуйста, введите не более 20 символов'
       }
       // Communicate validation
       if (!values.communicate) errors.communicate = 'Обязательно'
-      else if (values.communicate.length < 2) {
+      else if (values.communicate.trim().length < 2) {
         errors.communicate = 'Пожалуйста, введите не менее 2 символов'
-      } else if (values.communicate.length > 20) {
+      } else if (values.communicate.trim().length > 20) {
         errors.communicate = 'Пожалуйста, введите не более 20 символов'
       }
       // Message validation
       if (
         !fileInput.current.files[0] &&
-        (values.message && values.message.length < 20)
+        (values.message && values.message.trim().length < 20)
       ) {
         errors.message = 'Введите не менее 20 символов'
       }
@@ -76,7 +75,7 @@ function ClientForm({ className, targetPage }) {
       return errors
     },
     // set function for success validation and submitting
-    onSubmit: async (values) => {
+    onSubmit: async () => {
       setIsLoading(true)
       // call grecaptcha.execute on submit event
       window.grecaptcha.ready(async () => {
@@ -85,6 +84,11 @@ function ClientForm({ className, targetPage }) {
             try {
               // create FormData obj with all values from form
               const fData = new FormData(formRef.current)
+              // trim text values in FormData obj
+              fData.set('name', fData.get('name').trim())
+              fData.set('communicate', fData.get('communicate').trim())
+              fData.set('message', fData.get('message').trim())
+              // append token
               fData.append('token', token)
               // send FormData to server
               await api.sendOffer(fData)
@@ -129,7 +133,6 @@ function ClientForm({ className, targetPage }) {
   }
   // when file es attaching, write file data in formik.vales object
   const onFileChange = (fileData) => {
-    formik.setFieldValue('file', fileData)
     // if there is a message
     if (formik.values.message.length) {
       // and if file is attached - remove message errors
