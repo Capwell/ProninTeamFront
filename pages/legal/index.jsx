@@ -18,12 +18,7 @@ function Legal() {
   return (
     <>
       <PTHead
-        title='ProninTeam - Правовая информация'
-        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
-        ogType='website'
-        ogUrl="https://proninteam.ru/legal"
-        ogImg='/images/pronin-team-og-img.webp'
-        ogSiteName='ProninTeam'
+        title="Правовая информация ProninTeam"
       />
 
       <Container as="section" fluid="xxl" className="mb-100">

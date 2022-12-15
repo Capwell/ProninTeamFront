@@ -80,12 +80,7 @@ function Team() {
   return (
     <>
       <PTHead
-        title="ProninTeam - Команда"
-        description="Сюда надо будет написать какое-то описание для каждой отдельной страницы"
-        ogType="website"
-        ogUrl="https://proninteam.ru/team"
-        ogImg="/images/pronin-team-og-img.webp"
-        ogSiteName="ProninTeam"
+        title="Команда ProninTeam"
       />
 
       <Container as="section" fluid="xxl" className="mb-20">

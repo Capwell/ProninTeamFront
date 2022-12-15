@@ -9,12 +9,7 @@ function CasePage() {
   return (
     <>
       <PTHead
-        title="ProninTeam - Кейс: DonorSearch"
-        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
-        ogType='website'
-        ogUrl="https://proninteam.ru/cases/donor-search"
-        ogImg='/images/pronin-team-og-img.webp'
-        ogSiteName='ProninTeam'
+        title="ProninTeam - Кейс DonorSearch"
       />
 {/* Banner */}
       <div className={ `${ stl.banner } mt-lg-80 mb-60 mb-lg-100` }>
