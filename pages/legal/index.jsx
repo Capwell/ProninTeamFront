@@ -6,7 +6,6 @@ import PTButton from '../../components/PTButton/PTButton'
 import stl from '../../styles/Legal.module.scss'
 
 function Legal() {
-  const router = useRouter()
   // scroll to top on button click
   const scrollToTop = () =>{
     window.scrollTo({
