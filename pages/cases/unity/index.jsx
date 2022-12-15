@@ -8,12 +8,7 @@ function CasePage() {
   return (
     <>
       <PTHead
-        title="ProninTeam - Кейс: Unity"
-        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
-        ogType='website'
-        ogUrl="https://proninteam.ru/cases/unity"
-        ogImg='/images/pronin-team-og-img.webp'
-        ogSiteName='ProninTeam'
+        title="ProninTeam - Кейс Unity"
       />
 {/* Banner */}
       <div className={ `${ stl.banner } mt-lg-80 mb-60 mb-lg-100` }>
@@ -135,7 +130,7 @@ function CasePage() {
         </ul>
       </Container>
 {/* Result */}
-      <Container
+      {/* <Container
         as="section"
         fluid="xxl"
         className={ `${ stl.result } mb-50 mb-lg-75` }
@@ -148,7 +143,7 @@ function CasePage() {
           По итогам проекта количество организаций увеличилось...  а доноров ...
         </p>
 
-      </Container>
+      </Container> */}
     </>
   )
 }

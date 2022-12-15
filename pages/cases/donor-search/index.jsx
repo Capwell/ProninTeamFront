@@ -1,7 +1,7 @@
 import Image from 'next/image'
 import { Container, Row, Col } from 'react-bootstrap'
 import PTHead from '../../../components/PTHead/PTHead'
-import TeamMember from '../../../components/TeamMember/TeamMember'
+import PersonCard from '../../../components/PersonCard/PersonCard'
 import stl from './donor-search.module.scss'
 
 function CasePage() {
@@ -9,12 +9,7 @@ function CasePage() {
   return (
     <>
       <PTHead
-        title="ProninTeam - Кейс: DonorSearch"
-        description='Сюда надо будет написать какое-то описание для каждой отдельной страницы'
-        ogType='website'
-        ogUrl="https://proninteam.ru/cases/donor-search"
-        ogImg='/images/pronin-team-og-img.webp'
-        ogSiteName='ProninTeam'
+        title="ProninTeam - Кейс DonorSearch"
       />
 {/* Banner */}
       <div className={ `${ stl.banner } mt-lg-80 mb-60 mb-lg-100` }>
@@ -44,7 +39,7 @@ function CasePage() {
         <p>
           Мы работаем с DonorSearch на принципах <b>постоянного потока задач.</b><br/>
           В рамках сотрудничества закрываем основные боли заказчика, накопившиеся<br/>
-          за 12-ти&nbsp;летнюю историю проекта.
+          за 12-летнюю историю проекта.
         </p>
       </Container>
 {/* Letter */}
@@ -72,7 +67,7 @@ function CasePage() {
             lg="3"
             className="d-flex justify-content-center align-items-end mb-40 mb-md-0"
           >
-            <TeamMember
+            <PersonCard
               photo="/images/cases/donor-search/ruslan-shekurov.webp"
               name="Руслан Шекуров"
               mainRole="СЕО DonorSearch"

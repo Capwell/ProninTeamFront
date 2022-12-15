@@ -1,0 +1,95 @@
+.nav-tabs {                       // bootstrap default class
+  position: sticky;
+  top: $header-height;
+  border: none;
+  padding-top: $base * 8;         // 40 px
+  padding-bottom: $base * 2;      // 10 px
+  background-color: white;
+  z-index: 10;
+
+  & > .nav-item {                 // bootstrap default class
+    position: relative;
+
+    & > .nav-link {               // bootstrap default class
+      position: relative;
+      width: 100%;
+      min-width: $base * 23;      // 115 px
+      margin-bottom: 0;
+      padding-top: $base * 4;     // 20 px
+      padding-bottom: $base * 2;  // 10 px
+      padding-left: 0;
+      padding-right: 0;
+      border: none;
+      color: $c-primary;
+      line-height: 1.454;
+      letter-spacing: .07em;
+      text-align: left;
+
+      &:before {
+        content: '';
+        position: absolute;
+        top: -3px;
+        left: 0;
+        width: 100%;
+        max-width: $base * 23;     // 115 px
+        height: 3px;
+        background-color: $c-primary;
+        transition: all .15s ease-in-out;
+      }
+
+      &.active {
+        color: $c-success;
+
+        &:before {
+          background-color: $c-success;
+        }
+      }
+    }
+  }
+
+  .nav-item + .nav-item {
+    margin-left: $base * 10;    // 50 px
+  }
+
+  @media screen and (max-width: 991px) {
+
+    & > .nav-item {
+
+      & > .nav-link {
+        min-width: $base * 16;   // 80 px
+      }
+    }
+
+    .nav-item + .nav-item {
+      margin-left: $base * 6;    // 30 px
+    }
+  }
+
+  @media screen and (max-width: 767px) {
+    top: calc($header-height - $base * 6);  // 100 - 30 = 70 px
+    column-gap: $base * 4;       // 20 px
+    row-gap: $base * 2;          // 10 px
+
+    & > .nav-item {
+      position: relative;
+
+      & > .nav-link {
+        min-width: $base * 10;   // 50 px
+        padding-top: $base * 2;  // 10 px
+      }
+    }
+
+    .nav-item + .nav-item {
+      margin-left: 0;
+    }
+  }
+}
+
+.tab-content {
+  padding-top: $base * 8;       // 40 px
+  margin-bottom: $base * 4;     // 20 px
+
+  @media screen and (max-width: 767px) {
+    padding-top: $base * 8;     // 40 px
+  }
+}

@@ -83,7 +83,7 @@ function Footer() {
 
               <div className={ stl._contact }>
                 <span className={ stl._contact_title }>Написать</span>
-                <a className={ stl._contact_link } href="mailto:mail@yandex.ru">mail@yandex.ru</a>
+                <a className={ stl._contact_link } href="mailto:a@proninteam.ru">a@proninteam.ru</a>
               </div>
             </Col>
           </Row>

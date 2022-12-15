@@ -9,12 +9,14 @@ import PTInputFile from '../PTInputFile/PTInputFile'
 import PTButton from '../PTButton/PTButton'
 import stl from './ClientForm.module.scss'
 import api from '../../utils/api'
+import PTModal from '../PTModal/PTModal'
 
 function ClientForm({ className, targetPage }) {
 
   const [isSubmitAvailable, setIsSubmitAvailable] = useState(false) // submit button availablity
   const [modalShow, setModalShow] = useState(false) // modal visibility
   const [modalType, setModalType] = useState('') // modal content type
+  // const [modalErr, setModalErr] = useState('') // modal error
   const [isLoading, setIsLoading] = useState(false) // loading state
   const fileInput = useRef()
   const captchaToken = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
@@ -41,7 +43,6 @@ function ClientForm({ className, targetPage }) {
       name: '',
       communicate: '',
       message: '',
-      file: '',
       is_agreed: false
     },
     // set validate function
@@ -49,22 +50,22 @@ function ClientForm({ className, targetPage }) {
       const errors = {}
       // Name validation
       if (!values.name) errors.name = 'Обязательно'
-      else if (values.name.length < 2) {
+      else if (values.name.trim().length < 2) {
         errors.name = 'Пожалуйста, введите не менее 2 символов'
-      } else if (values.name.length > 20) {
+      } else if (values.name.trim().length > 20) {
         errors.name = 'Пожалуйста, введите не более 20 символов'
       }
       // Communicate validation
       if (!values.communicate) errors.communicate = 'Обязательно'
-      else if (values.communicate.length < 2) {
+      else if (values.communicate.trim().length < 2) {
         errors.communicate = 'Пожалуйста, введите не менее 2 символов'
-      } else if (values.communicate.length > 20) {
+      } else if (values.communicate.trim().length > 20) {
         errors.communicate = 'Пожалуйста, введите не более 20 символов'
       }
       // Message validation
       if (
         !fileInput.current.files[0] &&
-        (values.message && values.message.length < 20)
+        (values.message && values.message.trim().length < 20)
       ) {
         errors.message = 'Введите не менее 20 символов'
       }
@@ -76,7 +77,7 @@ function ClientForm({ className, targetPage }) {
       return errors
     },
     // set function for success validation and submitting
-    onSubmit: async (values) => {
+    onSubmit: async () => {
       setIsLoading(true)
       // call grecaptcha.execute on submit event
       window.grecaptcha.ready(async () => {
@@ -85,6 +86,11 @@ function ClientForm({ className, targetPage }) {
             try {
               // create FormData obj with all values from form
               const fData = new FormData(formRef.current)
+              // trim text values in FormData obj
+              fData.set('name', fData.get('name').trim())
+              fData.set('communicate', fData.get('communicate').trim())
+              fData.set('message', fData.get('message').trim())
+              // append token
               fData.append('token', token)
               // send FormData to server
               await api.sendOffer(fData)
@@ -92,6 +98,7 @@ function ClientForm({ className, targetPage }) {
               setModalType('success') // show success modal
             } catch (err) {
               setModalType('error') // show error modal
+              // setModalErr('error') // show error modal
             } finally {
               setModalShow(true)
               setTimeout(() => setModalShow(false), 3000) // close it in 3 sec
@@ -111,6 +118,7 @@ function ClientForm({ className, targetPage }) {
     // if required fields (name, communicate, checkbox) are empty or invalid
     if (errors.name || errors.communicate || errors.is_agreed) {
       setModalType('requiredErr') // set type of modal
+      // setModalErr('required') // set type of modal
       setModalShow(true) // show modal
       setTimeout(() => setModalShow(false), 3000) // close modal after 3 secs
 
@@ -119,6 +127,7 @@ function ClientForm({ className, targetPage }) {
     // if message input is empty AND file is NOT attached
     if ((errors.message || !values.message) && !values.file) {
       setModalType('messageOrFileErr')
+      // setModalErr('message-or-file')
       setModalShow(true)
       setTimeout(() => setModalShow(false), 5000)
 
@@ -129,7 +138,6 @@ function ClientForm({ className, targetPage }) {
   }
   // when file es attaching, write file data in formik.vales object
   const onFileChange = (fileData) => {
-    formik.setFieldValue('file', fileData)
     // if there is a message
     if (formik.values.message.length) {
       // and if file is attached - remove message errors
@@ -170,6 +178,13 @@ function ClientForm({ className, targetPage }) {
       ref={ formRef }
     >
 {/* Modal Window */}
+{/* TODO: доделать компонент модалки */}
+      {/* <PTModal
+        type="submit"
+        err={ modalErr }
+        show={ modalShow }
+        onHide={ () => setModalShow(false) }
+      /> */}
       <ModalSubmit
         show={ modalShow }
         type={ modalType }

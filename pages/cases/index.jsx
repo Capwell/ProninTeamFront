@@ -33,12 +33,9 @@ function Cases() {
   return (
     <>
       <PTHead
-        title="ProninTeam - Кейсы"
-        description='Можно посмотреть примеры услуг, оказанных компанией на примере реальных кейсов. Закрываем накопившиеся IT-потребности заказчика. Разработали раздел сайта. Разработали сайт компании с нуля за 4 недели'
-        ogType='website'
-        ogUrl="https://proninteam.ru/cases"
-        ogImg='/images/pronin-team-og-img.webp'
-        ogSiteName='Результат услуг ProninTeam на примере реальных кейсов'
+        title="Кейсы ProninTeam"
+        description="Примеры услуг, оказанных компанией на примере реальных кейсов. Закрываем накопившиеся IT-потребности заказчика. Разработали раздел сайта. Разработали сайт компании с нуля за 4 недели"
+        ogSiteName="Результат услуг ProninTeam на примере реальных кейсов"
       />
 
       <Container as="section" fluid="xxl" className="mb-100">

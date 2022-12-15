@@ -1,4 +1,5 @@
-$base: 5px;                  // basic step value
+$base-value: 5;              // numeric value of base
+$base: $base-value * 1px;    // basic step value in px
 
 $logo-width: $base * 30;     // 150 px
 $logo-height: $base * 6;     // 30 px

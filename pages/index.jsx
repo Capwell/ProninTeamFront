@@ -13,6 +13,8 @@ import stl from '../styles/Home.module.scss'
 import api from '../utils/api'
 import { mainCaseLocal } from '../public/mockData'
 
+import PTModal from '../components/PTModal/PTModal'
+
 // function Home({ caseData }) {
 function Home() {
   const [showVideo, setShowVideo] = useState(false)
@@ -42,12 +44,9 @@ function Home() {
   return (
     <>
       <PTHead
-        title="ProninTeam"
-        description="Сюда надо будет написать какое-то описание для каждой отдельной страницы"
-        ogType="website"
-        ogImg="/images/pronin-team-og-img.webp"
-        ogUrl="https://proninteam.ru"
-        ogSiteName="ProninTeam"
+        title="Наша миссия и как заказать проект"
+        description="ProninTeam помогает создать программный продукт для развития бизнеса. Наши преимущества. Можно заполнить форму, чтобы заказать проект. Указать основную информацию, чтобы стать клиентом айти компании. Указать имя. Указать телефон. Что мы можем для вас сделать. Сколько денег планируете потратить."
+        ogSiteName="Подать заявку, чтобы стать клиентом"
       />
 {/* Mission */}
       <Container
@@ -103,6 +102,13 @@ function Home() {
             className="d-flex justify-content-center mt-30 mt-lg-0"
           >
             <ModalVideo show={ showVideo } setShow={ setShowVideo } />
+{/* TODO: доделать компонент модалки */}
+            {/* <PTModal
+              type="video"
+              show={ showVideo }
+              onHide={ () => setShowVideo(false) }
+              videoSrc="https://www.youtube.com/embed/AbK2SViu6KQ?autoplay=1"
+            /> */}
 
             <div className={ stl.about__video }>
               <div
