@@ -1,17 +1,19 @@
 import Head from 'next/head'
+import { useRouter } from 'next/router'
 
 function PTHead({
-  title,
-  description,
+  title = 'ProninTeam',
+  description = '',
   ogTitle,
-  ogType,
-  ogUrl = '/',
-  ogImg,
-  ogSiteName,
-  twitterCard,
+  ogType = 'website',
+  ogImg = '/images/pronin-team-og-img.webp',
+  ogSiteName = 'ProninTeam',
+  twitterCard = 'summary_large_image',
   twitterSite,
   twitterImg
 }) {
+  const router = useRouter()
+  const ogUrl = `https://proninteam.ru${router.asPath}`
 
   return (
     <Head>
@@ -34,11 +36,11 @@ function PTHead({
       <meta property="og:locale" content="ru_RU" />
       <meta property="og:locale:alternate" content="en_US" />
 
-      { twitterCard && <meta name="twitter:card" content={ twitterCard } /> }
+      <meta name="twitter:card" content={ twitterCard } />
       { twitterSite && <meta name="twitter:site" content={ twitterSite } /> }
       <meta name="twitter:title" content={ title } />
       <meta name="twitter:description" content={ description } />
-      { twitterImg && <meta name="twitter:image" content={ twitterImg } /> }
+      <meta name="twitter:image" content={ twitterImg || ogImg } />
     </Head>
   )
 }

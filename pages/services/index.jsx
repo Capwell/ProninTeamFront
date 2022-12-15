@@ -1,7 +1,6 @@
 import Link from 'next/link'
 import { Container, Row, Col } from 'react-bootstrap'
 import PTHead from '../../components/PTHead/PTHead'
-import PTButton from '../../components/PTButton/PTButton'
 import ClientForm from '../../components/ClientForm/ClientForm'
 import stl from '../../styles/Services.module.scss'
 
@@ -11,11 +10,8 @@ function Services() {
     <>
       <PTHead
         title="Услуги ProninTeam"
-        description='В айти компании можно заказать услуги по разработке и поддержке сайтов. Администрирование серверов и сайтов. Дизайн. Верстка. Программирование. Информационная поддержка. Интеграция. Продвижение сайта.'
-        ogType='website'
-        ogUrl="https://proninteam.ru/services"
-        ogImg='/images/pronin-team-og-img.webp'
-        ogSiteName='Услуги ProninTeam по разработке и поддержке сайтов.'
+        description="Услуги по разработке и поддержке сайтов. Администрирование серверов и сайтов. Дизайн. Верстка. Программирование. Информационная поддержка. Интеграция. Продвижение сайта."
+        ogSiteName="Услуги ProninTeam по разработке и поддержке сайтов."
       />
 
       <Container as="section" fluid="xxl" className="mb-20">
