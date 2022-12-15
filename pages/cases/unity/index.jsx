@@ -130,7 +130,7 @@ function CasePage() {
         </ul>
       </Container>
 {/* Result */}
-      <Container
+      {/* <Container
         as="section"
         fluid="xxl"
         className={ `${ stl.result } mb-50 mb-lg-75` }
@@ -143,7 +143,7 @@ function CasePage() {
           По итогам проекта количество организаций увеличилось...  а доноров ...
         </p>
 
-      </Container>
+      </Container> */}
     </>
   )
 }
