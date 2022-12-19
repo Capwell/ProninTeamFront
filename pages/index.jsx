@@ -4,7 +4,7 @@ import { useState } from 'react'
 import { useEffect } from 'react'
 import { Row, Col, Container } from 'react-bootstrap'
 import PTHead from '../components/PTHead/PTHead'
-import ModalVideo from '../components/ModalVideo/ModalVideo'
+import PTModal from '../components/PTModal/PTModal'
 import ClientForm from '../components/ClientForm/ClientForm'
 import PTButton from '../components/PTButton/PTButton'
 import Loader from '../components/Loader/Loader'
@@ -12,8 +12,6 @@ import CaseBanner from '../components/CaseBanner/CaseBanner'
 import stl from '../styles/Home.module.scss'
 import api from '../utils/api'
 import { mainCaseLocal } from '../public/mockData'
-
-import PTModal from '../components/PTModal/PTModal'
 
 // function Home({ caseData }) {
 function Home() {
@@ -101,14 +99,13 @@ function Home() {
             lg="auto"
             className="d-flex justify-content-center mt-30 mt-lg-0"
           >
-            <ModalVideo show={ showVideo } setShow={ setShowVideo } />
 {/* TODO: доделать компонент модалки */}
-            {/* <PTModal
+            <PTModal
               type="video"
               show={ showVideo }
               onHide={ () => setShowVideo(false) }
               videoSrc="https://www.youtube.com/embed/AbK2SViu6KQ?autoplay=1"
-            /> */}
+            />
 
             <div className={ stl.about__video }>
               <div
