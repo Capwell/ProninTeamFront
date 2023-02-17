@@ -100,6 +100,15 @@ export const casesDataLocal = [
     is_visible: true,
     slug: 'pronin-team',
     text: 'Разработали сайт компании ProninTeam с нуля за 4 недели',
+  },
+  {
+    title: 'Макаровская кузница',
+    hex_color: '#F66109',
+    logo: '/images/cases/mkul/mkul-logo.webp',
+    is_on_main_page: false,
+    is_visible: true,
+    slug: 'mkul',
+    text: 'Наша команда для Макаровской кузницы сделала сайт с возможностью заказа через интернет',
   }
 ]
 

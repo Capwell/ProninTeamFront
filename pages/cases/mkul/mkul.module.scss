@@ -1,0 +1,215 @@
+@import '../../../styles/variables.scss';
+
+.case {
+
+  &__header {
+    width: 100%;
+    max-width: $base * 165;  // 825px
+    margin-bottom: $base * 6;  // 30px
+
+    .header__title {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: .04em;
+      margin-bottom: $base * 6;  // 30px
+    }
+
+    .header__description,
+    .header__stack {
+      font-size: 1.25rem;
+      font-weight: 400;
+      line-height: 1.2;
+    }
+
+    .header__description {
+      margin-bottom: $base * 4;  // 20px
+    }
+
+    .header__stack {
+      font-weight: 500;
+    }
+  }
+
+  &__pagespeed {
+    margin-bottom: $base * 10;  // 50px
+
+    .pagespeed__text {
+      width: 100%;
+      max-width: $base * 165;  // 825px
+      margin-bottom: $base * 2;  // 10px
+      font-weight: 700;
+      line-height: 1.25;
+    }
+
+    .pagespeed__img {
+      position: relative;
+      width: 100%;
+
+      .img__img {
+        position: relative !important;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &__mobileView {
+    margin-bottom: $base * 10;  // 50px
+
+    .mobileView__img {
+      position: relative;
+      width: 100%;
+
+      .img__img {
+        position: relative !important;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &__horizontal {
+    position: relative;
+    width: 100%;
+    height: auto;
+    max-width: 1440px;
+    margin: 0 auto $base * 10;
+
+    .horizontal__wrapper {
+      display: flex;
+      gap: 20px;
+    }
+
+    .horizontal__img {
+      position: relative;
+      flex-shrink: 0;
+
+      .img__img {
+        position: relative !important;
+        object-fit: contain;
+      }
+    }
+  }
+
+  &__about {
+
+    .about__title {
+      font-size: 2rem;
+      font-weight: 700;
+      line-height: 1.25;
+      letter-spacing: .04em;
+      margin-bottom: $base * 12;
+    }
+
+    .about__dates {
+      display: flex;
+      margin-bottom: $base * 8;  // 40px
+
+      .dates__group {
+        display: flex;
+        flex-direction: column;
+
+        &:nth-of-type(2) {
+          margin-left: 8px;
+        }
+
+        &:nth-of-type(3) {
+          margin-left: $base * 5;
+        }
+      }
+
+      .dates__label {
+        font-weight: 700;
+        line-height: 1.25;
+      }
+
+      .dates__value {
+        font-size: 2rem;
+        font-weight: 700;
+        line-height: 1.25;
+        letter-spacing: .04em;
+      }
+    }
+
+    .about__timeline {
+      display: flex;
+      flex-wrap: wrap;
+      font-weight: 700;
+      line-height: 1.25;
+
+      .timeline__summary {
+        width: 100%;
+        margin-bottom: $base * 3;
+      }
+
+      .timeline__item {
+        position: relative;
+        flex-grow: 0;
+        flex-shrink: 1;
+        margin-bottom: $base * 14;  // 70px
+        padding: $base $base * 4 0 8px;
+        width: fit-content;
+        min-width: $base * 20;  // 100px
+        max-width: $base * 42;  // 210px
+        border-top: 1px solid $c-primary;
+
+        &:before {
+          content: '';
+          position: absolute;
+          inset: 0 0 auto auto;
+          width: 100%;
+          height: $base * 4;  // 20px
+          background: transparent;
+          border: 1px solid $c-primary;
+          border-top: 0;
+          border-bottom: 0;
+        }
+
+        &:first-of-type:before {
+          border: 0;
+          border-left: 1px solid $c-primary;
+          height: $base * 7;  // 35px
+        }
+
+        &:last-of-type:before {
+          border: 0;
+          border-right: 1px solid $c-primary;
+          height: $base * 6;  // 30px
+        }
+      }
+    }
+
+    .about__team {
+      margin-bottom: $base * 30;  // 150px
+
+      .team__title,
+      .member__role {
+        font-weight: 700;
+        line-height: 1.25;
+      }
+
+      .team__list {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        row-gap: $base * 5;  // 25px
+        column-gap: $base * 10;  // 50px
+        list-style: none;
+        width: fit-content;
+        max-height: $base * 37;  // 185px
+        margin-top: $base * 5;  // 25px
+        padding: 0;
+      }
+
+      .team__member {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .member__name {
+        font-size: 1.25rem;
+        font-weight: 500;
+        line-height: 1.25;
+      }
+    }
+  }
+}
