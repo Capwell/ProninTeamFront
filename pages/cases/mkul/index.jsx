@@ -1,17 +1,45 @@
-import { useRef, useEffect } from 'react'
-import Image from 'next/image'
 import Link from 'next/link'
-import { Container, Row, Col } from 'react-bootstrap'
+import { Row, Col } from 'react-bootstrap'
 import PTHead from '../../../components/PTHead/PTHead'
 import PTButton from '../../../components/PTButton/PTButton'
 import stl from './mkul.module.scss'
-import horizontalAutoScroll from '../../../utils/horizontal-auto-scroll'
+import XAutoScroll from '../../../components/XAutoScroll/XAutoScroll'
+import PTContainer from '../../../components/PTContainer/PTContainer'
+import PTImage from '../../../components/PTImage/PTImage'
+
+import perfomanceImg from '../../../public/images/cases/mkul/perfomance.webp'
+import perfomance345Img from '../../../public/images/cases/mkul/perfomance-w345.webp'
 
 function CasePage() {
-  // !!! TODO: добавить прелоадер
-  const scrollX = useRef(null)
+  const timeline = [
+    'Анализ\nконкурентов',
+    'Дизайн',
+    'Разработка',
+    'Размещение на сервере и поддержка'
+  ]
 
-  useEffect(() => { horizontalAutoScroll(scrollX.current, '70%', '20%') }, [])
+  const team = [
+    {
+      role: 'Дизайнер',
+      name: 'Олег Кипарисов'
+    },
+    {
+      role: 'Бэкенд',
+      name: 'Александр Кондратьёв'
+    },
+    {
+      role: 'Фронтенд',
+      name: 'Егор Романов'
+    },
+    {
+      role: 'Тестирование',
+      name: 'Элина Нурматова'
+    },
+    {
+      role: 'Забота о клиенте',
+      name: 'Каролина Павлычева, Нина Попова'
+    }
+  ]
 
   return (
     <>
@@ -19,8 +47,8 @@ function CasePage() {
         title="Макаровская кузница - Кейс ProninTeam"
       />
 
-      <Container fluid="xxl">
-        <section className={ stl.case__header }>
+      <PTContainer className={ stl.header } as="section">
+        <section className={ stl.header__inner }>
           <h1 className={ stl.header__title }>
             Макаровская кузница
           </h1>
@@ -30,97 +58,81 @@ function CasePage() {
           </p>
 
           <p className={ stl.header__stack }>
-            <strong>Технологии:</strong> Django, Jinja2, Telegram Bot API.
+            <b>Технологии:</b> Django, Jinja2, Telegram Bot API.
           </p>
         </section>
-      </Container>
+      </PTContainer>
 
-      <Container
-        as="section"
-        fluid="xxl"
-        className={ stl.case__pagespeed }
-      >
+      <PTContainer as="section" className={ stl.pagespeed }>
         <p className={ stl.pagespeed__text }>
           Для дружбы с поисковыми системами обратили особое внимание на perfomance и рекомендации.
         </p>
 
-        <div className={ stl.pagespeed__img }>
-          <Image
-            className={ stl.img__img }
-            src="/images/cases/mkul/perfomance.webp"
-            alt="Результаты PageSpeed сайта mkul.ru"
-            fill
-          />
-        </div>
-      </Container>
+        <PTImage
+          className={ stl.pagespeed__img }
+          src="/images/cases/mkul/perfomance.webp"
+          srsSet="/images/cases/mkul/perfomance-w345.webp 345w,
+                  /images/cases/mkul/perfomance.webp 1110w"
+          sizes="(max-width: 375px) 345px,
+                1110px"
+          alt="Результаты PageSpeed сайта mkul.ru"
+        />
+      </PTContainer>
 
-      <Container
-        as="section"
-        fluid="xxl"
-        className={ stl.case__mobileView }
-      >
+      <PTContainer as="section" className={ stl.mobileView }>
         <Row>
-          <Col md className={ stl.mobileView__img }>
-            <Image
-              className={ stl.img__img }
+          <Col md>
+            <PTImage
+              className={ stl.mobileView__img }
               src="/images/cases/mkul/mobile-view-1.webp"
               alt="Результаты PageSpeed сайта mkul.ru"
-              fill
             />
           </Col>
 
-          <Col md className={ stl.mobileView__img }>
-            <Image
-              className={ stl.img__img }
+          <Col md>
+            <PTImage
+              className={ stl.mobileView__img }
               src="/images/cases/mkul/mobile-view-2.webp"
               alt="Результаты PageSpeed сайта mkul.ru"
-              fill
             />
           </Col>
         </Row>
-      </Container>
+      </PTContainer>
 
-      <div className={ stl.case__horizontal } ref={ scrollX }>
-        <div className={ stl.horizontal__wrapper } data-scroll-x>
-          <div md className={ stl.horizontal__img }>
-            <Image
-              className={ stl.img__img }
-              src="/images/cases/mkul/mkul-404.webp"
-              alt="Страница 404 mkul.ru"
-              fill
-            />
-          </div>
-
-          <div md className={ stl.horizontal__img }>
-            <Image
-              className={ stl.img__img }
-              src="/images/cases/mkul/mkul-homepage-1.webp"
-              alt="Верхняя часть главной страницы mkul.ru"
-              fill
-            />
-          </div>
-
-          <div md className={ stl.horizontal__img }>
-            <Image
-              className={ stl.img__img }
-              src="/images/cases/mkul/mkul-homepage-2.webp"
-              alt="Нижняя часть главной страницы mkul.ru"
-              fill
-            />
-          </div>
-        </div>
-      </div>
-
-      <Container
-        as="section"
-        fluid="xxl"
-        className={ stl.case__about }
+      <XAutoScroll
+        className={ stl.horizontal }
+        wrapperClass={ stl.horizontal__wrapper }
+        startScroll="20%"
+        endScroll="afterHide"
       >
-        <h2 className={ stl.about__title }>
+        <PTImage
+          className={ stl.horizontal__img }
+          src="/images/cases/mkul/mkul-404.webp"
+          alt="Страница 404 mkul.ru"
+          fill
+        />
+
+        <PTImage
+          className={ stl.horizontal__img }
+          src="/images/cases/mkul/mkul-homepage-1.webp"
+          alt="Верхняя часть главной страницы mkul.ru"
+          fill
+        />
+
+        <PTImage
+          className={ stl.horizontal__img }
+          src="/images/cases/mkul/mkul-homepage-2.webp"
+          alt="Нижняя часть главной страницы mkul.ru"
+          fill
+        />
+      </XAutoScroll>
+
+      <PTContainer as="section" className={ stl.summary }>
+        <h2 className={ stl.summary__title }>
           О проекте
         </h2>
 
-        <div className={ stl.about__dates }>
+        <div className={ stl.summary__dates }>
           <div className={ stl.dates__group }>
             <span className={ stl.dates__label }>Старт проекта</span>
             <span className={ stl.dates__value }>16 дек 2022 —</span>
@@ -137,41 +149,34 @@ function CasePage() {
           </div>
         </div>
 
-        <div className={ stl.about__timeline }>
-          <span className={ stl.timeline__summary }>6 недель</span>
-          <div className={ stl.timeline__item }>Анализ<br/>конкурентов</div>
-          <div className={ stl.timeline__item }>Дизайн</div>
-          <div className={ stl.timeline__item }>Разработка</div>
-          <div className={ stl.timeline__item }>Размещение на сервере и поддержка</div>
+        <div className={ stl.summary__timeline }>
+          <span className={ stl.timeline__total }>6 недель</span>
+          {
+            timeline.map((item, i) => {
+              return (
+                <div key={ `item-${i}` } className={ stl.timeline__item }>{ item }</div>
+              )
+            })
+          }
         </div>
 
-        <div className={ stl.about__team }>
+        <div className={ stl.summary__team }>
           <span className={ stl.team__title }>В ролях:</span>
 
           <ul className={ stl.team__list }>
-            <li className={ stl.team__member }>
-              <span className={ stl.member__role }>Дизайнер</span>
-              <span className={ stl.member__name }>Олег Кипарисов</span>
-            </li>
-            <li className={ stl.team__member }>
-              <span className={ stl.member__role }>Бэкенд</span>
-              <span className={ stl.member__name }>Александр Кондратьёв</span>
-            </li>
-            <li className={ stl.team__member }>
-              <span className={ stl.member__role }>Фронтенд</span>
-              <span className={ stl.member__name }>Егор Романов</span>
-            </li>
-            <li className={ stl.team__member }>
-              <span className={ stl.member__role }>Тестирование</span>
-              <span className={ stl.member__name }>Элина Нурматова</span>
-            </li>
-            <li className={ stl.team__member }>
-              <span className={ stl.member__role }>Забота о клиенте</span>
-              <span className={ stl.member__name }>Каролина Павлычева, Нина Попова</span>
-            </li>
+            {
+              team.map((member, i) => {
+                return (
+                  <li key={ `member-${i}` } className={ stl.team__member }>
+                    <span className={ stl.member__role }>{ member.role }</span>
+                    <span className={ stl.member__name }>{ member.name }</span>
+                  </li>
+                )
+              })
+            }
           </ul>
         </div>
-      </Container>
+      </PTContainer>
     </>
   )
 }
