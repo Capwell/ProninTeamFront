@@ -1,5 +1,20 @@
 @import '../../../styles/variables.scss';
 
+.btnWrapper {
+  position: sticky;
+  bottom: 30px;
+  margin-bottom: $base * 6;  // 30px
+  pointer-events: none;
+}
+
+.btn {
+  width: $base * 44;  // 220px
+  height: $base * 8;  // 40px
+  margin-left: auto;
+  background: white;
+  pointer-events: all;
+}
+
 .header {
   margin-bottom: $base * 6;  // 30px
 
@@ -58,6 +73,8 @@
 
   &__img {
     width: 100%;
+    border-radius: $base * 2;
+    overflow: hidden;
   }
 }
 
@@ -66,6 +83,27 @@
 
   &__img {
     width: 100%;
+  }
+
+  @media (max-width: 575px) {
+
+    &__imgWrapper {
+
+      & + & {
+        margin-top: $base * 5;  // 25px
+      }
+    }
+
+    &__img {
+      height: 90vh;
+    }
+  }
+
+  @media (max-width: 375px) {
+
+    &__img {
+      height: auto;
+    }
   }
 }
 
@@ -78,11 +116,19 @@
 
   &__wrapper {
     display: flex;
-    gap: 20px;
+    gap: 30px;
   }
 
   &__img {
     flex-shrink: 0;
+  }
+
+  @media (max-width: 375px) {
+    margin-bottom: $base * 14;  // 70px
+    &__img {
+      width: auto;
+      height: $base * 83;  // 415px
+    }
   }
 }
 
@@ -104,12 +150,30 @@
       display: flex;
       flex-direction: column;
 
-      &:nth-of-type(2) {
-        margin-left: 8px;
+      & > .dates__value::after {
+        position: absolute;
+        inset: auto 0 0 auto;
+        font-size: 2rem;
+        font-weight: 700;
+        background: transparent;
       }
 
-      &:nth-of-type(3) {
-        margin-left: $base * 5;
+      &:nth-of-type(1) {
+        margin-right: $base * 11;  // 55px
+
+        & > .dates__value::after {
+          right: -45px;
+          content: '—';
+        }
+      }
+
+      &:nth-of-type(2) {
+        margin-right: $base * 6;  // 30px
+
+        & > .dates__value::after {
+          right: -10px;
+          content: ',';
+        }
       }
     }
 
@@ -119,6 +183,7 @@
     }
 
     .dates__value {
+      position: relative;
       font-size: 2rem;
       font-weight: 700;
       line-height: 1.25;
@@ -131,6 +196,7 @@
     flex-wrap: wrap;
     font-weight: 700;
     line-height: 1.25;
+    margin-bottom: $base * 14;  // 70px
 
     .timeline__total {
       width: 100%;
@@ -141,7 +207,6 @@
       position: relative;
       flex-grow: 0;
       flex-shrink: 1;
-      margin-bottom: $base * 14;  // 70px
       padding: $base $base * 4 0 8px;
       width: fit-content;
       min-width: $base * 20;  // 100px
@@ -155,21 +220,25 @@
         width: 100%;
         height: $base * 4;  // 20px
         background: transparent;
-        border: 1px solid $c-primary;
-        border-top: 0;
-        border-bottom: 0;
+        border-right: 1px solid $c-primary;
+      }
+
+      &:first-of-type:before,
+      &:last-of-type:before {
+        height: $base * 7;  // 30px
       }
 
       &:first-of-type:before {
-        border: 0;
+        border-right: 0;
         border-left: 1px solid $c-primary;
-        height: $base * 7;  // 35px
+      }
+
+      &:nth-of-type(2):before {
+        border-left: 1px solid $c-primary;
       }
 
       &:last-of-type:before {
-        border: 0;
         border-right: 1px solid $c-primary;
-        height: $base * 6;  // 30px
       }
     }
   }
@@ -180,7 +249,7 @@
     .team__title,
     .member__role {
       font-weight: 700;
-      line-height: 1.25;
+      line-height: 1.5;
     }
 
     .team__list {
@@ -191,7 +260,7 @@
       column-gap: $base * 10;  // 50px
       list-style: none;
       width: fit-content;
-      max-height: $base * 37;  // 185px
+      max-height: $base * 40;  // 200px
       margin-top: $base * 5;  // 25px
       padding: 0;
     }
@@ -205,6 +274,122 @@
       font-size: 1.25rem;
       font-weight: 500;
       line-height: 1.25;
+    }
+  }
+
+  @media (max-width: 767px) {
+
+    &__dates {
+      justify-content: space-between;
+      column-gap: $base * 6;  // 30px
+
+      .dates__group:nth-of-type(n) {
+        margin-right: 0;
+      }
+
+      .dates__value::after {
+        display: none;
+      }
+    }
+
+    &__timeline .timeline__item {
+      max-width: $base * 30;  // 150px
+    }
+
+    &__team {
+
+      .team__list {
+        width: 100%;
+        column-gap: $base * 6;  // 30px
+        max-height: 100%;
+      }
+    }
+  }
+
+  @media (max-width: 575px) {
+
+    &__title {
+      text-align: center;
+      margin-bottom: $base * 8;  // 40px
+    }
+
+    &__dates {
+      flex-direction: column;
+      align-items: center;
+      row-gap: $base * 5;  // 25px
+      margin-bottom: $base * 13;  // 65px
+      text-align: center;
+
+      .dates__label {
+        margin-bottom: $base * 2;  // 10px
+      }
+    }
+
+    &__timeline {
+      position: relative;
+      flex-direction: column;
+      margin-bottom: $base * 13;  // 65px
+      padding-left: $base * 5;  // 25px
+
+      .timeline__total {
+        position: absolute;
+        inset: 0 auto 0 0;
+        transform: rotate(180deg);
+        writing-mode: vertical-lr;
+        text-align: center;
+        width: auto;
+        margin: 0;
+      }
+
+      .timeline__item {
+        max-width: 100%;
+        margin-bottom: 0;
+        border-top: 0;
+        border-left: 1px solid $c-primary;
+        padding: $base * 4;  // 20px
+        padding-left: $base * 2;  // 10px
+
+        &:before {
+          inset: 0 auto 0 0;
+          height: 100%;
+          width: $base * 4;  // 20px
+          border-bottom: 1px solid $c-primary;
+          border-right: 0;
+        }
+
+        &:first-of-type:before,
+        &:last-of-type:before {
+          width: $base * 7;  // 35px
+          height: 100%;
+        }
+
+        &:first-of-type:before {
+          border-top: 1px solid $c-primary;
+          border-left: 0;
+          border-bottom: 0;
+        }
+
+        &:nth-of-type(2):before {
+          border-top: 1px solid $c-primary;
+          border-left: 0;
+        }
+
+        &:last-of-type:before {
+          border-bottom: 1px solid $c-primary;
+          border-right: 0;
+        }
+      }
+    }
+
+    &__team {
+      margin-bottom: $base * 20;  // 100px
+      text-align: center;
+
+      .team__list {
+        align-items: center;
+        flex-wrap: nowrap;
+        width: 100%;
+      }
     }
   }
 }

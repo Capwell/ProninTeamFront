@@ -6,8 +6,8 @@ function PTImage({ className, ...props }) {
     <div className={ `${ className ? `${ className } ` : null}${ stl.wrapper }` }>
       {/* <Image
         className={ stl.img }
-        fill
         { ...props }
+        fill
       /> */}
       <img
         className={ stl.img }

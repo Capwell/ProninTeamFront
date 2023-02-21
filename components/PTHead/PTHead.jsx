@@ -10,7 +10,8 @@ function PTHead({
   ogSiteName = 'ProninTeam',
   twitterCard = 'summary_large_image',
   twitterSite,
-  twitterImg
+  twitterImg,
+  children
 }) {
   const router = useRouter()
   const ogUrl = `https://proninteam.ru${router.asPath}`
@@ -41,6 +42,7 @@ function PTHead({
       <meta name="twitter:title" content={ title } />
       <meta name="twitter:description" content={ description } />
       <meta name="twitter:image" content={ twitterImg || ogImg } />
+      { children }
     </Head>
   )
 }
