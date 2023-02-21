@@ -9,7 +9,6 @@ import PTInputFile from '../PTInputFile/PTInputFile'
 import PTButton from '../PTButton/PTButton'
 import stl from './ClientForm.module.scss'
 import api from '../../utils/api'
-import PTModal from '../PTModal/PTModal'
 
 function ClientForm({ className, targetPage }) {
 

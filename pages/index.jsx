@@ -13,8 +13,6 @@ import stl from '../styles/Home.module.scss'
 import api from '../utils/api'
 import { mainCaseLocal } from '../public/mockData'
 
-import PTModal from '../components/PTModal/PTModal'
-
 // function Home({ caseData }) {
 function Home() {
   const [showVideo, setShowVideo] = useState(false)
