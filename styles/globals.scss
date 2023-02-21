@@ -226,6 +226,7 @@ $form-check-input-checked-bg-image: url("data:image/svg+xml,%3Csvg width='20' he
 // ===== / ===== //
 
 // ===== MODALS ===== //
+@import '../components/PTModal/PTModal.scss';
 // ----- Submit Modal ----- //
 @import '../components/PTModal/ModalForm/ModalForm.scss';
 // ----- Video Modal ----- //
