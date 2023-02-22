@@ -1,13 +1,13 @@
 import { Modal } from 'react-bootstrap'
-import MainVideo from '../MainVideo/MainVideo'
+import MainVideo from '../../MainVideo/MainVideo'
 
-function ModalVideo({ show, setShow }) {
+function ModalVideo({ show, onHide, videoSrc }) {
 
   return (
     <Modal
       className="video-modal"
       show={ show }
-      onHide={ () => setShow(false) }
+      onHide={ onHide }
       centered
     >
       <Modal.Header closeButton />
@@ -15,7 +15,7 @@ function ModalVideo({ show, setShow }) {
       <Modal.Body>
         <MainVideo
           className="modal-video"
-          src="https://www.youtube.com/embed/AbK2SViu6KQ?autoplay=1"
+          src={ videoSrc }
         />
       </Modal.Body>
     </Modal>

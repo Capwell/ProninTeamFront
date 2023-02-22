@@ -30,7 +30,8 @@
     "react-redux": "^8.0.5",
     "sharp": "^0.31.2",
     "styled-components": "^5.3.6",
-    "typescript": "^4.9.3"
+    "typescript": "^4.9.3",
+    "viewerjs": "^1.11.2"
   },
   "devDependencies": {
     "@svgr/webpack": "^6.5.1",

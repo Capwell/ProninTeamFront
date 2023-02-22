@@ -1,11 +1,11 @@
-import { Modal } from "react-bootstrap";
+import { Modal } from 'react-bootstrap'
 
-function ModalSubmit({ show, onHide, type }) {
+function ModalForm({ show, onHide, status }) {
 
   return (
     <Modal
       contentClassName={ 'submit-modal' + (
-        type === 'success'           // if modal type is submit
+        status === 'success'         // if modal status is success
           ? ' success'               // set "success" class
           : ' error'                 // set "error" class
       )}
@@ -19,12 +19,12 @@ function ModalSubmit({ show, onHide, type }) {
     >
       <Modal.Body className='submit-modal__text'>
         {
-          type === 'requiredErr' && (
+          status === 'requiredErr' && (
             <p>
               Пожалуйста, заполните все <b>обязательные поля</b>.
             </p>
           ) ||
-          type === 'messageOrFileErr' && (
+          status === 'messageOrFileErr' && (
             <p>
               Пожалуйста, расскажите про свой проект.<br/><br/>
               <b>Вы можете или ответить на наши вопросы или прикрепить файл.</b><br/>
@@ -32,14 +32,14 @@ function ModalSubmit({ show, onHide, type }) {
               С уважением, ProninTeam
             </p>
           ) ||
-          type === 'success' && (
+          status === 'success' && (
             <p>
               <b>Спасибо! Мы приняли Вашу заявку и скоро свяжемся c Вами.</b>
               <br/><br/>
               С уважением, ProninTeam
             </p>
           ) ||
-          type === 'error' && (
+          status === 'error' && (
             <p>
               Непредвиденная ошибка!<br/><br/>
               Пожалуйста, повторите попытку позже.
@@ -51,4 +51,4 @@ function ModalSubmit({ show, onHide, type }) {
   )
 }
 
-export default ModalSubmit
+export default ModalForm
